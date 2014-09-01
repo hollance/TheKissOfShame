@@ -33,9 +33,7 @@ public:
     ScopedPointer<Slider> inputSaturationSlider;
     ScopedPointer<Slider> shameSlider;
     ScopedPointer<Slider> hissSlider;
-    
-    //small change. --DELETE!!!--
-    
+        
 private:
     
     KissOfShameAudioProcessor* getProcessor() const

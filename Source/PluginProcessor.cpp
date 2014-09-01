@@ -15,9 +15,9 @@
 //==============================================================================
 KissOfShameAudioProcessor::KissOfShameAudioProcessor()
 {
-    inputSaturation = 1.0;
-    shame = 1.0;
-    hiss = 1.0;
+    inputSaturation = 0.0;
+    shame = 0.0;
+    hiss = 0.0;
     
 }
 
