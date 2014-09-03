@@ -17,34 +17,25 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     : AudioProcessorEditor (ownerFilter)
 {
 
-    inputSaturationSlider = new Slider;
-    inputSaturationSlider->setSliderStyle(juce::Slider::Rotary);
+    inputSaturationSlider = new CustomKnob;
     inputSaturationSlider->setTopLeftPosition(50, 100);
-    inputSaturationSlider->setSize(100, 100);
-    inputSaturationSlider->setRange(0.0, 1.0);
     inputSaturationSlider->addListener (this);
     addAndMakeVisible(inputSaturationSlider);
-
-//*** Need to add a label for the slider ***
-//    gainLabel.attachToComponent (&gainSlider, false);
-//    gainLabel.setFont (Font (11.0f));
-
-    shameSlider = new Slider;
-    shameSlider->setSliderStyle(juce::Slider::Rotary);
+    
+    shameSlider = new CustomKnob;
     shameSlider->setTopLeftPosition(inputSaturationSlider->getRight() + 10, 100);
-    shameSlider->setSize(100, 100);
-    shameSlider->setRange(0.0, 1.0);
     shameSlider->addListener (this);
     addAndMakeVisible(shameSlider);
-
-    hissSlider = new Slider;
-    hissSlider->setSliderStyle(juce::Slider::Rotary);
+    
+    hissSlider = new CustomKnob;
     hissSlider->setTopLeftPosition(shameSlider->getRight() + 10, 100);
-    hissSlider->setSize(100, 100);
-    hissSlider->setRange(0.0, 1.0);
     hissSlider->addListener (this);
     addAndMakeVisible(hissSlider);
 
+
+    //*** Need to add a label for the slider ***
+    //    gainLabel.attachToComponent (&gainSlider, false);
+    //    gainLabel.setFont (Font (11.0f));
     
     
     // This is where our plugin's editor size is set.

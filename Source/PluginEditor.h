@@ -13,6 +13,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
+#include "CustomKnob.h"
 
 
 //==============================================================================
@@ -30,9 +31,9 @@ public:
     
     void sliderValueChanged (Slider*) override;
     
-    ScopedPointer<Slider> inputSaturationSlider;
-    ScopedPointer<Slider> shameSlider;
-    ScopedPointer<Slider> hissSlider;
+    ScopedPointer<CustomKnob> inputSaturationSlider;
+    ScopedPointer<CustomKnob> shameSlider;
+    ScopedPointer<CustomKnob> hissSlider;
         
 private:
     
