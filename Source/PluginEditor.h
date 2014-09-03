@@ -37,6 +37,8 @@ public:
         
 private:
     
+    Image faceImage;
+    
     KissOfShameAudioProcessor* getProcessor() const
     {
         return static_cast <KissOfShameAudioProcessor*> (getAudioProcessor());

@@ -17,6 +17,11 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     : AudioProcessorEditor (ownerFilter)
 {
 
+    String imageLocation = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/Face/Face.png";
+    faceImage = ImageCache::getFromFile(File(imageLocation));
+    faceImage = faceImage.rescaled(faceImage.getWidth()*0.5, faceImage.getHeight()*0.5);
+    setSize(faceImage.getWidth(), faceImage.getHeight());
+
     inputSaturationSlider = new CustomKnob;
     inputSaturationSlider->setTopLeftPosition(50, 100);
     inputSaturationSlider->addListener (this);
@@ -32,14 +37,10 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     hissSlider->addListener (this);
     addAndMakeVisible(hissSlider);
 
-
     //*** Need to add a label for the slider ***
     //    gainLabel.attachToComponent (&gainSlider, false);
     //    gainLabel.setFont (Font (11.0f));
     
-    
-    // This is where our plugin's editor size is set.
-    setSize (400, 300);
     
     startTimer(200);
 }
@@ -81,10 +82,12 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
 //==============================================================================
 void KissOfShameAudioProcessorEditor::paint (Graphics& g)
 {
-    g.fillAll (Colours::white);
-//    g.setColour (Colours::black);
-//    g.setFont (15.0f);
-//    g.drawFittedText ("Hello World!",
-//                      0, 0, getWidth(), getHeight(),
-//                      Justification::centred, 1);
+    
+    g.drawImageAt(faceImage, 0, 0);
+    
+//    String LabelText = "RAVEN SETTINGS";
+//    g.setFont(35.0f);
+//    g.setColour(Colours::grey);
+//    g.drawFittedText(LabelText, 60, 10, 300, 50, 1, 1);
+//    g.fillAll (Colours::white);
 }
