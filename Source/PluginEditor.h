@@ -14,6 +14,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
 #include "CustomKnob.h"
+#include "ImageAnimator.h"
 
 
 //==============================================================================
@@ -34,6 +35,8 @@ public:
     ScopedPointer<CustomKnob> inputSaturationSlider;
     ScopedPointer<CustomKnob> shameSlider;
     ScopedPointer<CustomKnob> hissSlider;
+    
+    ScopedPointer<ImageAnimator> testAnimation;
         
 private:
     

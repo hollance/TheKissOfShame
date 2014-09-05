@@ -17,9 +17,9 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     : AudioProcessorEditor (ownerFilter)
 {
 
-    String imageLocation = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/Face/Face.png";
+    String imageLocation = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/Face/Controls.png";
     faceImage = ImageCache::getFromFile(File(imageLocation));
-    faceImage = faceImage.rescaled(faceImage.getWidth()*0.5, faceImage.getHeight()*0.5);
+    faceImage = faceImage.rescaled(faceImage.getWidth()*0.75, faceImage.getHeight()*0.75);
     setSize(faceImage.getWidth(), faceImage.getHeight());
 
     inputSaturationSlider = new CustomKnob;
@@ -40,6 +40,14 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     //*** Need to add a label for the slider ***
     //    gainLabel.attachToComponent (&gainSlider, false);
     //    gainLabel.setFont (Font (11.0f));
+    
+    
+    //NOTE: basic animation of an image. 
+    String animatedImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/MixKnob/Knob-Pan-Mix.png";
+    File aniFile(animatedImagePath);
+    testAnimation = new ImageAnimator(aniFile, 128, 20);
+    addAndMakeVisible(testAnimation);
+    testAnimation->startAnimation();
     
     
     startTimer(200);
