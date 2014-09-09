@@ -27,15 +27,15 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     inputSaturationSlider->addListener (this);
     addAndMakeVisible(inputSaturationSlider);
     
-    shameSlider = new CustomKnob;
-    shameSlider->setTopLeftPosition(inputSaturationSlider->getRight() + 10, 100);
-    shameSlider->addListener (this);
-    addAndMakeVisible(shameSlider);
-    
-    hissSlider = new CustomKnob;
-    hissSlider->setTopLeftPosition(shameSlider->getRight() + 10, 100);
-    hissSlider->addListener (this);
-    addAndMakeVisible(hissSlider);
+//    shameSlider = new CustomKnob;
+//    shameSlider->setTopLeftPosition(inputSaturationSlider->getRight() + 10, 100);
+//    shameSlider->addListener (this);
+//    addAndMakeVisible(shameSlider);
+//    
+//    hissSlider = new CustomKnob;
+//    hissSlider->setTopLeftPosition(shameSlider->getRight() + 10, 100);
+//    hissSlider->addListener (this);
+//    addAndMakeVisible(hissSlider);
 
     //*** Need to add a label for the slider ***
     //    gainLabel.attachToComponent (&gainSlider, false);

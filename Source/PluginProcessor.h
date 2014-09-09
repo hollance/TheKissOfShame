@@ -13,6 +13,8 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
+#include "AudioProcessing/AudioGraph.h"
+
 
 //==============================================================================
 /**
@@ -68,7 +70,7 @@ public:
     
     
     
-    enum Parameters
+    enum AudioInputParameters
     {
         inputSaturationParam = 0,
         shameParam,
@@ -78,6 +80,9 @@ public:
     };
     
     float inputSaturation, shame, hiss;
+    bool masterBypass;
+    
+    ScopedPointer<AudioGraph> aGraph;
 
 
 private:

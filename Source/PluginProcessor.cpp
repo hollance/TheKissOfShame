@@ -13,11 +13,14 @@
 
 
 //==============================================================================
-KissOfShameAudioProcessor::KissOfShameAudioProcessor()
+KissOfShameAudioProcessor::KissOfShameAudioProcessor() : masterBypass(false)
 {
-    inputSaturation = 0.0;
+    inputSaturation = 1.0;
     shame = 0.0;
     hiss = 0.0;
+    
+    
+    aGraph = new AudioGraph();
     
 }
 
@@ -170,18 +173,21 @@ void KissOfShameAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuf
     {
         float* channelData = buffer.getWritePointer (channel);
         
-        //simple clipping to test DSP
+        
         for(int i = 0; i < buffer.getNumSamples(); i++)
         {
-            if (channelData[i] > 0.01f)
-                channelData[i] = 0.01f;
-            else if (channelData[i] < - 0.01f)
-                channelData[i] = -0.01f;
             
-            //Testing GUI parameters: input, shame, and hiss.
-            channelData[i] *= inputSaturation*20;
-            channelData[i] *= shame*20;
-            channelData[i] *= hiss*20;
+            channelData[i] = aGraph->processGraph(channelData[i]);
+            
+//            if (channelData[i] > 0.01f)
+//                channelData[i] = 0.01f;
+//            else if (channelData[i] < - 0.01f)
+//                channelData[i] = -0.01f;
+//            
+//            //Testing GUI parameters: input, shame, and hiss.
+//            channelData[i] *= inputSaturation*20;
+//            channelData[i] *= shame*20;
+//            channelData[i] *= hiss*20;
         }
     }
 
