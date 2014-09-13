@@ -14,6 +14,10 @@
 #include <iostream>
 #include "math.h"
 
+#include "../shameConfig.h"
+
+
+
 
 class InputSaturation
 {
@@ -29,6 +33,8 @@ public:
         else                     satThreshold = threshold;
 
         satRate = (rate < 0.0) ? 0.0 : rate;
+        
+        saturationGlobalLevel = 0.0;
     }
     
     ~InputSaturation(){}
@@ -48,7 +54,7 @@ public:
     
     void setDrive(float _drive)
     {
-        drive = _drive;
+        drive = _drive*5.0;
     }
     
     void setOutput(float _output)
@@ -56,30 +62,37 @@ public:
         output = _output;
     }
     
-    
-    float processInputSaturation(float sample)
+    void setGlobalLevel(float level) {saturationGlobalLevel = level;}
+        
+    void processInputSaturation(AudioSampleBuffer& sampleBuffer, int numChannels)
     {
-        sample *= drive;
-//        satThreshold = 0.1;
-//        satRate = 2.0;
-        
-        if(sample > satThreshold)
+        for (int channel = 0; channel < numChannels; ++channel)
         {
-            sample = satThreshold + tanhf(satRate * (fabs(sample) - satThreshold)) * (1.0 - satThreshold);
+            float* samples = sampleBuffer.getWritePointer(channel);
+            
+            
+            for(int i = 0; i < sampleBuffer.getNumSamples(); i++)
+            {
+                samples[i] *= drive;
+                
+                if(samples[i] > satThreshold)
+                {
+                    samples[i] = satThreshold + tanhf(satRate * (fabs(samples[i]) - satThreshold)) * (1.0 - satThreshold);
+                }
+                else if(samples[i] < -satThreshold)
+                {
+                    samples[i] = -satThreshold - tanhf(satRate * (fabs(samples[i]) - satThreshold)) * (1.0 - satThreshold);
+                }
+                else
+                {
+                    //samples[i] = samples[i];
+                }
+                
+                samples[i] *= output;
+            }
         }
-        else if(sample < -satThreshold)
-        {
-            sample = -satThreshold - tanhf(satRate * (fabs(sample) - satThreshold)) * (1.0 - satThreshold);
-        }
-        else
-        {
-            //sample = sample;
-        }
-        
-        return sample *= output;
-        
-        
     };
+
 
     
 private:
@@ -88,6 +101,8 @@ private:
     float satThreshold;     //The amplitude level at which the saturation waveshaping begins.
     float drive;
     float output;
+    
+    float saturationGlobalLevel;
 };
 
 

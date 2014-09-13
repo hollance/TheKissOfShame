@@ -20,7 +20,7 @@ KissOfShameAudioProcessor::KissOfShameAudioProcessor() : masterBypass(false)
     hiss = 0.0;
     
     
-    aGraph = new AudioGraph();
+    aGraph = new AudioGraph(getNumInputChannels());
     
 }
 
@@ -169,27 +169,21 @@ void KissOfShameAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuf
 {
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
-    for (int channel = 0; channel < getNumInputChannels(); ++channel)
-    {
-        float* channelData = buffer.getWritePointer (channel);
-        
-        
-        for(int i = 0; i < buffer.getNumSamples(); i++)
-        {
-            
-            channelData[i] = aGraph->processGraph(channelData[i]);
-            
-//            if (channelData[i] > 0.01f)
-//                channelData[i] = 0.01f;
-//            else if (channelData[i] < - 0.01f)
-//                channelData[i] = -0.01f;
+    
+    aGraph->processGraph(buffer, getNumInputChannels());
+    
+//    for (int channel = 0; channel < getNumInputChannels(); ++channel)
+//    {
+//        float* channelData = buffer.getWritePointer (channel);
+//        
+//        
+//        for(int i = 0; i < buffer.getNumSamples(); i++)
+//        {
 //            
-//            //Testing GUI parameters: input, shame, and hiss.
-//            channelData[i] *= inputSaturation*20;
-//            channelData[i] *= shame*20;
-//            channelData[i] *= hiss*20;
-        }
-    }
+//            channelData[i] = aGraph->processGraph(channelData[i]);
+//            
+//        }
+//    }
 
     // In case we have more outputs than inputs, we'll clear any output
     // channels that didn't contain input data, (because these aren't

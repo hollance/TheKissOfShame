@@ -27,15 +27,15 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     inputSaturationSlider->addListener (this);
     addAndMakeVisible(inputSaturationSlider);
     
-//    shameSlider = new CustomKnob;
-//    shameSlider->setTopLeftPosition(inputSaturationSlider->getRight() + 10, 100);
-//    shameSlider->addListener (this);
-//    addAndMakeVisible(shameSlider);
-//    
-//    hissSlider = new CustomKnob;
-//    hissSlider->setTopLeftPosition(shameSlider->getRight() + 10, 100);
-//    hissSlider->addListener (this);
-//    addAndMakeVisible(hissSlider);
+    shameSlider = new CustomKnob;
+    shameSlider->setTopLeftPosition(inputSaturationSlider->getRight() + 10, 100);
+    shameSlider->addListener (this);
+    addAndMakeVisible(shameSlider);
+
+    hissSlider = new CustomKnob;
+    hissSlider->setTopLeftPosition(shameSlider->getRight() + 10, 100);
+    hissSlider->addListener (this);
+    addAndMakeVisible(hissSlider);
 
     //*** Need to add a label for the slider ***
     //    gainLabel.attachToComponent (&gainSlider, false);
@@ -43,11 +43,11 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     
     
     //NOTE: basic animation of an image. 
-    String animatedImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/MixKnob/Knob-Pan-Mix.png";
-    File aniFile(animatedImagePath);
-    testAnimation = new ImageAnimator(aniFile, 128, 20);
-    addAndMakeVisible(testAnimation);
-    testAnimation->startAnimation();
+//    String animatedImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/MixKnob/Knob-Pan-Mix.png";
+//    File aniFile(animatedImagePath);
+//    testAnimation = new ImageAnimator(aniFile, 128, 20);
+//    addAndMakeVisible(testAnimation);
+//    testAnimation->startAnimation();
     
     
     startTimer(200);
@@ -69,19 +69,24 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
         // It's vital to use setParameterNotifyingHost to change any parameters that are automatable
         // by the host, rather than just modifying them directly, otherwise the host won't know
         // that they've changed.
-        
         getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam,
                                                    (float) inputSaturationSlider->getValue());
+        
+        getProcessor()->aGraph->setAudioUnitParameters(eSaturationDrive, (float) inputSaturationSlider->getValue());
     }
     else if(slider == shameSlider)
     {
         getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::shameParam,
                                                    (float) shameSlider->getValue());
+        
+        getProcessor()->aGraph->setAudioUnitParameters(eShameFreq, (float) shameSlider->getValue());
     }
     else if(slider == hissSlider)
     {
         getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::hissParam,
                                                    (float) hissSlider->getValue());
+        
+        getProcessor()->aGraph->setAudioUnitParameters(eHissLevel, (float) hissSlider->getValue());
     }
 
 }
