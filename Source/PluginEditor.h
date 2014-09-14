@@ -35,6 +35,7 @@ public:
     ScopedPointer<CustomKnob> inputSaturationSlider;
     ScopedPointer<CustomKnob> shameSlider;
     ScopedPointer<CustomKnob> hissSlider;
+    ScopedPointer<CustomKnob> blendSlider;
     
     ScopedPointer<ImageAnimator> testAnimation;
         

@@ -32,7 +32,11 @@ enum AUParameter
     eShameFreq,
     eShameDepth,
     
-    eHissLevel
+    eHissLevel,
+    
+    eBlendLevel,
+    
+    eBypass
 };
 
 

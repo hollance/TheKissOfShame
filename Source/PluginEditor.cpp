@@ -36,6 +36,12 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     hissSlider->setTopLeftPosition(shameSlider->getRight() + 10, 100);
     hissSlider->addListener (this);
     addAndMakeVisible(hissSlider);
+    
+    blendSlider = new CustomKnob;
+    blendSlider->setTopLeftPosition(hissSlider->getRight() + 10, 100);
+    blendSlider->addListener (this);
+    addAndMakeVisible(blendSlider);
+
 
     //*** Need to add a label for the slider ***
     //    gainLabel.attachToComponent (&gainSlider, false);
@@ -88,6 +94,14 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
         
         getProcessor()->aGraph->setAudioUnitParameters(eHissLevel, (float) hissSlider->getValue());
     }
+    else if(slider == blendSlider)
+    {
+        getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam,
+                                                   (float) blendSlider->getValue());
+        
+        getProcessor()->aGraph->setAudioUnitParameters(eBlendLevel, (float) blendSlider->getValue());
+    }
+
 
 }
 

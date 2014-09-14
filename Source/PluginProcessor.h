@@ -69,18 +69,22 @@ public:
     void setStateInformation (const void* data, int sizeInBytes);
     
     
-    
+    //////All of these values get communicated to the host:
     enum AudioInputParameters
     {
         inputSaturationParam = 0,
         shameParam,
         hissParam,
+        blendParam,
+        bypassParam,
         
         totalNumParams
     };
     
-    float inputSaturation, shame, hiss;
+    float inputSaturation, shame, hiss, blend;
     bool masterBypass;
+    /////////////////////////////////////////////////////////
+    
     
     ScopedPointer<AudioGraph> aGraph;
 

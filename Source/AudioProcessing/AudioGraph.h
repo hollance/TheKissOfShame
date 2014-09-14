@@ -15,6 +15,7 @@
 #include "Hiss.h"
 #include "Shame.h"
 #include "InputSaturation.h"
+#include "Blend.h"
 
 
 class AudioGraph
@@ -24,6 +25,7 @@ public:
     
     AudioGraph(int numChannels)
     {
+        
         inSaturation = new InputSaturation(0.1, 2.0);
         
         shame = new Shame(2);
@@ -31,6 +33,10 @@ public:
         shame->setOscFreq(7);
         
         hiss = new Hiss();
+        
+        blend = new Blend();
+        
+        bypassGraph = false;
     }
     
     ~AudioGraph(){}
@@ -38,9 +44,20 @@ public:
         
     void processGraph(AudioSampleBuffer& audioBuffer, int numChannels)
     {
-        inSaturation->processInputSaturation(audioBuffer, numChannels);
-        shame->processShame(audioBuffer, numChannels);
-        hiss->processHiss(audioBuffer, numChannels);
+        if(bypassGraph) return;
+        
+        audioGraphProcessingBuffer = audioBuffer;
+        
+        
+        inSaturation->processInputSaturation(audioGraphProcessingBuffer, numChannels);
+        shame->processShame(audioGraphProcessingBuffer, numChannels);
+        hiss->processHiss(audioGraphProcessingBuffer, numChannels);
+        blend->processBlend(audioBuffer, audioGraphProcessingBuffer, numChannels);
+        
+        
+        //the final apply gain will be the master output level.
+        audioBuffer.applyGain(1.0);
+        
     }
     
     
@@ -60,6 +77,8 @@ public:
                 
             case eHissLevel: hiss->setHissLevel(paramLevel); break;
                 
+            case eBlendLevel: blend->setBlendLevel(paramLevel); break;
+                
             default: break;
         }
     }
@@ -67,9 +86,14 @@ public:
     
 private:
     
+    AudioSampleBuffer audioGraphProcessingBuffer;
+    
     ScopedPointer<Hiss> hiss;
     ScopedPointer<Shame> shame;
     ScopedPointer<InputSaturation> inSaturation;
+    ScopedPointer<Blend> blend;
+    
+    bool bypassGraph;
     
 };
 
