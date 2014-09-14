@@ -24,7 +24,10 @@ public:
         
         hissLevel = 0.0;
         
-        incr = 0;
+        indx1 = 0;
+        indx2 = hissBuffer->getNumSamples()/2;
+        
+//        crossfade = false;
     }
     
     ~Hiss(){}
@@ -80,20 +83,51 @@ public:
             
             for(int i = 0; i < sampleBuffer.getNumSamples(); i++)
             {
-                samples[i] = (1-hissLevel)*samples[i] + hissLevel*hissBuffer->getReadPointer(channel)[incr];
+                //
+//                if(indx1 > hissBuffer->getNumSamples()*0.5) crossfade = true;
                 
-                incr = (incr + 1) % hissBuffer->getNumSamples();
+                
+                //Calculate ramp value for crossfading
+                if(indx1 < 0.5*hissBuffer->getNumSamples())
+                    rampValue = (float)indx1 / (0.5*(float)hissBuffer->getNumSamples());
+                else
+                    rampValue = (float)(hissBuffer->getNumSamples() - indx1) / (0.5*(float)hissBuffer->getNumSamples());
+                
+//NOTE: not working...
+//                if(crossfade)
+//                    hissSample = rampValue*hissBuffer->getReadPointer(channel)[indx1] + (1-rampValue)*hissBuffer->getReadPointer(channel)[indx2];
+//                else
+//                    hissSample = hissBuffer->getReadPointer(channel)[indx1];
+                
+                
+                hissSample = rampValue*hissBuffer->getReadPointer(channel)[indx1] + (1-rampValue)*hissBuffer->getReadPointer(channel)[indx2];
+                
+            
+                samples[i] = (1-hissLevel)*samples[i] + hissLevel*hissSample;
+                
+                
+                indx1 = (indx1 + 1) % hissBuffer->getNumSamples();
+                //if(crossfade) indx2 = (indx2 + 1) % hissBuffer->getNumSamples();
+                indx2 = (indx2 + 1) % hissBuffer->getNumSamples();
             }
         }
     }
+    
     
     void setHissLevel(float level) {hissLevel = level;}
     
 private:
     
     ScopedPointer<AudioSampleBuffer> hissBuffer;
-    int incr;
+    int indx1;
+    int indx2;
+    float hissSample;
     float hissLevel;
+    
+    
+    float rampValue;
+    
+//    bool crossfade;
     
 };
 

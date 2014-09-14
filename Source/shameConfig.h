@@ -9,7 +9,11 @@
 #ifndef KissOfShame_shameConfig_h
 #define KissOfShame_shameConfig_h
 
+#include <iostream>
+#include <math.h>
+
 #include "../JuceLibraryCode/JuceHeader.h"
+
 
 #define BUFFER_SIZE (44100)
 #define PI 3.14159265359

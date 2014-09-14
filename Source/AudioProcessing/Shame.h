@@ -9,12 +9,8 @@
 #ifndef __KissOfShame__Shame__
 #define __KissOfShame__Shame__
 
-#include <iostream>
-#include <math.h>
 
 #include "../shameConfig.h"
-
-
 
 
 class Shame
