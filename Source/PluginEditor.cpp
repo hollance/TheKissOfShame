@@ -42,10 +42,13 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     blendKnob->addListener (this);
     addAndMakeVisible(blendKnob);
     
-    //Output level knob here!!!
+    outputKnob = new CustomKnob;
+    outputKnob->setTopLeftPosition(blendKnob->getRight() + 10, 100);
+    outputKnob->addListener (this);
+    addAndMakeVisible(outputKnob);
 
     bypassButton = new CustomButton;
-    bypassButton->setTopLeftPosition(blendKnob->getRight() + 10, 100);
+    bypassButton->setTopLeftPosition(outputKnob->getRight() + 10, 100);
     bypassButton->addListener(this);
     bypassButton->setClickingTogglesState(true);
     addAndMakeVisible(bypassButton);
@@ -109,6 +112,14 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
         
         getProcessor()->aGraph->setAudioUnitParameters(eBlendLevel, (float) blendKnob->getValue());
     }
+    else if(slider == outputKnob)
+    {
+        getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam,
+                                                   (float) outputKnob->getValue());
+        
+        getProcessor()->aGraph->setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
+    }
+
 
 
 }

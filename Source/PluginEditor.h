@@ -43,6 +43,7 @@ public:
     ScopedPointer<CustomKnob> shameKnob;
     ScopedPointer<CustomKnob> hissKnob;
     ScopedPointer<CustomKnob> blendKnob;
+    ScopedPointer<CustomKnob> outputKnob;
     
     ScopedPointer<CustomButton> bypassButton;
     

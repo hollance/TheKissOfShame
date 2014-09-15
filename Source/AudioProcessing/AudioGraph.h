@@ -74,11 +74,11 @@ public:
             case eShameDepth: shame->setOscDepth(paramLevel); break;
             case eShameGlobalLevel: shame->setOscFreq(paramLevel); break;
                 
-            case eHissLevel: hiss->setHissLevel(paramLevel); break;
+            case eHissLevel:   hiss->setHissLevel(paramLevel); break;
                 
-            case eBlendLevel: blend->setBlendLevel(paramLevel); break;
+            case eBlendLevel:  blend->setBlendLevel(paramLevel); break;
                 
-            case eBypass:     bypassGraph = paramLevel; break;
+            case eBypass:      bypassGraph = paramLevel; break;
                 
             case eOutputLevel: outputLevel = paramLevel; break;
                 
