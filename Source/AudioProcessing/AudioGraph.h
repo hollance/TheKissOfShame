@@ -51,8 +51,8 @@ public:
         
         //process audio
         inSaturation->processInputSaturation(audioGraphProcessingBuffer, numChannels);
-        shame->processShame(audioGraphProcessingBuffer, numChannels);
         hiss->processHiss(audioGraphProcessingBuffer, numChannels);
+        shame->processShame(audioGraphProcessingBuffer, numChannels);
         blend->processBlend(audioBuffer, audioGraphProcessingBuffer, numChannels);
         
         //apply the final output level

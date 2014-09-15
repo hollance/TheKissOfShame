@@ -58,8 +58,7 @@ public:
             
             float frac = playPosition - (int)playPosition;
             int prX = (int)playPosition;
-            int nxtX = prX + 1;
-            if(nxtX > BUFFER_SIZE) nxtX -= BUFFER_SIZE;
+            int nxtX = (prX + 1) % BUFFER_SIZE;
             
             //compute the output sample by indexing and interpolating the circular buffer.
             for(int channel = 0; channel < numChannels; ++channel)
