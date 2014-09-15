@@ -25,7 +25,6 @@ public:
     
     AudioGraph(int numChannels)
     {
-        
         inSaturation = new InputSaturation(0.1, 2.0);
         
         shame = new Shame(2);
@@ -37,6 +36,7 @@ public:
         blend = new Blend();
         
         bypassGraph = false;
+        outputLevel = 1.0;
     }
     
     ~AudioGraph(){}
@@ -46,18 +46,17 @@ public:
     {
         if(bypassGraph) return;
         
+        //make a copy of the original audio to be used strictly for processing
         audioGraphProcessingBuffer = audioBuffer;
         
-        
+        //process audio
         inSaturation->processInputSaturation(audioGraphProcessingBuffer, numChannels);
         shame->processShame(audioGraphProcessingBuffer, numChannels);
         hiss->processHiss(audioGraphProcessingBuffer, numChannels);
         blend->processBlend(audioBuffer, audioGraphProcessingBuffer, numChannels);
         
-        
-        //the final apply gain will be the master output level.
-        audioBuffer.applyGain(1.0);
-        
+        //apply the final output level
+        audioBuffer.applyGain(outputLevel);
     }
     
     
@@ -79,6 +78,10 @@ public:
                 
             case eBlendLevel: blend->setBlendLevel(paramLevel); break;
                 
+            case eBypass:     bypassGraph = paramLevel; break;
+                
+            case eOutputLevel: outputLevel = paramLevel; break;
+                
             default: break;
         }
     }
@@ -94,6 +97,7 @@ private:
     ScopedPointer<Blend> blend;
     
     bool bypassGraph;
+    float outputLevel;
     
 };
 

@@ -16,13 +16,15 @@
 #include "CustomKnob.h"
 #include "ImageAnimator.h"
 
+#include "GUIUtilities/CustomButton.h"
 
 //==============================================================================
 /**
 */
 class KissOfShameAudioProcessorEditor  : public AudioProcessorEditor,
                                          public Timer,
-                                         public SliderListener
+                                         public SliderListener,
+                                         public Button::Listener
 {
 public:
     KissOfShameAudioProcessorEditor (KissOfShameAudioProcessor* ownerFilter);
@@ -32,12 +34,22 @@ public:
     
     void sliderValueChanged (Slider*) override;
     
-    ScopedPointer<CustomKnob> inputSaturationSlider;
-    ScopedPointer<CustomKnob> shameSlider;
-    ScopedPointer<CustomKnob> hissSlider;
-    ScopedPointer<CustomKnob> blendSlider;
+    void buttonClicked (Button* b);
+    virtual void timerCallback(int timerID){};
+    void changeListenerCallback (ChangeBroadcaster *source){};
+    
+    
+    ScopedPointer<CustomKnob> inputSaturationKnob;
+    ScopedPointer<CustomKnob> shameKnob;
+    ScopedPointer<CustomKnob> hissKnob;
+    ScopedPointer<CustomKnob> blendKnob;
+    
+    ScopedPointer<CustomButton> bypassButton;
     
     ScopedPointer<ImageAnimator> testAnimation;
+    
+    
+    
         
 private:
     

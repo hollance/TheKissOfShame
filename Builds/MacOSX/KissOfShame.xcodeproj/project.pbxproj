@@ -153,6 +153,7 @@
 		12FDD1876F1897CBFD6A376D /* juce_ReverbAudioSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_ReverbAudioSource.h; path = ../../JuceLibraryCode/modules/juce_audio_basics/sources/juce_ReverbAudioSource.h; sourceTree = SOURCE_ROOT; };
 		131652D619C5E4A400579156 /* Blend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Blend.cpp; sourceTree = "<group>"; };
 		131652D719C5E4A400579156 /* Blend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blend.h; sourceTree = "<group>"; };
+		131652DD19C62ED100579156 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
 		1316BEAEC69D11D188F687A1 /* juce_StringArray.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_StringArray.cpp; path = ../../JuceLibraryCode/modules/juce_core/text/juce_StringArray.cpp; sourceTree = SOURCE_ROOT; };
 		13197953BC9D08ACE5F14CA5 /* juce_audio_formats.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = juce_audio_formats.mm; path = ../../JuceLibraryCode/modules/juce_audio_formats/juce_audio_formats.mm; sourceTree = SOURCE_ROOT; };
 		1325AC3E19B69A2A0074B0F1 /* CustomKnob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CustomKnob.cpp; path = ../../Source/CustomKnob.cpp; sourceTree = "<group>"; };
@@ -1150,6 +1151,15 @@
 			name = juce_cryptography;
 			sourceTree = "<group>";
 		};
+		131652DB19C62EA400579156 /* GUIUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				131652DD19C62ED100579156 /* CustomButton.h */,
+			);
+			name = GUIUtilities;
+			path = ../../Source/GUIUtilities;
+			sourceTree = "<group>";
+		};
 		1376F058365CFA8D0F8DCA63 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -2044,6 +2054,7 @@
 				DDE1B4CD9E6EC6D634822F0F /* PluginEditor.h */,
 				13A5807819B95E8400CD245C /* ImageAnimator.cpp */,
 				13A5807919B95E8400CD245C /* ImageAnimator.h */,
+				131652DB19C62EA400579156 /* GUIUtilities */,
 				13F895DA19BF54270074B902 /* AudioProcessing */,
 			);
 			name = Source;

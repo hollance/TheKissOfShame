@@ -22,27 +22,35 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     faceImage = faceImage.rescaled(faceImage.getWidth()*0.75, faceImage.getHeight()*0.75);
     setSize(faceImage.getWidth(), faceImage.getHeight());
 
-    inputSaturationSlider = new CustomKnob;
-    inputSaturationSlider->setTopLeftPosition(50, 100);
-    inputSaturationSlider->addListener (this);
-    addAndMakeVisible(inputSaturationSlider);
+    inputSaturationKnob = new CustomKnob;
+    inputSaturationKnob->setTopLeftPosition(50, 100);
+    inputSaturationKnob->addListener (this);
+    addAndMakeVisible(inputSaturationKnob);
     
-    shameSlider = new CustomKnob;
-    shameSlider->setTopLeftPosition(inputSaturationSlider->getRight() + 10, 100);
-    shameSlider->addListener (this);
-    addAndMakeVisible(shameSlider);
+    shameKnob = new CustomKnob;
+    shameKnob->setTopLeftPosition(inputSaturationKnob->getRight() + 10, 100);
+    shameKnob->addListener (this);
+    addAndMakeVisible(shameKnob);
 
-    hissSlider = new CustomKnob;
-    hissSlider->setTopLeftPosition(shameSlider->getRight() + 10, 100);
-    hissSlider->addListener (this);
-    addAndMakeVisible(hissSlider);
+    hissKnob = new CustomKnob;
+    hissKnob->setTopLeftPosition(shameKnob->getRight() + 10, 100);
+    hissKnob->addListener (this);
+    addAndMakeVisible(hissKnob);
     
-    blendSlider = new CustomKnob;
-    blendSlider->setTopLeftPosition(hissSlider->getRight() + 10, 100);
-    blendSlider->addListener (this);
-    addAndMakeVisible(blendSlider);
+    blendKnob = new CustomKnob;
+    blendKnob->setTopLeftPosition(hissKnob->getRight() + 10, 100);
+    blendKnob->addListener (this);
+    addAndMakeVisible(blendKnob);
+    
+    //Output level knob here!!!
 
-
+    bypassButton = new CustomButton;
+    bypassButton->setTopLeftPosition(blendKnob->getRight() + 10, 100);
+    bypassButton->addListener(this);
+    bypassButton->setClickingTogglesState(true);
+    addAndMakeVisible(bypassButton);
+    
+    
     //*** Need to add a label for the slider ***
     //    gainLabel.attachToComponent (&gainSlider, false);
     //    gainLabel.setFont (Font (11.0f));
@@ -70,39 +78,51 @@ void KissOfShameAudioProcessorEditor::timerCallback()
 
 void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
 {
-    if (slider == inputSaturationSlider)
+    if (slider == inputSaturationKnob)
     {
         // It's vital to use setParameterNotifyingHost to change any parameters that are automatable
         // by the host, rather than just modifying them directly, otherwise the host won't know
         // that they've changed.
         getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam,
-                                                   (float) inputSaturationSlider->getValue());
+                                                   (float) inputSaturationKnob->getValue());
         
-        getProcessor()->aGraph->setAudioUnitParameters(eSaturationDrive, (float) inputSaturationSlider->getValue());
+        getProcessor()->aGraph->setAudioUnitParameters(eSaturationDrive, (float) inputSaturationKnob->getValue());
     }
-    else if(slider == shameSlider)
+    else if(slider == shameKnob)
     {
         getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::shameParam,
-                                                   (float) shameSlider->getValue());
+                                                   (float) shameKnob->getValue());
         
-        getProcessor()->aGraph->setAudioUnitParameters(eShameFreq, (float) shameSlider->getValue());
+        getProcessor()->aGraph->setAudioUnitParameters(eShameFreq, (float) shameKnob->getValue());
     }
-    else if(slider == hissSlider)
+    else if(slider == hissKnob)
     {
         getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::hissParam,
-                                                   (float) hissSlider->getValue());
+                                                   (float) hissKnob->getValue());
         
-        getProcessor()->aGraph->setAudioUnitParameters(eHissLevel, (float) hissSlider->getValue());
+        getProcessor()->aGraph->setAudioUnitParameters(eHissLevel, (float) hissKnob->getValue());
     }
-    else if(slider == blendSlider)
+    else if(slider == blendKnob)
     {
         getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam,
-                                                   (float) blendSlider->getValue());
+                                                   (float) blendKnob->getValue());
         
-        getProcessor()->aGraph->setAudioUnitParameters(eBlendLevel, (float) blendSlider->getValue());
+        getProcessor()->aGraph->setAudioUnitParameters(eBlendLevel, (float) blendKnob->getValue());
     }
 
 
+}
+
+
+void KissOfShameAudioProcessorEditor::buttonClicked (Button* b)
+{
+    if(b == bypassButton)
+    {
+        getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::bypassParam,
+                                                   b->getToggleState());
+        
+        getProcessor()->aGraph->setAudioUnitParameters(eBypass, b->getToggleState());
+    }
 }
 
 

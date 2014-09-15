@@ -49,6 +49,9 @@ float KissOfShameAudioProcessor::getParameter (int index)
         case inputSaturationParam:     return inputSaturation;
         case shameParam:               return shame;
         case hissParam:                return hiss;
+        case blendParam:               return blend;
+        case bypassParam:              return masterBypass;
+        case outputParam:              return output;
             
         default:                       return 0.0f;
     }
@@ -66,6 +69,9 @@ void KissOfShameAudioProcessor::setParameter (int index, float newValue)
         case inputSaturationParam:     inputSaturation = newValue;  break;
         case shameParam:               shame = newValue;  break;
         case hissParam:                hiss = newValue;  break;
+        case blendParam:               blend = newValue; break;
+        case bypassParam:              masterBypass = newValue; break;
+        case outputParam:              output = newValue; break;
             
         default:            break;
     }
@@ -172,18 +178,6 @@ void KissOfShameAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuf
     
     aGraph->processGraph(buffer, getNumInputChannels());
     
-//    for (int channel = 0; channel < getNumInputChannels(); ++channel)
-//    {
-//        float* channelData = buffer.getWritePointer (channel);
-//        
-//        
-//        for(int i = 0; i < buffer.getNumSamples(); i++)
-//        {
-//            
-//            channelData[i] = aGraph->processGraph(channelData[i]);
-//            
-//        }
-//    }
 
     // In case we have more outputs than inputs, we'll clear any output
     // channels that didn't contain input data, (because these aren't

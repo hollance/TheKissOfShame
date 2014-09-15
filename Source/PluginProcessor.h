@@ -77,11 +77,12 @@ public:
         hissParam,
         blendParam,
         bypassParam,
+        outputParam,
         
         totalNumParams
     };
     
-    float inputSaturation, shame, hiss, blend;
+    float inputSaturation, shame, hiss, blend, output;
     bool masterBypass;
     /////////////////////////////////////////////////////////
     

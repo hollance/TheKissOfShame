@@ -20,6 +20,11 @@
 #define SAMPLE_RATE 44100
 
 
+#define CURRENT_APPLICATION_PATH (File::getSpecialLocation(File::currentApplicationFile).getFullPathName())
+#define GUI_PATH CURRENT_APPLICATION_PATH + "/Contents/Resources/GUI_Resources/"
+
+
+
 enum AUParameter
 {
     eSaturationDrive,
@@ -36,7 +41,9 @@ enum AUParameter
     
     eBlendLevel,
     
-    eBypass
+    eBypass,
+    
+    eOutputLevel
 };
 
 
