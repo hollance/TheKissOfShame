@@ -20,43 +20,88 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     String imageLocation = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/Face/Controls.png";
     faceImage = ImageCache::getFromFile(File(imageLocation));
     faceImage = faceImage.rescaled(faceImage.getWidth()*0.75, faceImage.getHeight()*0.75);
-    setSize(faceImage.getWidth(), faceImage.getHeight());
 
+    
+    
     inputSaturationKnob = new CustomKnob;
-    inputSaturationKnob->setTopLeftPosition(50, 100);
+    inputSaturationKnob->setTopLeftPosition(0, faceImage.getHeight() + 20);
     inputSaturationKnob->addListener (this);
     addAndMakeVisible(inputSaturationKnob);
     
     shameKnob = new CustomKnob;
-    shameKnob->setTopLeftPosition(inputSaturationKnob->getRight() + 10, 100);
+    shameKnob->setTopLeftPosition(inputSaturationKnob->getRight() + 10, inputSaturationKnob->getY());
     shameKnob->addListener (this);
     addAndMakeVisible(shameKnob);
 
     hissKnob = new CustomKnob;
-    hissKnob->setTopLeftPosition(shameKnob->getRight() + 10, 100);
+    hissKnob->setTopLeftPosition(shameKnob->getRight() + 10, inputSaturationKnob->getY());
     hissKnob->addListener (this);
     addAndMakeVisible(hissKnob);
     
     blendKnob = new CustomKnob;
-    blendKnob->setTopLeftPosition(hissKnob->getRight() + 10, 100);
+    blendKnob->setTopLeftPosition(hissKnob->getRight() + 10, inputSaturationKnob->getY());
     blendKnob->addListener (this);
     addAndMakeVisible(blendKnob);
     
     outputKnob = new CustomKnob;
-    outputKnob->setTopLeftPosition(blendKnob->getRight() + 10, 100);
+    outputKnob->setTopLeftPosition(blendKnob->getRight() + 10, inputSaturationKnob->getY());
     outputKnob->addListener (this);
     addAndMakeVisible(outputKnob);
 
     bypassButton = new CustomButton;
-    bypassButton->setTopLeftPosition(outputKnob->getRight() + 10, 100);
+    bypassButton->setTopLeftPosition(outputKnob->getRight() + 10, inputSaturationKnob->getY());
     bypassButton->addListener(this);
     bypassButton->setClickingTogglesState(true);
     addAndMakeVisible(bypassButton);
     
     
-    //*** Need to add a label for the slider ***
-    //    gainLabel.attachToComponent (&gainSlider, false);
-    //    gainLabel.setFont (Font (11.0f));
+    
+    //////////////// Temporary labels to attach to components
+    
+    inputLabel.attachToComponent (inputSaturationKnob, false);
+    String inputText = "Input/Saturation";
+    inputLabel.setText(inputText, dontSendNotification);
+    inputLabel.setFont (Font (11.0f));
+    inputLabel.setColour(Label::textColourId, Colours::white);
+    addAndMakeVisible(inputLabel);
+    
+    shameLabel.attachToComponent (shameKnob, false);
+    String shameText = "SHAME";
+    shameLabel.setText(shameText, dontSendNotification);
+    shameLabel.setFont (Font (11.0f));
+    shameLabel.setColour(Label::textColourId, Colours::white);
+    addAndMakeVisible(shameLabel);
+
+    hissLabel.attachToComponent (hissKnob, false);
+    String hissText = "Hiss";
+    hissLabel.setText(hissText, dontSendNotification);
+    hissLabel.setFont (Font (11.0f));
+    hissLabel.setColour(Label::textColourId, Colours::white);
+    addAndMakeVisible(hissLabel);
+
+    blendLabel.attachToComponent (blendKnob, false);
+    String blendText = "Blend";
+    blendLabel.setText(blendText, dontSendNotification);
+    blendLabel.setFont (Font (11.0f));
+    blendLabel.setColour(Label::textColourId, Colours::white);
+    addAndMakeVisible(blendLabel);
+
+    outputLabel.attachToComponent (outputKnob, false);
+    String outputText = "Output";
+    outputLabel.setText(outputText, dontSendNotification);
+    outputLabel.setFont (Font (11.0f));
+    outputLabel.setColour(Label::textColourId, Colours::white);
+    addAndMakeVisible(outputLabel);
+
+    bypassLabel.attachToComponent (bypassButton, false);
+    String bypassText = "Bypass";
+    bypassLabel.setText(bypassText, dontSendNotification);
+    bypassLabel.setFont (Font (11.0f));
+    bypassLabel.setColour(Label::textColourId, Colours::white);
+    addAndMakeVisible(bypassLabel);
+
+    //////////////////////////////////////////////////////////////////
+    
     
     
     //NOTE: basic animation of an image. 
@@ -65,6 +110,11 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
 //    testAnimation = new ImageAnimator(aniFile, 128, 20);
 //    addAndMakeVisible(testAnimation);
 //    testAnimation->startAnimation();
+    
+    
+    int mainWidth = faceImage.getWidth();
+    int mainHeight = faceImage.getHeight() + inputSaturationKnob->getHeight() + inputLabel.getHeight();
+    setSize(mainWidth, mainHeight);
     
     
     startTimer(200);
@@ -119,8 +169,6 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
         
         getProcessor()->aGraph->setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
     }
-
-
 
 }
 

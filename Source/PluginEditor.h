@@ -38,15 +38,25 @@ public:
     virtual void timerCallback(int timerID){};
     void changeListenerCallback (ChangeBroadcaster *source){};
     
-    
+    //Knobs
     ScopedPointer<CustomKnob> inputSaturationKnob;
     ScopedPointer<CustomKnob> shameKnob;
     ScopedPointer<CustomKnob> hissKnob;
     ScopedPointer<CustomKnob> blendKnob;
     ScopedPointer<CustomKnob> outputKnob;
     
+    //buttons
     ScopedPointer<CustomButton> bypassButton;
     
+    //labels & images
+    Label inputLabel;
+    Label shameLabel;
+    Label hissLabel;
+    Label blendLabel;
+    Label outputLabel;
+    Label bypassLabel;
+    
+    //animation
     ScopedPointer<ImageAnimator> testAnimation;
     
     

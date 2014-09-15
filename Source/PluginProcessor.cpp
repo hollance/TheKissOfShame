@@ -178,6 +178,11 @@ void KissOfShameAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuf
     
     aGraph->processGraph(buffer, getNumInputChannels());
     
+    
+    //Need to send the RMS below to the animation components for VU meters...
+    //use juce's messaging system to keep the audio thread safe.
+    //audioBuffer.getRMSLevel(0, 0, audioBuffer.getNumSamples());
+
 
     // In case we have more outputs than inputs, we'll clear any output
     // channels that didn't contain input data, (because these aren't

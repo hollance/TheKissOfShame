@@ -29,7 +29,14 @@ public:
     ~CustomButton(){}
     
     //void paint (Graphics& g){};
-    
+
+    void resizeButton(float scale)
+    {
+        offImage = offImage.rescaled(offImage.getWidth()*scale, offImage.getHeight()*scale);
+        onImage = onImage.rescaled(onImage.getWidth()*scale, onImage.getHeight()*scale);
+//        setImages(true, false, true, onImage, 1.0f, Colour(0x0), Image(), 1.0f, Colour(0x0), offImage, 1.0f, Colour(0x0));
+//        repaint();
+    }
     
      void setImagePaths(String onImgPath, String offImgPath)
      {

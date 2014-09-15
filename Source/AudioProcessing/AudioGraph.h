@@ -28,7 +28,7 @@ public:
         inSaturation = new InputSaturation(0.1, 2.0);
         
         shame = new Shame(2);
-        shame->setOscDepth(0.1);
+        shame->setOscDepth(0.2);
         shame->setOscFreq(7);
         
         hiss = new Hiss();
@@ -56,7 +56,7 @@ public:
         blend->processBlend(audioBuffer, audioGraphProcessingBuffer, numChannels);
         
         //apply the final output level
-        audioBuffer.applyGain(outputLevel);
+        audioBuffer.applyGain(outputLevel);        
     }
     
     

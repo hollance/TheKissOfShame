@@ -37,7 +37,7 @@ public:
         return prSamp*(1-fraction) + nxtSamp*fraction;
     }
     
-    void setOscFreq(float freq){oscFreq = freq;}
+    void setOscFreq(float freq){oscFreq = 15.0*freq;}
     void setOscDepth(float depth){oscDepth = depth;}
     void setGlobalLevel(float level){shameGlobalLevel = level;}
     
