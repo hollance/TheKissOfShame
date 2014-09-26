@@ -13,10 +13,10 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
-#include "CustomKnob.h"
-#include "ImageAnimator.h"
-
+#include "GUIUtilities/CustomKnob.h"
+#include "GUIUtilities/ImageAnimator.h"
 #include "GUIUtilities/CustomButton.h"
+#include "GUIUtilities/ImageInteractor.h"
 
 //==============================================================================
 /**
@@ -25,6 +25,7 @@ class KissOfShameAudioProcessorEditor  : public AudioProcessorEditor,
                                          public Timer,
                                          public SliderListener,
                                          public Button::Listener
+
 {
 public:
     KissOfShameAudioProcessorEditor (KissOfShameAudioProcessor* ownerFilter);
@@ -36,6 +37,7 @@ public:
     
     void buttonClicked (Button* b);
     virtual void timerCallback(int timerID){};
+    
     void changeListenerCallback (ChangeBroadcaster *source){};
     
     //Knobs
@@ -55,13 +57,16 @@ public:
     Label blendLabel;
     Label outputLabel;
     Label bypassLabel;
+    Label debugLabel; //Used strictly to post messages for debugging...
+
     
     //animation
     ScopedPointer<ImageAnimator> testAnimation;
+    ScopedPointer<ImageInteractor> vuMeter;
     
     
     
-        
+    
 private:
     
     Image faceImage;

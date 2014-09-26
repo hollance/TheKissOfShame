@@ -68,6 +68,8 @@ public:
     void getStateInformation (MemoryBlock& destData);
     void setStateInformation (const void* data, int sizeInBytes);
     
+    float getCurrentRMS(){return curRMS;}
+    
     
     //////All of these values get communicated to the host:
     enum AudioInputParameters
@@ -88,6 +90,7 @@ public:
     
     
     ScopedPointer<AudioGraph> aGraph;
+    float curRMS; 
 
 
 private:

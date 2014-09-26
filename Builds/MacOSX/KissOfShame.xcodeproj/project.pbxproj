@@ -11,8 +11,9 @@
 		0B9B0494B4549147F5B6B9B2 /* juce_VST3_Wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E3E42639E1876E82F8E47FD /* juce_VST3_Wrapper.cpp */; };
 		0C66406A5069927544763DBD /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B21C97309AF9BFA504052D99 /* AudioUnit.framework */; };
 		131652D819C5E4A400579156 /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 131652D619C5E4A400579156 /* Blend.cpp */; };
-		1325AC4019B69A2A0074B0F1 /* CustomKnob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1325AC3E19B69A2A0074B0F1 /* CustomKnob.cpp */; };
-		13A5807A19B95E8400CD245C /* ImageAnimator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13A5807819B95E8400CD245C /* ImageAnimator.cpp */; };
+		134C6BF319D5EBC900B454CE /* CustomKnob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 134C6BEF19D5EBC900B454CE /* CustomKnob.cpp */; };
+		134C6BF419D5EBC900B454CE /* ImageAnimator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 134C6BF119D5EBC900B454CE /* ImageAnimator.cpp */; };
+		134C6BF719D5EC8100B454CE /* ImageInteractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 134C6BF519D5EC8100B454CE /* ImageInteractor.cpp */; };
 		13F895DD19BF54400074B902 /* AudioGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F895DB19BF54400074B902 /* AudioGraph.cpp */; };
 		13F895E019BF54730074B902 /* Hiss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F895DE19BF54730074B902 /* Hiss.cpp */; };
 		13F895E319BF54940074B902 /* Shame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F895E119BF54940074B902 /* Shame.cpp */; };
@@ -156,14 +157,16 @@
 		131652DD19C62ED100579156 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
 		1316BEAEC69D11D188F687A1 /* juce_StringArray.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_StringArray.cpp; path = ../../JuceLibraryCode/modules/juce_core/text/juce_StringArray.cpp; sourceTree = SOURCE_ROOT; };
 		13197953BC9D08ACE5F14CA5 /* juce_audio_formats.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = juce_audio_formats.mm; path = ../../JuceLibraryCode/modules/juce_audio_formats/juce_audio_formats.mm; sourceTree = SOURCE_ROOT; };
-		1325AC3E19B69A2A0074B0F1 /* CustomKnob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CustomKnob.cpp; path = ../../Source/CustomKnob.cpp; sourceTree = "<group>"; };
-		1325AC3F19B69A2A0074B0F1 /* CustomKnob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomKnob.h; path = ../../Source/CustomKnob.h; sourceTree = "<group>"; };
 		132FE28A587DE6846A5A99A7 /* juce_DrawableText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_DrawableText.h; path = ../../JuceLibraryCode/modules/juce_gui_basics/drawables/juce_DrawableText.h; sourceTree = SOURCE_ROOT; };
+		134C6BEF19D5EBC900B454CE /* CustomKnob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomKnob.cpp; sourceTree = "<group>"; };
+		134C6BF019D5EBC900B454CE /* CustomKnob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomKnob.h; sourceTree = "<group>"; };
+		134C6BF119D5EBC900B454CE /* ImageAnimator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageAnimator.cpp; sourceTree = "<group>"; };
+		134C6BF219D5EBC900B454CE /* ImageAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAnimator.h; sourceTree = "<group>"; };
+		134C6BF519D5EC8100B454CE /* ImageInteractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageInteractor.cpp; sourceTree = "<group>"; };
+		134C6BF619D5EC8100B454CE /* ImageInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInteractor.h; sourceTree = "<group>"; };
 		1370A9F519C2BEE7003F3401 /* shameConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shameConfig.h; path = ../../Source/shameConfig.h; sourceTree = "<group>"; };
 		137D367FB15FD16829B81533 /* juce_DrawableShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_DrawableShape.cpp; path = ../../JuceLibraryCode/modules/juce_gui_basics/drawables/juce_DrawableShape.cpp; sourceTree = SOURCE_ROOT; };
 		1384F21E3089BF58CC92B4E0 /* juce_Random.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_Random.h; path = ../../JuceLibraryCode/modules/juce_core/maths/juce_Random.h; sourceTree = SOURCE_ROOT; };
-		13A5807819B95E8400CD245C /* ImageAnimator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageAnimator.cpp; path = ../../Source/ImageAnimator.cpp; sourceTree = "<group>"; };
-		13A5807919B95E8400CD245C /* ImageAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageAnimator.h; path = ../../Source/ImageAnimator.h; sourceTree = "<group>"; };
 		13D5CB519BB65DEC2C1ED580 /* juce_PropertyPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_PropertyPanel.h; path = ../../JuceLibraryCode/modules/juce_gui_basics/properties/juce_PropertyPanel.h; sourceTree = SOURCE_ROOT; };
 		13F895DB19BF54400074B902 /* AudioGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioGraph.cpp; sourceTree = "<group>"; };
 		13F895DC19BF54400074B902 /* AudioGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioGraph.h; sourceTree = "<group>"; };
@@ -1154,6 +1157,12 @@
 		131652DB19C62EA400579156 /* GUIUtilities */ = {
 			isa = PBXGroup;
 			children = (
+				134C6BF519D5EC8100B454CE /* ImageInteractor.cpp */,
+				134C6BF619D5EC8100B454CE /* ImageInteractor.h */,
+				134C6BEF19D5EBC900B454CE /* CustomKnob.cpp */,
+				134C6BF019D5EBC900B454CE /* CustomKnob.h */,
+				134C6BF119D5EBC900B454CE /* ImageAnimator.cpp */,
+				134C6BF219D5EBC900B454CE /* ImageAnimator.h */,
 				131652DD19C62ED100579156 /* CustomButton.h */,
 			);
 			name = GUIUtilities;
@@ -2046,14 +2055,10 @@
 			isa = PBXGroup;
 			children = (
 				1370A9F519C2BEE7003F3401 /* shameConfig.h */,
-				1325AC3E19B69A2A0074B0F1 /* CustomKnob.cpp */,
-				1325AC3F19B69A2A0074B0F1 /* CustomKnob.h */,
 				A2ECF618E5E90824F1FD01F3 /* PluginProcessor.cpp */,
 				21F4BF4F08BA5943383D0B0E /* PluginProcessor.h */,
 				7AB82F1F677A5849A4B59B20 /* PluginEditor.cpp */,
 				DDE1B4CD9E6EC6D634822F0F /* PluginEditor.h */,
-				13A5807819B95E8400CD245C /* ImageAnimator.cpp */,
-				13A5807919B95E8400CD245C /* ImageAnimator.h */,
 				131652DB19C62EA400579156 /* GUIUtilities */,
 				13F895DA19BF54270074B902 /* AudioProcessing */,
 			);
@@ -3035,9 +3040,9 @@
 				CA0CF065FFDD7B2C8F0381BB /* AUMIDIBase.cpp in Sources */,
 				41C309601482EF2221BEE562 /* AUMIDIEffectBase.cpp in Sources */,
 				9EACF33D632FBA72300594FE /* AUOutputBase.cpp in Sources */,
-				13A5807A19B95E8400CD245C /* ImageAnimator.cpp in Sources */,
 				E102B449BD3D2EB3A9ADF123 /* AUOutputElement.cpp in Sources */,
 				320AB915E073C8BFF3C0610A /* AUScopeElement.cpp in Sources */,
+				134C6BF319D5EBC900B454CE /* CustomKnob.cpp in Sources */,
 				91D4591556E598BD8668B412 /* CAAudioChannelLayout.cpp in Sources */,
 				CD79EB8BF51D6B3C7215EE44 /* CAAUParameter.cpp in Sources */,
 				F9AC7AB895E6A275A4044CC5 /* CAMutex.cpp in Sources */,
@@ -3045,7 +3050,6 @@
 				A1C42E5393973B957FEE2930 /* CAStreamBasicDescription.cpp in Sources */,
 				58A0AFD3F916494DEBAA8FAC /* CAVectorUnit.cpp in Sources */,
 				93F4F86D5BA80A7C5E2791F0 /* ComponentBase.cpp in Sources */,
-				1325AC4019B69A2A0074B0F1 /* CustomKnob.cpp in Sources */,
 				767FDA0929C9279D18E5DB31 /* MusicDeviceBase.cpp in Sources */,
 				6354CB6249481565A3A08105 /* juce_AAX_Wrapper.cpp in Sources */,
 				13F895E619BF54A70074B902 /* InputSaturation.cpp in Sources */,
@@ -3069,10 +3073,12 @@
 				F7048346597B8F9ED397251C /* juce_RTAS_DigiCode1.cpp in Sources */,
 				BAB575CDE2605106B105D2D0 /* juce_RTAS_DigiCode2.cpp in Sources */,
 				01A4A9C105F1F4FFC235229D /* juce_RTAS_DigiCode3.cpp in Sources */,
+				134C6BF419D5EBC900B454CE /* ImageAnimator.cpp in Sources */,
 				F7A0AFECAB26455BFCB23FF8 /* juce_RTAS_MacUtilities.mm in Sources */,
 				AA24C3BCA35ACBA3AEF6F39D /* juce_RTAS_Wrapper.cpp in Sources */,
 				537231FEEEEA4DC66D4ADBF6 /* juce_video.mm in Sources */,
 				0B9B0494B4549147F5B6B9B2 /* juce_VST3_Wrapper.cpp in Sources */,
+				134C6BF719D5EC8100B454CE /* ImageInteractor.cpp in Sources */,
 				57B1529FEE598A87B40268BD /* juce_VST3_Wrapper.mm in Sources */,
 				E0AD0BCF36AAA025866FC9F0 /* juce_VST_Wrapper.cpp in Sources */,
 				E0DD49147811FF40979F8D77 /* juce_VST_Wrapper.mm in Sources */,

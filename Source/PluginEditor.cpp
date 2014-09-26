@@ -16,7 +16,7 @@
 KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAudioProcessor* ownerFilter)
     : AudioProcessorEditor (ownerFilter)
 {
-
+    
     String imageLocation = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/Face/Controls.png";
     faceImage = ImageCache::getFromFile(File(imageLocation));
     faceImage = faceImage.rescaled(faceImage.getWidth()*0.75, faceImage.getHeight()*0.75);
@@ -99,11 +99,20 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     bypassLabel.setFont (Font (11.0f));
     bypassLabel.setColour(Label::textColourId, Colours::white);
     addAndMakeVisible(bypassLabel);
+    
+    String debugText = "Debug Info...";
+    debugLabel.setText(debugText, dontSendNotification);
+    debugLabel.setTopLeftPosition(100, 100);
+    debugLabel.setFont (Font (25.0f));
+    debugLabel.setSize(500, 50);
+    debugLabel.setColour(Label::textColourId, Colours::white);
+    addAndMakeVisible(debugLabel);
+
 
     //////////////////////////////////////////////////////////////////
     
     
-    
+    //////////// Animation ///////////////////////////////////////////
     //NOTE: basic animation of an image. 
 //    String animatedImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/MixKnob/Knob-Pan-Mix.png";
 //    File aniFile(animatedImagePath);
@@ -111,13 +120,17 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
 //    addAndMakeVisible(testAnimation);
 //    testAnimation->startAnimation();
     
+    vuMeter = new ImageInteractor;
+    vuMeter->setTopLeftPosition(bypassButton->getRight() + 25, inputSaturationKnob->getY());
+    addAndMakeVisible(vuMeter);
+
+    
     
     int mainWidth = faceImage.getWidth();
     int mainHeight = faceImage.getHeight() + inputSaturationKnob->getHeight() + inputLabel.getHeight();
     setSize(mainWidth, mainHeight);
     
-    
-    startTimer(200);
+    startTimer(25);
 }
 
 KissOfShameAudioProcessorEditor::~KissOfShameAudioProcessorEditor()
@@ -127,6 +140,16 @@ KissOfShameAudioProcessorEditor::~KissOfShameAudioProcessorEditor()
 void KissOfShameAudioProcessorEditor::timerCallback()
 {
     KissOfShameAudioProcessor* ourProcessor = getProcessor();
+    
+    //NOTE: maybe this is used to get audio from different positions.
+    //AudioPlayHead::CurrentPositionInfo newPos (ourProcessor->lastPosInfo);
+    
+    debugLabel.setText(String(ourProcessor->curRMS), dontSendNotification);
+    
+    //vuMeter->updateImageWithValue(ourProcessor->curRMS);
+    vuMeter->updateImageWithValue(ourProcessor->curRMS*10);
+    
+    
 }
 
 void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
@@ -140,6 +163,9 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
                                                    (float) inputSaturationKnob->getValue());
         
         getProcessor()->aGraph->setAudioUnitParameters(eSaturationDrive, (float) inputSaturationKnob->getValue());
+        
+        
+        
     }
     else if(slider == shameKnob)
     {
