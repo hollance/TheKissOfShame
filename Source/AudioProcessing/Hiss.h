@@ -55,7 +55,8 @@ public:
 //    }
 
     
-    AudioSampleBuffer *loadSampleFromFile(const File& audioFile) {
+    AudioSampleBuffer *loadSampleFromFile(const File& audioFile)
+    {
         AudioSampleBuffer *toneASB = NULL;
         //    File noteFile(File::getCurrentWorkingDirectory().getChildFile(fileName));
         if (audioFile.existsAsFile()) {

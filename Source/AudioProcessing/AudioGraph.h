@@ -28,8 +28,8 @@ public:
         inSaturation = new InputSaturation(0.1, 2.0);
         
         shame = new Shame(2);
-        shame->setOscDepth(0.2);
-        shame->setOscFreq(7);
+        shame->setDepth(0.2);
+        shame->setRate(7);
         
         hiss = new Hiss();
         
@@ -70,9 +70,9 @@ public:
             case eSaturationThresh: inSaturation->setThreshold(paramLevel); break;
             case eSaturationGlobalLevel: inSaturation->setGlobalLevel(paramLevel); break;
             
-            case eShameFreq: shame->setOscFreq(paramLevel); break;
-            case eShameDepth: shame->setOscDepth(paramLevel); break;
-            case eShameGlobalLevel: shame->setOscFreq(paramLevel); break;
+            case eShameFreq: shame->setRate(paramLevel); break;
+            case eShameDepth: shame->setDepth(paramLevel); break;
+            case eShameGlobalLevel: shame->setRate(paramLevel); break;
                 
             case eHissLevel:   hiss->setHissLevel(paramLevel); break;
                 
