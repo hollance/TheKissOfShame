@@ -61,7 +61,7 @@ public:
 
     
     //animation
-    ScopedPointer<ImageAnimator> testAnimation;
+    ScopedPointer<ImageAnimator> reelAnimation;
     ScopedPointer<ImageInteractor> vuMeter;
     
     

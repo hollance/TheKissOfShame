@@ -17,9 +17,9 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     : AudioProcessorEditor (ownerFilter)
 {
     
-    String imageLocation = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/Face/Controls.png";
+    String imageLocation = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/fond.png";
     faceImage = ImageCache::getFromFile(File(imageLocation));
-    faceImage = faceImage.rescaled(faceImage.getWidth()*0.75, faceImage.getHeight()*0.75);
+    faceImage = faceImage.rescaled(faceImage.getWidth(), faceImage.getHeight());
 
     
     
@@ -29,7 +29,10 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     addAndMakeVisible(inputSaturationKnob);
     
     shameKnob = new CustomKnob;
-    shameKnob->setTopLeftPosition(inputSaturationKnob->getRight() + 10, inputSaturationKnob->getY());
+    String knobImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/09.png";
+    shameKnob->setKnobImage(knobImagePath);
+    shameKnob->setNumFrames(65);
+    shameKnob->setKnobDimensions(401, 491, 174, 163);
     shameKnob->addListener (this);
     addAndMakeVisible(shameKnob);
 
@@ -114,11 +117,12 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     
     //////////// Animation ///////////////////////////////////////////
     //NOTE: basic animation of an image. 
-//    String animatedImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/MixKnob/Knob-Pan-Mix.png";
-//    File aniFile(animatedImagePath);
-//    testAnimation = new ImageAnimator(aniFile, 128, 20);
-//    addAndMakeVisible(testAnimation);
-//    testAnimation->startAnimation();
+    String reelImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/wheels.png";
+    File reelFile(reelImagePath);
+    reelAnimation = new ImageAnimator(reelFile, 31, 20);
+    reelAnimation->setFrameDimensions(0, 0, 960, 322);
+    addAndMakeVisible(reelAnimation);
+    reelAnimation->startAnimation();
     
     vuMeter = new ImageInteractor;
     vuMeter->setTopLeftPosition(bypassButton->getRight() + 25, inputSaturationKnob->getY());

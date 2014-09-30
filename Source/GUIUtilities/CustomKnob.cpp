@@ -1,7 +1,6 @@
 #include "CustomKnob.h"
 
 
-const String knobImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/MixKnob/Knob-Pan-Mix.png";
 
 CustomKnob::CustomKnob()
 :
@@ -10,6 +9,9 @@ knobNumFrames(128)
     setSliderStyle(Rotary);
     setTextBoxStyle(NoTextBox, true, 0, 0);
     setRange(0.000, 1.000, 0.001);
+    
+    
+    knobImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/MixKnob/Knob-Pan-Mix.png";
     
     File imgFile;
     imgFile = File(knobImagePath);
@@ -22,6 +24,26 @@ knobNumFrames(128)
 
 CustomKnob::~CustomKnob()
 {}
+
+void CustomKnob::setNumFrames(int numFrames)
+{
+    knobNumFrames = numFrames;
+}
+
+void CustomKnob::setKnobImage(String filePath)
+{
+    knobImage = ImageCache::getFromFile(File(filePath));
+}
+
+
+void CustomKnob::setKnobDimensions(int topLeftX, int topLeftY, int w, int h)
+{
+    setTopLeftPosition(topLeftX, topLeftY);
+    knobFrameWidth = w;
+    knobFrameHeight = h;
+    setSize(knobFrameWidth, knobFrameHeight);
+}
+
 
 void CustomKnob::paint (Graphics& g)
 {

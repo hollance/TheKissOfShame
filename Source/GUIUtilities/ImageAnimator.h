@@ -45,6 +45,12 @@ public:
         }
     }
     
+    void setFrameDimensions(int topLeftX, int topLeftY, int w, int h)
+    {
+        setTopLeftPosition(topLeftX, topLeftY);
+        imageFrameWidth = w;
+        imageFrameHeight = h;
+    }
     
     void setStartingFrame(int frameNumber)
     {

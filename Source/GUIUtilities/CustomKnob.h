@@ -13,10 +13,15 @@ public:
     CustomKnob();
     ~CustomKnob();
     
+    void setNumFrames(int numFrames);
+    void setKnobImage(String filePath);
+    void setKnobDimensions(int topLeftX, int topLeftY, int w, int h);
+    
     void paint (Graphics& g);
     
 private:
 
+    String knobImagePath;
 	Image knobImage;
     int knobFrameWidth;
     int knobFrameHeight;
