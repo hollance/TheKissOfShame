@@ -44,7 +44,7 @@ public:
     
     ~Shame(){}
     
-    void interpolateParameters(float input)
+    void setInterpolatedParameters(float input)
     {
         if(input < 0.0) input = 0.0;
         if(input > 1.0) input = 1.0;
@@ -76,11 +76,15 @@ public:
     void importWaveTables()
     {
         Array<File> audioFiles;
-        File audioFile1("/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/Audio_Resources/Hiss.wav");
-        File audioFile2("/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/Audio_Resources/Hiss.wav");
+        File audioFile1(AUDIO_PATH + "SineTone.wav");
+        File audioFile2(AUDIO_PATH + "SquareTone.wav");
+        File audioFile3(AUDIO_PATH + "SawtoothTone.wav");
+        File audioFile4(AUDIO_PATH + "DrawTone.wav");
         
         audioFiles.add(audioFile1);
         audioFiles.add(audioFile2);
+        audioFiles.add(audioFile3);
+        audioFiles.add(audioFile4);
         
         for(int i = 0; i < audioFiles.size(); i++)
         {

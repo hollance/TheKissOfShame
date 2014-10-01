@@ -17,7 +17,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     : AudioProcessorEditor (ownerFilter)
 {
     
-    String imageLocation = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/fond.png";
+    String imageLocation = GUI_PATH + "KOS_Graphics/fond.png";
     faceImage = ImageCache::getFromFile(File(imageLocation));
     faceImage = faceImage.rescaled(faceImage.getWidth(), faceImage.getHeight());
 
@@ -26,7 +26,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     ////////// KNOBS ////////////////
     
     inputSaturationKnob = new CustomKnob;
-    String inputImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/06.png";
+    String inputImagePath = GUI_PATH + "KOS_Graphics/06.png";
     inputSaturationKnob->setKnobImage(inputImagePath);
     inputSaturationKnob->setNumFrames(65);
     inputSaturationKnob->setKnobDimensions(104, 521, 116, 116);
@@ -36,12 +36,12 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     shameKnobImage = new ImageInteractor;
     shameKnobImage->setNumFrames(65);
     shameKnobImage->setDimensions(401, 491, 174, 163);
-    String shameImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/09.png";
+    String shameImagePath = GUI_PATH + "KOS_Graphics/09.png";
     shameKnobImage->setAnimationImage(shameImagePath);
     addAndMakeVisible(shameKnobImage);
 
     shameKnob = new CustomKnob;
-    String crossImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/09_v2.png";
+    String crossImagePath = GUI_PATH + "KOS_Graphics/09_v2.png";
     shameKnob->setKnobImage(crossImagePath);
     shameKnob->setNumFrames(65);
     shameKnob->setKnobDimensions(401, 491, 174, 163);
@@ -49,7 +49,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     addAndMakeVisible(shameKnob);
 
     hissKnob = new CustomKnob;
-    String hissImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/04.png";
+    String hissImagePath = GUI_PATH + "KOS_Graphics/04.png";
     hissKnob->setKnobImage(hissImagePath);
     hissKnob->setNumFrames(65);
     hissKnob->setKnobDimensions(547, 455, 78, 72);
@@ -57,7 +57,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     addAndMakeVisible(hissKnob);
 
     blendKnob = new CustomKnob;
-    String blendImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/05.png";
+    String blendImagePath = GUI_PATH + "KOS_Graphics/05.png";
     blendKnob->setKnobImage(blendImagePath);
     blendKnob->setNumFrames(65);
     blendKnob->setKnobDimensions(705, 455, 78, 72);
@@ -65,7 +65,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     addAndMakeVisible(blendKnob);
 
     outputKnob = new CustomKnob;
-    String outputImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/12.png";
+    String outputImagePath = GUI_PATH + "KOS_Graphics/12.png";
     outputKnob->setKnobImage(outputImagePath);
     outputKnob->setNumFrames(65);
     outputKnob->setKnobDimensions(757, 521, 122, 116);
@@ -73,7 +73,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     addAndMakeVisible(outputKnob);
 
     ageKnob = new CustomKnob;
-    String ageImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/03.png";
+    String ageImagePath = GUI_PATH + "KOS_Graphics/03.png";
     ageKnob->setKnobImage(ageImagePath);
     ageKnob->setNumFrames(65);
     ageKnob->setKnobDimensions(350, 455, 74, 72);
@@ -86,7 +86,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     
     bypassButton = new CustomButton;
     bypassButton->setTopLeftPosition(202, 469);
-    String bypassImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/01.png";
+    String bypassImagePath = GUI_PATH + "KOS_Graphics/01.png";
     bypassButton->setClippedCustomOnImage(bypassImagePath, 0, 68, 34, 34);
     bypassButton->setClippedCustomOffImage(bypassImagePath, 0, 0, 34, 34);
     bypassButton->addListener(this);
@@ -95,7 +95,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     
     daysYearsButton = new CustomButton;
     daysYearsButton->setTopLeftPosition(232, 502);
-    String daysYearsImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/02.png";
+    String daysYearsImagePath = GUI_PATH + "KOS_Graphics/02.png";
     daysYearsButton->setClippedCustomOnImage(daysYearsImagePath, 0, 0, 44, 37);
     daysYearsButton->setClippedCustomOffImage(daysYearsImagePath, 0, 37, 44, 37);
     daysYearsButton->addListener(this);
@@ -104,7 +104,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
 
     tapeTypeButton = new CustomButton;
     tapeTypeButton->setTopLeftPosition(233, 610);
-    String tapeTypeImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/07.png";
+    String tapeTypeImagePath = GUI_PATH + "KOS_Graphics/07.png";
     tapeTypeButton->setClippedCustomOnImage(tapeTypeImagePath, 0, 0, 42, 39);
     tapeTypeButton->setClippedCustomOffImage(tapeTypeImagePath, 0, 39, 42, 39);
     tapeTypeButton->addListener(this);
@@ -113,7 +113,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
 
     printThroughButton = new CustomButton;
     printThroughButton->setTopLeftPosition(698, 609);
-    String printThroughImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/11.png";
+    String printThroughImagePath = GUI_PATH + "KOS_Graphics/11.png";
     printThroughButton->setClippedCustomOnImage(printThroughImagePath, 0, 41, 47, 41);
     printThroughButton->setClippedCustomOffImage(printThroughImagePath, 0, 0, 47, 41);
     printThroughButton->addListener(this);
@@ -121,6 +121,31 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     addAndMakeVisible(printThroughButton);
     
    
+    
+    ///////////////// Animation //////////////////
+    
+    String reelImagePath = GUI_PATH + "KOS_Graphics/wheels.png";
+    File reelFile(reelImagePath);
+    reelAnimation = new ImageAnimator(reelFile, 31, 31);
+    reelAnimation->setFrameDimensions(0, 0, 960, 322);
+    addAndMakeVisible(reelAnimation);
+    reelAnimation->startAnimation();
+    
+    vuMeterL = new ImageInteractor;
+    vuMeterL->setNumFrames(65);
+    vuMeterL->setDimensions(251, 518, 108, 108);
+    String vuLeftImagePath = GUI_PATH + "KOS_Graphics/08.png";
+    vuMeterL->setAnimationImage(vuLeftImagePath);
+    addAndMakeVisible(vuMeterL);
+
+    vuMeterR = new ImageInteractor;
+    vuMeterR->setNumFrames(65);
+    vuMeterR->setDimensions(605, 518, 110, 108);
+    String vuRightImagePath = GUI_PATH + "KOS_Graphics/10.png";
+    vuMeterR->setAnimationImage(vuRightImagePath);
+    addAndMakeVisible(vuMeterR);
+
+    
     
     //////////////// LABELS /////////////////
     
@@ -134,31 +159,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     
     
     
-    //////////// Animation ///////////////////////////////////////////
-    
-    String reelImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/wheels.png";
-    File reelFile(reelImagePath);
-    reelAnimation = new ImageAnimator(reelFile, 31, 31);
-    reelAnimation->setFrameDimensions(0, 0, 960, 322);
-    addAndMakeVisible(reelAnimation);
-    reelAnimation->startAnimation();
-    
-    vuMeterL = new ImageInteractor;
-    vuMeterL->setNumFrames(65);
-    vuMeterL->setDimensions(251, 518, 108, 108);
-    String vuLeftImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/08.png";
-    vuMeterL->setAnimationImage(vuLeftImagePath);
-    addAndMakeVisible(vuMeterL);
-
-    vuMeterR = new ImageInteractor;
-    vuMeterR->setNumFrames(65);
-    vuMeterR->setDimensions(605, 518, 110, 108);
-    String vuRightImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/10.png";
-    vuMeterR->setAnimationImage(vuRightImagePath);
-    addAndMakeVisible(vuMeterR);
-
-    
-    
     int mainWidth = faceImage.getWidth();
     int mainHeight = faceImage.getHeight();// + inputSaturationKnob->getHeight() + inputLabel.getHeight();
     setSize(mainWidth, mainHeight);
@@ -166,9 +166,10 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     startTimer(25);
 }
 
+
 KissOfShameAudioProcessorEditor::~KissOfShameAudioProcessorEditor()
-{
-}
+{}
+
 
 void KissOfShameAudioProcessorEditor::timerCallback()
 {
@@ -185,6 +186,7 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     vuMeterR->updateImageWithValue(ourProcessor->curRMS*10);
 }
 
+
 void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
 {
     if (slider == inputSaturationKnob)
@@ -196,9 +198,6 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
                                                    (float) inputSaturationKnob->getValue());
         
         getProcessor()->aGraph->setAudioUnitParameters(eSaturationDrive, (float) inputSaturationKnob->getValue());
-        
-        
-        
     }
     else if(slider == shameKnob)
     {
@@ -207,7 +206,7 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
         getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::shameParam,
                                                    (float) shameKnob->getValue());
         
-        getProcessor()->aGraph->setAudioUnitParameters(eShameFreq, (float) shameKnob->getValue());
+        getProcessor()->aGraph->setAudioUnitParameters(eShameGlobalLevel, (float) shameKnob->getValue());
     }
     else if(slider == hissKnob)
     {
@@ -230,7 +229,6 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
         
         getProcessor()->aGraph->setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
     }
-
 }
 
 

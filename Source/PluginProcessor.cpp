@@ -177,9 +177,7 @@ void KissOfShameAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuf
 {
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
-    
     aGraph->processGraph(buffer, getNumInputChannels());
-    
     
     
     //Need to send the RMS below to the animation components for VU meters...
