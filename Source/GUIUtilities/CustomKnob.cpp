@@ -19,7 +19,6 @@ knobNumFrames(128)
     knobFrameWidth = knobImage.getWidth();
     knobFrameHeight = knobImage.getHeight()/knobNumFrames;
     setSize(knobFrameWidth, knobFrameHeight);
-
 }
 
 CustomKnob::~CustomKnob()

@@ -1,36 +1,58 @@
 #include "ImageInteractor.h"
 
 
-const String knobImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/MixKnob/Knob-Pan-Mix.png";
 
 ImageInteractor::ImageInteractor()
 :
-knobNumFrames(128)
+numFrames(128)
 {
     
     minValue = 0.0;
     maxValue = 1.0;
     
+    
+    imagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/MixKnob/Knob-Pan-Mix.png";
+    
     File imgFile;
-    imgFile = File(knobImagePath);
-    knobImage = ImageCache::getFromFile(imgFile);
-    knobFrameWidth = knobImage.getWidth();
-    knobFrameHeight = knobImage.getHeight()/knobNumFrames;
-    setSize(knobFrameWidth, knobFrameHeight);
+    imgFile = File(imagePath);
+    image = ImageCache::getFromFile(imgFile);
+    frameWidth = image.getWidth();
+    frameHeight = image.getHeight()/numFrames;
+    setSize(frameWidth, frameHeight);
 
 }
 
 ImageInteractor::~ImageInteractor()
 {}
 
+
+void ImageInteractor::setNumFrames(int _numFrames)
+{
+    numFrames = _numFrames;
+}
+
+void ImageInteractor::setAnimationImage(String filePath)
+{
+    image = ImageCache::getFromFile(File(filePath));
+}
+
+void ImageInteractor::setDimensions(int topLeftX, int topLeftY, int w, int h)
+{
+    setTopLeftPosition(topLeftX, topLeftY);
+    frameWidth = w;
+    frameHeight = h;
+    setSize(frameWidth, frameHeight);
+}
+
+
 void ImageInteractor::paint (Graphics& g)
 {
-    if (!knobImage.isNull())
+    if (!image.isNull())
     {
         double normalizedValue = (curValue - minValue) / (maxValue - minValue);
-        int frameNum = normalizedValue*(knobNumFrames-1);
-		juce::Rectangle<int> clipRect(0, frameNum*knobFrameHeight, knobFrameWidth, knobFrameHeight);
-        const Image & clippedIm = knobImage.getClippedImage(clipRect);
+        int frameNum = normalizedValue*(numFrames-1);
+		juce::Rectangle<int> clipRect(0, frameNum*frameHeight, frameWidth, frameHeight);
+        const Image & clippedIm = image.getClippedImage(clipRect);
         g.drawImageAt(clippedIm, 0, 0);
     }
 }

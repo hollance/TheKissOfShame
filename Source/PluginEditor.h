@@ -25,7 +25,6 @@ class KissOfShameAudioProcessorEditor  : public AudioProcessorEditor,
                                          public Timer,
                                          public SliderListener,
                                          public Button::Listener
-
 {
 public:
     KissOfShameAudioProcessorEditor (KissOfShameAudioProcessor* ownerFilter);
@@ -46,25 +45,23 @@ public:
     ScopedPointer<CustomKnob> hissKnob;
     ScopedPointer<CustomKnob> blendKnob;
     ScopedPointer<CustomKnob> outputKnob;
+    ScopedPointer<CustomKnob> ageKnob;
     
     //buttons
     ScopedPointer<CustomButton> bypassButton;
+    ScopedPointer<CustomButton> daysYearsButton;
+    ScopedPointer<CustomButton> tapeTypeButton;
+    ScopedPointer<CustomButton> printThroughButton;
     
     //labels & images
-    Label inputLabel;
-    Label shameLabel;
-    Label hissLabel;
-    Label blendLabel;
-    Label outputLabel;
-    Label bypassLabel;
     Label debugLabel; //Used strictly to post messages for debugging...
 
     
     //animation
     ScopedPointer<ImageAnimator> reelAnimation;
-    ScopedPointer<ImageInteractor> vuMeter;
-    
-    
+    ScopedPointer<ImageInteractor> vuMeterL;
+    ScopedPointer<ImageInteractor> vuMeterR;
+    ScopedPointer<ImageInteractor> shameKnobImage;
     
     
 private:

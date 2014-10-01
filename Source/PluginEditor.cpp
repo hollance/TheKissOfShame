@@ -23,85 +23,106 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
 
     
     
+    ////////// KNOBS ////////////////
+    
     inputSaturationKnob = new CustomKnob;
-    inputSaturationKnob->setTopLeftPosition(0, faceImage.getHeight() + 20);
+    String inputImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/06.png";
+    inputSaturationKnob->setKnobImage(inputImagePath);
+    inputSaturationKnob->setNumFrames(65);
+    inputSaturationKnob->setKnobDimensions(104, 521, 116, 116);
     inputSaturationKnob->addListener (this);
     addAndMakeVisible(inputSaturationKnob);
     
+    shameKnobImage = new ImageInteractor;
+    shameKnobImage->setNumFrames(65);
+    shameKnobImage->setDimensions(401, 491, 174, 163);
+    String shameImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/09.png";
+    shameKnobImage->setAnimationImage(shameImagePath);
+    addAndMakeVisible(shameKnobImage);
+
     shameKnob = new CustomKnob;
-    String knobImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/09.png";
-    shameKnob->setKnobImage(knobImagePath);
+    String crossImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/09_v2.png";
+    shameKnob->setKnobImage(crossImagePath);
     shameKnob->setNumFrames(65);
     shameKnob->setKnobDimensions(401, 491, 174, 163);
     shameKnob->addListener (this);
     addAndMakeVisible(shameKnob);
 
     hissKnob = new CustomKnob;
-    hissKnob->setTopLeftPosition(shameKnob->getRight() + 10, inputSaturationKnob->getY());
+    String hissImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/04.png";
+    hissKnob->setKnobImage(hissImagePath);
+    hissKnob->setNumFrames(65);
+    hissKnob->setKnobDimensions(547, 455, 78, 72);
     hissKnob->addListener (this);
     addAndMakeVisible(hissKnob);
-    
+
     blendKnob = new CustomKnob;
-    blendKnob->setTopLeftPosition(hissKnob->getRight() + 10, inputSaturationKnob->getY());
+    String blendImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/05.png";
+    blendKnob->setKnobImage(blendImagePath);
+    blendKnob->setNumFrames(65);
+    blendKnob->setKnobDimensions(705, 455, 78, 72);
     blendKnob->addListener (this);
     addAndMakeVisible(blendKnob);
-    
+
     outputKnob = new CustomKnob;
-    outputKnob->setTopLeftPosition(blendKnob->getRight() + 10, inputSaturationKnob->getY());
+    String outputImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/12.png";
+    outputKnob->setKnobImage(outputImagePath);
+    outputKnob->setNumFrames(65);
+    outputKnob->setKnobDimensions(757, 521, 122, 116);
     outputKnob->addListener (this);
     addAndMakeVisible(outputKnob);
 
+    ageKnob = new CustomKnob;
+    String ageImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/03.png";
+    ageKnob->setKnobImage(ageImagePath);
+    ageKnob->setNumFrames(65);
+    ageKnob->setKnobDimensions(350, 455, 74, 72);
+    ageKnob->addListener (this);
+    addAndMakeVisible(ageKnob);
+
+
+    
+    /////////////// BUTTONS /////////////////
+    
     bypassButton = new CustomButton;
-    bypassButton->setTopLeftPosition(outputKnob->getRight() + 10, inputSaturationKnob->getY());
+    bypassButton->setTopLeftPosition(202, 469);
+    String bypassImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/01.png";
+    bypassButton->setClippedCustomOnImage(bypassImagePath, 0, 68, 34, 34);
+    bypassButton->setClippedCustomOffImage(bypassImagePath, 0, 0, 34, 34);
     bypassButton->addListener(this);
     bypassButton->setClickingTogglesState(true);
     addAndMakeVisible(bypassButton);
     
-    
-    
-    //////////////// Temporary labels to attach to components
-    
-    inputLabel.attachToComponent (inputSaturationKnob, false);
-    String inputText = "Input/Saturation";
-    inputLabel.setText(inputText, dontSendNotification);
-    inputLabel.setFont (Font (11.0f));
-    inputLabel.setColour(Label::textColourId, Colours::white);
-    addAndMakeVisible(inputLabel);
-    
-    shameLabel.attachToComponent (shameKnob, false);
-    String shameText = "SHAME";
-    shameLabel.setText(shameText, dontSendNotification);
-    shameLabel.setFont (Font (11.0f));
-    shameLabel.setColour(Label::textColourId, Colours::white);
-    addAndMakeVisible(shameLabel);
+    daysYearsButton = new CustomButton;
+    daysYearsButton->setTopLeftPosition(232, 502);
+    String daysYearsImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/02.png";
+    daysYearsButton->setClippedCustomOnImage(daysYearsImagePath, 0, 0, 44, 37);
+    daysYearsButton->setClippedCustomOffImage(daysYearsImagePath, 0, 37, 44, 37);
+    daysYearsButton->addListener(this);
+    daysYearsButton->setClickingTogglesState(true);
+    addAndMakeVisible(daysYearsButton);
 
-    hissLabel.attachToComponent (hissKnob, false);
-    String hissText = "Hiss";
-    hissLabel.setText(hissText, dontSendNotification);
-    hissLabel.setFont (Font (11.0f));
-    hissLabel.setColour(Label::textColourId, Colours::white);
-    addAndMakeVisible(hissLabel);
+    tapeTypeButton = new CustomButton;
+    tapeTypeButton->setTopLeftPosition(233, 610);
+    String tapeTypeImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/07.png";
+    tapeTypeButton->setClippedCustomOnImage(tapeTypeImagePath, 0, 0, 42, 39);
+    tapeTypeButton->setClippedCustomOffImage(tapeTypeImagePath, 0, 39, 42, 39);
+    tapeTypeButton->addListener(this);
+    tapeTypeButton->setClickingTogglesState(true);
+    addAndMakeVisible(tapeTypeButton);
 
-    blendLabel.attachToComponent (blendKnob, false);
-    String blendText = "Blend";
-    blendLabel.setText(blendText, dontSendNotification);
-    blendLabel.setFont (Font (11.0f));
-    blendLabel.setColour(Label::textColourId, Colours::white);
-    addAndMakeVisible(blendLabel);
-
-    outputLabel.attachToComponent (outputKnob, false);
-    String outputText = "Output";
-    outputLabel.setText(outputText, dontSendNotification);
-    outputLabel.setFont (Font (11.0f));
-    outputLabel.setColour(Label::textColourId, Colours::white);
-    addAndMakeVisible(outputLabel);
-
-    bypassLabel.attachToComponent (bypassButton, false);
-    String bypassText = "Bypass";
-    bypassLabel.setText(bypassText, dontSendNotification);
-    bypassLabel.setFont (Font (11.0f));
-    bypassLabel.setColour(Label::textColourId, Colours::white);
-    addAndMakeVisible(bypassLabel);
+    printThroughButton = new CustomButton;
+    printThroughButton->setTopLeftPosition(698, 609);
+    String printThroughImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/11.png";
+    printThroughButton->setClippedCustomOnImage(printThroughImagePath, 0, 41, 47, 41);
+    printThroughButton->setClippedCustomOffImage(printThroughImagePath, 0, 0, 47, 41);
+    printThroughButton->addListener(this);
+    printThroughButton->setClickingTogglesState(true);
+    addAndMakeVisible(printThroughButton);
+    
+   
+    
+    //////////////// LABELS /////////////////
     
     String debugText = "Debug Info...";
     debugLabel.setText(debugText, dontSendNotification);
@@ -110,28 +131,36 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     debugLabel.setSize(500, 50);
     debugLabel.setColour(Label::textColourId, Colours::white);
     addAndMakeVisible(debugLabel);
-
-
-    //////////////////////////////////////////////////////////////////
+    
     
     
     //////////// Animation ///////////////////////////////////////////
-    //NOTE: basic animation of an image. 
+    
     String reelImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/wheels.png";
     File reelFile(reelImagePath);
-    reelAnimation = new ImageAnimator(reelFile, 31, 20);
+    reelAnimation = new ImageAnimator(reelFile, 31, 31);
     reelAnimation->setFrameDimensions(0, 0, 960, 322);
     addAndMakeVisible(reelAnimation);
     reelAnimation->startAnimation();
     
-    vuMeter = new ImageInteractor;
-    vuMeter->setTopLeftPosition(bypassButton->getRight() + 25, inputSaturationKnob->getY());
-    addAndMakeVisible(vuMeter);
+    vuMeterL = new ImageInteractor;
+    vuMeterL->setNumFrames(65);
+    vuMeterL->setDimensions(251, 518, 108, 108);
+    String vuLeftImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/08.png";
+    vuMeterL->setAnimationImage(vuLeftImagePath);
+    addAndMakeVisible(vuMeterL);
+
+    vuMeterR = new ImageInteractor;
+    vuMeterR->setNumFrames(65);
+    vuMeterR->setDimensions(605, 518, 110, 108);
+    String vuRightImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/KOS_Graphics/10.png";
+    vuMeterR->setAnimationImage(vuRightImagePath);
+    addAndMakeVisible(vuMeterR);
 
     
     
     int mainWidth = faceImage.getWidth();
-    int mainHeight = faceImage.getHeight() + inputSaturationKnob->getHeight() + inputLabel.getHeight();
+    int mainHeight = faceImage.getHeight();// + inputSaturationKnob->getHeight() + inputLabel.getHeight();
     setSize(mainWidth, mainHeight);
     
     startTimer(25);
@@ -148,12 +177,12 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     //NOTE: maybe this is used to get audio from different positions.
     //AudioPlayHead::CurrentPositionInfo newPos (ourProcessor->lastPosInfo);
     
+    //DEBUG: PRINTING RMS FROM THE PROCESSOR
     debugLabel.setText(String(ourProcessor->curRMS), dontSendNotification);
     
     //vuMeter->updateImageWithValue(ourProcessor->curRMS);
-    vuMeter->updateImageWithValue(ourProcessor->curRMS*10);
-    
-    
+    vuMeterL->updateImageWithValue(ourProcessor->curRMS*10);
+    vuMeterR->updateImageWithValue(ourProcessor->curRMS*10);
 }
 
 void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
@@ -173,6 +202,8 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
     }
     else if(slider == shameKnob)
     {
+        shameKnobImage->updateImageWithValue(slider->getValue());
+        
         getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::shameParam,
                                                    (float) shameKnob->getValue());
         
@@ -221,9 +252,4 @@ void KissOfShameAudioProcessorEditor::paint (Graphics& g)
     
     g.drawImageAt(faceImage, 0, 0);
     
-//    String LabelText = "RAVEN SETTINGS";
-//    g.setFont(35.0f);
-//    g.setColour(Colours::grey);
-//    g.drawFittedText(LabelText, 60, 10, 300, 50, 1, 1);
-//    g.fillAll (Colours::white);
 }

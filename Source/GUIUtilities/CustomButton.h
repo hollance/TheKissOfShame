@@ -34,13 +34,13 @@ public:
     {
         offImage = offImage.rescaled(offImage.getWidth()*scale, offImage.getHeight()*scale);
         onImage = onImage.rescaled(onImage.getWidth()*scale, onImage.getHeight()*scale);
-//        setImages(true, false, true, onImage, 1.0f, Colour(0x0), Image(), 1.0f, Colour(0x0), offImage, 1.0f, Colour(0x0));
+        setImages(true, false, true, onImage, 1.0f, Colour(0x0), Image(), 1.0f, Colour(0x0), offImage, 1.0f, Colour(0x0));
 //        repaint();
     }
     
      void setImagePaths(String onImgPath, String offImgPath)
      {
-         File offImgFile(String(GUI_PATH) +onImgPath);
+         File offImgFile(String(GUI_PATH) + onImgPath);
          File onImgFile(String(GUI_PATH) + offImgPath);
 
          offImage = ImageCache::getFromFile(offImgFile);
@@ -48,6 +48,33 @@ public:
      
          setImages(true, false, true, onImage, 1.0f, Colour(0x0), Image(), 1.0f, Colour(0x0), offImage, 1.0f, Colour(0x0));
      }
+    
+    void setClippedCustomOnImage(String onImgPath, int topLeftX, int topLeftY, int w, int h)
+    {
+        onImage = ImageCache::getFromFile(File(onImgPath));
+        
+        if (!onImage.isNull())
+        {
+            juce::Rectangle<int> clipRect(topLeftX, topLeftY, w, h);
+            onImage = onImage.getClippedImage(clipRect);
+        }
+        
+        setImages(true, false, true, onImage, 1.0f, Colour(0x0), Image(), 1.0f, Colour(0x0), offImage, 1.0f, Colour(0x0));
+    }
+    
+    void setClippedCustomOffImage(String offImgPath, int topLeftX, int topLeftY, int w, int h)
+    {
+        offImage = ImageCache::getFromFile(File(offImgPath));
+        
+        if (!offImage.isNull())
+        {
+            juce::Rectangle<int> clipRect(topLeftX, topLeftY, w, h);
+            offImage = offImage.getClippedImage(clipRect);
+        }
+        
+        setImages(true, false, true, onImage, 1.0f, Colour(0x0), Image(), 1.0f, Colour(0x0), offImage, 1.0f, Colour(0x0));
+    }
+
     
 
 private:

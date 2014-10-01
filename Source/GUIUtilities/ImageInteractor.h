@@ -39,7 +39,12 @@ public:
         repaint();
     }
     
-    void setCurrentValue(float value){curValue = value;}
+    void setCurrentValue(float value)
+    {
+        if(value > maxValue)        curValue = maxValue;
+        else if(value < minValue)   curValue = minValue;
+        else                        curValue = value;
+    }
     
     void setMinMaxValues(float min, float max)
     {
@@ -47,14 +52,19 @@ public:
         maxValue = max;
     }
     
+    void setNumFrames(int numFrames);
+    void setAnimationImage(String filePath);
+    void setDimensions(int topLeftX, int topLeftY, int w, int h);
+
     
     
 private:
 
-	Image knobImage;
-    int knobFrameWidth;
-    int knobFrameHeight;
-    int knobNumFrames;
+    String imagePath;
+	Image image;
+    int frameWidth;
+    int frameHeight;
+    int numFrames;
     
     float maxValue, minValue, curValue;
     

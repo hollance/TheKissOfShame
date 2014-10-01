@@ -22,10 +22,11 @@ public:
 private:
 
     String knobImagePath;
+    int knobNumFrames;
+    
 	Image knobImage;
     int knobFrameWidth;
     int knobFrameHeight;
-    int knobNumFrames;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CustomKnob)
 };
