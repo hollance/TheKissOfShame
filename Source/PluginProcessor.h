@@ -29,7 +29,6 @@ public:
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock);
     void releaseResources();
-
     void processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages);
 
     //==============================================================================
@@ -86,6 +85,15 @@ public:
     
     float inputSaturation, shame, hiss, blend, output;
     bool masterBypass;
+    bool isProcessing;
+    
+    //TODO: REMOVE!!! used in hack to control reel animation start/stop
+    int processingIncr; //NOTE: major hack to determine if currently processing or not.
+    
+    
+    
+    //HOW TO DETERMINE IF transport isPlaying!!!!!
+    AudioPlayHead::CurrentPositionInfo positionInfo;
     /////////////////////////////////////////////////////////
     
     

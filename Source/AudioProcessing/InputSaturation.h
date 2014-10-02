@@ -26,7 +26,7 @@ public:
     InputSaturation(float threshold, float rate)
     {
         drive = 1.0;
-        output = 1.0;
+        output = 0.0;
         
         if(threshold > 1.0)      satThreshold = 1.0;
         else if(threshold < 0.0) satThreshold = 0.0;

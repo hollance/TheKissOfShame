@@ -16,7 +16,7 @@ class ImageAnimator : public Component, Timer
 {
   
 public:
-    ImageAnimator(File imgFile, int numFrames, int frameRateInMilliseconds) : animationNumFrames(numFrames), frameRate(frameRateInMilliseconds)
+    ImageAnimator(File imgFile, int numFrames, int frameRateInMilliseconds) : animationNumFrames(numFrames), frameRate(frameRateInMilliseconds), isAnimating(false)
     {
         startFrame = 0;
         currentFrame = startFrame;
@@ -71,11 +71,13 @@ public:
     void startAnimation()
     {
         startTimer(frameRate);
+        isAnimating = true;
     }
     
     void stopAnimation()
     {
         stopTimer();
+        isAnimating = false;
     }
     
     virtual void timerCallback()
@@ -83,6 +85,7 @@ public:
         repaint();
     }
     
+    bool isAnimating;
     
 private:
     
@@ -96,6 +99,8 @@ private:
     int startFrame;
     int endFrame;
     int frameRate;
+    
+    
 };
 
 

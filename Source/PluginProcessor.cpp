@@ -24,6 +24,11 @@ KissOfShameAudioProcessor::KissOfShameAudioProcessor() : masterBypass(false)
     
     curRMS = 0;
     
+    processingIncr = 0;
+    isProcessing = false;
+    
+    positionInfo.resetToDefault();
+    
 }
 
 KissOfShameAudioProcessor::~KissOfShameAudioProcessor()
@@ -171,11 +176,16 @@ void KissOfShameAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
+    isProcessing = false;
 }
 
 void KissOfShameAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    // This is the place where you'd normally do the guts of your plugin's
+    processingIncr =  (processingIncr + 1) % 999999999;
+    
+    isProcessing = true;
+    
+    
     // audio processing...
     aGraph->processGraph(buffer, getNumInputChannels());
     
@@ -192,6 +202,21 @@ void KissOfShameAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuf
     {
         buffer.clear (i, 0, buffer.getNumSamples());
     }
+    
+    // ask the host for the current time so we can display it...
+//    AudioPlayHead::CurrentPositionInfo newTime;
+//    
+//    if (getPlayHead() != nullptr && getPlayHead()->getCurrentPosition (newTime))
+//    {
+//        // Successfully got the current time from the host..
+//        positionInfo.isPlaying = true;
+//    }
+//    else
+//    {
+//        // If the host fails to fill-in the current time, we'll just clear it to a default..
+//        positionInfo.resetToDefault();
+//    }
+
 }
 
 //==============================================================================

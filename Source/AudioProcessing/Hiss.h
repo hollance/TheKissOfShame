@@ -18,7 +18,7 @@ class Hiss
 public:
     Hiss()
     {
-        File hissFile("/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/Audio_Resources/Hiss.wav");
+        File hissFile(AUDIO_PATH + "Hiss.wav");
         hissBuffer = new AudioSampleBuffer();
         if(hissFile.existsAsFile()) hissBuffer = loadSampleFromFile(hissFile);
         

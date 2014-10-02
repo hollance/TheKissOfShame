@@ -25,9 +25,10 @@ public:
     
     AudioGraph(int numChannels)
     {
-        inSaturation = new InputSaturation(0.1, 2.0);
+        inSaturation = new InputSaturation(0.5, 2.0);
         
         shame = new Shame(2);
+        shame->setInterpolatedParameters(0.0);
         //shame->setDepth(0.2);
         //shame->setRate(7);
         
@@ -36,7 +37,7 @@ public:
         blend = new Blend();
         
         bypassGraph = false;
-        outputLevel = 1.0;
+        outputLevel = 0.0;
     }
     
     ~AudioGraph(){}

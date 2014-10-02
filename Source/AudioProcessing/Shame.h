@@ -49,25 +49,25 @@ public:
         if(input < 0.0) input = 0.0;
         if(input > 1.0) input = 1.0;
         
-        if(input <= 0.3)
+        if(input <= 0.5)
         {
-            depth = 0.2 * input;
+            depth = 0.2 * input / 0.5;
             randPeriodicity = 0.0;
             rate = 75.0;
             waveformIndx = 3;
         }
-        else if(input > 0.3 && input <= 0.5)
+        else if(input > 0.5 && input <= 0.75)
         {
-            depth = 0.2 + 0.1*(input - 0.3);
-            randPeriodicity = 0.25*(input - 0.3);
+            depth = 0.2 + 0.1*(input - 0.5)/(0.75 - 0.5);
+            randPeriodicity = 0.25*(input - 0.5)/(0.75 - 0.5);
             rate = 75.0;
             waveformIndx = 3;
         }
-        else if(input > 0.5 && input <= 1.0)
+        else if(input > 0.75 && input <= 1.0)
         {
-            depth = 0.3 + 0.7*(input - 0.5);
-            randPeriodicity = 0.25 + 0.25*(input - 0.5);
-            rate = 75.0 - 40.0*(input - 0.5);
+            depth = 0.3 + 0.7*(input - 0.75)/0.25;
+            randPeriodicity = 0.25 + 0.25*(input - 0.75)/0.25;
+            rate = 75.0 - 40.0*(input - 0.75)/0.25;
             waveformIndx = 3;
         }
     }

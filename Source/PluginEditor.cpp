@@ -16,10 +16,16 @@
 KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAudioProcessor* ownerFilter)
     : AudioProcessorEditor (ownerFilter)
 {
+    prevProcessorIncr = 0;
     
     String imageLocation = GUI_PATH + "KOS_Graphics/fond.png";
     faceImage = ImageCache::getFromFile(File(imageLocation));
     faceImage = faceImage.rescaled(faceImage.getWidth(), faceImage.getHeight());
+    
+    String environmentsImageLocation = GUI_PATH + "KOS_Graphics/00.png";
+    environmentsImage = ImageCache::getFromFile(File(environmentsImageLocation));
+    juce::Rectangle<int> clipRect(0, 0, 183, 32);
+    environmentsImage = environmentsImage.getClippedImage(clipRect);
 
     
     
@@ -80,7 +86,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     ageKnob->addListener (this);
     addAndMakeVisible(ageKnob);
 
-
     
     /////////////// BUTTONS /////////////////
     
@@ -119,7 +124,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     printThroughButton->addListener(this);
     printThroughButton->setClickingTogglesState(true);
     addAndMakeVisible(printThroughButton);
-    
    
     
     ///////////////// Animation //////////////////
@@ -129,7 +133,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     reelAnimation = new ImageAnimator(reelFile, 31, 31);
     reelAnimation->setFrameDimensions(0, 0, 960, 322);
     addAndMakeVisible(reelAnimation);
-    reelAnimation->startAnimation();
+    //reelAnimation->startAnimation();
     
     vuMeterL = new ImageInteractor;
     vuMeterL->setNumFrames(65);
@@ -146,7 +150,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     addAndMakeVisible(vuMeterR);
 
     
-    
     //////////////// LABELS /////////////////
     
     String debugText = "Debug Info...";
@@ -155,8 +158,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     debugLabel.setFont (Font (25.0f));
     debugLabel.setSize(500, 50);
     debugLabel.setColour(Label::textColourId, Colours::white);
-    addAndMakeVisible(debugLabel);
-    
+    //addAndMakeVisible(debugLabel);
     
     
     int mainWidth = faceImage.getWidth();
@@ -179,11 +181,24 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     //AudioPlayHead::CurrentPositionInfo newPos (ourProcessor->lastPosInfo);
     
     //DEBUG: PRINTING RMS FROM THE PROCESSOR
-    debugLabel.setText(String(ourProcessor->curRMS), dontSendNotification);
+    //debugLabel.setText(String(ourProcessor->curRMS), dontSendNotification);
     
     //vuMeter->updateImageWithValue(ourProcessor->curRMS);
     vuMeterL->updateImageWithValue(ourProcessor->curRMS*10);
     vuMeterR->updateImageWithValue(ourProcessor->curRMS*10);
+    
+    
+    
+    //debugLabel.setText(String(ourProcessor->positionInfo.isPlaying), dontSendNotification);
+
+    //TODO: REMOVE!!! used in hack to control reel animation start/stop
+    if(prevProcessorIncr != ourProcessor->processingIncr)
+    {
+        prevProcessorIncr = ourProcessor->processingIncr;
+        if(!reelAnimation->isAnimating) reelAnimation->startAnimation();
+    }
+    else if(reelAnimation->isAnimating) reelAnimation->stopAnimation();
+    
 }
 
 
@@ -249,5 +264,6 @@ void KissOfShameAudioProcessorEditor::paint (Graphics& g)
 {
     
     g.drawImageAt(faceImage, 0, 0);
+    g.drawImageAt(environmentsImage, 388, 654);
     
 }

@@ -39,6 +39,10 @@ public:
     
     void changeListenerCallback (ChangeBroadcaster *source){};
     
+    //Images
+    Image faceImage;
+    Image environmentsImage;
+    
     //Knobs
     ScopedPointer<CustomKnob> inputSaturationKnob;
     ScopedPointer<CustomKnob> shameKnob;
@@ -53,7 +57,7 @@ public:
     ScopedPointer<CustomButton> tapeTypeButton;
     ScopedPointer<CustomButton> printThroughButton;
     
-    //labels & images
+    //labels
     Label debugLabel; //Used strictly to post messages for debugging...
 
     
@@ -66,7 +70,8 @@ public:
     
 private:
     
-    Image faceImage;
+    //TODO: REMOVE!!! used in hack to control reel animation start/stop
+    int prevProcessorIncr;
     
     KissOfShameAudioProcessor* getProcessor() const
     {
