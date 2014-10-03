@@ -3,20 +3,21 @@
 #ifndef KOS_ImageInteractor_h
 #define KOS_ImageInteractor_h
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include "../shameConfig.h"
 
 
-
-class ImageInteractor : public Component, public ChangeListener
+class ImageInteractor : public Component
 {
 public:
     ImageInteractor();
     ~ImageInteractor();
     
-    virtual void changeListenerCallback (ChangeBroadcaster* source)
-    {
         
-    };
+    
+//    virtual void changeListenerCallback (ChangeBroadcaster* source)
+//    {
+//        
+//    };
     
     void paint (Graphics& g);
     

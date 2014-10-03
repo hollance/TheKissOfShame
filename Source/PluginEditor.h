@@ -17,6 +17,7 @@
 #include "GUIUtilities/ImageAnimator.h"
 #include "GUIUtilities/CustomButton.h"
 #include "GUIUtilities/ImageInteractor.h"
+#include "GUIUtilities/EnvironmentsComponent.h"
 
 //==============================================================================
 /**
@@ -41,7 +42,6 @@ public:
     
     //Images
     Image faceImage;
-    Image environmentsImage;
     
     //Knobs
     ScopedPointer<CustomKnob> inputSaturationKnob;
@@ -59,6 +59,9 @@ public:
     
     //labels
     Label debugLabel; //Used strictly to post messages for debugging...
+    
+    //Components
+    ScopedPointer<EnvironmentsComponent> environmentsComponent;
 
     
     //animation

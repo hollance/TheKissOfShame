@@ -1,7 +1,6 @@
 #include "ImageInteractor.h"
 
 
-
 ImageInteractor::ImageInteractor()
 :
 numFrames(128)
@@ -11,7 +10,7 @@ numFrames(128)
     maxValue = 1.0;
     
     
-    imagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/MixKnob/Knob-Pan-Mix.png";
+    imagePath = GUI_PATH + "MixKnob/Knob-Pan-Mix.png";
     
     File imgFile;
     imgFile = File(imagePath);

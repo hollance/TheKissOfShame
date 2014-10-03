@@ -93,7 +93,7 @@ public:
     
     
     //HOW TO DETERMINE IF transport isPlaying!!!!!
-    AudioPlayHead::CurrentPositionInfo positionInfo;
+    AudioPlayHead::CurrentPositionInfo curPositionInfo;
     /////////////////////////////////////////////////////////
     
     

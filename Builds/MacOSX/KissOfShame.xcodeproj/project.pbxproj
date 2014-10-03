@@ -14,6 +14,7 @@
 		134C6BF319D5EBC900B454CE /* CustomKnob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 134C6BEF19D5EBC900B454CE /* CustomKnob.cpp */; };
 		134C6BF419D5EBC900B454CE /* ImageAnimator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 134C6BF119D5EBC900B454CE /* ImageAnimator.cpp */; };
 		134C6BF719D5EC8100B454CE /* ImageInteractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 134C6BF519D5EC8100B454CE /* ImageInteractor.cpp */; };
+		134D7B8419DE4AA0002F8EB2 /* EnvironmentsComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 134D7B8219DE4AA0002F8EB2 /* EnvironmentsComponent.cpp */; };
 		13F895DD19BF54400074B902 /* AudioGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F895DB19BF54400074B902 /* AudioGraph.cpp */; };
 		13F895E019BF54730074B902 /* Hiss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F895DE19BF54730074B902 /* Hiss.cpp */; };
 		13F895E319BF54940074B902 /* Shame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F895E119BF54940074B902 /* Shame.cpp */; };
@@ -164,6 +165,8 @@
 		134C6BF219D5EBC900B454CE /* ImageAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAnimator.h; sourceTree = "<group>"; };
 		134C6BF519D5EC8100B454CE /* ImageInteractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageInteractor.cpp; sourceTree = "<group>"; };
 		134C6BF619D5EC8100B454CE /* ImageInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInteractor.h; sourceTree = "<group>"; };
+		134D7B8219DE4AA0002F8EB2 /* EnvironmentsComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EnvironmentsComponent.cpp; sourceTree = "<group>"; };
+		134D7B8319DE4AA0002F8EB2 /* EnvironmentsComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvironmentsComponent.h; sourceTree = "<group>"; };
 		1370A9F519C2BEE7003F3401 /* shameConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shameConfig.h; path = ../../Source/shameConfig.h; sourceTree = "<group>"; };
 		137D367FB15FD16829B81533 /* juce_DrawableShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_DrawableShape.cpp; path = ../../JuceLibraryCode/modules/juce_gui_basics/drawables/juce_DrawableShape.cpp; sourceTree = SOURCE_ROOT; };
 		1384F21E3089BF58CC92B4E0 /* juce_Random.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_Random.h; path = ../../JuceLibraryCode/modules/juce_core/maths/juce_Random.h; sourceTree = SOURCE_ROOT; };
@@ -1157,6 +1160,8 @@
 		131652DB19C62EA400579156 /* GUIUtilities */ = {
 			isa = PBXGroup;
 			children = (
+				134D7B8219DE4AA0002F8EB2 /* EnvironmentsComponent.cpp */,
+				134D7B8319DE4AA0002F8EB2 /* EnvironmentsComponent.h */,
 				134C6BF519D5EC8100B454CE /* ImageInteractor.cpp */,
 				134C6BF619D5EC8100B454CE /* ImageInteractor.h */,
 				134C6BEF19D5EBC900B454CE /* CustomKnob.cpp */,
@@ -3062,6 +3067,7 @@
 				13F895E019BF54730074B902 /* Hiss.cpp in Sources */,
 				97CD489EBC9E7C37E4DAD679 /* juce_core.mm in Sources */,
 				307A625438C5B214E2D8223F /* juce_cryptography.mm in Sources */,
+				134D7B8419DE4AA0002F8EB2 /* EnvironmentsComponent.cpp in Sources */,
 				4D4D7CFED2F53F7473E3DFE8 /* juce_data_structures.mm in Sources */,
 				131652D819C5E4A400579156 /* Blend.cpp in Sources */,
 				561FF3B811BEF76315B0D425 /* juce_events.mm in Sources */,

@@ -22,11 +22,13 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     faceImage = ImageCache::getFromFile(File(imageLocation));
     faceImage = faceImage.rescaled(faceImage.getWidth(), faceImage.getHeight());
     
-    String environmentsImageLocation = GUI_PATH + "KOS_Graphics/00.png";
-    environmentsImage = ImageCache::getFromFile(File(environmentsImageLocation));
-    juce::Rectangle<int> clipRect(0, 0, 183, 32);
-    environmentsImage = environmentsImage.getClippedImage(clipRect);
-
+    
+    /////////// COMPONENTS /////////////////
+    
+    environmentsComponent = new EnvironmentsComponent;
+    environmentsComponent->setTopLeftPosition(388, 654);
+    environmentsComponent->addMouseListener(this, false);
+    addAndMakeVisible(environmentsComponent);
     
     
     ////////// KNOBS ////////////////
@@ -188,8 +190,8 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     vuMeterR->updateImageWithValue(ourProcessor->curRMS*10);
     
     
-    
-    //debugLabel.setText(String(ourProcessor->positionInfo.isPlaying), dontSendNotification);
+    //debugLabel.setText(String(ourProcessor->curPositionInfo.isPlaying), dontSendNotification);
+    //debugLabel.setText(String(ourProcessor->processingIncr), dontSendNotification);
 
     //TODO: REMOVE!!! used in hack to control reel animation start/stop
     if(prevProcessorIncr != ourProcessor->processingIncr)
@@ -262,8 +264,5 @@ void KissOfShameAudioProcessorEditor::buttonClicked (Button* b)
 //==============================================================================
 void KissOfShameAudioProcessorEditor::paint (Graphics& g)
 {
-    
     g.drawImageAt(faceImage, 0, 0);
-    g.drawImageAt(environmentsImage, 388, 654);
-    
 }

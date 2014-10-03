@@ -27,7 +27,7 @@ KissOfShameAudioProcessor::KissOfShameAudioProcessor() : masterBypass(false)
     processingIncr = 0;
     isProcessing = false;
     
-    positionInfo.resetToDefault();
+    curPositionInfo.resetToDefault();
     
 }
 
@@ -182,7 +182,6 @@ void KissOfShameAudioProcessor::releaseResources()
 void KissOfShameAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
     processingIncr =  (processingIncr + 1) % 999999999;
-    
     isProcessing = true;
     
     
@@ -202,6 +201,12 @@ void KissOfShameAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuf
     {
         buffer.clear (i, 0, buffer.getNumSamples());
     }
+    
+    
+    
+    if (getPlayHead() != nullptr)   getPlayHead()->getCurrentPosition(curPositionInfo);
+    else                            curPositionInfo.resetToDefault();
+    
     
     // ask the host for the current time so we can display it...
 //    AudioPlayHead::CurrentPositionInfo newTime;
