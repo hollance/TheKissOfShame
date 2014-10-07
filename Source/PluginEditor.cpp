@@ -14,9 +14,8 @@
 
 //==============================================================================
 KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAudioProcessor* ownerFilter)
-    : AudioProcessorEditor (ownerFilter)
+    : AudioProcessorEditor (ownerFilter), priorProcessorTime(0)
 {
-    prevProcessorIncr = 0;
     
     String imageLocation = GUI_PATH + "KOS_Graphics/fond.png";
     faceImage = ImageCache::getFromFile(File(imageLocation));
@@ -135,7 +134,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     reelAnimation = new ImageAnimator(reelFile, 31, 31);
     reelAnimation->setFrameDimensions(0, 0, 960, 322);
     addAndMakeVisible(reelAnimation);
-    //reelAnimation->startAnimation();
     
     vuMeterL = new ImageInteractor;
     vuMeterL->setNumFrames(65);
@@ -179,25 +177,20 @@ void KissOfShameAudioProcessorEditor::timerCallback()
 {
     KissOfShameAudioProcessor* ourProcessor = getProcessor();
     
-    //NOTE: maybe this is used to get audio from different positions.
-    //AudioPlayHead::CurrentPositionInfo newPos (ourProcessor->lastPosInfo);
+    //DEBUG: message from processor
+    //debugLabel.setText(String(ourProcessor->curPositionInfo.isPlaying) + ":  " + String(ourProcessor->playHeadPos), dontSendNotification);
+
     
-    //DEBUG: PRINTING RMS FROM THE PROCESSOR
-    //debugLabel.setText(String(ourProcessor->curRMS), dontSendNotification);
-    
-    //vuMeter->updateImageWithValue(ourProcessor->curRMS);
     vuMeterL->updateImageWithValue(ourProcessor->curRMS*10);
     vuMeterR->updateImageWithValue(ourProcessor->curRMS*10);
     
     
-    //debugLabel.setText(String(ourProcessor->curPositionInfo.isPlaying), dontSendNotification);
-    //debugLabel.setText(String(ourProcessor->processingIncr), dontSendNotification);
-
-    //TODO: REMOVE!!! used in hack to control reel animation start/stop
-    if(prevProcessorIncr != ourProcessor->processingIncr)
+    //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
+    //after stopping playback. Don't know why this is... For now, only animating reels when output != 0.
+    if(ourProcessor->curPositionInfo.isPlaying && ourProcessor->playHeadPos != priorProcessorTime)
     {
-        prevProcessorIncr = ourProcessor->processingIncr;
-        if(!reelAnimation->isAnimating) reelAnimation->startAnimation();
+         priorProcessorTime = ourProcessor->playHeadPos;
+         if(!reelAnimation->isAnimating) reelAnimation->startAnimation();
     }
     else if(reelAnimation->isAnimating) reelAnimation->stopAnimation();
     

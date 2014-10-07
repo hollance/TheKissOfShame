@@ -73,15 +73,12 @@ public:
     
 private:
     
-    //TODO: REMOVE!!! used in hack to control reel animation start/stop
-    int prevProcessorIncr;
+    int priorProcessorTime;
     
     KissOfShameAudioProcessor* getProcessor() const
     {
         return static_cast <KissOfShameAudioProcessor*> (getAudioProcessor());
     }
-    
-    
 
 
     //==============================================================================

@@ -85,22 +85,14 @@ public:
     
     float inputSaturation, shame, hiss, blend, output;
     bool masterBypass;
-    bool isProcessing;
     
-    //TODO: REMOVE!!! used in hack to control reel animation start/stop
-    int processingIncr; //NOTE: major hack to determine if currently processing or not.
-    
-    
-    
-    //HOW TO DETERMINE IF transport isPlaying!!!!!
     AudioPlayHead::CurrentPositionInfo curPositionInfo;
-    /////////////////////////////////////////////////////////
-    
     
     ScopedPointer<AudioGraph> aGraph;
     float curRMS; 
 
-
+    int playHeadPos;
+        
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KissOfShameAudioProcessor)

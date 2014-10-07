@@ -19,16 +19,13 @@ KissOfShameAudioProcessor::KissOfShameAudioProcessor() : masterBypass(false)
     shame = 0.0;
     hiss = 0.0;
     
-    
     aGraph = new AudioGraph(getNumInputChannels());
     
     curRMS = 0;
     
-    processingIncr = 0;
-    isProcessing = false;
-    
     curPositionInfo.resetToDefault();
     
+    playHeadPos = 0.0;
 }
 
 KissOfShameAudioProcessor::~KissOfShameAudioProcessor()
@@ -176,14 +173,12 @@ void KissOfShameAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
-    isProcessing = false;
+    curPositionInfo.resetToDefault();
 }
 
 void KissOfShameAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    processingIncr =  (processingIncr + 1) % 999999999;
-    isProcessing = true;
-    
+    playHeadPos = (playHeadPos + 1) % 99999;
     
     // audio processing...
     aGraph->processGraph(buffer, getNumInputChannels());
@@ -203,25 +198,16 @@ void KissOfShameAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuf
     }
     
     
-    
-    if (getPlayHead() != nullptr)   getPlayHead()->getCurrentPosition(curPositionInfo);
-    else                            curPositionInfo.resetToDefault();
-    
-    
     // ask the host for the current time so we can display it...
-//    AudioPlayHead::CurrentPositionInfo newTime;
-//    
-//    if (getPlayHead() != nullptr && getPlayHead()->getCurrentPosition (newTime))
-//    {
-//        // Successfully got the current time from the host..
-//        positionInfo.isPlaying = true;
-//    }
-//    else
-//    {
-//        // If the host fails to fill-in the current time, we'll just clear it to a default..
-//        positionInfo.resetToDefault();
-//    }
-
+    if (getPlayHead() != nullptr && getPlayHead()->getCurrentPosition (curPositionInfo))
+    {
+        // Successfully got the current time from the host..
+    }
+    else
+    {
+        // If the host fails to fill-in the current time, we'll just clear it to a default..
+        curPositionInfo.resetToDefault();
+    }
 }
 
 //==============================================================================

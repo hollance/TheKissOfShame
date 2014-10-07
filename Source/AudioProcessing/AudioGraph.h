@@ -35,7 +35,7 @@ public:
         blend = new Blend();
         
         bypassGraph = false;
-        outputLevel = 0.0;
+        outputLevel = 0.0; 
     }
     
     ~AudioGraph(){}
@@ -55,7 +55,8 @@ public:
         blend->processBlend(audioBuffer, audioGraphProcessingBuffer, numChannels);
         
         //apply the final output level
-        audioBuffer.applyGain(outputLevel);        
+        audioBuffer.applyGain(outputLevel);
+        
     }
     
     
@@ -84,7 +85,8 @@ public:
             default: break;
         }
     }
-
+    
+    float getOutputLevel(){return outputLevel;}
     
 private:
     

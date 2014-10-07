@@ -32,7 +32,7 @@ public:
     
     void paint (Graphics& g)
     {
-        if (!animationImage.isNull())
+        if (!animationImage.isNull()/* && isAnimating*/)
         {
             if(currentFrame > endFrame) currentFrame = startFrame;
             
@@ -70,14 +70,14 @@ public:
     
     void startAnimation()
     {
-        startTimer(frameRate);
         isAnimating = true;
+        startTimer(frameRate);
     }
     
     void stopAnimation()
     {
-        stopTimer();
         isAnimating = false;
+        stopTimer();
     }
     
     virtual void timerCallback()

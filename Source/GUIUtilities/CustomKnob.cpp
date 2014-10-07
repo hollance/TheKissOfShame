@@ -9,6 +9,7 @@ knobNumFrames(128)
     setSliderStyle(Rotary);
     setTextBoxStyle(NoTextBox, true, 0, 0);
     setRange(0.000, 1.000, 0.001);
+    setValue(0.0);
     
     
     knobImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/MixKnob/Knob-Pan-Mix.png";
@@ -19,6 +20,8 @@ knobNumFrames(128)
     knobFrameWidth = knobImage.getWidth();
     knobFrameHeight = knobImage.getHeight()/knobNumFrames;
     setSize(knobFrameWidth, knobFrameHeight);
+    
+    
 }
 
 CustomKnob::~CustomKnob()
@@ -27,6 +30,7 @@ CustomKnob::~CustomKnob()
 void CustomKnob::setNumFrames(int numFrames)
 {
     knobNumFrames = numFrames;
+    setValue(0.0);
 }
 
 void CustomKnob::setKnobImage(String filePath)

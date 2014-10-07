@@ -3,7 +3,7 @@
 
 ImageInteractor::ImageInteractor()
 :
-numFrames(128)
+numFrames(128), curValue(0)
 {
     
     minValue = 0.0;
@@ -27,6 +27,7 @@ ImageInteractor::~ImageInteractor()
 
 void ImageInteractor::setNumFrames(int _numFrames)
 {
+    curValue = 0;
     numFrames = _numFrames;
 }
 
