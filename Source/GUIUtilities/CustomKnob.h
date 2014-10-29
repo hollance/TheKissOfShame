@@ -18,9 +18,9 @@ public:
     void setKnobDimensions(int topLeftX, int topLeftY, int w, int h);
     
     void paint (Graphics& g);
-    
+        
 private:
-
+    
     String knobImagePath;
     int knobNumFrames;
     

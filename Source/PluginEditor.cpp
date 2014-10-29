@@ -14,26 +14,41 @@
 
 //==============================================================================
 KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAudioProcessor* ownerFilter)
-    : AudioProcessorEditor (ownerFilter), priorProcessorTime(0)
+    : AudioProcessorEditor (ownerFilter), priorProcessorTime(0), showReels(true)
 {
     
-    String imageLocation = GUI_PATH + "KOS_Graphics/fond.png";
-    faceImage = ImageCache::getFromFile(File(imageLocation));
-    faceImage = faceImage.rescaled(faceImage.getWidth(), faceImage.getHeight());
+//    String imageLocation = GUI_PATH + "KOS_Graphics/fond_alpha.png";
+//    faceImage = ImageCache::getFromFile(File(imageLocation));
+//    faceImage = faceImage.rescaled(faceImage.getWidth(), faceImage.getHeight());
     
+    //Place pulsing component here...
+    backlight = new BacklightComponent;
+    backlight->setTopLeftPosition(0, 703 - backlight->getHeight());
+    addAndMakeVisible(backlight);
+    
+    faceImage = new ImageInteractor;
+    faceImage->setNumFrames(1);
+    faceImage->setDimensions(0, 0, 960, 703);
+    //String faceImagePath = GUI_PATH + "KOS_Graphics/fond_alpha_edited.png";
+    String faceImagePath = GUI_PATH + "KOS_Graphics/fond_alpha.png";
+    faceImage->setAnimationImage(faceImagePath);
+    addAndMakeVisible(faceImage);
+
+    
+   
     
     /////////// COMPONENTS /////////////////
     
     environmentsComponent = new EnvironmentsComponent;
     environmentsComponent->setTopLeftPosition(388, 654);
-    environmentsComponent->addMouseListener(this, false);
+    //environmentsComponent->addMouseListener(this, false);
     addAndMakeVisible(environmentsComponent);
     
     
     ////////// KNOBS ////////////////
     
     inputSaturationKnob = new CustomKnob;
-    String inputImagePath = GUI_PATH + "KOS_Graphics/06.png";
+    String inputImagePath = GUI_PATH + "KOS_Graphics/06_alpha.png";
     inputSaturationKnob->setKnobImage(inputImagePath);
     inputSaturationKnob->setNumFrames(65);
     inputSaturationKnob->setKnobDimensions(104, 521, 116, 116);
@@ -43,7 +58,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     shameKnobImage = new ImageInteractor;
     shameKnobImage->setNumFrames(65);
     shameKnobImage->setDimensions(401, 491, 174, 163);
-    String shameImagePath = GUI_PATH + "KOS_Graphics/09.png";
+    String shameImagePath = GUI_PATH + "KOS_Graphics/09_alpha.png";
     shameKnobImage->setAnimationImage(shameImagePath);
     addAndMakeVisible(shameKnobImage);
 
@@ -56,7 +71,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     addAndMakeVisible(shameKnob);
 
     hissKnob = new CustomKnob;
-    String hissImagePath = GUI_PATH + "KOS_Graphics/04.png";
+    String hissImagePath = GUI_PATH + "KOS_Graphics/04_alpha.png";
     hissKnob->setKnobImage(hissImagePath);
     hissKnob->setNumFrames(65);
     hissKnob->setKnobDimensions(547, 455, 78, 72);
@@ -64,7 +79,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     addAndMakeVisible(hissKnob);
 
     blendKnob = new CustomKnob;
-    String blendImagePath = GUI_PATH + "KOS_Graphics/05.png";
+    String blendImagePath = GUI_PATH + "KOS_Graphics/05_alpha.png";
     blendKnob->setKnobImage(blendImagePath);
     blendKnob->setNumFrames(65);
     blendKnob->setKnobDimensions(705, 455, 78, 72);
@@ -72,7 +87,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     addAndMakeVisible(blendKnob);
 
     outputKnob = new CustomKnob;
-    String outputImagePath = GUI_PATH + "KOS_Graphics/12.png";
+    String outputImagePath = GUI_PATH + "KOS_Graphics/12_alpha.png";
     outputKnob->setKnobImage(outputImagePath);
     outputKnob->setNumFrames(65);
     outputKnob->setKnobDimensions(757, 521, 122, 116);
@@ -80,7 +95,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     addAndMakeVisible(outputKnob);
 
     ageKnob = new CustomKnob;
-    String ageImagePath = GUI_PATH + "KOS_Graphics/03.png";
+    String ageImagePath = GUI_PATH + "KOS_Graphics/03_alpha.png";
     ageKnob->setKnobImage(ageImagePath);
     ageKnob->setNumFrames(65);
     ageKnob->setKnobDimensions(350, 455, 74, 72);
@@ -99,15 +114,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     bypassButton->setClickingTogglesState(true);
     addAndMakeVisible(bypassButton);
     
-    daysYearsButton = new CustomButton;
-    daysYearsButton->setTopLeftPosition(232, 502);
-    String daysYearsImagePath = GUI_PATH + "KOS_Graphics/02.png";
-    daysYearsButton->setClippedCustomOnImage(daysYearsImagePath, 0, 0, 44, 37);
-    daysYearsButton->setClippedCustomOffImage(daysYearsImagePath, 0, 37, 44, 37);
-    daysYearsButton->addListener(this);
-    daysYearsButton->setClickingTogglesState(true);
-    addAndMakeVisible(daysYearsButton);
-
     tapeTypeButton = new CustomButton;
     tapeTypeButton->setTopLeftPosition(233, 610);
     String tapeTypeImagePath = GUI_PATH + "KOS_Graphics/07.png";
@@ -158,14 +164,15 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     debugLabel.setFont (Font (25.0f));
     debugLabel.setSize(500, 50);
     debugLabel.setColour(Label::textColourId, Colours::white);
-    //addAndMakeVisible(debugLabel);
+    addAndMakeVisible(debugLabel);
     
     
-    int mainWidth = faceImage.getWidth();
-    int mainHeight = faceImage.getHeight();// + inputSaturationKnob->getHeight() + inputLabel.getHeight();
+    int mainWidth = faceImage->getWidth();
+    int mainHeight = faceImage->getHeight();// + inputSaturationKnob->getHeight() + inputLabel.getHeight();
     setSize(mainWidth, mainHeight);
     
     startTimer(25);
+    
 }
 
 
@@ -180,19 +187,48 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     //DEBUG: message from processor
     //debugLabel.setText(String(ourProcessor->curPositionInfo.isPlaying) + ":  " + String(ourProcessor->playHeadPos), dontSendNotification);
 
-    
     vuMeterL->updateImageWithValue(ourProcessor->curRMS*10);
     vuMeterR->updateImageWithValue(ourProcessor->curRMS*10);
-    
+    backlight->setAlpha(1 - ourProcessor->curRMS*3);
+    shameKnob->setAlpha(1 - ourProcessor->curRMS*3);
     
     //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
     //after stopping playback. Don't know why this is... For now, only animating reels when output != 0.
-    if(ourProcessor->curPositionInfo.isPlaying && ourProcessor->playHeadPos != priorProcessorTime)
+    if(ourProcessor->curPositionInfo.isPlaying && ourProcessor->playHeadPos != priorProcessorTime && !ourProcessor->aGraph->isGraphBypassed())
     {
          priorProcessorTime = ourProcessor->playHeadPos;
          if(!reelAnimation->isAnimating) reelAnimation->startAnimation();
     }
     else if(reelAnimation->isAnimating) reelAnimation->stopAnimation();
+    
+}
+
+void KissOfShameAudioProcessorEditor::mouseDoubleClick(const MouseEvent &event)
+{
+    debugLabel.setText("Double Clicked!!!!", dontSendNotification);
+    
+    
+//    if(showReels)
+//    {
+//        //reelAnimation->removeFromDesktop();
+//        removeChildComponent(reelAnimation);
+//        showReels = false;
+//        
+//        String imageLocation = GUI_PATH + "KOS_Graphics/fond_alone2.png";
+//        faceImage = ImageCache::getFromFile(File(imageLocation));
+//        setSize(faceImage.getWidth(), faceImage.getHeight());
+//        repaint();
+//    }
+//    else
+//    {
+//        addAndMakeVisible(reelAnimation);
+//        showReels = true;
+//        
+//        String imageLocation = GUI_PATH + "KOS_Graphics/fond.png";
+//        faceImage = ImageCache::getFromFile(File(imageLocation));
+//        setSize(faceImage.getWidth(), faceImage.getHeight());
+//        repaint();
+//    }
     
 }
 
@@ -257,5 +293,9 @@ void KissOfShameAudioProcessorEditor::buttonClicked (Button* b)
 //==============================================================================
 void KissOfShameAudioProcessorEditor::paint (Graphics& g)
 {
-    g.drawImageAt(faceImage, 0, 0);
+    //RGBA: 255, 55, 98, 1.0
+    //g.fillAll(Colour::fromFloatRGBA(1.0f, 0.216f, 0.384f, 1.0f));
+    
+    g.fillAll(Colours::black.withAlpha(1.0f));
+    //g.drawImageAt(faceImage, 0, 0);
 }

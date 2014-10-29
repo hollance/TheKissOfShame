@@ -18,6 +18,7 @@
 #include "GUIUtilities/CustomButton.h"
 #include "GUIUtilities/ImageInteractor.h"
 #include "GUIUtilities/EnvironmentsComponent.h"
+#include "GUIUtilities/BacklightComponent.h"
 
 //==============================================================================
 /**
@@ -25,7 +26,8 @@
 class KissOfShameAudioProcessorEditor  : public AudioProcessorEditor,
                                          public Timer,
                                          public SliderListener,
-                                         public Button::Listener
+                                         public Button::Listener,
+                                         public MouseListener
 {
 public:
     KissOfShameAudioProcessorEditor (KissOfShameAudioProcessor* ownerFilter);
@@ -36,12 +38,15 @@ public:
     void sliderValueChanged (Slider*) override;
     
     void buttonClicked (Button* b);
-    virtual void timerCallback(int timerID){};
+    virtual void timerCallback(int timerID){}
+    virtual void mouseDoubleClick(const MouseEvent &event);
     
     void changeListenerCallback (ChangeBroadcaster *source){};
     
     //Images
-    Image faceImage;
+    //Image faceImage;
+    ScopedPointer<BacklightComponent> backlight;
+    ScopedPointer<ImageInteractor> faceImage;
     
     //Knobs
     ScopedPointer<CustomKnob> inputSaturationKnob;
@@ -53,7 +58,6 @@ public:
     
     //buttons
     ScopedPointer<CustomButton> bypassButton;
-    ScopedPointer<CustomButton> daysYearsButton;
     ScopedPointer<CustomButton> tapeTypeButton;
     ScopedPointer<CustomButton> printThroughButton;
     
@@ -72,7 +76,7 @@ public:
     
     
 private:
-    
+    bool showReels;
     int priorProcessorTime;
     
     KissOfShameAudioProcessor* getProcessor() const

@@ -12,15 +12,12 @@ public:
     ImageInteractor();
     ~ImageInteractor();
     
-        
-    
 //    virtual void changeListenerCallback (ChangeBroadcaster* source)
 //    {
 //        
 //    };
     
     void paint (Graphics& g);
-    
     
     void updateImageWithValue(float value)
     {
@@ -57,7 +54,6 @@ public:
     void setAnimationImage(String filePath);
     void setDimensions(int topLeftX, int topLeftY, int w, int h);
 
-    
     
 private:
 

@@ -19,9 +19,7 @@ knobNumFrames(128)
     knobImage = ImageCache::getFromFile(imgFile);
     knobFrameWidth = knobImage.getWidth();
     knobFrameHeight = knobImage.getHeight()/knobNumFrames;
-    setSize(knobFrameWidth, knobFrameHeight);
-    
-    
+    setSize(knobFrameWidth, knobFrameHeight);    
 }
 
 CustomKnob::~CustomKnob()

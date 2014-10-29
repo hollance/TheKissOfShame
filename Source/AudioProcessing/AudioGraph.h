@@ -88,6 +88,8 @@ public:
     
     float getOutputLevel(){return outputLevel;}
     
+    bool isGraphBypassed(){return bypassGraph;}
+    
 private:
     
     AudioSampleBuffer audioGraphProcessingBuffer;

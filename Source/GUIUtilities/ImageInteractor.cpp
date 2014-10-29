@@ -18,7 +18,6 @@ numFrames(128), curValue(0)
     frameWidth = image.getWidth();
     frameHeight = image.getHeight()/numFrames;
     setSize(frameWidth, frameHeight);
-
 }
 
 ImageInteractor::~ImageInteractor()
