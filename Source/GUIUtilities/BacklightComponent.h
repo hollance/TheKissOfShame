@@ -13,8 +13,9 @@ public:
     
     BacklightComponent()
     {
-        //setSize(960, 703);
         setSize(960, 266);
+        
+        setInterceptsMouseClicks(false, false);
     };
     
     ~BacklightComponent(){};

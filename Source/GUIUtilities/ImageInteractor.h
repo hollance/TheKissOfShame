@@ -54,9 +54,9 @@ public:
     void setAnimationImage(String filePath);
     void setDimensions(int topLeftX, int topLeftY, int w, int h);
 
-    
 private:
-
+    
+    
     String imagePath;
 	Image image;
     int frameWidth;

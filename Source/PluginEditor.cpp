@@ -17,11 +17,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     : AudioProcessorEditor (ownerFilter), priorProcessorTime(0), showReels(true)
 {
     
-//    String imageLocation = GUI_PATH + "KOS_Graphics/fond_alpha.png";
-//    faceImage = ImageCache::getFromFile(File(imageLocation));
-//    faceImage = faceImage.rescaled(faceImage.getWidth(), faceImage.getHeight());
     
-    //Place pulsing component here...
     backlight = new BacklightComponent;
     backlight->setTopLeftPosition(0, 703 - backlight->getHeight());
     addAndMakeVisible(backlight);
@@ -29,12 +25,9 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     faceImage = new ImageInteractor;
     faceImage->setNumFrames(1);
     faceImage->setDimensions(0, 0, 960, 703);
-    //String faceImagePath = GUI_PATH + "KOS_Graphics/fond_alpha_edited.png";
     String faceImagePath = GUI_PATH + "KOS_Graphics/fond_alpha.png";
     faceImage->setAnimationImage(faceImagePath);
     addAndMakeVisible(faceImage);
-
-    
    
     
     /////////// COMPONENTS /////////////////
@@ -166,18 +159,69 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     debugLabel.setColour(Label::textColourId, Colours::white);
     addAndMakeVisible(debugLabel);
     
-    
     int mainWidth = faceImage->getWidth();
     int mainHeight = faceImage->getHeight();// + inputSaturationKnob->getHeight() + inputLabel.getHeight();
     setSize(mainWidth, mainHeight);
     
     startTimer(25);
-    
 }
 
 
 KissOfShameAudioProcessorEditor::~KissOfShameAudioProcessorEditor()
 {}
+
+
+void KissOfShameAudioProcessorEditor::setReelMode(bool showReels)
+{
+    
+    int adustment = showReels ? 437 : -437; //= height difference: 703 - 266
+    
+//    int adustment = 437;
+//    if(showReels && adustment > 0)       adustment *= 0;
+//    else if(showReels && adustment < 0)  adustment *= -1;
+//    else if(!showReels && adustment > 0) adustment *= -1;
+//    else if(!showReels && adustment < 0) adustment *= 0;
+    
+    //images
+    backlight->setTopLeftPosition(backlight->getX(),backlight->getY()+adustment);
+    
+    //Knobs
+    inputSaturationKnob->setTopLeftPosition(inputSaturationKnob->getX(),inputSaturationKnob->getY()+adustment);
+    shameKnob->setTopLeftPosition(shameKnob->getX(),shameKnob->getY()+adustment);
+    hissKnob->setTopLeftPosition(hissKnob->getX(),hissKnob->getY()+adustment);
+    blendKnob->setTopLeftPosition(blendKnob->getX(),blendKnob->getY()+adustment);
+    outputKnob->setTopLeftPosition(outputKnob->getX(),outputKnob->getY()+adustment);
+    ageKnob->setTopLeftPosition(ageKnob->getX(),ageKnob->getY()+adustment);
+    
+    //buttons
+    bypassButton->setTopLeftPosition(bypassButton->getX(),bypassButton->getY()+adustment);
+    tapeTypeButton->setTopLeftPosition(tapeTypeButton->getX(),tapeTypeButton->getY()+adustment);
+    printThroughButton->setTopLeftPosition(printThroughButton->getX(),printThroughButton->getY()+adustment);
+    
+    //Components
+    environmentsComponent->setTopLeftPosition(environmentsComponent->getX(),environmentsComponent->getY()+adustment);
+    
+    //animation
+    vuMeterL->setTopLeftPosition(vuMeterL->getX(),vuMeterL->getY()+adustment);
+    vuMeterR->setTopLeftPosition(vuMeterR->getX(),vuMeterR->getY()+adustment);
+    shameKnobImage->setTopLeftPosition(shameKnobImage->getX(),shameKnobImage->getY()+adustment);
+    
+    
+    String faceImagePath;
+    int faceHeight = 0;
+    if(showReels)
+    {
+        faceImagePath = GUI_PATH + "KOS_Graphics/fond_alpha.png";
+        faceHeight = 703;
+    }
+    else
+    {
+        faceImagePath = GUI_PATH + "KOS_Graphics/fond_alone2.png";
+        faceHeight = 266;
+    }
+    faceImage->setAnimationImage(faceImagePath);
+    faceImage->setDimensions(0, 0, 960, faceHeight);
+}
 
 
 void KissOfShameAudioProcessorEditor::timerCallback()
@@ -205,31 +249,28 @@ void KissOfShameAudioProcessorEditor::timerCallback()
 
 void KissOfShameAudioProcessorEditor::mouseDoubleClick(const MouseEvent &event)
 {
-    debugLabel.setText("Double Clicked!!!!", dontSendNotification);
+    
+    //debugLabel.setText("Double Clicked!!!!", dontSendNotification);
     
     
-//    if(showReels)
-//    {
-//        //reelAnimation->removeFromDesktop();
-//        removeChildComponent(reelAnimation);
-//        showReels = false;
-//        
-//        String imageLocation = GUI_PATH + "KOS_Graphics/fond_alone2.png";
-//        faceImage = ImageCache::getFromFile(File(imageLocation));
-//        setSize(faceImage.getWidth(), faceImage.getHeight());
-//        repaint();
-//    }
-//    else
-//    {
-//        addAndMakeVisible(reelAnimation);
-//        showReels = true;
-//        
-//        String imageLocation = GUI_PATH + "KOS_Graphics/fond.png";
-//        faceImage = ImageCache::getFromFile(File(imageLocation));
-//        setSize(faceImage.getWidth(), faceImage.getHeight());
-//        repaint();
-//    }
-    
+    if(showReels)
+    {
+        debugLabel.setText("Close Reels!!!!", dontSendNotification);
+        showReels = false;
+        removeChildComponent(reelAnimation);
+        setReelMode(false);
+        setSize(faceImage->getWidth(), faceImage->getHeight());
+        repaint();
+    }
+    else
+    {
+        debugLabel.setText("Open Reels!!!!", dontSendNotification);
+        showReels = true;
+        addAndMakeVisible(reelAnimation);
+        setReelMode(true);
+        setSize(faceImage->getWidth(), faceImage->getHeight());
+        repaint();
+    }
 }
 
 

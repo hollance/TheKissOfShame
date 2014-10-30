@@ -15,6 +15,7 @@
 		134C6BF419D5EBC900B454CE /* ImageAnimator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 134C6BF119D5EBC900B454CE /* ImageAnimator.cpp */; };
 		134C6BF719D5EC8100B454CE /* ImageInteractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 134C6BF519D5EC8100B454CE /* ImageInteractor.cpp */; };
 		134D7B8419DE4AA0002F8EB2 /* EnvironmentsComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 134D7B8219DE4AA0002F8EB2 /* EnvironmentsComponent.cpp */; };
+		13E7D6AA1A008D03005BFC92 /* BacklightComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13E7D6A81A008D03005BFC92 /* BacklightComponent.cpp */; };
 		13F895DD19BF54400074B902 /* AudioGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F895DB19BF54400074B902 /* AudioGraph.cpp */; };
 		13F895E019BF54730074B902 /* Hiss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F895DE19BF54730074B902 /* Hiss.cpp */; };
 		13F895E319BF54940074B902 /* Shame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F895E119BF54940074B902 /* Shame.cpp */; };
@@ -171,6 +172,8 @@
 		137D367FB15FD16829B81533 /* juce_DrawableShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_DrawableShape.cpp; path = ../../JuceLibraryCode/modules/juce_gui_basics/drawables/juce_DrawableShape.cpp; sourceTree = SOURCE_ROOT; };
 		1384F21E3089BF58CC92B4E0 /* juce_Random.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_Random.h; path = ../../JuceLibraryCode/modules/juce_core/maths/juce_Random.h; sourceTree = SOURCE_ROOT; };
 		13D5CB519BB65DEC2C1ED580 /* juce_PropertyPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_PropertyPanel.h; path = ../../JuceLibraryCode/modules/juce_gui_basics/properties/juce_PropertyPanel.h; sourceTree = SOURCE_ROOT; };
+		13E7D6A81A008D03005BFC92 /* BacklightComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BacklightComponent.cpp; sourceTree = "<group>"; };
+		13E7D6A91A008D03005BFC92 /* BacklightComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BacklightComponent.h; sourceTree = "<group>"; };
 		13F895DB19BF54400074B902 /* AudioGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioGraph.cpp; sourceTree = "<group>"; };
 		13F895DC19BF54400074B902 /* AudioGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioGraph.h; sourceTree = "<group>"; };
 		13F895DE19BF54730074B902 /* Hiss.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hiss.cpp; sourceTree = "<group>"; };
@@ -1160,6 +1163,8 @@
 		131652DB19C62EA400579156 /* GUIUtilities */ = {
 			isa = PBXGroup;
 			children = (
+				13E7D6A81A008D03005BFC92 /* BacklightComponent.cpp */,
+				13E7D6A91A008D03005BFC92 /* BacklightComponent.h */,
 				134D7B8219DE4AA0002F8EB2 /* EnvironmentsComponent.cpp */,
 				134D7B8319DE4AA0002F8EB2 /* EnvironmentsComponent.h */,
 				134C6BF519D5EC8100B454CE /* ImageInteractor.cpp */,
@@ -3069,6 +3074,7 @@
 				307A625438C5B214E2D8223F /* juce_cryptography.mm in Sources */,
 				134D7B8419DE4AA0002F8EB2 /* EnvironmentsComponent.cpp in Sources */,
 				4D4D7CFED2F53F7473E3DFE8 /* juce_data_structures.mm in Sources */,
+				13E7D6AA1A008D03005BFC92 /* BacklightComponent.cpp in Sources */,
 				131652D819C5E4A400579156 /* Blend.cpp in Sources */,
 				561FF3B811BEF76315B0D425 /* juce_events.mm in Sources */,
 				6B07013939521DE60F505710 /* juce_graphics.mm in Sources */,

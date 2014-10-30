@@ -5,10 +5,8 @@ ImageInteractor::ImageInteractor()
 :
 numFrames(128), curValue(0)
 {
-    
     minValue = 0.0;
     maxValue = 1.0;
-    
     
     imagePath = GUI_PATH + "MixKnob/Knob-Pan-Mix.png";
     
@@ -18,6 +16,9 @@ numFrames(128), curValue(0)
     frameWidth = image.getWidth();
     frameHeight = image.getHeight()/numFrames;
     setSize(frameWidth, frameHeight);
+    
+    
+    setInterceptsMouseClicks(false, false);
 }
 
 ImageInteractor::~ImageInteractor()

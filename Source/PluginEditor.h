@@ -43,6 +43,8 @@ public:
     
     void changeListenerCallback (ChangeBroadcaster *source){};
     
+    void setReelMode(bool showReels);
+    
     //Images
     //Image faceImage;
     ScopedPointer<BacklightComponent> backlight;
