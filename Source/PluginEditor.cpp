@@ -27,6 +27,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     faceImage->setDimensions(0, 0, 960, 703);
     String faceImagePath = GUI_PATH + "KOS_Graphics/fond_alpha.png";
     faceImage->setAnimationImage(faceImagePath);
+    faceImage->setInterceptsMouseClicks(false, false);
     addAndMakeVisible(faceImage);
    
     
@@ -34,7 +35,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     
     environmentsComponent = new EnvironmentsComponent;
     environmentsComponent->setTopLeftPosition(388, 654);
-    //environmentsComponent->addMouseListener(this, false);
     addAndMakeVisible(environmentsComponent);
     
     
