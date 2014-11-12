@@ -14,12 +14,10 @@ public:
     BacklightComponent()
     {
         setSize(960, 266);
-        
         setInterceptsMouseClicks(false, false);
     };
     
     ~BacklightComponent(){};
-    
     
     
     void paint (Graphics& g)

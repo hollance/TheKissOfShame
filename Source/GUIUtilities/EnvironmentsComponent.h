@@ -32,6 +32,8 @@ public:
         updateImageWithValue(imageIncr);
     }
     
+    virtual void mouseDrag(const MouseEvent& event){}
+    
 private:
     
     int imageIncr;

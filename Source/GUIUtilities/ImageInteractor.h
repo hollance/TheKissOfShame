@@ -35,6 +35,8 @@ public:
         }
         
         repaint();
+        
+        
     }
     
     void setCurrentValue(float value)
@@ -50,15 +52,33 @@ public:
         maxValue = max;
     }
     
+    void setDesaturate(bool _desaturate)
+    {
+        desaturate = _desaturate;
+        
+        if(desaturate)
+        {
+            image = desatImage;
+        }
+        else
+        {
+            image = satImage;
+        }
+        
+        repaint();
+    }
+    
     void setNumFrames(int numFrames);
     void setAnimationImage(String filePath);
     void setDimensions(int topLeftX, int topLeftY, int w, int h);
 
 private:
     
-    
+    bool desaturate;
     String imagePath;
 	Image image;
+    Image satImage;
+    Image desatImage;
     int frameWidth;
     int frameHeight;
     int numFrames;

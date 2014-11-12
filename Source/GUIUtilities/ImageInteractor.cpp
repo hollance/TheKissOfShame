@@ -3,16 +3,14 @@
 
 ImageInteractor::ImageInteractor()
 :
-numFrames(128), curValue(0)
+numFrames(128), curValue(0), desaturate(false)
 {
     minValue = 0.0;
     maxValue = 1.0;
     
     imagePath = GUI_PATH + "MixKnob/Knob-Pan-Mix.png";
     
-    File imgFile;
-    imgFile = File(imagePath);
-    image = ImageCache::getFromFile(imgFile);
+    image = ImageCache::getFromFile(File(imagePath));
     frameWidth = image.getWidth();
     frameHeight = image.getHeight()/numFrames;
     setSize(frameWidth, frameHeight);
@@ -30,7 +28,11 @@ void ImageInteractor::setNumFrames(int _numFrames)
 
 void ImageInteractor::setAnimationImage(String filePath)
 {
-    image = ImageCache::getFromFile(File(filePath));
+    imagePath = filePath;
+    image = ImageCache::getFromFile(File(imagePath));
+    desatImage = image.createCopy();
+    satImage = image.createCopy();
+    desatImage.desaturate();
 }
 
 void ImageInteractor::setDimensions(int topLeftX, int topLeftY, int w, int h)
@@ -49,6 +51,7 @@ void ImageInteractor::paint (Graphics& g)
         double normalizedValue = (curValue - minValue) / (maxValue - minValue);
         int frameNum = normalizedValue*(numFrames-1);
 		juce::Rectangle<int> clipRect(0, frameNum*frameHeight, frameWidth, frameHeight);
+        image = (desaturate) ? desatImage : satImage;
         const Image & clippedIm = image.getClippedImage(clipRect);
         g.drawImageAt(clippedIm, 0, 0);
     }

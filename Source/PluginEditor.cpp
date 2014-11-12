@@ -150,14 +150,15 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
 
     
     //////////////// LABELS /////////////////
-    
-    String debugText = "Debug Info...";
-    debugLabel.setText(debugText, dontSendNotification);
-    debugLabel.setTopLeftPosition(100, 100);
-    debugLabel.setFont (Font (25.0f));
-    debugLabel.setSize(500, 50);
-    debugLabel.setColour(Label::textColourId, Colours::white);
-    addAndMakeVisible(debugLabel);
+#if DEBUG
+//    String debugText = "Debug Info...";
+//    debugLabel.setText(debugText, dontSendNotification);
+//    debugLabel.setTopLeftPosition(100, 100);
+//    debugLabel.setFont (Font (25.0f));
+//    debugLabel.setSize(500, 50);
+//    debugLabel.setColour(Label::textColourId, Colours::white);
+//    addAndMakeVisible(debugLabel);
+#endif
     
     int mainWidth = faceImage->getWidth();
     int mainHeight = faceImage->getHeight();// + inputSaturationKnob->getHeight() + inputLabel.getHeight();
@@ -175,12 +176,6 @@ void KissOfShameAudioProcessorEditor::setReelMode(bool showReels)
 {
     
     int adustment = showReels ? 437 : -437; //= height difference: 703 - 266
-    
-//    int adustment = 437;
-//    if(showReels && adustment > 0)       adustment *= 0;
-//    else if(showReels && adustment < 0)  adustment *= -1;
-//    else if(!showReels && adustment > 0) adustment *= -1;
-//    else if(!showReels && adustment < 0) adustment *= 0;
     
     //images
     backlight->setTopLeftPosition(backlight->getX(),backlight->getY()+adustment);
@@ -230,11 +225,19 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     
     //DEBUG: message from processor
     //debugLabel.setText(String(ourProcessor->curPositionInfo.isPlaying) + ":  " + String(ourProcessor->playHeadPos), dontSendNotification);
-
-    vuMeterL->updateImageWithValue(ourProcessor->curRMS*10);
-    vuMeterR->updateImageWithValue(ourProcessor->curRMS*10);
-    backlight->setAlpha(1 - ourProcessor->curRMS*3);
-    shameKnob->setAlpha(1 - ourProcessor->curRMS*3);
+    
+    //animation of VU meters and backlighting
+    if(!bypassButton->getToggleState())
+    {
+        //float smoothRMS = tanh(ourProcessor->curRMS*10);
+        float vuAlpha = ourProcessor->curRMS*10*shameKnob->getValue();
+        vuMeterL->updateImageWithValue(vuAlpha);
+        vuMeterR->updateImageWithValue(vuAlpha);
+        
+        float backlightAlpha = 1 - 0.75*tanh(ourProcessor->curRMS*10)*shameKnob->getValue();
+        backlight->setAlpha(backlightAlpha);
+        shameKnob->setAlpha(backlightAlpha);
+    }
     
     //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
     //after stopping playback. Don't know why this is... For now, only animating reels when output != 0.
@@ -252,10 +255,8 @@ void KissOfShameAudioProcessorEditor::mouseDoubleClick(const MouseEvent &event)
     
     //debugLabel.setText("Double Clicked!!!!", dontSendNotification);
     
-    
     if(showReels)
     {
-        debugLabel.setText("Close Reels!!!!", dontSendNotification);
         showReels = false;
         removeChildComponent(reelAnimation);
         setReelMode(false);
@@ -264,7 +265,6 @@ void KissOfShameAudioProcessorEditor::mouseDoubleClick(const MouseEvent &event)
     }
     else
     {
-        debugLabel.setText("Open Reels!!!!", dontSendNotification);
         showReels = true;
         addAndMakeVisible(reelAnimation);
         setReelMode(true);
@@ -323,6 +323,24 @@ void KissOfShameAudioProcessorEditor::buttonClicked (Button* b)
 {
     if(b == bypassButton)
     {
+        if(b->getToggleState())
+        {
+            vuMeterL->updateImageWithValue(0);
+            vuMeterR->updateImageWithValue(0);
+            vuMeterL->setDesaturate(true);
+            vuMeterR->setDesaturate(true);
+            backlight->setAlpha(0.25);
+            shameKnob->setAlpha(0.25);
+        }
+        else
+        {
+            vuMeterL->setDesaturate(false);
+            vuMeterR->setDesaturate(false);
+            vuMeterL->setAlpha(1.0);
+            vuMeterR->setAlpha(1.0);
+        }
+
+        
         getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::bypassParam,
                                                    b->getToggleState());
         
