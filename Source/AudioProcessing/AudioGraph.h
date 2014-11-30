@@ -25,7 +25,7 @@ public:
     
     AudioGraph(int numChannels)
     {
-        inSaturation = new InputSaturation(0.2, 2.0);
+        inSaturation = new InputSaturation(0.0, 2.0, 0.272);
         
         shame = new Shame(2);
         shame->setInterpolatedParameters(0.0);
@@ -66,7 +66,7 @@ public:
         {
             case eSaturationDrive: inSaturation->setDrive(paramLevel); break;
             case eSaturationOuput: inSaturation->setOutput(paramLevel); break;
-            case eSaturationRate: inSaturation->setRate(paramLevel); break;
+            case eSaturationRate: inSaturation->setRateOdd(paramLevel); break;
             case eSaturationThresh: inSaturation->setThreshold(paramLevel); break;
             case eSaturationGlobalLevel: inSaturation->setGlobalLevel(paramLevel); break;
             
