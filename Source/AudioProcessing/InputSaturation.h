@@ -69,7 +69,11 @@ public:
     
     void setDrive(float _drive)
     {
-        drive = _drive*5.0;
+        //NOTE: drive input is in dB
+        drive = _drive * 36.0 - 18.0;
+        
+        //now convert dB to Amp
+        drive = powf(10, drive/20);
     }
     
     void setOutput(float _output)
