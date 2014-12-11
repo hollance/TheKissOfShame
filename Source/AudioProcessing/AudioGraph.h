@@ -35,7 +35,9 @@ public:
         blend = new Blend();
         
         bypassGraph = false;
-        outputLevel = 0.0; 
+        
+        outputLevel = 1.0;
+        inputDrive = 1.0;
     }
     
     ~AudioGraph(){}
@@ -44,6 +46,9 @@ public:
     void processGraph(AudioSampleBuffer& audioBuffer, int numChannels)
     {
         if(bypassGraph) return;
+        
+        //apply the input drive
+        audioBuffer.applyGain(inputDrive);
         
         //make a copy of the original audio to be used strictly for processing
         audioGraphProcessingBuffer = audioBuffer;
@@ -56,8 +61,27 @@ public:
         
         //apply the final output level
         audioBuffer.applyGain(outputLevel);
-        
     }
+    
+    
+    void setInputDrive(float drive)
+    {
+        //NOTE: drive input is in dB
+        inputDrive = drive * 36.0 - 18.0;
+        
+        //now convert dB to Amp
+        inputDrive = powf(10, inputDrive/20);
+    }
+    
+    void setOutputLevel(float level)
+    {
+        //NOTE: drive input is in dB
+        outputLevel = level * 36.0 - 18.0;
+        
+        //now convert dB to Amp
+        outputLevel = powf(10, outputLevel/20);
+    }
+    
     
     
     void setAudioUnitParameters(AUParameter param, float paramLevel)
@@ -79,8 +103,8 @@ public:
             case eBlendLevel:  blend->setBlendLevel(paramLevel); break;
                 
             case eBypass:      bypassGraph = paramLevel; break;
-                
-            case eOutputLevel: outputLevel = paramLevel; break;
+            case eInputDrive:  setInputDrive(paramLevel); break;
+            case eOutputLevel: setOutputLevel(paramLevel); break;
                 
             default: break;
         }
@@ -100,6 +124,8 @@ private:
     ScopedPointer<Blend> blend;
     
     bool bypassGraph;
+    
+    float inputDrive;
     float outputLevel;
     
 };

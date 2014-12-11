@@ -45,6 +45,8 @@ public:
     
     void setReelMode(bool showReels);
     
+    void initializeLevels();
+    
     //Images
     //Image faceImage;
     ScopedPointer<BacklightComponent> backlight;

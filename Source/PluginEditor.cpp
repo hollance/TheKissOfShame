@@ -164,6 +164,8 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     int mainHeight = faceImage->getHeight();// + inputSaturationKnob->getHeight() + inputLabel.getHeight();
     setSize(mainWidth, mainHeight);
     
+    initializeLevels();
+    
     startTimer(25);
 }
 
@@ -273,6 +275,20 @@ void KissOfShameAudioProcessorEditor::mouseDoubleClick(const MouseEvent &event)
     }
 }
 
+void KissOfShameAudioProcessorEditor::initializeLevels()
+{
+    inputSaturationKnob->setValue(0.5);
+    getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam, 0.5);
+    getProcessor()->aGraph->setAudioUnitParameters(eInputDrive, 0.5);
+    
+    outputKnob->setValue(0.5);
+    getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam, 0.5);
+    getProcessor()->aGraph->setAudioUnitParameters(eOutputLevel, 0.5);
+
+    blendKnob->setValue(1.0);
+    getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam, 1.0);
+    getProcessor()->aGraph->setAudioUnitParameters(eBlendLevel, 1.0);
+}
 
 void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
 {
@@ -284,7 +300,7 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
         getProcessor()->setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam,
                                                    (float) inputSaturationKnob->getValue());
         
-        getProcessor()->aGraph->setAudioUnitParameters(eSaturationDrive, (float) inputSaturationKnob->getValue());
+        getProcessor()->aGraph->setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
     }
     else if(slider == shameKnob)
     {

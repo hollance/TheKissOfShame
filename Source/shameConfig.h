@@ -49,7 +49,7 @@ enum AUParameter
     eBlendLevel,
     
     eBypass,
-    
+    eInputDrive,
     eOutputLevel
 };
 
