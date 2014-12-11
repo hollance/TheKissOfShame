@@ -51,55 +51,40 @@ public:
         
         if(input <= 0.5)
         {
-            depth = 0.2 * input / 0.5;
-            randPeriodicity = 0.0;
-            rate = 75.0;
-            waveformIndx = 3;
+            depth = 20 * input / 0.5;
+            randPeriodicity = 0.5;
+            rate = 7.0;
+            waveformIndx = 0;
         }
         else if(input > 0.5 && input <= 0.75)
         {
-            depth = 0.2 + 0.1*(input - 0.5)/(0.75 - 0.5);
-            randPeriodicity = 0.25*(input - 0.5)/(0.75 - 0.5);
-            rate = 75.0;
-            waveformIndx = 3;
+            depth = 20 + 10*(input - 0.5)/(0.75 - 0.5);
+            randPeriodicity = 0.5 - 0.25*(input - 0.5)/(0.75 - 0.5);
+            rate = 7.0 + 70.0*(input - 0.5)/(0.75 - 0.5);
+            waveformIndx = 0;
         }
         else if(input > 0.75 && input <= 1.0)
         {
-            depth = 0.3 + 0.7*(input - 0.75)/0.25;
-            randPeriodicity = 0.25 + 0.25*(input - 0.75)/0.25;
-            rate = 75.0 - 40.0*(input - 0.75)/0.25;
-            waveformIndx = 3;
+            depth = 30 + 30*(input - 0.75)/0.25;
+            randPeriodicity = 0.25 + 0.5*(input - 0.75)/0.25;
+            rate = 77.0 - 40.0*(input - 0.75)/0.25;
+            waveformIndx = 0;
         }
     }
     
     
     void importWaveTables()
     {
-        Array<File> audioFiles;
-        File audioFile1(AUDIO_PATH + "SineTone.wav");
-        File audioFile2(AUDIO_PATH + "SquareTone.wav");
-        File audioFile3(AUDIO_PATH + "SawtoothTone.wav");
-        File audioFile4(AUDIO_PATH + "DrawTone.wav");
         
-        audioFiles.add(audioFile1);
-        audioFiles.add(audioFile2);
-        audioFiles.add(audioFile3);
-        audioFiles.add(audioFile4);
-        
-        for(int i = 0; i < audioFiles.size(); i++)
+        for(int i = 0; i < 4; i++)
         {
-            if (!audioFiles[i].existsAsFile()) return;
+            AudioSampleBuffer *tempAudioBuffer = new AudioSampleBuffer(1, (int) BUFFER_SIZE);
             
-            AudioFormatManager formatManager;
-            formatManager.registerBasicFormats();
-            AudioFormatReader* reader = formatManager.createReaderFor (audioFiles[i]);
-            
-            if (!reader) return;
-
-            AudioSampleBuffer *tempAudioBuffer = new AudioSampleBuffer(reader->numChannels, (int) reader->lengthInSamples);
-            reader->read(tempAudioBuffer, 0, 44100, 0, true, true);
-            
-            delete reader;
+            for(int j = 0; j < tempAudioBuffer->getNumSamples(); j++)
+            {
+                float cosDomain = 2.0*PI*(double)j/((double)BUFFER_SIZE-1);
+                tempAudioBuffer->getWritePointer(0)[j] = (0.5*(cos(cosDomain) - 1));
+            }
             
             waveTableBuffers.add(tempAudioBuffer);
         }
@@ -159,18 +144,14 @@ public:
         float outsample = w1Sample*(1-fracWaveIndx) + w2Sample*fracWaveIndx;
         
         
-        //randomize the periodicity.
-        if((outsample < 0 && curDirection > 0) || (outsample > 0 && curDirection < 0))
-        {
-            curDirection *= -1;
-            rateFluctuation = ((float)rNum.nextInt(2000)/1000 - 1.0)*rate*randPeriodicity;
-            //post("Random Number Triggered: %f", rateFluctuation);
-        }
-        
         //increment the current position.
         curPos_wTable = curPos_wTable + rate + rateFluctuation;
-        if(curPos_wTable >= BUFFER_SIZE) curPos_wTable -= BUFFER_SIZE;
         
+        if(curPos_wTable >= BUFFER_SIZE)
+        {
+            rateFluctuation = ((float)(rand() % 2000)/1000 - 1.0)*rate*randPeriodicity;
+            curPos_wTable -= BUFFER_SIZE;
+        }
         
         return outsample;
     }
@@ -189,6 +170,7 @@ public:
             }
             
             if(playPosition > BUFFER_SIZE) playPosition -= BUFFER_SIZE;
+            if(playPosition < 0) playPosition += (BUFFER_SIZE);
             
             float frac = playPosition - (int)playPosition;
             int prX = (int)playPosition;
@@ -201,12 +183,10 @@ public:
                 outSamples[i] = linearInterpolate(shameSampleBuffer->getReadPointer(channel)[prX], shameSampleBuffer->getReadPointer(channel)[nxtX], frac);
             }
             
-            curPos = (curPos + 1) % BUFFER_SIZE;
+            playPosition = curPos + depth*processWavetable();
             
-            //float oscVal = 1.0 - oscDepth*sin(oscFreq*2*PI*(oscIncr/SAMPLE_RATE));
-            float oscVal = 1.0 - depth*processWavetable();
-            //oscIncr = ((int)oscIncr + 1) % (int)SAMPLE_RATE;
-            playPosition += oscVal;
+            curPos = (curPos + 1) % BUFFER_SIZE;
+                        
         }
     };
 
