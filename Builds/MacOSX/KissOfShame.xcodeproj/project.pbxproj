@@ -1695,7 +1695,6 @@
 				51015E10DFC3DD1B46BA25D0 /* juce_IncludeModuleHeaders.h */,
 				1E274959BEB12261129DEAAD /* juce_IncludeSystemHeaders.h */,
 				CAF128AD6DA4E51EE7F866AF /* juce_PluginHostType.h */,
-				63D56C1F3F47FC95B3E84B26 /* juce_PluginUtilities.cpp */,
 				2AA3BED8004E654403B11DBB /* juce_WindowsHooks.h */,
 			);
 			name = utility;
@@ -1862,8 +1861,6 @@
 		57B087C75EB4694407A829BC /* VST */ = {
 			isa = PBXGroup;
 			children = (
-				D6704C07EEAEEB1DB8C29040 /* juce_VST_Wrapper.cpp */,
-				2D9DC5BAA5FF8E146A103C2F /* juce_VST_Wrapper.mm */,
 			);
 			name = VST;
 			sourceTree = "<group>";
@@ -1893,7 +1890,6 @@
 		5B88293FBD16A3D681973A85 /* AU */ = {
 			isa = PBXGroup;
 			children = (
-				FE96D52EA2EF7C8F41A09E8C /* juce_AU_Wrapper.mm */,
 			);
 			name = AU;
 			sourceTree = "<group>";
@@ -2616,12 +2612,7 @@
 		CEA88A78CDE247E0ADA13D9B /* RTAS */ = {
 			isa = PBXGroup;
 			children = (
-				CEA996EF19EC25DE7ECCF1F4 /* juce_RTAS_DigiCode1.cpp */,
-				455B7AB25F9C48F5B159A848 /* juce_RTAS_DigiCode2.cpp */,
-				1BEF4012CD206B261F5DD7DB /* juce_RTAS_DigiCode3.cpp */,
 				BEDBF7C34022211FEA1937FB /* juce_RTAS_WinUtilities.cpp */,
-				EC272043431047CAA9F02FCE /* juce_RTAS_Wrapper.cpp */,
-				FBFD02ADC5522132D2FBEA56 /* juce_RTAS_MacUtilities.mm */,
 				FA96140DBBD7D34B4442684A /* juce_RTAS_DigiCode_Header.h */,
 			);
 			name = RTAS;
@@ -2706,8 +2697,6 @@
 		E0B5DD894C116B1C15793065 /* AAX */ = {
 			isa = PBXGroup;
 			children = (
-				5CB74245840EC965AC513F24 /* juce_AAX_Wrapper.cpp */,
-				ACF43B1A8C1D3C1C6E1E94D8 /* juce_AAX_Wrapper.mm */,
 			);
 			name = AAX;
 			sourceTree = "<group>";
@@ -2765,8 +2754,6 @@
 		E46D7F7CD664B5D3449E7F4A /* VST3 */ = {
 			isa = PBXGroup;
 			children = (
-				5E3E42639E1876E82F8E47FD /* juce_VST3_Wrapper.cpp */,
-				7761F6EE50F05D466EA383AC /* juce_VST3_Wrapper.mm */,
 			);
 			name = VST3;
 			sourceTree = "<group>";
@@ -3146,6 +3133,7 @@
 		AAD01A50433BF070A59572A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -3188,6 +3176,7 @@
 		F4210532ADD3419C7960C5CA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
