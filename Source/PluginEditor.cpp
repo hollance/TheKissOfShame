@@ -229,17 +229,15 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     //debugLabel.setText(String(ourProcessor->curPositionInfo.isPlaying) + ":  " + String(ourProcessor->playHeadPos), dontSendNotification);
     
     //animation of VU meters and backlighting
-    if(!bypassButton->getToggleState())
-    {
-        //float smoothRMS = tanh(ourProcessor->curRMS*10);
-        float vuAlpha = ourProcessor->curRMS*10*shameKnob->getValue();
-        vuMeterL->updateImageWithValue(vuAlpha);
-        vuMeterR->updateImageWithValue(vuAlpha);
-        
-        float backlightAlpha = 1 - ourProcessor->curRMS*3*shameKnob->getValue();
-        backlight->setAlpha(backlightAlpha);
-        shameKnob->setAlpha(backlightAlpha);
-    }
+    //float smoothRMS = tanh(ourProcessor->curRMS*10);
+    float vuAlpha = ourProcessor->curRMS*10*shameKnob->getValue();
+    vuMeterL->updateImageWithValue(vuAlpha);
+    vuMeterR->updateImageWithValue(vuAlpha);
+    
+    float backlightAlpha = 1 - ourProcessor->curRMS*3*shameKnob->getValue();
+    backlight->setAlpha(backlightAlpha);
+    shameKnob->setAlpha(backlightAlpha);
+    
     
     //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
     //after stopping playback. Don't know why this is... For now, only animating reels when output != 0.
@@ -341,19 +339,19 @@ void KissOfShameAudioProcessorEditor::buttonClicked (Button* b)
     {
         if(b->getToggleState())
         {
-            vuMeterL->updateImageWithValue(0);
-            vuMeterR->updateImageWithValue(0);
-            vuMeterL->setDesaturate(true);
-            vuMeterR->setDesaturate(true);
+            //vuMeterL->updateImageWithValue(0);
+            //vuMeterR->updateImageWithValue(0);
+            //vuMeterL->setDesaturate(true);
+            //vuMeterR->setDesaturate(true);
             backlight->setAlpha(0.25);
             shameKnob->setAlpha(0.25);
         }
         else
         {
-            vuMeterL->setDesaturate(false);
-            vuMeterR->setDesaturate(false);
-            vuMeterL->setAlpha(1.0);
-            vuMeterR->setAlpha(1.0);
+            //vuMeterL->setDesaturate(false);
+            //vuMeterR->setDesaturate(false);
+            //vuMeterL->setAlpha(1.0);
+            //vuMeterR->setAlpha(1.0);
         }
 
         
