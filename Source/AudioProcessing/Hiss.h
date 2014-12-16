@@ -21,8 +21,8 @@ public:
         File hissFile(AUDIO_PATH + "Hiss.wav");
         hissBuffer = new AudioSampleBuffer();
         if(hissFile.existsAsFile()) hissBuffer = loadSampleFromFile(hissFile);
-        
-        hissLevel = 0.0;
+                
+        setHissLevel(0.0);
         
         indx1 = 0;
         indx2 = hissBuffer->getNumSamples()/2;
@@ -104,7 +104,7 @@ public:
                 hissSample = rampValue*hissBuffer->getReadPointer(channel)[indx1] + (1-rampValue)*hissBuffer->getReadPointer(channel)[indx2];
                 
             
-                samples[i] = (1-hissLevel)*samples[i] + hissLevel*hissSample;
+                samples[i] = signalLevel*samples[i] + hissLevel*hissSample;
                 
                 
                 indx1 = (indx1 + 1) % hissBuffer->getNumSamples();
@@ -115,7 +115,30 @@ public:
     }
     
     
-    void setHissLevel(float level) {hissLevel = level;}
+    void setHissLevel(float level)
+    {
+        hissLevel = level*0.005;
+        signalLevel = 1 - hissLevel;
+        
+//        signalLevel = 0.0 - 3.0*level; //reducing signal level by this much (up to 3dB)
+//        hissLevel = 3.0*level - 36.0; //replacing with hiss.
+//        
+//        signalLevel = powf(10, signalLevel/20); //convert to amp
+//        hissLevel = powf(10, hissLevel/20); //convert to amp
+    }
+    
+    
+    
+//    void setInputDrive(float drive)
+//    {
+//        //NOTE: drive input is in dB
+//        inputDrive = drive * 36.0 - 18.0;
+//        
+//        //now convert dB to Amp
+//        inputDrive = powf(10, inputDrive/20);
+//    }
+
+    
     
 private:
     
@@ -123,7 +146,9 @@ private:
     int indx1;
     int indx2;
     float hissSample;
+    
     float hissLevel;
+    float signalLevel;
     
     
     float rampValue;

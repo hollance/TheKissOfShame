@@ -230,9 +230,9 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     
     //animation of VU meters and backlighting
     //float smoothRMS = tanh(ourProcessor->curRMS*10);
-    float vuAlpha = ourProcessor->curRMS*10*shameKnob->getValue();
-    vuMeterL->updateImageWithValue(vuAlpha);
-    vuMeterR->updateImageWithValue(vuAlpha);
+    float vuLevel = ourProcessor->curRMS*3;
+    vuMeterL->updateImageWithValue(vuLevel);
+    vuMeterR->updateImageWithValue(vuLevel);
     
     float backlightAlpha = 1 - ourProcessor->curRMS*3*shameKnob->getValue();
     backlight->setAlpha(backlightAlpha);
