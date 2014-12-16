@@ -236,7 +236,7 @@ void KissOfShameAudioProcessorEditor::timerCallback()
         vuMeterL->updateImageWithValue(vuAlpha);
         vuMeterR->updateImageWithValue(vuAlpha);
         
-        float backlightAlpha = 1 - 0.75*tanh(ourProcessor->curRMS*10)*shameKnob->getValue();
+        float backlightAlpha = 1 - ourProcessor->curRMS*3*shameKnob->getValue();
         backlight->setAlpha(backlightAlpha);
         shameKnob->setAlpha(backlightAlpha);
     }
