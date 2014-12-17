@@ -51,23 +51,23 @@ public:
         
         if(input <= 0.5)
         {
-            depth = 20 * input / 0.5;
+            depth = 5 * input / 0.5;
             randPeriodicity = 0.5;
             rate = 7.0;
             waveformIndx = 0;
         }
-        else if(input > 0.5 && input <= 0.75)
+        else if(input > 0.5 && input <= 0.85)
         {
-            depth = 20 + 10*(input - 0.5)/(0.75 - 0.5);
-            randPeriodicity = 0.5 - 0.25*(input - 0.5)/(0.75 - 0.5);
-            rate = 7.0 + 70.0*(input - 0.5)/(0.75 - 0.5);
+            depth = 5 + 25*(input - 0.5)/(0.85 - 0.5);
+            randPeriodicity = 0.5 - 0.25*(input - 0.5)/(0.85 - 0.5);
+            rate = 7.0 + 70.0*(input - 0.5)/(0.85 - 0.5);
             waveformIndx = 0;
         }
-        else if(input > 0.75 && input <= 1.0)
+        else if(input > 0.85 && input <= 1.0)
         {
-            depth = 30 + 30*(input - 0.75)/0.25;
-            randPeriodicity = 0.25 + 0.5*(input - 0.75)/0.25;
-            rate = 77.0 - 40.0*(input - 0.75)/0.25;
+            depth = 30 + 30*(input - 0.85)/0.15;
+            randPeriodicity = 0.25 + 0.5*(input - 0.85)/0.15;
+            rate = 77.0 - 20.0*(input - 0.85)/0.15;
             waveformIndx = 0;
         }
     }
@@ -169,7 +169,7 @@ public:
                 shameSampleBuffer->getWritePointer(channel)[curPos] = curSample;
             }
             
-            if(playPosition > BUFFER_SIZE) playPosition -= BUFFER_SIZE;
+            if(playPosition >= BUFFER_SIZE) playPosition -= BUFFER_SIZE;
             if(playPosition < 0) playPosition += (BUFFER_SIZE);
             
             float frac = playPosition - (int)playPosition;

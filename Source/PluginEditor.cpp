@@ -230,13 +230,16 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     
     //animation of VU meters and backlighting
     //float smoothRMS = tanh(ourProcessor->curRMS*10);
-    float vuLevel = ourProcessor->curRMS*3;
+    float vuLevel = bypassButton->getToggleState() ? 0.0 : ourProcessor->curRMS*3;
     vuMeterL->updateImageWithValue(vuLevel);
     vuMeterR->updateImageWithValue(vuLevel);
     
-    float backlightAlpha = 1 - ourProcessor->curRMS*3*shameKnob->getValue();
-    backlight->setAlpha(backlightAlpha);
-    shameKnob->setAlpha(backlightAlpha);
+    if(!bypassButton->getToggleState())
+    {
+        float backlightAlpha = 1 - ourProcessor->curRMS*3*shameKnob->getValue();
+        backlight->setAlpha(backlightAlpha);
+        shameKnob->setAlpha(backlightAlpha);
+    }
     
     
     //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
