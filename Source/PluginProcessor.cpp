@@ -21,7 +21,8 @@ KissOfShameAudioProcessor::KissOfShameAudioProcessor() : masterBypass(false)
     
     aGraph = new AudioGraph(getNumInputChannels());
     
-    curRMS = 0;
+    curRMSL = 0;
+    curRMSR = 0;
     
     curPositionInfo.resetToDefault();
     
@@ -186,7 +187,9 @@ void KissOfShameAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuf
     
     //Need to send the RMS below to the animation components for VU meters...
     //use juce's messaging system to keep the audio thread safe.
-    curRMS = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
+    curRMSL = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
+    curRMSR = buffer.getRMSLevel(1, 0, buffer.getNumSamples());
+    
 
 
     // In case we have more outputs than inputs, we'll clear any output

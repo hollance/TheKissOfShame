@@ -230,17 +230,17 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     
     //animation of VU meters and backlighting
     //float smoothRMS = tanh(ourProcessor->curRMS*10);
-    float vuLevel = bypassButton->getToggleState() ? 0.0 : ourProcessor->curRMS*3;
-    vuMeterL->updateImageWithValue(vuLevel);
-    vuMeterR->updateImageWithValue(vuLevel);
+    float vuLevelL = bypassButton->getToggleState() ? 0.0 : ourProcessor->curRMSL*3;
+    float vuLevelR = bypassButton->getToggleState() ? 0.0 : ourProcessor->curRMSR*3;
+    vuMeterL->updateImageWithValue(vuLevelL);
+    vuMeterR->updateImageWithValue(vuLevelR);
     
     if(!bypassButton->getToggleState())
     {
-        float backlightAlpha = 1 - ourProcessor->curRMS*3*shameKnob->getValue();
+        float backlightAlpha = 1 - (0.5*ourProcessor->curRMSL + 0.5*ourProcessor->curRMSR)*3*shameKnob->getValue();
         backlight->setAlpha(backlightAlpha);
         shameKnob->setAlpha(backlightAlpha);
     }
-    
     
     //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
     //after stopping playback. Don't know why this is... For now, only animating reels when output != 0.

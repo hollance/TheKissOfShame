@@ -16,6 +16,7 @@
 #include "Shame.h"
 #include "InputSaturation.h"
 #include "Blend.h"
+#include "Flange.h"
 
 
 class AudioGraph

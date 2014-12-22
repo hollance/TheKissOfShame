@@ -159,6 +159,7 @@
 		131652DD19C62ED100579156 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
 		1316BEAEC69D11D188F687A1 /* juce_StringArray.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_StringArray.cpp; path = ../../JuceLibraryCode/modules/juce_core/text/juce_StringArray.cpp; sourceTree = SOURCE_ROOT; };
 		13197953BC9D08ACE5F14CA5 /* juce_audio_formats.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = juce_audio_formats.mm; path = ../../JuceLibraryCode/modules/juce_audio_formats/juce_audio_formats.mm; sourceTree = SOURCE_ROOT; };
+		1329D2B21A47A1A60049380F /* Flange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flange.h; sourceTree = "<group>"; };
 		132FE28A587DE6846A5A99A7 /* juce_DrawableText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_DrawableText.h; path = ../../JuceLibraryCode/modules/juce_gui_basics/drawables/juce_DrawableText.h; sourceTree = SOURCE_ROOT; };
 		134C6BEF19D5EBC900B454CE /* CustomKnob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomKnob.cpp; sourceTree = "<group>"; };
 		134C6BF019D5EBC900B454CE /* CustomKnob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomKnob.h; sourceTree = "<group>"; };
@@ -1200,6 +1201,7 @@
 				13F895E519BF54A70074B902 /* InputSaturation.h */,
 				131652D619C5E4A400579156 /* Blend.cpp */,
 				131652D719C5E4A400579156 /* Blend.h */,
+				1329D2B21A47A1A60049380F /* Flange.h */,
 			);
 			name = AudioProcessing;
 			path = ../../Source/AudioProcessing;

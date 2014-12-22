@@ -67,7 +67,8 @@ public:
     void getStateInformation (MemoryBlock& destData);
     void setStateInformation (const void* data, int sizeInBytes);
     
-    float getCurrentRMS(){return curRMS;}
+    float getCurrentRMSL(){return curRMSL;}
+    float getCurrentRMSR(){return curRMSR;}
     
     
     //////All of these values get communicated to the host:
@@ -89,7 +90,7 @@ public:
     AudioPlayHead::CurrentPositionInfo curPositionInfo;
     
     ScopedPointer<AudioGraph> aGraph;
-    float curRMS; 
+    float curRMSL, curRMSR;
 
     int playHeadPos;
         
