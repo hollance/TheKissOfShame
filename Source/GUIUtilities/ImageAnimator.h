@@ -20,7 +20,9 @@ public:
     {
         startFrame = 0;
         currentFrame = startFrame;
+        curFramePosition = startFrame;
         endFrame = animationNumFrames - 1;
+        animationRate = 0.8;
         
         animationImage = ImageCache::getFromFile(imgFile);
         imageFrameWidth = animationImage.getWidth();
@@ -28,19 +30,42 @@ public:
         setSize(imageFrameWidth, imageFrameHeight);
     }
     
-    ~ImageAnimator(){} 
+    ~ImageAnimator(){}
+    
+    virtual void mouseDown (const MouseEvent& event){};
+    virtual void mouseUp (const MouseEvent& event){};
+    virtual void mouseDrag (const MouseEvent& event)
+    {
+        float dragDist = -(float)event.getDistanceFromDragStartY()/3000;
+        
+        animationRate += dragDist;
+        
+        if(animationRate > 1.25) animationRate = 1.25;
+        if(animationRate < 0.75) animationRate = 0.75;
+        
+        
+//        event.getMouseDownScreenY();
+//        event.getPosition().getY();
+    }
+    
+    float getAnimationRate() {return animationRate; }
+
     
     void paint (Graphics& g)
     {
         if (!animationImage.isNull()/* && isAnimating*/)
         {
             if(currentFrame > endFrame) currentFrame = startFrame;
+            //if(curFramePosition > endFrame) curFramePosition -= animationNumFrames;
+            
+            //currentFrame = (int)curFramePosition;
             
             juce::Rectangle<int> clipRect(0, currentFrame*imageFrameHeight, imageFrameWidth, imageFrameHeight);
             const Image & clippedIm = animationImage.getClippedImage(clipRect);
             g.drawImageAt(clippedIm, 0, 0);
             
-            currentFrame++;
+            //curFramePosition += animationRate;
+            currentFrame++;// = (int)curFramePosition;
             //currentFrame += 5; can change the speed via the increment amount, but jitter will result...
         }
     }
@@ -99,6 +124,8 @@ private:
     int startFrame;
     int endFrame;
     int frameRate;
+    float animationRate;
+    float curFramePosition;
     
     
 };

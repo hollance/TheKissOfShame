@@ -11,8 +11,8 @@
 
 */
 
-#ifndef __JUCE_APPCONFIG_Z8VFUF__
-#define __JUCE_APPCONFIG_Z8VFUF__
+#ifndef __JUCE_APPCONFIG_S7ITBY__
+#define __JUCE_APPCONFIG_S7ITBY__
 
 //==============================================================================
 // [BEGIN_USER_CODE_SECTION]
@@ -210,16 +210,16 @@
  #define JucePlugin_Build_RTAS             0
 #endif
 #ifndef  JucePlugin_Build_AAX
- #define JucePlugin_Build_AAX              0
+ #define JucePlugin_Build_AAX              1
 #endif
 #ifndef  JucePlugin_Name
- #define JucePlugin_Name                   "KissOfShame"
+ #define JucePlugin_Name                   "The Kiss Of Shame"
 #endif
 #ifndef  JucePlugin_Desc
  #define JucePlugin_Desc                   "KissOfShame"
 #endif
 #ifndef  JucePlugin_Manufacturer
- #define JucePlugin_Manufacturer           "InfernalLove"
+ #define JucePlugin_Manufacturer           "Infernal Love"
 #endif
 #ifndef  JucePlugin_ManufacturerWebsite
  #define JucePlugin_ManufacturerWebsite    ""
@@ -231,7 +231,7 @@
  #define JucePlugin_ManufacturerCode       'ILov'
 #endif
 #ifndef  JucePlugin_PluginCode
- #define JucePlugin_PluginCode             'KOS'
+ #define JucePlugin_PluginCode             'Plug'
 #endif
 #ifndef  JucePlugin_MaxNumInputChannels
  #define JucePlugin_MaxNumInputChannels    2
@@ -324,4 +324,4 @@
  #define JucePlugin_AAXDisableMultiMono    0
 #endif
 
-#endif  // __JUCE_APPCONFIG_Z8VFUF__
+#endif  // __JUCE_APPCONFIG_S7ITBY__
