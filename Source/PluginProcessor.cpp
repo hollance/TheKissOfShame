@@ -13,8 +13,20 @@
 
 
 //==============================================================================
-KissOfShameAudioProcessor::KissOfShameAudioProcessor()
+KissOfShameAudioProcessor::KissOfShameAudioProcessor() : masterBypass(false)
 {
+    inputSaturation = 1.0;
+    shame = 0.0;
+    hiss = 0.0;
+    
+    aGraph = new AudioGraph(getNumInputChannels());
+    
+    curRMSL = 0;
+    curRMSR = 0;
+    
+    curPositionInfo.resetToDefault();
+    
+    playHeadPos = 0.0;
 }
 
 KissOfShameAudioProcessor::~KissOfShameAudioProcessor()
@@ -34,11 +46,40 @@ int KissOfShameAudioProcessor::getNumParameters()
 
 float KissOfShameAudioProcessor::getParameter (int index)
 {
+    // This method will be called by the host, probably on the audio thread, so
+    // it's absolutely time-critical. Don't use critical sections or anything
+    // UI-related, or anything at all that may block in any way!
+    switch (index)
+    {
+        case inputSaturationParam:     return inputSaturation;
+        case shameParam:               return shame;
+        case hissParam:                return hiss;
+        case blendParam:               return blend;
+        case bypassParam:              return masterBypass;
+        case outputParam:              return output;
+            
+        default:                       return 0.0f;
+    }
+
     return 0.0f;
 }
 
 void KissOfShameAudioProcessor::setParameter (int index, float newValue)
 {
+    // This method will be called by the host, probably on the audio thread, so
+    // it's absolutely time-critical. Don't use critical sections or anything
+    // UI-related, or anything at all that may block in any way!
+    switch (index)
+    {
+        case inputSaturationParam:     inputSaturation = newValue;  break;
+        case shameParam:               shame = newValue;  break;
+        case hissParam:                hiss = newValue;  break;
+        case blendParam:               blend = newValue; break;
+        case bypassParam:              masterBypass = newValue; break;
+        case outputParam:              output = newValue; break;
+            
+        default:            break;
+    }
 }
 
 const String KissOfShameAudioProcessor::getParameterName (int index)
@@ -134,26 +175,42 @@ void KissOfShameAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
+    curPositionInfo.resetToDefault();
 }
 
 void KissOfShameAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    // In case we have more outputs than inputs, this code clears any output
+    playHeadPos = (playHeadPos + 1) % 99999;
+    
+    // audio processing...
+    aGraph->processGraph(buffer, getNumInputChannels());
+    
+    
+    //Need to send the RMS below to the animation components for VU meters...
+    //use juce's messaging system to keep the audio thread safe.
+    curRMSL = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
+    curRMSR = buffer.getRMSLevel(1, 0, buffer.getNumSamples());
+    
+    
+    
+    // In case we have more outputs than inputs, we'll clear any output
     // channels that didn't contain input data, (because these aren't
     // guaranteed to be empty - they may contain garbage).
-    // I've added this to avoid people getting screaming feedback
-    // when they first compile the plugin, but obviously you don't need to
-    // this code if your algorithm already fills all the output channels.
     for (int i = getNumInputChannels(); i < getNumOutputChannels(); ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
-
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    for (int channel = 0; channel < getNumInputChannels(); ++channel)
     {
-        float* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
+        buffer.clear (i, 0, buffer.getNumSamples());
+    }
+    
+    
+    // ask the host for the current time so we can display it...
+    if (getPlayHead() != nullptr && getPlayHead()->getCurrentPosition (curPositionInfo))
+    {
+        // Successfully got the current time from the host..
+    }
+    else
+    {
+        // If the host fails to fill-in the current time, we'll just clear it to a default..
+        curPositionInfo.resetToDefault();
     }
 }
 

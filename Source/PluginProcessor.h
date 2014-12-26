@@ -12,6 +12,7 @@
 #define PLUGINPROCESSOR_H_INCLUDED
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "AudioProcessing/AudioGraph.h"
 
 
 //==============================================================================
@@ -27,7 +28,6 @@ public:
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;
-
     void processBlock (AudioSampleBuffer&, MidiBuffer&) override;
 
     //==============================================================================
@@ -65,6 +65,34 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    
+    float getCurrentRMSL(){return curRMSL;}
+    float getCurrentRMSR(){return curRMSR;}
+    
+    //////All of these values get communicated to the host:
+    enum AudioInputParameters
+    {
+        inputSaturationParam = 0,
+        shameParam,
+        hissParam,
+        blendParam,
+        bypassParam,
+        outputParam,
+        
+        totalNumParams
+    };
+    
+    float inputSaturation, shame, hiss, blend, output;
+    bool masterBypass;
+    
+    AudioPlayHead::CurrentPositionInfo curPositionInfo;
+    
+    ScopedPointer<AudioGraph> aGraph;
+    float curRMSL, curRMSR;
+    
+    int playHeadPos;
+
+    
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KissOfShameAudioProcessor)

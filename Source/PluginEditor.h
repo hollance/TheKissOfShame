@@ -13,16 +13,80 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
+#include "GUIUtilities/CustomKnob.h"
+#include "GUIUtilities/ImageAnimator.h"
+#include "GUIUtilities/CustomButton.h"
+#include "GUIUtilities/ImageInteractor.h"
+#include "GUIUtilities/EnvironmentsComponent.h"
+#include "GUIUtilities/BacklightComponent.h"
+
 
 
 //==============================================================================
 /**
 */
-class KissOfShameAudioProcessorEditor  : public AudioProcessorEditor
+class KissOfShameAudioProcessorEditor  : public AudioProcessorEditor,
+                                         public Timer,
+                                         public SliderListener,
+                                         public Button::Listener,
+                                         public MouseListener
 {
 public:
     KissOfShameAudioProcessorEditor (KissOfShameAudioProcessor&);
     ~KissOfShameAudioProcessorEditor();
+    
+    void timerCallback() override;
+    
+    void sliderValueChanged (Slider*) override;
+    
+    void buttonClicked (Button* b);
+    virtual void timerCallback(int timerID){}
+    
+    virtual void mouseDoubleClick(const MouseEvent &event);
+    virtual void mouseDown (const MouseEvent& event);
+    virtual void mouseUp (const MouseEvent& event);
+    virtual void mouseDrag (const MouseEvent& event);
+    
+    
+    
+    void changeListenerCallback (ChangeBroadcaster *source){};
+    
+    void setReelMode(bool showReels);
+    
+    void initializeLevels();
+    
+    //Images
+    //Image faceImage;
+    ScopedPointer<BacklightComponent> backlight;
+    ScopedPointer<ImageInteractor> faceImage;
+    
+    //Knobs
+    ScopedPointer<CustomKnob> inputSaturationKnob;
+    ScopedPointer<CustomKnob> shameKnob;
+    ScopedPointer<CustomKnob> hissKnob;
+    ScopedPointer<CustomKnob> blendKnob;
+    ScopedPointer<CustomKnob> outputKnob;
+    ScopedPointer<CustomKnob> ageKnob;
+    
+    //buttons
+    ScopedPointer<CustomButton> bypassButton;
+    ScopedPointer<CustomButton> tapeTypeButton;
+    ScopedPointer<CustomButton> printThroughButton;
+    
+    //labels
+    Label debugLabel; //Used strictly to post messages for debugging...
+    
+    //Components
+    ScopedPointer<EnvironmentsComponent> environmentsComponent;
+    
+    
+    //animation
+    ScopedPointer<ImageAnimator> reelAnimation;
+    ScopedPointer<ImageInteractor> vuMeterL;
+    ScopedPointer<ImageInteractor> vuMeterR;
+    ScopedPointer<ImageInteractor> shameKnobImage;
+
+
 
     //==============================================================================
     void paint (Graphics&) override;
@@ -32,6 +96,9 @@ private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     KissOfShameAudioProcessor& processor;
+    
+    bool showReels;
+    int priorProcessorTime;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KissOfShameAudioProcessorEditor)
 };

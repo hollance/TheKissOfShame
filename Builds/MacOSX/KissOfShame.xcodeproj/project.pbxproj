@@ -15,6 +15,16 @@
 		10AED7EB8C0B27FB4B8EE4BD /* juce_opengl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 889F804447C0356F2E3F142B /* juce_opengl.mm */; };
 		11FD071780B5EF0B4278B2E6 /* PluginEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD40B0795B039878EF7D1200 /* PluginEditor.cpp */; };
 		13FD20F81A4DE85600B6E308 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 13FD20F71A4DE85600B6E308 /* libc++.dylib */; };
+		13FD21351A4DF37000B6E308 /* AudioGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD211D1A4DF37000B6E308 /* AudioGraph.cpp */; };
+		13FD21361A4DF37000B6E308 /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD211F1A4DF37000B6E308 /* Blend.cpp */; };
+		13FD21371A4DF37000B6E308 /* Hiss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD21221A4DF37000B6E308 /* Hiss.cpp */; };
+		13FD21381A4DF37000B6E308 /* InputSaturation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD21241A4DF37000B6E308 /* InputSaturation.cpp */; };
+		13FD21391A4DF37000B6E308 /* Shame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD21261A4DF37000B6E308 /* Shame.cpp */; };
+		13FD213A1A4DF37000B6E308 /* BacklightComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD21291A4DF37000B6E308 /* BacklightComponent.cpp */; };
+		13FD213B1A4DF37000B6E308 /* CustomKnob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD212C1A4DF37000B6E308 /* CustomKnob.cpp */; };
+		13FD213C1A4DF37000B6E308 /* EnvironmentsComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD212E1A4DF37000B6E308 /* EnvironmentsComponent.cpp */; };
+		13FD213D1A4DF37000B6E308 /* ImageAnimator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD21301A4DF37000B6E308 /* ImageAnimator.cpp */; };
+		13FD213E1A4DF37000B6E308 /* ImageInteractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD21321A4DF37000B6E308 /* ImageInteractor.cpp */; };
 		2484A5BFE2EDB391790AE8C7 /* juce_graphics.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0B15B42B869E699235E12E3 /* juce_graphics.mm */; };
 		24955026357CD47A81DF57C0 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58A13F2E39607177374A4F78 /* CAStreamBasicDescription.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
 		271B99C941FBDE9F0A90789C /* juce_audio_formats.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1A85A857E383478235AD7D1 /* juce_audio_formats.mm */; };
@@ -156,6 +166,29 @@
 		134A6467B9B561553ACF9E34 /* juce_ImagePreviewComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_ImagePreviewComponent.h; path = ../../../../../../../JUCE3.1/modules/juce_gui_basics/filebrowser/juce_ImagePreviewComponent.h; sourceTree = SOURCE_ROOT; };
 		1399910E57E4EA75AAEFEC8F /* juce_win32_ASIO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_win32_ASIO.cpp; path = ../../../../../../../JUCE3.1/modules/juce_audio_devices/native/juce_win32_ASIO.cpp; sourceTree = SOURCE_ROOT; };
 		13FD20F71A4DE85600B6E308 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/libc++.dylib"; sourceTree = DEVELOPER_DIR; };
+		13FD211D1A4DF37000B6E308 /* AudioGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioGraph.cpp; sourceTree = "<group>"; };
+		13FD211E1A4DF37000B6E308 /* AudioGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioGraph.h; sourceTree = "<group>"; };
+		13FD211F1A4DF37000B6E308 /* Blend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Blend.cpp; sourceTree = "<group>"; };
+		13FD21201A4DF37000B6E308 /* Blend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blend.h; sourceTree = "<group>"; };
+		13FD21211A4DF37000B6E308 /* Flange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flange.h; sourceTree = "<group>"; };
+		13FD21221A4DF37000B6E308 /* Hiss.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hiss.cpp; sourceTree = "<group>"; };
+		13FD21231A4DF37000B6E308 /* Hiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hiss.h; sourceTree = "<group>"; };
+		13FD21241A4DF37000B6E308 /* InputSaturation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputSaturation.cpp; sourceTree = "<group>"; };
+		13FD21251A4DF37000B6E308 /* InputSaturation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputSaturation.h; sourceTree = "<group>"; };
+		13FD21261A4DF37000B6E308 /* Shame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shame.cpp; sourceTree = "<group>"; };
+		13FD21271A4DF37000B6E308 /* Shame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shame.h; sourceTree = "<group>"; };
+		13FD21291A4DF37000B6E308 /* BacklightComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BacklightComponent.cpp; sourceTree = "<group>"; };
+		13FD212A1A4DF37000B6E308 /* BacklightComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BacklightComponent.h; sourceTree = "<group>"; };
+		13FD212B1A4DF37000B6E308 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
+		13FD212C1A4DF37000B6E308 /* CustomKnob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomKnob.cpp; sourceTree = "<group>"; };
+		13FD212D1A4DF37000B6E308 /* CustomKnob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomKnob.h; sourceTree = "<group>"; };
+		13FD212E1A4DF37000B6E308 /* EnvironmentsComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EnvironmentsComponent.cpp; sourceTree = "<group>"; };
+		13FD212F1A4DF37000B6E308 /* EnvironmentsComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvironmentsComponent.h; sourceTree = "<group>"; };
+		13FD21301A4DF37000B6E308 /* ImageAnimator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageAnimator.cpp; sourceTree = "<group>"; };
+		13FD21311A4DF37000B6E308 /* ImageAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAnimator.h; sourceTree = "<group>"; };
+		13FD21321A4DF37000B6E308 /* ImageInteractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageInteractor.cpp; sourceTree = "<group>"; };
+		13FD21331A4DF37000B6E308 /* ImageInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInteractor.h; sourceTree = "<group>"; };
+		13FD21341A4DF37000B6E308 /* shameConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shameConfig.h; path = ../../Source/shameConfig.h; sourceTree = "<group>"; };
 		147B3C2A42C5FECA96554AEA /* juce_GlyphArrangement.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_GlyphArrangement.cpp; path = ../../../../../../../JUCE3.1/modules/juce_graphics/fonts/juce_GlyphArrangement.cpp; sourceTree = SOURCE_ROOT; };
 		14A6B8BA289A2F52B70C225B /* juce_UIViewComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_UIViewComponent.h; path = ../../../../../../../JUCE3.1/modules/juce_gui_extra/embedding/juce_UIViewComponent.h; sourceTree = SOURCE_ROOT; };
 		14BDAD41DEC54A91F2878C01 /* AUInputElement.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AUInputElement.cpp; path = Extras/CoreAudio/AudioUnits/AUPublic/AUBase/AUInputElement.cpp; sourceTree = DEVELOPER_DIR; };
@@ -1267,6 +1300,44 @@
 				B370B953E5DA71B696303267 /* juce_TargetPlatform.h */,
 			);
 			name = system;
+			sourceTree = "<group>";
+		};
+		13FD211C1A4DF37000B6E308 /* AudioProcessing */ = {
+			isa = PBXGroup;
+			children = (
+				13FD211D1A4DF37000B6E308 /* AudioGraph.cpp */,
+				13FD211E1A4DF37000B6E308 /* AudioGraph.h */,
+				13FD211F1A4DF37000B6E308 /* Blend.cpp */,
+				13FD21201A4DF37000B6E308 /* Blend.h */,
+				13FD21211A4DF37000B6E308 /* Flange.h */,
+				13FD21221A4DF37000B6E308 /* Hiss.cpp */,
+				13FD21231A4DF37000B6E308 /* Hiss.h */,
+				13FD21241A4DF37000B6E308 /* InputSaturation.cpp */,
+				13FD21251A4DF37000B6E308 /* InputSaturation.h */,
+				13FD21261A4DF37000B6E308 /* Shame.cpp */,
+				13FD21271A4DF37000B6E308 /* Shame.h */,
+			);
+			name = AudioProcessing;
+			path = ../../Source/AudioProcessing;
+			sourceTree = "<group>";
+		};
+		13FD21281A4DF37000B6E308 /* GUIUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				13FD21291A4DF37000B6E308 /* BacklightComponent.cpp */,
+				13FD212A1A4DF37000B6E308 /* BacklightComponent.h */,
+				13FD212B1A4DF37000B6E308 /* CustomButton.h */,
+				13FD212C1A4DF37000B6E308 /* CustomKnob.cpp */,
+				13FD212D1A4DF37000B6E308 /* CustomKnob.h */,
+				13FD212E1A4DF37000B6E308 /* EnvironmentsComponent.cpp */,
+				13FD212F1A4DF37000B6E308 /* EnvironmentsComponent.h */,
+				13FD21301A4DF37000B6E308 /* ImageAnimator.cpp */,
+				13FD21311A4DF37000B6E308 /* ImageAnimator.h */,
+				13FD21321A4DF37000B6E308 /* ImageInteractor.cpp */,
+				13FD21331A4DF37000B6E308 /* ImageInteractor.h */,
+			);
+			name = GUIUtilities;
+			path = ../../Source/GUIUtilities;
 			sourceTree = "<group>";
 		};
 		190BF503F90426BC4DFB770E /* image_formats */ = {
@@ -2391,6 +2462,9 @@
 		B60948F452D33E96BB997853 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				13FD211C1A4DF37000B6E308 /* AudioProcessing */,
+				13FD21281A4DF37000B6E308 /* GUIUtilities */,
+				13FD21341A4DF37000B6E308 /* shameConfig.h */,
 				17B2C9CA43C61EC5860F2421 /* PluginProcessor.cpp */,
 				BEF663B0324E4B62EBA3D45A /* PluginProcessor.h */,
 				FD40B0795B039878EF7D1200 /* PluginEditor.cpp */,
@@ -2994,9 +3068,11 @@
 				11FD071780B5EF0B4278B2E6 /* PluginEditor.cpp in Sources */,
 				CB3BCC2705CC1D37DC9B893E /* AUBase.cpp in Sources */,
 				9329BD4CCCCF6FE4425A50A5 /* AUBuffer.cpp in Sources */,
+				13FD21371A4DF37000B6E308 /* Hiss.cpp in Sources */,
 				D0387CDF7EFB915204B8EE03 /* AUCarbonViewBase.cpp in Sources */,
 				C7033D371250AE7C0B5DFFC3 /* AUCarbonViewControl.cpp in Sources */,
 				28097040AB82EACAFB50957F /* AUCarbonViewDispatch.cpp in Sources */,
+				13FD21391A4DF37000B6E308 /* Shame.cpp in Sources */,
 				BB4F1B17A2C7629D067BEC59 /* AUDispatch.cpp in Sources */,
 				9364A0F73B1A0F845400B133 /* AUEffectBase.cpp in Sources */,
 				53D286C2D2E76BD55C3FAC2C /* AUInputElement.cpp in Sources */,
@@ -3004,14 +3080,17 @@
 				A94280F7DA53FF65839F8BF6 /* AUMIDIEffectBase.cpp in Sources */,
 				F8E849BD39C1AC22BA8B5040 /* AUOutputBase.cpp in Sources */,
 				47A9446ABBE0DC61CA73B276 /* AUOutputElement.cpp in Sources */,
+				13FD213A1A4DF37000B6E308 /* BacklightComponent.cpp in Sources */,
 				8055FD15AB2714B64F7DE324 /* AUScopeElement.cpp in Sources */,
 				CD2CA28A8EF0AC4D5D9ACB9C /* CAAudioChannelLayout.cpp in Sources */,
 				8C91C66772B7FC0C4D37A406 /* CAAUParameter.cpp in Sources */,
 				5E42F748600D544C8A28E9BE /* CAMutex.cpp in Sources */,
+				13FD21361A4DF37000B6E308 /* Blend.cpp in Sources */,
 				E31890EDA3A808BDBC4E5666 /* CarbonEventHandler.cpp in Sources */,
 				24955026357CD47A81DF57C0 /* CAStreamBasicDescription.cpp in Sources */,
 				DD60DFFAFE2E575FDB01646D /* CAVectorUnit.cpp in Sources */,
 				F015AFA783875C2C80208416 /* ComponentBase.cpp in Sources */,
+				13FD21381A4DF37000B6E308 /* InputSaturation.cpp in Sources */,
 				D76517EF528D72922DEFF96B /* MusicDeviceBase.cpp in Sources */,
 				F693ECD4FB6B0237675BE72D /* juce_AAX_Wrapper.cpp in Sources */,
 				5CF3AD3150FE333302F252D7 /* juce_AAX_Wrapper.mm in Sources */,
@@ -3021,6 +3100,10 @@
 				271B99C941FBDE9F0A90789C /* juce_audio_formats.mm in Sources */,
 				B5791629B28E16B043DB55C7 /* juce_audio_processors.mm in Sources */,
 				5012A0F3C02873A82F8FF9D1 /* juce_core.mm in Sources */,
+				13FD213C1A4DF37000B6E308 /* EnvironmentsComponent.cpp in Sources */,
+				13FD213B1A4DF37000B6E308 /* CustomKnob.cpp in Sources */,
+				13FD21351A4DF37000B6E308 /* AudioGraph.cpp in Sources */,
+				13FD213E1A4DF37000B6E308 /* ImageInteractor.cpp in Sources */,
 				73EB5A2A88FDDD34869D8CCD /* juce_cryptography.mm in Sources */,
 				6262D01F5C727716C1E351B4 /* juce_data_structures.mm in Sources */,
 				005055090386AB16F9922507 /* juce_events.mm in Sources */,
@@ -3032,6 +3115,7 @@
 				A9372DCE8ED9313152D09C61 /* juce_RTAS_DigiCode1.cpp in Sources */,
 				549C775616D44FA77A9A8511 /* juce_RTAS_DigiCode2.cpp in Sources */,
 				A4AD4189FA98F3D634C07237 /* juce_RTAS_DigiCode3.cpp in Sources */,
+				13FD213D1A4DF37000B6E308 /* ImageAnimator.cpp in Sources */,
 				AE6F389098D8F215BC038EEB /* juce_RTAS_MacUtilities.mm in Sources */,
 				09E01B9200C58B2400A49849 /* juce_RTAS_Wrapper.cpp in Sources */,
 				4B56B8A0E4353E50D0D6895B /* juce_video.mm in Sources */,
