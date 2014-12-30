@@ -306,46 +306,46 @@ void KissOfShameAudioProcessorEditor::initializeLevels()
 
 void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
 {
-//    if (slider == inputSaturationKnob)
-//    {
-//        // It's vital to use setParameterNotifyingHost to change any parameters that are automatable
-//        // by the host, rather than just modifying them directly, otherwise the host won't know
-//        // that they've changed.
-//        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam,
-//                                                   (float) inputSaturationKnob->getValue());
-//        
-//        processor.aGraph->setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
-//    }
-//    else if(slider == shameKnob)
-//    {
-//        shameKnobImage->updateImageWithValue(slider->getValue());
-//        
-//        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::shameParam,
-//                                                   (float) shameKnob->getValue());
-//        
-//        processor.aGraph->setAudioUnitParameters(eShameGlobalLevel, (float) shameKnob->getValue());
-//    }
-//    else if(slider == hissKnob)
-//    {
-//        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::hissParam,
-//                                                   (float) hissKnob->getValue());
-//        
-//        processor.aGraph->setAudioUnitParameters(eHissLevel, (float) hissKnob->getValue());
-//    }
-//    else if(slider == blendKnob)
-//    {
-//        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam,
-//                                                   (float) blendKnob->getValue());
-//        
-//        processor.aGraph->setAudioUnitParameters(eBlendLevel, (float) blendKnob->getValue());
-//    }
-//    else if(slider == outputKnob)
-//    {
-//        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam,
-//                                                   (float) outputKnob->getValue());
-//        
-//        processor.aGraph->setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
-//    }
+    if (slider == inputSaturationKnob)
+    {
+        // It's vital to use setParameterNotifyingHost to change any parameters that are automatable
+        // by the host, rather than just modifying them directly, otherwise the host won't know
+        // that they've changed.
+        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam,
+                                                   (float) inputSaturationKnob->getValue());
+        
+        processor.aGraph->setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
+    }
+    else if(slider == shameKnob)
+    {
+        shameKnobImage->updateImageWithValue(slider->getValue());
+        
+        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::shameParam,
+                                                   (float) shameKnob->getValue());
+        
+        processor.aGraph->setAudioUnitParameters(eShameGlobalLevel, (float) shameKnob->getValue());
+    }
+    else if(slider == hissKnob)
+    {
+        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::hissParam,
+                                                   (float) hissKnob->getValue());
+        
+        processor.aGraph->setAudioUnitParameters(eHissLevel, (float) hissKnob->getValue());
+    }
+    else if(slider == blendKnob)
+    {
+        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam,
+                                                   (float) blendKnob->getValue());
+        
+        processor.aGraph->setAudioUnitParameters(eBlendLevel, (float) blendKnob->getValue());
+    }
+    else if(slider == outputKnob)
+    {
+        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam,
+                                                   (float) outputKnob->getValue());
+        
+        processor.aGraph->setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
+    }
 }
 
 void KissOfShameAudioProcessorEditor::buttonClicked (Button* b)
