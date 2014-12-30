@@ -175,43 +175,43 @@ void KissOfShameAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
-    curPositionInfo.resetToDefault();
+//    curPositionInfo.resetToDefault();
 }
 
 void KissOfShameAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    playHeadPos = (playHeadPos + 1) % 99999;
-    
-    // audio processing...
-    aGraph->processGraph(buffer, getNumInputChannels());
-    
-    
-    //Need to send the RMS below to the animation components for VU meters...
-    //use juce's messaging system to keep the audio thread safe.
-    curRMSL = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
-    curRMSR = buffer.getRMSLevel(1, 0, buffer.getNumSamples());
-    
-    
-    
-    // In case we have more outputs than inputs, we'll clear any output
-    // channels that didn't contain input data, (because these aren't
-    // guaranteed to be empty - they may contain garbage).
-    for (int i = getNumInputChannels(); i < getNumOutputChannels(); ++i)
-    {
-        buffer.clear (i, 0, buffer.getNumSamples());
-    }
-    
-    
-    // ask the host for the current time so we can display it...
-    if (getPlayHead() != nullptr && getPlayHead()->getCurrentPosition (curPositionInfo))
-    {
-        // Successfully got the current time from the host..
-    }
-    else
-    {
-        // If the host fails to fill-in the current time, we'll just clear it to a default..
-        curPositionInfo.resetToDefault();
-    }
+//    playHeadPos = (playHeadPos + 1) % 99999;
+//    
+//    // audio processing...
+//    aGraph->processGraph(buffer, getNumInputChannels());
+//    
+//    
+//    //Need to send the RMS below to the animation components for VU meters...
+//    //use juce's messaging system to keep the audio thread safe.
+//    curRMSL = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
+//    curRMSR = buffer.getRMSLevel(1, 0, buffer.getNumSamples());
+//    
+//    
+//    
+//    // In case we have more outputs than inputs, we'll clear any output
+//    // channels that didn't contain input data, (because these aren't
+//    // guaranteed to be empty - they may contain garbage).
+//    for (int i = getNumInputChannels(); i < getNumOutputChannels(); ++i)
+//    {
+//        buffer.clear (i, 0, buffer.getNumSamples());
+//    }
+//    
+//    
+//    // ask the host for the current time so we can display it...
+//    if (getPlayHead() != nullptr && getPlayHead()->getCurrentPosition (curPositionInfo))
+//    {
+//        // Successfully got the current time from the host..
+//    }
+//    else
+//    {
+//        // If the host fails to fill-in the current time, we'll just clear it to a default..
+//        curPositionInfo.resetToDefault();
+//    }
 }
 
 //==============================================================================

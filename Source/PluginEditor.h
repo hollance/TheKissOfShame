@@ -46,15 +46,13 @@ public:
     virtual void mouseDown (const MouseEvent& event);
     virtual void mouseUp (const MouseEvent& event);
     virtual void mouseDrag (const MouseEvent& event);
-    
-    
-    
+
     void changeListenerCallback (ChangeBroadcaster *source){};
-    
+
     void setReelMode(bool showReels);
     
     void initializeLevels();
-    
+
     //Images
     //Image faceImage;
     ScopedPointer<BacklightComponent> backlight;
@@ -72,13 +70,13 @@ public:
     ScopedPointer<CustomButton> bypassButton;
     ScopedPointer<CustomButton> tapeTypeButton;
     ScopedPointer<CustomButton> printThroughButton;
-    
+
     //labels
     Label debugLabel; //Used strictly to post messages for debugging...
     
     //Components
     ScopedPointer<EnvironmentsComponent> environmentsComponent;
-    
+
     
     //animation
     ScopedPointer<ImageAnimator> reelAnimation;

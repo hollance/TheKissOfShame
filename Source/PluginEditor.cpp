@@ -17,6 +17,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     : AudioProcessorEditor (&p), processor (p), priorProcessorTime(0), showReels(true)
 {
     
+    //setSize(1000, 1000);
     
     backlight = new BacklightComponent;
     backlight->setTopLeftPosition(0, 703 - backlight->getHeight());
@@ -47,7 +48,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     inputSaturationKnob->setKnobDimensions(104, 521, 116, 116);
     inputSaturationKnob->addListener (this);
     addAndMakeVisible(inputSaturationKnob);
-    
+
     shameKnobImage = new ImageInteractor;
     shameKnobImage->setNumFrames(65);
     shameKnobImage->setDimensions(401, 491, 174, 163);
@@ -96,7 +97,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     addAndMakeVisible(ageKnob);
     
     
-    /////////////// BUTTONS /////////////////
+    ///////////// BUTTONS /////////////////
     
     bypassButton = new CustomButton;
     bypassButton->setTopLeftPosition(202, 469);
@@ -175,7 +176,7 @@ KissOfShameAudioProcessorEditor::~KissOfShameAudioProcessorEditor()
 
 void KissOfShameAudioProcessorEditor::setReelMode(bool showReels)
 {
-    
+
     int adustment = showReels ? 437 : -437; //= height difference: 703 - 266
     
     //images
@@ -221,42 +222,42 @@ void KissOfShameAudioProcessorEditor::setReelMode(bool showReels)
 
 void KissOfShameAudioProcessorEditor::timerCallback()
 {
-    //processor.
-    //KissOfShameAudioProcessor* ourProcessor = getProcessor();
-    
-    //debugLabel.setText(String(reelAnimation->getAnimationRate()), dontSendNotification);
-    
-    //DEBUG: message from processor
-    //debugLabel.setText(String(ourProcessor->curPositionInfo.isPlaying) + ":  " + String(ourProcessor->playHeadPos), dontSendNotification);
-    
-    //animation of VU meters and backlighting
-    //float smoothRMS = tanh(ourProcessor->curRMS*10);
-    float vuLevelL = bypassButton->getToggleState() ? 0.0 : processor.curRMSL*3;
-    float vuLevelR = bypassButton->getToggleState() ? 0.0 : processor.curRMSR*3;
-    vuMeterL->updateImageWithValue(vuLevelL);
-    vuMeterR->updateImageWithValue(vuLevelR);
-    
-    if(!bypassButton->getToggleState())
-    {
-        float backlightAlpha = 1 - (0.5*processor.curRMSL + 0.5*processor.curRMSR)*3*shameKnob->getValue();
-        backlight->setAlpha(backlightAlpha);
-        shameKnob->setAlpha(backlightAlpha);
-    }
-    
-    //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
-    //after stopping playback. Don't know why this is... For now, only animating reels when output != 0.
-    if(processor.curPositionInfo.isPlaying && processor.playHeadPos != priorProcessorTime && !processor.aGraph->isGraphBypassed())
-    {
-        priorProcessorTime = processor.playHeadPos;
-        if(!reelAnimation->isAnimating) reelAnimation->startAnimation();
-    }
-    else if(reelAnimation->isAnimating) reelAnimation->stopAnimation();
-    
+//    //processor.
+//    //KissOfShameAudioProcessor* ourProcessor = getProcessor();
+//    
+//    //debugLabel.setText(String(reelAnimation->getAnimationRate()), dontSendNotification);
+//    
+//    //DEBUG: message from processor
+//    //debugLabel.setText(String(ourProcessor->curPositionInfo.isPlaying) + ":  " + String(ourProcessor->playHeadPos), dontSendNotification);
+//    
+//    //animation of VU meters and backlighting
+//    //float smoothRMS = tanh(ourProcessor->curRMS*10);
+//    float vuLevelL = bypassButton->getToggleState() ? 0.0 : processor.curRMSL*3;
+//    float vuLevelR = bypassButton->getToggleState() ? 0.0 : processor.curRMSR*3;
+//    vuMeterL->updateImageWithValue(vuLevelL);
+//    vuMeterR->updateImageWithValue(vuLevelR);
+//    
+//    if(!bypassButton->getToggleState())
+//    {
+//        float backlightAlpha = 1 - (0.5*processor.curRMSL + 0.5*processor.curRMSR)*3*shameKnob->getValue();
+//        backlight->setAlpha(backlightAlpha);
+//        shameKnob->setAlpha(backlightAlpha);
+//    }
+//    
+//    //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
+//    //after stopping playback. Don't know why this is... For now, only animating reels when output != 0.
+//    if(processor.curPositionInfo.isPlaying && processor.playHeadPos != priorProcessorTime && !processor.aGraph->isGraphBypassed())
+//    {
+//        priorProcessorTime = processor.playHeadPos;
+//        if(!reelAnimation->isAnimating) reelAnimation->startAnimation();
+//    }
+//    else if(reelAnimation->isAnimating) reelAnimation->stopAnimation();
+//    
 }
 
 void KissOfShameAudioProcessorEditor::mouseDoubleClick(const MouseEvent &event)
 {
-    
+
     //debugLabel.setText("Double Clicked!!!!", dontSendNotification);
     
     if(showReels)
@@ -305,46 +306,46 @@ void KissOfShameAudioProcessorEditor::initializeLevels()
 
 void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
 {
-    if (slider == inputSaturationKnob)
-    {
-        // It's vital to use setParameterNotifyingHost to change any parameters that are automatable
-        // by the host, rather than just modifying them directly, otherwise the host won't know
-        // that they've changed.
-        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam,
-                                                   (float) inputSaturationKnob->getValue());
-        
-        processor.aGraph->setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
-    }
-    else if(slider == shameKnob)
-    {
-        shameKnobImage->updateImageWithValue(slider->getValue());
-        
-        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::shameParam,
-                                                   (float) shameKnob->getValue());
-        
-        processor.aGraph->setAudioUnitParameters(eShameGlobalLevel, (float) shameKnob->getValue());
-    }
-    else if(slider == hissKnob)
-    {
-        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::hissParam,
-                                                   (float) hissKnob->getValue());
-        
-        processor.aGraph->setAudioUnitParameters(eHissLevel, (float) hissKnob->getValue());
-    }
-    else if(slider == blendKnob)
-    {
-        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam,
-                                                   (float) blendKnob->getValue());
-        
-        processor.aGraph->setAudioUnitParameters(eBlendLevel, (float) blendKnob->getValue());
-    }
-    else if(slider == outputKnob)
-    {
-        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam,
-                                                   (float) outputKnob->getValue());
-        
-        processor.aGraph->setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
-    }
+//    if (slider == inputSaturationKnob)
+//    {
+//        // It's vital to use setParameterNotifyingHost to change any parameters that are automatable
+//        // by the host, rather than just modifying them directly, otherwise the host won't know
+//        // that they've changed.
+//        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam,
+//                                                   (float) inputSaturationKnob->getValue());
+//        
+//        processor.aGraph->setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
+//    }
+//    else if(slider == shameKnob)
+//    {
+//        shameKnobImage->updateImageWithValue(slider->getValue());
+//        
+//        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::shameParam,
+//                                                   (float) shameKnob->getValue());
+//        
+//        processor.aGraph->setAudioUnitParameters(eShameGlobalLevel, (float) shameKnob->getValue());
+//    }
+//    else if(slider == hissKnob)
+//    {
+//        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::hissParam,
+//                                                   (float) hissKnob->getValue());
+//        
+//        processor.aGraph->setAudioUnitParameters(eHissLevel, (float) hissKnob->getValue());
+//    }
+//    else if(slider == blendKnob)
+//    {
+//        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam,
+//                                                   (float) blendKnob->getValue());
+//        
+//        processor.aGraph->setAudioUnitParameters(eBlendLevel, (float) blendKnob->getValue());
+//    }
+//    else if(slider == outputKnob)
+//    {
+//        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam,
+//                                                   (float) outputKnob->getValue());
+//        
+//        processor.aGraph->setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
+//    }
 }
 
 void KissOfShameAudioProcessorEditor::buttonClicked (Button* b)
@@ -366,6 +367,8 @@ void KissOfShameAudioProcessorEditor::buttonClicked (Button* b)
             //vuMeterR->setDesaturate(false);
             //vuMeterL->setAlpha(1.0);
             //vuMeterR->setAlpha(1.0);
+            backlight->setAlpha(1.0);
+            shameKnob->setAlpha(1.0);
         }
         
         
