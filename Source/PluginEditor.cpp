@@ -19,6 +19,8 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     
     //setSize(1000, 1000);
     
+    //addKeyListener(this);
+    
     backlight = new BacklightComponent;
     backlight->setTopLeftPosition(0, 703 - backlight->getHeight());
     addAndMakeVisible(backlight);
@@ -152,13 +154,13 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     
     //////////////// LABELS /////////////////
     //#if DEBUG
-    //    String debugText = "Debug Info...";
-    //    debugLabel.setText(debugText, dontSendNotification);
-    //    debugLabel.setTopLeftPosition(100, 100);
-    //    debugLabel.setFont (Font (25.0f));
-    //    debugLabel.setSize(500, 50);
-    //    debugLabel.setColour(Label::textColourId, Colours::white);
-    //    addAndMakeVisible(debugLabel);
+    String debugText = "Debug Info...";
+    debugLabel.setText(debugText, dontSendNotification);
+    debugLabel.setTopLeftPosition(100, 100);
+    debugLabel.setFont (Font (25.0f));
+    debugLabel.setSize(500, 50);
+    debugLabel.setColour(Label::textColourId, Colours::white);
+    addAndMakeVisible(debugLabel);
     //#endif
     
     int mainWidth = faceImage->getWidth();
@@ -222,37 +224,37 @@ void KissOfShameAudioProcessorEditor::setReelMode(bool showReels)
 
 void KissOfShameAudioProcessorEditor::timerCallback()
 {
-//    //processor.
-//    //KissOfShameAudioProcessor* ourProcessor = getProcessor();
-//    
-//    //debugLabel.setText(String(reelAnimation->getAnimationRate()), dontSendNotification);
-//    
-//    //DEBUG: message from processor
-//    //debugLabel.setText(String(ourProcessor->curPositionInfo.isPlaying) + ":  " + String(ourProcessor->playHeadPos), dontSendNotification);
-//    
-//    //animation of VU meters and backlighting
-//    //float smoothRMS = tanh(ourProcessor->curRMS*10);
-//    float vuLevelL = bypassButton->getToggleState() ? 0.0 : processor.curRMSL*3;
-//    float vuLevelR = bypassButton->getToggleState() ? 0.0 : processor.curRMSR*3;
-//    vuMeterL->updateImageWithValue(vuLevelL);
-//    vuMeterR->updateImageWithValue(vuLevelR);
-//    
+    //processor.
+    //KissOfShameAudioProcessor* ourProcessor = getProcessor();
+    
+    //debugLabel.setText(String(reelAnimation->getAnimationRate()), dontSendNotification);
+    
+    //DEBUG: message from processor
+    //debugLabel.setText(String(ourProcessor->curPositionInfo.isPlaying) + ":  " + String(ourProcessor->playHeadPos), dontSendNotification);
+    
+    //animation of VU meters and backlighting
+    //float smoothRMS = tanh(ourProcessor->curRMS*10);
+    float vuLevelL = bypassButton->getToggleState() ? 0.0 : processor.curRMSL*3;
+    float vuLevelR = bypassButton->getToggleState() ? 0.0 : processor.curRMSR*3;
+    vuMeterL->updateImageWithValue(vuLevelL);
+    vuMeterR->updateImageWithValue(vuLevelR);
+    
 //    if(!bypassButton->getToggleState())
 //    {
 //        float backlightAlpha = 1 - (0.5*processor.curRMSL + 0.5*processor.curRMSR)*3*shameKnob->getValue();
 //        backlight->setAlpha(backlightAlpha);
 //        shameKnob->setAlpha(backlightAlpha);
 //    }
-//    
-//    //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
-//    //after stopping playback. Don't know why this is... For now, only animating reels when output != 0.
+    
+    //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
+    //after stopping playback. Don't know why this is... For now, only animating reels when output != 0.
 //    if(processor.curPositionInfo.isPlaying && processor.playHeadPos != priorProcessorTime && !processor.aGraph->isGraphBypassed())
 //    {
 //        priorProcessorTime = processor.playHeadPos;
 //        if(!reelAnimation->isAnimating) reelAnimation->startAnimation();
 //    }
 //    else if(reelAnimation->isAnimating) reelAnimation->stopAnimation();
-//    
+    
 }
 
 void KissOfShameAudioProcessorEditor::mouseDoubleClick(const MouseEvent &event)

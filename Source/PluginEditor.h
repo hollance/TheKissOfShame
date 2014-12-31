@@ -28,8 +28,9 @@
 class KissOfShameAudioProcessorEditor  : public AudioProcessorEditor,
                                          public Timer,
                                          public SliderListener,
-                                         public Button::Listener,
-                                         public MouseListener
+                                         public Button::Listener//,
+                                         //public KeyListener//,
+                                         //public MouseListener
 {
 public:
     KissOfShameAudioProcessorEditor (KissOfShameAudioProcessor&);
@@ -48,6 +49,16 @@ public:
     virtual void mouseDrag (const MouseEvent& event);
 
     void changeListenerCallback (ChangeBroadcaster *source){};
+    
+//    virtual bool keyPressed (const KeyPress& key, Component* originatingComponent)
+//    {
+//        key.getTextDescription();
+//        
+//        debugLabel.setText(key.getTextDescription(), dontSendNotification);
+//        
+//        return false;
+//    };
+
 
     void setReelMode(bool showReels);
     

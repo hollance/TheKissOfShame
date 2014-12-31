@@ -52,7 +52,7 @@ public:
         if(input <= 0.5)
         {
             depth = 5 * input / 0.5;
-            randPeriodicity = 0.5;
+            randPeriodicity = 0.5 ;
             rate = 7.0;
             waveformIndx = 0;
         }
@@ -152,14 +152,15 @@ public:
             rateFluctuation = ((float)(rand() % 2000)/1000 - 1.0)*rate*randPeriodicity;
             curPos_wTable -= BUFFER_SIZE;
         }
-        
+        if(curPos_wTable < 0) curPos_wTable += BUFFER_SIZE;
+    
+
         return outsample;
     }
 
     
     void processShame(AudioSampleBuffer& sampleBuffer, int numChannels)
     {
-        
         for(int i = 0; i < sampleBuffer.getNumSamples(); i++)
         {
             //populate the circular buffer
@@ -168,9 +169,6 @@ public:
                 float curSample = sampleBuffer.getReadPointer(channel)[i];
                 shameSampleBuffer->getWritePointer(channel)[curPos] = curSample;
             }
-            
-            if(playPosition >= BUFFER_SIZE) playPosition -= BUFFER_SIZE;
-            if(playPosition < 0) playPosition += (BUFFER_SIZE);
             
             float frac = playPosition - (int)playPosition;
             int prX = (int)playPosition;
@@ -185,19 +183,20 @@ public:
             
             playPosition = curPos + depth*processWavetable();
             
+            
+            if(playPosition >= BUFFER_SIZE) playPosition -= BUFFER_SIZE;
+            if(playPosition < 0) playPosition += (BUFFER_SIZE);
+
             curPos = (curPos + 1) % BUFFER_SIZE;
-                        
         }
     };
 
-    
     void setRate(float _rate){rate = _rate;}
     void setDepth(float _depth){depth = _depth;}
     void setPeriodicity(float periodicity){randPeriodicity = periodicity;}
     void setWaveformIndex(float indx){waveformIndx = indx;}
     void setGlobalLevel(float level){shameGlobalLevel = level;}
 
-    
 private:
     
     ScopedPointer<AudioSampleBuffer> shameSampleBuffer;
