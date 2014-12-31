@@ -81,6 +81,8 @@ public:
     ScopedPointer<CustomButton> bypassButton;
     ScopedPointer<CustomButton> tapeTypeButton;
     ScopedPointer<CustomButton> printThroughButton;
+    ScopedPointer<CustomButton> linkIOButtonL;
+    ScopedPointer<CustomButton> linkIOButtonR;
 
     //labels
     Label debugLabel; //Used strictly to post messages for debugging...
@@ -107,6 +109,7 @@ private:
     KissOfShameAudioProcessor& processor;
     
     bool showReels;
+    bool linkIOMode;
     int priorProcessorTime;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KissOfShameAudioProcessorEditor)

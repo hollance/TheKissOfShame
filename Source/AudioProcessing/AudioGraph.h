@@ -82,8 +82,7 @@ public:
         //now convert dB to Amp
         outputLevel = powf(10, outputLevel/20);
     }
-    
-    
+        
     
     void setAudioUnitParameters(AUParameter param, float paramLevel)
     {

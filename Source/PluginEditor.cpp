@@ -14,7 +14,7 @@
 
 //==============================================================================
 KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAudioProcessor& p)
-    : AudioProcessorEditor (&p), processor (p), priorProcessorTime(0), showReels(true)
+    : AudioProcessorEditor (&p), processor (p), priorProcessorTime(0), showReels(true), linkIOMode(false)
 {
     
     //setSize(1000, 1000);
@@ -32,7 +32,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     faceImage->setAnimationImage(faceImagePath);
     faceImage->setInterceptsMouseClicks(false, false);
     addAndMakeVisible(faceImage);
-    
+
     
     /////////// COMPONENTS /////////////////
     
@@ -128,6 +128,27 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     printThroughButton->setClickingTogglesState(true);
     addAndMakeVisible(printThroughButton);
     
+    linkIOButtonL = new CustomButton;
+    //inputSaturationKnob->setKnobDimensions(104, 521, 116, 116);
+    linkIOButtonL->setTopLeftPosition(137, 605);
+    String linkImagePath = GUI_PATH + "KOS_Graphics/link.png";
+    linkIOButtonL->setClippedCustomOnImage(linkImagePath, 0, 0, 50, 50);
+    linkIOButtonL->setClippedCustomOffImage(linkImagePath, 0, 0, 50, 50);
+    linkIOButtonL->resizeButton(0.6);
+    linkIOButtonL->addListener(this);
+    linkIOButtonL->setClickingTogglesState(true);
+    addAndMakeVisible(linkIOButtonL);
+
+    linkIOButtonR = new CustomButton;
+    //outputKnob->setKnobDimensions(757, 521, 122, 116);
+    linkIOButtonR->setTopLeftPosition(792, 605);
+    linkIOButtonR->setClippedCustomOnImage(linkImagePath, 0, 0, 50, 50);
+    linkIOButtonR->setClippedCustomOffImage(linkImagePath, 0, 0, 50, 50);
+    linkIOButtonR->resizeButton(0.6);
+    linkIOButtonR->addListener(this);
+    linkIOButtonR->setClickingTogglesState(true);
+    addAndMakeVisible(linkIOButtonR);
+
     
     ///////////////// Animation //////////////////
     
@@ -162,6 +183,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     debugLabel.setColour(Label::textColourId, Colours::white);
     addAndMakeVisible(debugLabel);
     //#endif
+
     
     int mainWidth = faceImage->getWidth();
     int mainHeight = faceImage->getHeight();// + inputSaturationKnob->getHeight() + inputLabel.getHeight();
@@ -308,15 +330,36 @@ void KissOfShameAudioProcessorEditor::initializeLevels()
 
 void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
 {
+    
+    // It's vital to use setParameterNotifyingHost to change any parameters that are automatable
+    // by the host, rather than just modifying them directly, otherwise the host won't know
+    // that they've changed.
+    
     if (slider == inputSaturationKnob)
     {
-        // It's vital to use setParameterNotifyingHost to change any parameters that are automatable
-        // by the host, rather than just modifying them directly, otherwise the host won't know
-        // that they've changed.
         processor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam,
                                                    (float) inputSaturationKnob->getValue());
-        
         processor.aGraph->setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
+        
+        if(linkIOMode)
+        {
+            outputKnob->setValue(1.0 - inputSaturationKnob->getValue());
+            processor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam, (float) outputKnob->getValue());
+            processor.aGraph->setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
+        }
+    }
+    else if(slider == outputKnob)
+    {
+        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam,
+                                             (float) outputKnob->getValue());
+        processor.aGraph->setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
+        
+        if(linkIOMode)
+        {
+            inputSaturationKnob->setValue(1.0 - outputKnob->getValue());
+            processor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam, (float) inputSaturationKnob->getValue());
+            processor.aGraph->setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
+        }
     }
     else if(slider == shameKnob)
     {
@@ -340,13 +383,6 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
                                                    (float) blendKnob->getValue());
         
         processor.aGraph->setAudioUnitParameters(eBlendLevel, (float) blendKnob->getValue());
-    }
-    else if(slider == outputKnob)
-    {
-        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam,
-                                                   (float) outputKnob->getValue());
-        
-        processor.aGraph->setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
     }
 }
 
@@ -376,8 +412,28 @@ void KissOfShameAudioProcessorEditor::buttonClicked (Button* b)
         
         processor.setParameterNotifyingHost (KissOfShameAudioProcessor::bypassParam,
                                                    b->getToggleState());
-        
         processor.aGraph->setAudioUnitParameters(eBypass, b->getToggleState());
+    }
+    else if(b == linkIOButtonL || b == linkIOButtonR)
+    {
+        linkIOButtonL->setToggleState(b->getToggleState(), dontSendNotification);
+        linkIOButtonR->setToggleState(b->getToggleState(), dontSendNotification);
+        linkIOMode = b->getToggleState();
+ 
+        if(b->getToggleState())
+        {
+            linkIOButtonL->setAlpha(1.0);
+            linkIOButtonR->setAlpha(1.0);
+            
+            outputKnob->setValue(1.0 - inputSaturationKnob->getValue());
+            processor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam, (float) outputKnob->getValue());
+            processor.aGraph->setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
+        }
+        else
+        {
+            linkIOButtonL->setAlpha(0.25);
+            linkIOButtonR->setAlpha(0.25);
+        }
     }
 }
 
@@ -389,7 +445,8 @@ void KissOfShameAudioProcessorEditor::paint (Graphics& g)
     //g.fillAll(Colour::fromFloatRGBA(1.0f, 0.216f, 0.384f, 1.0f));
     
     g.fillAll(Colours::black.withAlpha(1.0f));
-    //g.drawImageAt(faceImage, 0, 0);
+    
+    //g.drawImageAt(linkIO, 0, 0);
 }
 
 void KissOfShameAudioProcessorEditor::resized()
