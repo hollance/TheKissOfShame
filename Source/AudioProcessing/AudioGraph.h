@@ -28,6 +28,9 @@ public:
     {
         inSaturation = new InputSaturation(0.0, 2.0, 0.272);
         
+        flange = new Flange(2);
+        flange->setDepth(0.0);
+        
         shame = new Shame(2);
         shame->setInterpolatedParameters(0.0);
         
@@ -56,6 +59,7 @@ public:
         
         //process audio
         inSaturation->processInputSaturation(audioGraphProcessingBuffer, numChannels);
+        flange->processFlange(audioGraphProcessingBuffer, numChannels);
         hiss->processHiss(audioGraphProcessingBuffer, numChannels);
         shame->processShame(audioGraphProcessingBuffer, numChannels);
         blend->processBlend(audioBuffer, audioGraphProcessingBuffer, numChannels);
@@ -67,7 +71,7 @@ public:
     
     void setInputDrive(float drive)
     {
-        //NOTE: drive input is in dB
+        //NOTE: express inputDrive in terms of dB
         inputDrive = drive * 36.0 - 18.0;
         
         //now convert dB to Amp
@@ -76,13 +80,13 @@ public:
     
     void setOutputLevel(float level)
     {
-        //NOTE: drive input is in dB
+        //NOTE:express outputLevel in terms of dB
         outputLevel = level * 36.0 - 18.0;
         
         //now convert dB to Amp
         outputLevel = powf(10, outputLevel/20);
     }
-        
+    
     
     void setAudioUnitParameters(AUParameter param, float paramLevel)
     {
@@ -101,6 +105,8 @@ public:
             case eHissLevel:   hiss->setHissLevel(paramLevel); break;
                 
             case eBlendLevel:  blend->setBlendLevel(paramLevel); break;
+                
+            case eFlangeDepth:  flange->setDepth(paramLevel); break;
                 
             case eBypass:      bypassGraph = paramLevel; break;
             case eInputDrive:  setInputDrive(paramLevel); break;
@@ -122,6 +128,7 @@ private:
     ScopedPointer<Shame> shame;
     ScopedPointer<InputSaturation> inSaturation;
     ScopedPointer<Blend> blend;
+    ScopedPointer<Flange> flange;
     
     bool bypassGraph;
     

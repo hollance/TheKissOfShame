@@ -57,7 +57,8 @@ float KissOfShameAudioProcessor::getParameter (int index)
         case blendParam:               return blend;
         case bypassParam:              return masterBypass;
         case outputParam:              return output;
-            
+        case flangeParam:              return flange;
+
         default:                       return 0.0f;
     }
 
@@ -77,6 +78,7 @@ void KissOfShameAudioProcessor::setParameter (int index, float newValue)
         case blendParam:               blend = newValue; break;
         case bypassParam:              masterBypass = newValue; break;
         case outputParam:              output = newValue; break;
+        case flangeParam:              flange = newValue; break;
             
         default:            break;
     }

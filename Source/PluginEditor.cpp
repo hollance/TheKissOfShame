@@ -154,8 +154,10 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     
     String reelImagePath = GUI_PATH + "KOS_Graphics/wheels.png";
     File reelFile(reelImagePath);
-    reelAnimation = new ImageAnimator(reelFile, 31, 31);
+    //reelAnimation = new ImageAnimator(reelFile, 31, 31);
+    reelAnimation = new ImageAnimationComponent(reelFile, 31, 50);
     reelAnimation->setFrameDimensions(0, 0, 960, 322);
+    reelAnimation->addActionListener(this);
     addAndMakeVisible(reelAnimation);
     
     vuMeterL = new ImageInteractor;
@@ -175,13 +177,13 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     
     //////////////// LABELS /////////////////
     //#if DEBUG
-    String debugText = "Debug Info...";
-    debugLabel.setText(debugText, dontSendNotification);
-    debugLabel.setTopLeftPosition(100, 100);
-    debugLabel.setFont (Font (25.0f));
-    debugLabel.setSize(500, 50);
-    debugLabel.setColour(Label::textColourId, Colours::white);
-    addAndMakeVisible(debugLabel);
+//    String debugText = "Debug Info...";
+//    debugLabel.setText(debugText, dontSendNotification);
+//    debugLabel.setTopLeftPosition(100, 100);
+//    debugLabel.setFont (Font (25.0f));
+//    debugLabel.setSize(500, 50);
+//    debugLabel.setColour(Label::textColourId, Colours::white);
+//    addAndMakeVisible(debugLabel);
     //#endif
 
     
@@ -196,6 +198,16 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
 
 KissOfShameAudioProcessorEditor::~KissOfShameAudioProcessorEditor()
 {
+}
+
+void KissOfShameAudioProcessorEditor::actionListenerCallback (const String& message)
+{
+    if(message == "updateFlange")
+    {
+        //debugLabel.setText(String(reelAnimation->getCurrentFlangeDepth()), dontSendNotification);
+        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::flangeParam, reelAnimation->getCurrentFlangeDepth());
+        processor.aGraph->setAudioUnitParameters(eFlangeDepth, reelAnimation->getCurrentFlangeDepth());
+    }
 }
 
 void KissOfShameAudioProcessorEditor::setReelMode(bool showReels)
@@ -249,7 +261,7 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     //processor.
     //KissOfShameAudioProcessor* ourProcessor = getProcessor();
     
-    //debugLabel.setText(String(reelAnimation->getAnimationRate()), dontSendNotification);
+    //debugLabel.setText(String(reelAnimation->getCurrentFlangeDepth()), dontSendNotification);
     
     //DEBUG: message from processor
     //debugLabel.setText(String(ourProcessor->curPositionInfo.isPlaying) + ":  " + String(ourProcessor->playHeadPos), dontSendNotification);
@@ -326,6 +338,12 @@ void KissOfShameAudioProcessorEditor::initializeLevels()
     blendKnob->setValue(1.0);
     processor.setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam, 1.0);
     processor.aGraph->setAudioUnitParameters(eBlendLevel, 1.0);
+    
+    linkIOButtonL->setToggleState(false, dontSendNotification);
+    linkIOButtonR->setToggleState(false, dontSendNotification);
+    linkIOButtonL->setAlpha(0.25);
+    linkIOButtonR->setAlpha(0.25);
+    linkIOMode = false;
 }
 
 void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
@@ -383,6 +401,10 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
                                                    (float) blendKnob->getValue());
         
         processor.aGraph->setAudioUnitParameters(eBlendLevel, (float) blendKnob->getValue());
+    }
+    else if(slider == ageKnob)
+    {
+        reelAnimation->setFramesPerSecond(ageKnob->getValue()*15 + 35);
     }
 }
 

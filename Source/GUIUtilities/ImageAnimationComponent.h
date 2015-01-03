@@ -6,27 +6,25 @@
 //
 //
 
-#ifndef __KissOfShame__ImageAnimator__
-#define __KissOfShame__ImageAnimator__
+#ifndef __KissOfShame__ImageAnimationComponent__
+#define __KissOfShame__ImageAnimationComponent__
 
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include "../shameConfig.h"
 
 
-class ImageAnimator : public Component, Timer, public ActionBroadcaster
+class ImageAnimationComponent : public AnimatedAppComponent, public ActionBroadcaster
 {
   
 public:
-    ImageAnimator(File imgFile, int numFrames, int frameRateInMilliseconds) : animationNumFrames(numFrames), frameRate(frameRateInMilliseconds), isAnimating(false)
+    ImageAnimationComponent(File imgFile, int numFrames, int framesPerSecond) : animationNumFrames(numFrames)
     {
-        curFlangeDepth = 0;
-        setFlangeDepth = 0;
+        setFramesPerSecond(framesPerSecond);
         
         startFrame = 0;
         currentFrame = startFrame;
         curFramePosition = startFrame;
         endFrame = animationNumFrames - 1;
-        animationRate = 0.8;
         
         animationImage = ImageCache::getFromFile(imgFile);
         imageFrameWidth = animationImage.getWidth();
@@ -34,13 +32,13 @@ public:
         setSize(imageFrameWidth, imageFrameHeight);
     }
     
-    ~ImageAnimator(){}
-    
-    
-    
-    virtual void mouseDown (const MouseEvent& event){};
+    virtual void mouseDown (const MouseEvent& event)
+    {
+        setFramesPerSecond(35);
+    };
     virtual void mouseUp (const MouseEvent& event)
     {
+        setFramesPerSecond(50);
         setFlangeDepth = curFlangeDepth;
     };
     virtual void mouseDrag (const MouseEvent& event)
@@ -51,27 +49,34 @@ public:
         if(curFlangeDepth > 1.0) curFlangeDepth = 1.0;
         if(curFlangeDepth < 0) curFlangeDepth = 0;
         sendActionMessage("updateFlange");
+        
+        //setFramesPerSecond(50 - 10*curFlangeDepth);
     }
     
-    float getAnimationRate() {return animationRate; }
     float getCurrentFlangeDepth() {return curFlangeDepth;}
+
+    
+    ~ImageAnimationComponent(){}
+    
+    void update() override
+    {
+    // This function is called at the frequency specified by the setFramesPerSecond() call
+    // in the constructor. You can use it to update counters, animate values, etc.
+        if (!animationImage.isNull()/* && isAnimating*/)
+        {
+            if(currentFrame >= endFrame) currentFrame = startFrame;
+                currentFrame++;// = (int)curFramePosition;
+        }
+    }
+
 
     void paint (Graphics& g)
     {
         if (!animationImage.isNull()/* && isAnimating*/)
         {
-            if(currentFrame > endFrame) currentFrame = startFrame;
-            //if(curFramePosition > endFrame) curFramePosition -= animationNumFrames;
-            
-            //currentFrame = (int)curFramePosition;
-            
             juce::Rectangle<int> clipRect(0, currentFrame*imageFrameHeight, imageFrameWidth, imageFrameHeight);
             const Image & clippedIm = animationImage.getClippedImage(clipRect);
             g.drawImageAt(clippedIm, 0, 0);
-            
-            //curFramePosition += animationRate;
-            currentFrame++;// = (int)curFramePosition;
-            //currentFrame += 5; can change the speed via the increment amount, but jitter will result...
         }
     }
     
@@ -93,49 +98,22 @@ public:
         endFrame = frameNumber;
     }
     
-    void setFrameRate(int milliseconds)
-    {
-        frameRate = milliseconds;
-    }
-    
-    void startAnimation()
-    {
-        isAnimating = true;
-        startTimer(frameRate);
-    }
-    
-    void stopAnimation()
-    {
-        isAnimating = false;
-        stopTimer();
-    }
-    
-    virtual void timerCallback()
-    {
-        repaint();
-    }
-    
-    bool isAnimating;
-    
+
 private:
     
 	Image animationImage;
     int imageFrameWidth;
     int imageFrameHeight;
-    
+
     float curFlangeDepth;
     float setFlangeDepth;
     float dragDist;
-    
-    
+
     int animationNumFrames;
     int currentFrame;
     int startFrame;
     int endFrame;
-    int frameRate;
-    float animationRate;
     float curFramePosition;
-    
 };
 
 

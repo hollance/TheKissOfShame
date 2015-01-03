@@ -78,11 +78,12 @@ public:
         blendParam,
         bypassParam,
         outputParam,
+        flangeParam,
         
         totalNumParams
     };
     
-    float inputSaturation, shame, hiss, blend, output;
+    float inputSaturation, shame, hiss, blend, output, flange;
     bool masterBypass;
     
     AudioPlayHead::CurrentPositionInfo curPositionInfo;

@@ -19,6 +19,7 @@
 #include "GUIUtilities/ImageInteractor.h"
 #include "GUIUtilities/EnvironmentsComponent.h"
 #include "GUIUtilities/BacklightComponent.h"
+#include "GUIUtilities/ImageAnimationComponent.h"
 
 
 
@@ -28,9 +29,9 @@
 class KissOfShameAudioProcessorEditor  : public AudioProcessorEditor,
                                          public Timer,
                                          public SliderListener,
-                                         public Button::Listener//,
-                                         //public KeyListener//,
-                                         //public MouseListener
+                                         public Button::Listener,
+                                         public ActionListener
+
 {
 public:
     KissOfShameAudioProcessorEditor (KissOfShameAudioProcessor&);
@@ -49,6 +50,8 @@ public:
     virtual void mouseDrag (const MouseEvent& event);
 
     void changeListenerCallback (ChangeBroadcaster *source){};
+    
+    virtual void actionListenerCallback (const String& message);
     
 //    virtual bool keyPressed (const KeyPress& key, Component* originatingComponent)
 //    {
@@ -92,7 +95,8 @@ public:
 
     
     //animation
-    ScopedPointer<ImageAnimator> reelAnimation;
+    //ScopedPointer<ImageAnimator> reelAnimation;
+    ScopedPointer<ImageAnimationComponent> reelAnimation;
     ScopedPointer<ImageInteractor> vuMeterL;
     ScopedPointer<ImageInteractor> vuMeterR;
     ScopedPointer<ImageInteractor> shameKnobImage;
