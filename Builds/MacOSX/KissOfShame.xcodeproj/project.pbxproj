@@ -165,6 +165,7 @@
 		12B69303AA901992505B28F3 /* juce_SelectedItemSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_SelectedItemSet.h; path = ../../../../../../../JUCE3.1/modules/juce_gui_basics/mouse/juce_SelectedItemSet.h; sourceTree = SOURCE_ROOT; };
 		134A6467B9B561553ACF9E34 /* juce_ImagePreviewComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_ImagePreviewComponent.h; path = ../../../../../../../JUCE3.1/modules/juce_gui_basics/filebrowser/juce_ImagePreviewComponent.h; sourceTree = SOURCE_ROOT; };
 		1399910E57E4EA75AAEFEC8F /* juce_win32_ASIO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_win32_ASIO.cpp; path = ../../../../../../../JUCE3.1/modules/juce_audio_devices/native/juce_win32_ASIO.cpp; sourceTree = SOURCE_ROOT; };
+		13ED58BA1A57955C00F45B12 /* ImageAnimationComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAnimationComponent.h; sourceTree = "<group>"; };
 		13FD20F71A4DE85600B6E308 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/libc++.dylib"; sourceTree = DEVELOPER_DIR; };
 		13FD211D1A4DF37000B6E308 /* AudioGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioGraph.cpp; sourceTree = "<group>"; };
 		13FD211E1A4DF37000B6E308 /* AudioGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioGraph.h; sourceTree = "<group>"; };
@@ -1324,6 +1325,7 @@
 		13FD21281A4DF37000B6E308 /* GUIUtilities */ = {
 			isa = PBXGroup;
 			children = (
+				13ED58BA1A57955C00F45B12 /* ImageAnimationComponent.h */,
 				13FD21291A4DF37000B6E308 /* BacklightComponent.cpp */,
 				13FD212A1A4DF37000B6E308 /* BacklightComponent.h */,
 				13FD212B1A4DF37000B6E308 /* CustomButton.h */,
