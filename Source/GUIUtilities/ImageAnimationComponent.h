@@ -17,9 +17,9 @@ class ImageAnimationComponent : public AnimatedAppComponent, public ActionBroadc
 {
   
 public:
-    ImageAnimationComponent(File imgFile, int numFrames, int framesPerSecond) : animationNumFrames(numFrames)
+    ImageAnimationComponent(File imgFile, int numFrames, int framesPerSecond) : animationNumFrames(numFrames), isAnimating(false)
     {
-        setFramesPerSecond(framesPerSecond);
+        setFramesPerSecond(framesPerSecond); //NOTE: setting framesPerSecond to 0 stops the timer.
         
         startFrame = 0;
         currentFrame = startFrame;
@@ -34,7 +34,7 @@ public:
     
     virtual void mouseDown (const MouseEvent& event)
     {
-        setFramesPerSecond(35);
+        setFramesPerSecond(25);
     };
     virtual void mouseUp (const MouseEvent& event)
     {
@@ -99,6 +99,8 @@ public:
     }
     
 
+    bool isAnimating;
+
 private:
     
 	Image animationImage;
@@ -114,6 +116,8 @@ private:
     int startFrame;
     int endFrame;
     float curFramePosition;
+
+
 };
 
 

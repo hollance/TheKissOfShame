@@ -273,21 +273,30 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     vuMeterL->updateImageWithValue(vuLevelL);
     vuMeterR->updateImageWithValue(vuLevelR);
     
-//    if(!bypassButton->getToggleState())
-//    {
-//        float backlightAlpha = 1 - (0.5*processor.curRMSL + 0.5*processor.curRMSR)*3*shameKnob->getValue();
-//        backlight->setAlpha(backlightAlpha);
-//        shameKnob->setAlpha(backlightAlpha);
-//    }
+    if(!bypassButton->getToggleState())
+    {
+        float backlightAlpha = 1 - (0.5*processor.curRMSL + 0.5*processor.curRMSR)*3*shameKnob->getValue();
+        backlight->setAlpha(backlightAlpha);
+        shameKnob->setAlpha(backlightAlpha);
+    }
     
     //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
     //after stopping playback. Don't know why this is... For now, only animating reels when output != 0.
-//    if(processor.curPositionInfo.isPlaying && processor.playHeadPos != priorProcessorTime && !processor.aGraph->isGraphBypassed())
-//    {
-//        priorProcessorTime = processor.playHeadPos;
-//        if(!reelAnimation->isAnimating) reelAnimation->startAnimation();
-//    }
-//    else if(reelAnimation->isAnimating) reelAnimation->stopAnimation();
+    if(processor.curPositionInfo.isPlaying && processor.playHeadPos != priorProcessorTime && !processor.aGraph->isGraphBypassed())
+    {
+        priorProcessorTime = processor.playHeadPos;
+        if(!reelAnimation->isAnimating)
+        {
+            reelAnimation->setFramesPerSecond(50);
+            reelAnimation->isAnimating = true;
+        }
+    }
+    else
+    {
+        reelAnimation->setFramesPerSecond(0);
+        reelAnimation->isAnimating = false;
+    }
+    //else if(reelAnimation->isAnimating) reelAnimation->stopAnimation();
     
 }
 
