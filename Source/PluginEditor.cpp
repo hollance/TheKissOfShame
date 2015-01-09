@@ -282,20 +282,20 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     
     //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
     //after stopping playback. Don't know why this is... For now, only animating reels when output != 0.
-    if(processor.curPositionInfo.isPlaying && processor.playHeadPos != priorProcessorTime && !processor.aGraph->isGraphBypassed())
-    {
-        priorProcessorTime = processor.playHeadPos;
-        if(!reelAnimation->isAnimating)
-        {
-            reelAnimation->setFramesPerSecond(50);
-            reelAnimation->isAnimating = true;
-        }
-    }
-    else
-    {
-        reelAnimation->setFramesPerSecond(0);
-        reelAnimation->isAnimating = false;
-    }
+//    if(processor.curPositionInfo.isPlaying && processor.playHeadPos != priorProcessorTime && !processor.aGraph->isGraphBypassed())
+//    {
+//        priorProcessorTime = processor.playHeadPos;
+//        if(!reelAnimation->isAnimating)
+//        {
+//            reelAnimation->setFramesPerSecond(50);
+//            reelAnimation->isAnimating = true;
+//        }
+//    }
+//    else
+//    {
+//        reelAnimation->setFramesPerSecond(0);
+//        reelAnimation->isAnimating = false;
+//    }
     //else if(reelAnimation->isAnimating) reelAnimation->stopAnimation();
     
 }
@@ -353,6 +353,8 @@ void KissOfShameAudioProcessorEditor::initializeLevels()
     linkIOButtonL->setAlpha(0.25);
     linkIOButtonR->setAlpha(0.25);
     linkIOMode = false;
+    
+    reelAnimation->setFramesPerSecond(1000);
 }
 
 void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
@@ -413,7 +415,9 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
     }
     else if(slider == ageKnob)
     {
-        reelAnimation->setFramesPerSecond(ageKnob->getValue()*15 + 35);
+        //reelAnimation->setFramesPerSecond(ageKnob->getValue()*15 + 35);
+        //reelAnimation->setAnimationRate(ageKnob->getValue());
+        reelAnimation->setAnimationResetThreshold(ageKnob->getValue()*0.025);
     }
 }
 

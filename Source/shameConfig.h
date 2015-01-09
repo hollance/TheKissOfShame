@@ -20,11 +20,11 @@
 #define SAMPLE_RATE 44100
 
 
-#define GUI_PATH String("/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/")
-#define AUDIO_PATH String("/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/Audio_Resources/")
+//#define GUI_PATH String("/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/")
+//#define AUDIO_PATH String("/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/Audio_Resources/")
 
-//#define GUI_PATH String("/Users/Shared/KissOfShame/GUI_Resources/")
-//#define AUDIO_PATH String("/Users/Shared/KissOfShame/Audio_Resources/")
+#define GUI_PATH String("/Users/Shared/KissOfShame/GUI_Resources/")
+#define AUDIO_PATH String("/Users/Shared/KissOfShame/Audio_Resources/")
 
 
 

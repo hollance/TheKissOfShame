@@ -17,7 +17,7 @@ class ImageAnimationComponent : public AnimatedAppComponent, public ActionBroadc
 {
   
 public:
-    ImageAnimationComponent(File imgFile, int numFrames, int framesPerSecond) : animationNumFrames(numFrames), isAnimating(false)
+    ImageAnimationComponent(File imgFile, int numFrames, int framesPerSecond) : animationNumFrames(numFrames), isAnimating(false), curIncrement(0), resetThresh(1), incrRate(0.01)
     {
         setFramesPerSecond(framesPerSecond); //NOTE: setting framesPerSecond to 0 stops the timer.
         
@@ -34,24 +34,26 @@ public:
     
     virtual void mouseDown (const MouseEvent& event)
     {
-        setFramesPerSecond(25);
+        //setFramesPerSecond(25);
+        setAnimationResetThreshold(0.02);
     };
     virtual void mouseUp (const MouseEvent& event)
     {
-        setFramesPerSecond(50);
-        setFlangeDepth = curFlangeDepth;
+        //setFramesPerSecond(50);
+        //setFlangeDepth = curFlangeDepth;
+        setAnimationResetThreshold(0.0);
     };
-    virtual void mouseDrag (const MouseEvent& event)
-    {
-        dragDist = (float)event.getDistanceFromDragStartY()/100;
-        curFlangeDepth = setFlangeDepth + dragDist;
-        
-        if(curFlangeDepth > 1.0) curFlangeDepth = 1.0;
-        if(curFlangeDepth < 0) curFlangeDepth = 0;
-        sendActionMessage("updateFlange");
-        
-        //setFramesPerSecond(50 - 10*curFlangeDepth);
-    }
+//    virtual void mouseDrag (const MouseEvent& event)
+//    {
+//        dragDist = (float)event.getDistanceFromDragStartY()/100;
+//        curFlangeDepth = setFlangeDepth + dragDist;
+//        
+//        if(curFlangeDepth > 1.0) curFlangeDepth = 1.0;
+//        if(curFlangeDepth < 0) curFlangeDepth = 0;
+//        sendActionMessage("updateFlange");
+//        
+//        //setFramesPerSecond(50 - 10*curFlangeDepth);
+//    }
     
     float getCurrentFlangeDepth() {return curFlangeDepth;}
 
@@ -62,13 +64,20 @@ public:
     {
     // This function is called at the frequency specified by the setFramesPerSecond() call
     // in the constructor. You can use it to update counters, animate values, etc.
-        if (!animationImage.isNull()/* && isAnimating*/)
+        
+        if(curIncrement == 0)
         {
-            if(currentFrame >= endFrame) currentFrame = startFrame;
+            if (!animationImage.isNull()/* && isAnimating*/)
+            {
+                if(currentFrame >= endFrame) currentFrame = startFrame;
                 currentFrame++;// = (int)curFramePosition;
+            }
         }
+    
+        curIncrement += incrRate;
+        if(curIncrement >= resetThresh) curIncrement = 0;
+            
     }
-
 
     void paint (Graphics& g)
     {
@@ -97,12 +106,19 @@ public:
     {
         endFrame = frameNumber;
     }
-    
+
+    void setAnimationRate(float rate) {incrRate = rate;}
+    void setAnimationResetThreshold(float thresh) {resetThresh = thresh;}
+
 
     bool isAnimating;
 
 private:
-    
+
+    float resetThresh;
+    float curIncrement;
+    float incrRate;
+
 	Image animationImage;
     int imageFrameWidth;
     int imageFrameHeight;
@@ -116,8 +132,6 @@ private:
     int startFrame;
     int endFrame;
     float curFramePosition;
-
-
 };
 
 
