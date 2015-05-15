@@ -112,6 +112,8 @@ private:
     // access the processor object that created it.
     KissOfShameAudioProcessor& processor;
     
+    //OpenGLContext oglContext;
+    
     bool showReels;
     bool linkIOMode;
     int priorProcessorTime;

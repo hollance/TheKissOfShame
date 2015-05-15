@@ -30,30 +30,31 @@ public:
         imageFrameWidth = animationImage.getWidth();
         imageFrameHeight = animationImage.getHeight()/animationNumFrames;
         setSize(imageFrameWidth, imageFrameHeight);
+        
+        oglContext.setComponentPaintingEnabled(true);
+        oglContext.attachTo(*this);
     }
     
     virtual void mouseDown (const MouseEvent& event)
     {
         //setFramesPerSecond(25);
-        setAnimationResetThreshold(0.02);
+        setAnimationResetThreshold(0.015);
     };
     virtual void mouseUp (const MouseEvent& event)
     {
         //setFramesPerSecond(50);
-        //setFlangeDepth = curFlangeDepth;
+        setFlangeDepth = curFlangeDepth;
         setAnimationResetThreshold(0.0);
     };
-//    virtual void mouseDrag (const MouseEvent& event)
-//    {
-//        dragDist = (float)event.getDistanceFromDragStartY()/100;
-//        curFlangeDepth = setFlangeDepth + dragDist;
-//        
-//        if(curFlangeDepth > 1.0) curFlangeDepth = 1.0;
-//        if(curFlangeDepth < 0) curFlangeDepth = 0;
-//        sendActionMessage("updateFlange");
-//        
-//        //setFramesPerSecond(50 - 10*curFlangeDepth);
-//    }
+    virtual void mouseDrag (const MouseEvent& event)
+    {
+        dragDist = (float)event.getDistanceFromDragStartY()/100;
+        curFlangeDepth = setFlangeDepth + dragDist;
+        
+        if(curFlangeDepth > 1.0) curFlangeDepth = 1.0;
+        if(curFlangeDepth < 0) curFlangeDepth = 0;
+        sendActionMessage("updateFlange");
+    }
     
     float getCurrentFlangeDepth() {return curFlangeDepth;}
 
@@ -81,11 +82,15 @@ public:
 
     void paint (Graphics& g)
     {
+        g.fillAll(Colours::black);
+        
         if (!animationImage.isNull()/* && isAnimating*/)
         {
             juce::Rectangle<int> clipRect(0, currentFrame*imageFrameHeight, imageFrameWidth, imageFrameHeight);
             const Image & clippedIm = animationImage.getClippedImage(clipRect);
-            g.drawImageAt(clippedIm, 0, 0);
+            
+            //NOTE: for some reason, had to offset drawing the image by 1 pixel to avoid grey line showing break between images. Something strange about the openGL context...
+            g.drawImageAt(clippedIm, 0, 1);
         }
     }
     
@@ -114,6 +119,8 @@ public:
     bool isAnimating;
 
 private:
+
+    OpenGLContext oglContext;
 
     float resetThresh;
     float curIncrement;

@@ -79,6 +79,7 @@ public:
         bypassParam,
         outputParam,
         flangeParam,
+        hurricaneSandyParam,
         
         totalNumParams
     };

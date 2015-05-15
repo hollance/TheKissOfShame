@@ -14,6 +14,7 @@
 		0B88FF4E07085AEE20574E16 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9255A9B1B6E6785960E6BAC0 /* AudioUnit.framework */; };
 		10AED7EB8C0B27FB4B8EE4BD /* juce_opengl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 889F804447C0356F2E3F142B /* juce_opengl.mm */; };
 		11FD071780B5EF0B4278B2E6 /* PluginEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD40B0795B039878EF7D1200 /* PluginEditor.cpp */; };
+		139AF31F1B06994E0050534B /* HurricaneSandy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 139AF31D1B06994E0050534B /* HurricaneSandy.cpp */; };
 		13FD20F81A4DE85600B6E308 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 13FD20F71A4DE85600B6E308 /* libc++.dylib */; };
 		13FD21351A4DF37000B6E308 /* AudioGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD211D1A4DF37000B6E308 /* AudioGraph.cpp */; };
 		13FD21361A4DF37000B6E308 /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD211F1A4DF37000B6E308 /* Blend.cpp */; };
@@ -165,6 +166,9 @@
 		12B69303AA901992505B28F3 /* juce_SelectedItemSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_SelectedItemSet.h; path = ../../../../../../../JUCE3.1/modules/juce_gui_basics/mouse/juce_SelectedItemSet.h; sourceTree = SOURCE_ROOT; };
 		134A6467B9B561553ACF9E34 /* juce_ImagePreviewComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_ImagePreviewComponent.h; path = ../../../../../../../JUCE3.1/modules/juce_gui_basics/filebrowser/juce_ImagePreviewComponent.h; sourceTree = SOURCE_ROOT; };
 		1399910E57E4EA75AAEFEC8F /* juce_win32_ASIO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_win32_ASIO.cpp; path = ../../../../../../../JUCE3.1/modules/juce_audio_devices/native/juce_win32_ASIO.cpp; sourceTree = SOURCE_ROOT; };
+		139AF31D1B06994E0050534B /* HurricaneSandy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HurricaneSandy.cpp; sourceTree = "<group>"; };
+		139AF31E1B06994E0050534B /* HurricaneSandy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HurricaneSandy.h; sourceTree = "<group>"; };
+		139AF3201B069AE50050534B /* EnvelopeDips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvelopeDips.h; sourceTree = "<group>"; };
 		13ED58BA1A57955C00F45B12 /* ImageAnimationComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAnimationComponent.h; sourceTree = "<group>"; };
 		13FD20F71A4DE85600B6E308 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/libc++.dylib"; sourceTree = DEVELOPER_DIR; };
 		13FD211D1A4DF37000B6E308 /* AudioGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioGraph.cpp; sourceTree = "<group>"; };
@@ -1306,6 +1310,9 @@
 		13FD211C1A4DF37000B6E308 /* AudioProcessing */ = {
 			isa = PBXGroup;
 			children = (
+				139AF3201B069AE50050534B /* EnvelopeDips.h */,
+				139AF31D1B06994E0050534B /* HurricaneSandy.cpp */,
+				139AF31E1B06994E0050534B /* HurricaneSandy.h */,
 				13FD211D1A4DF37000B6E308 /* AudioGraph.cpp */,
 				13FD211E1A4DF37000B6E308 /* AudioGraph.h */,
 				13FD211F1A4DF37000B6E308 /* Blend.cpp */,
@@ -3073,6 +3080,7 @@
 				13FD21371A4DF37000B6E308 /* Hiss.cpp in Sources */,
 				D0387CDF7EFB915204B8EE03 /* AUCarbonViewBase.cpp in Sources */,
 				C7033D371250AE7C0B5DFFC3 /* AUCarbonViewControl.cpp in Sources */,
+				139AF31F1B06994E0050534B /* HurricaneSandy.cpp in Sources */,
 				28097040AB82EACAFB50957F /* AUCarbonViewDispatch.cpp in Sources */,
 				13FD21391A4DF37000B6E308 /* Shame.cpp in Sources */,
 				BB4F1B17A2C7629D067BEC59 /* AUDispatch.cpp in Sources */,

@@ -155,7 +155,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     String reelImagePath = GUI_PATH + "KOS_Graphics/wheels.png";
     File reelFile(reelImagePath);
     //reelAnimation = new ImageAnimator(reelFile, 31, 31);
-    reelAnimation = new ImageAnimationComponent(reelFile, 31, 50);
+    reelAnimation = new ImageAnimationComponent(reelFile, 31, 50); //50
     reelAnimation->setFrameDimensions(0, 0, 960, 322);
     reelAnimation->addActionListener(this);
     addAndMakeVisible(reelAnimation);
@@ -174,6 +174,9 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     vuMeterR->setAnimationImage(vuRightImagePath);
     addAndMakeVisible(vuMeterR);
     
+    //oglContext.setComponentPaintingEnabled(true);
+    //oglContext.attachTo(*this);
+
     
     //////////////// LABELS /////////////////
     //#if DEBUG
@@ -192,8 +195,8 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     setSize(mainWidth, mainHeight);
     
     initializeLevels();
-    
-    startTimer(25);
+        
+    startTimer(25);    
 }
 
 KissOfShameAudioProcessorEditor::~KissOfShameAudioProcessorEditor()
@@ -273,29 +276,29 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     vuMeterL->updateImageWithValue(vuLevelL);
     vuMeterR->updateImageWithValue(vuLevelR);
     
-    if(!bypassButton->getToggleState())
-    {
-        float backlightAlpha = 1 - (0.5*processor.curRMSL + 0.5*processor.curRMSR)*3*shameKnob->getValue();
-        backlight->setAlpha(backlightAlpha);
-        shameKnob->setAlpha(backlightAlpha);
-    }
+//    if(!bypassButton->getToggleState())
+//    {
+//        float backlightAlpha = 1 - (0.5*processor.curRMSL + 0.5*processor.curRMSR)*3*shameKnob->getValue();
+//        backlight->setAlpha(backlightAlpha);
+//        shameKnob->setAlpha(backlightAlpha);
+//    }
     
     //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
     //after stopping playback. Don't know why this is... For now, only animating reels when output != 0.
-//    if(processor.curPositionInfo.isPlaying && processor.playHeadPos != priorProcessorTime && !processor.aGraph->isGraphBypassed())
-//    {
-//        priorProcessorTime = processor.playHeadPos;
-//        if(!reelAnimation->isAnimating)
-//        {
-//            reelAnimation->setFramesPerSecond(50);
-//            reelAnimation->isAnimating = true;
-//        }
-//    }
-//    else
-//    {
-//        reelAnimation->setFramesPerSecond(0);
-//        reelAnimation->isAnimating = false;
-//    }
+    if(processor.curPositionInfo.isPlaying && processor.playHeadPos != priorProcessorTime && !processor.aGraph->isGraphBypassed())
+    {
+        priorProcessorTime = processor.playHeadPos;
+        if(!reelAnimation->isAnimating)
+        {
+            reelAnimation->setFramesPerSecond(50);
+            reelAnimation->isAnimating = true;
+        }
+    }
+    else
+    {
+        reelAnimation->setFramesPerSecond(0);
+        reelAnimation->isAnimating = false;
+    }
     //else if(reelAnimation->isAnimating) reelAnimation->stopAnimation();
     
 }
@@ -354,7 +357,7 @@ void KissOfShameAudioProcessorEditor::initializeLevels()
     linkIOButtonR->setAlpha(0.25);
     linkIOMode = false;
     
-    reelAnimation->setFramesPerSecond(1000);
+    reelAnimation->setAnimationResetThreshold(0.0);
 }
 
 void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
@@ -417,7 +420,12 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
     {
         //reelAnimation->setFramesPerSecond(ageKnob->getValue()*15 + 35);
         //reelAnimation->setAnimationRate(ageKnob->getValue());
-        reelAnimation->setAnimationResetThreshold(ageKnob->getValue()*0.025);
+        //reelAnimation->setAnimationResetThreshold(ageKnob->getValue()*0.025);
+        
+        processor.setParameterNotifyingHost (KissOfShameAudioProcessor::hurricaneSandyParam,
+                                             (float) ageKnob->getValue());
+        
+        processor.aGraph->setAudioUnitParameters(eHurricaneSandyGlobalLevel, (float) ageKnob->getValue());
     }
 }
 

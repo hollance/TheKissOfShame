@@ -17,6 +17,7 @@
 #include "InputSaturation.h"
 #include "Blend.h"
 #include "Flange.h"
+#include "HurricaneSandy.h"
 
 
 class AudioGraph
@@ -38,6 +39,9 @@ public:
         
         blend = new Blend();
         
+        hurricaneSandy = new HurricaneSandy();
+        
+        
         bypassGraph = false;
         
         outputLevel = 1.0;
@@ -57,14 +61,35 @@ public:
         //make a copy of the original audio to be used strictly for processing
         audioGraphProcessingBuffer = audioBuffer;
         
-        //process audio
+        //////////// Process Audio ///////////
+        //1.Incomming audio gets flange and saturation processing
         inSaturation->processInputSaturation(audioGraphProcessingBuffer, numChannels);
         flange->processFlange(audioGraphProcessingBuffer, numChannels);
+        
+        //2. add environment effects
+        int environmentSelection = 0;
+        switch (environmentSelection)
+        {
+            case 0:
+                hurricaneSandy->processHurricaneSandy(audioGraphProcessingBuffer, numChannels);
+                break;
+            case 1:
+                break;
+                
+            default:
+                break;
+        }
+        
+        //3. add hiss and the shame feature
         hiss->processHiss(audioGraphProcessingBuffer, numChannels);
         shame->processShame(audioGraphProcessingBuffer, numChannels);
+        
+        //4. blend the processed audio with the original signal.
         blend->processBlend(audioBuffer, audioGraphProcessingBuffer, numChannels);
         
-        //apply the final output level
+        //////////// End Process Audio ///////////
+        
+        //5. apply the final output level
         audioBuffer.applyGain(outputLevel);
     }
     
@@ -102,6 +127,8 @@ public:
             case eShameDepth: shame->setDepth(paramLevel); break;
             case eShameGlobalLevel: shame->setInterpolatedParameters(paramLevel); break;
                 
+            case eHurricaneSandyGlobalLevel: hurricaneSandy->setInterpolatedParameters(paramLevel); break;
+                
             case eHissLevel:   hiss->setHissLevel(paramLevel); break;
                 
             case eBlendLevel:  blend->setBlendLevel(paramLevel); break;
@@ -129,6 +156,9 @@ private:
     ScopedPointer<InputSaturation> inSaturation;
     ScopedPointer<Blend> blend;
     ScopedPointer<Flange> flange;
+    
+    
+    ScopedPointer<HurricaneSandy> hurricaneSandy;
     
     bool bypassGraph;
     

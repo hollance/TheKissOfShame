@@ -44,6 +44,8 @@ enum AUParameter
     eShameFreq,
     eShameDepth,
     
+    eHurricaneSandyGlobalLevel,
+    
     eHissLevel,
     
     eBlendLevel,
