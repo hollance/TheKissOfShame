@@ -32,6 +32,16 @@ public:
     
     ~Hiss(){}
     
+    void setAudioFile(String audioFilePath)
+    {
+        hissBuffer->clear();
+        
+        File hissFile(audioFilePath);
+        hissBuffer = new AudioSampleBuffer();
+        if(hissFile.existsAsFile()) hissBuffer = loadSampleFromFile(hissFile);
+    }
+
+    
     
 //    void chooseFileToOpen()
 //    {
@@ -78,39 +88,27 @@ public:
     
     void processHiss(AudioSampleBuffer& sampleBuffer, int numChannels)
     {
-        for (int channel = 0; channel < numChannels; ++channel)
+        for(int i = 0; i < sampleBuffer.getNumSamples(); i++)
         {
-            float* samples = sampleBuffer.getWritePointer(channel);
-            
-            for(int i = 0; i < sampleBuffer.getNumSamples(); i++)
+            if(indx1 < 0.5*hissBuffer->getNumSamples())
+                rampValue = (float)indx1 / (0.5*(float)hissBuffer->getNumSamples());
+            else
+                rampValue = (float)(hissBuffer->getNumSamples() - indx1) / (0.5*(float)hissBuffer->getNumSamples());
+
+
+            for(int channel = 0; channel < numChannels; ++channel)
             {
-                //
-//                if(indx1 > hissBuffer->getNumSamples()*0.5) crossfade = true;
-                
-                
-                //Calculate ramp value for crossfading
-                if(indx1 < 0.5*hissBuffer->getNumSamples())
-                    rampValue = (float)indx1 / (0.5*(float)hissBuffer->getNumSamples());
-                else
-                    rampValue = (float)(hissBuffer->getNumSamples() - indx1) / (0.5*(float)hissBuffer->getNumSamples());
-                
-//NOTE: not working...
-//                if(crossfade)
-//                    hissSample = rampValue*hissBuffer->getReadPointer(channel)[indx1] + (1-rampValue)*hissBuffer->getReadPointer(channel)[indx2];
-//                else
-//                    hissSample = hissBuffer->getReadPointer(channel)[indx1];
-                
+                float* samples = sampleBuffer.getWritePointer(channel);
                 
                 hissSample = rampValue*hissBuffer->getReadPointer(channel)[indx1] + (1-rampValue)*hissBuffer->getReadPointer(channel)[indx2];
                 
-            
                 samples[i] = signalLevel*samples[i] + hissLevel*hissSample;
-                
-                
-                indx1 = (indx1 + 1) % hissBuffer->getNumSamples();
-                //if(crossfade) indx2 = (indx2 + 1) % hissBuffer->getNumSamples();
-                indx2 = (indx2 + 1) % hissBuffer->getNumSamples();
             }
+            
+            
+            indx1 = (indx1 + 1) % hissBuffer->getNumSamples();
+            //if(crossfade) indx2 = (indx2 + 1) % hissBuffer->getNumSamples();
+            indx2 = (indx2 + 1) % hissBuffer->getNumSamples();
         }
     }
     

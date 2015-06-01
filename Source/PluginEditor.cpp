@@ -36,7 +36,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     
     /////////// COMPONENTS /////////////////
     
-    environmentsComponent = new EnvironmentsComponent;
+    environmentsComponent = new EnvironmentsComponent(p);
     environmentsComponent->setTopLeftPosition(388, 654);
     addAndMakeVisible(environmentsComponent);
     

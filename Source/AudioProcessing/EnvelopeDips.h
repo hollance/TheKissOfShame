@@ -1,5 +1,5 @@
-#ifndef ENVELOPE_H
-#define ENVELOPE_H
+#ifndef ENVELOPEDIPS_H
+#define ENVELOPEDIPS_H
 
 
 //#include "Generator.h"
@@ -47,7 +47,7 @@ public:
         for(int i = 0; i < numRandPoints; i++)
         {
             float xInit = ((float)i+1)/(numRandPoints+1);
-            float xDeviation = (float)(rand() % 1000)/1000 * partitionSize / 2.5;
+            float xDeviation = (float)(rand() % 1000)/1000 * partitionSize / 2.5; //why is 2.5 in the denominator??
             xDeviation = xDeviation * powf(-1, rand()%2);
             
             Point<float> pRand(xInit + xDeviation, 1.0 - dynamicExtremity*(float)(rand() % 1000)/1000);

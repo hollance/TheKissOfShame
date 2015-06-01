@@ -14,11 +14,12 @@
 		0B88FF4E07085AEE20574E16 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9255A9B1B6E6785960E6BAC0 /* AudioUnit.framework */; };
 		10AED7EB8C0B27FB4B8EE4BD /* juce_opengl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 889F804447C0356F2E3F142B /* juce_opengl.mm */; };
 		11FD071780B5EF0B4278B2E6 /* PluginEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD40B0795B039878EF7D1200 /* PluginEditor.cpp */; };
+		134F6E361B0AEBB40033694E /* Granulate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 134F6E341B0AEBB40033694E /* Granulate.cpp */; };
+		134F6E391B0AEC840033694E /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 134F6E371B0AEC840033694E /* Noise.cpp */; };
 		139AF31F1B06994E0050534B /* HurricaneSandy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 139AF31D1B06994E0050534B /* HurricaneSandy.cpp */; };
 		13FD20F81A4DE85600B6E308 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 13FD20F71A4DE85600B6E308 /* libc++.dylib */; };
 		13FD21351A4DF37000B6E308 /* AudioGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD211D1A4DF37000B6E308 /* AudioGraph.cpp */; };
 		13FD21361A4DF37000B6E308 /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD211F1A4DF37000B6E308 /* Blend.cpp */; };
-		13FD21371A4DF37000B6E308 /* Hiss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD21221A4DF37000B6E308 /* Hiss.cpp */; };
 		13FD21381A4DF37000B6E308 /* InputSaturation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD21241A4DF37000B6E308 /* InputSaturation.cpp */; };
 		13FD21391A4DF37000B6E308 /* Shame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD21261A4DF37000B6E308 /* Shame.cpp */; };
 		13FD213A1A4DF37000B6E308 /* BacklightComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD21291A4DF37000B6E308 /* BacklightComponent.cpp */; };
@@ -165,10 +166,18 @@
 		12B4E2B70DF1A7C4DFEB6121 /* juce_DrawablePath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_DrawablePath.cpp; path = ../../../../../../../JUCE3.1/modules/juce_gui_basics/drawables/juce_DrawablePath.cpp; sourceTree = SOURCE_ROOT; };
 		12B69303AA901992505B28F3 /* juce_SelectedItemSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_SelectedItemSet.h; path = ../../../../../../../JUCE3.1/modules/juce_gui_basics/mouse/juce_SelectedItemSet.h; sourceTree = SOURCE_ROOT; };
 		134A6467B9B561553ACF9E34 /* juce_ImagePreviewComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_ImagePreviewComponent.h; path = ../../../../../../../JUCE3.1/modules/juce_gui_basics/filebrowser/juce_ImagePreviewComponent.h; sourceTree = SOURCE_ROOT; };
+		134F6E341B0AEBB40033694E /* Granulate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Granulate.cpp; sourceTree = "<group>"; };
+		134F6E351B0AEBB40033694E /* Granulate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Granulate.h; sourceTree = "<group>"; };
+		134F6E371B0AEC840033694E /* Noise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Noise.cpp; sourceTree = "<group>"; };
+		134F6E381B0AEC840033694E /* Noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Noise.h; sourceTree = "<group>"; };
+		134F6E461B0EEEC40033694E /* Loop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loop.h; sourceTree = "<group>"; };
+		134F6E471B0FDCF30033694E /* LoopCrossfade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopCrossfade.h; sourceTree = "<group>"; };
+		134F6E481B11956D0033694E /* Biquads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Biquads.h; sourceTree = "<group>"; };
 		1399910E57E4EA75AAEFEC8F /* juce_win32_ASIO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_win32_ASIO.cpp; path = ../../../../../../../JUCE3.1/modules/juce_audio_devices/native/juce_win32_ASIO.cpp; sourceTree = SOURCE_ROOT; };
 		139AF31D1B06994E0050534B /* HurricaneSandy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HurricaneSandy.cpp; sourceTree = "<group>"; };
 		139AF31E1B06994E0050534B /* HurricaneSandy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HurricaneSandy.h; sourceTree = "<group>"; };
 		139AF3201B069AE50050534B /* EnvelopeDips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvelopeDips.h; sourceTree = "<group>"; };
+		13CF4B2D1B1A17560021D500 /* Envelope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Envelope.h; sourceTree = "<group>"; };
 		13ED58BA1A57955C00F45B12 /* ImageAnimationComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAnimationComponent.h; sourceTree = "<group>"; };
 		13FD20F71A4DE85600B6E308 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/libc++.dylib"; sourceTree = DEVELOPER_DIR; };
 		13FD211D1A4DF37000B6E308 /* AudioGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioGraph.cpp; sourceTree = "<group>"; };
@@ -176,7 +185,6 @@
 		13FD211F1A4DF37000B6E308 /* Blend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Blend.cpp; sourceTree = "<group>"; };
 		13FD21201A4DF37000B6E308 /* Blend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blend.h; sourceTree = "<group>"; };
 		13FD21211A4DF37000B6E308 /* Flange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flange.h; sourceTree = "<group>"; };
-		13FD21221A4DF37000B6E308 /* Hiss.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hiss.cpp; sourceTree = "<group>"; };
 		13FD21231A4DF37000B6E308 /* Hiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hiss.h; sourceTree = "<group>"; };
 		13FD21241A4DF37000B6E308 /* InputSaturation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputSaturation.cpp; sourceTree = "<group>"; };
 		13FD21251A4DF37000B6E308 /* InputSaturation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputSaturation.h; sourceTree = "<group>"; };
@@ -1310,15 +1318,22 @@
 		13FD211C1A4DF37000B6E308 /* AudioProcessing */ = {
 			isa = PBXGroup;
 			children = (
+				13CF4B2D1B1A17560021D500 /* Envelope.h */,
 				139AF3201B069AE50050534B /* EnvelopeDips.h */,
-				139AF31D1B06994E0050534B /* HurricaneSandy.cpp */,
-				139AF31E1B06994E0050534B /* HurricaneSandy.h */,
+				134F6E481B11956D0033694E /* Biquads.h */,
+				134F6E471B0FDCF30033694E /* LoopCrossfade.h */,
+				134F6E461B0EEEC40033694E /* Loop.h */,
 				13FD211D1A4DF37000B6E308 /* AudioGraph.cpp */,
 				13FD211E1A4DF37000B6E308 /* AudioGraph.h */,
+				134F6E371B0AEC840033694E /* Noise.cpp */,
+				134F6E381B0AEC840033694E /* Noise.h */,
+				134F6E341B0AEBB40033694E /* Granulate.cpp */,
+				134F6E351B0AEBB40033694E /* Granulate.h */,
+				139AF31D1B06994E0050534B /* HurricaneSandy.cpp */,
+				139AF31E1B06994E0050534B /* HurricaneSandy.h */,
 				13FD211F1A4DF37000B6E308 /* Blend.cpp */,
 				13FD21201A4DF37000B6E308 /* Blend.h */,
 				13FD21211A4DF37000B6E308 /* Flange.h */,
-				13FD21221A4DF37000B6E308 /* Hiss.cpp */,
 				13FD21231A4DF37000B6E308 /* Hiss.h */,
 				13FD21241A4DF37000B6E308 /* InputSaturation.cpp */,
 				13FD21251A4DF37000B6E308 /* InputSaturation.h */,
@@ -3075,9 +3090,9 @@
 			files = (
 				8D4DCDD4FC1791ADE0BACE00 /* PluginProcessor.cpp in Sources */,
 				11FD071780B5EF0B4278B2E6 /* PluginEditor.cpp in Sources */,
+				134F6E361B0AEBB40033694E /* Granulate.cpp in Sources */,
 				CB3BCC2705CC1D37DC9B893E /* AUBase.cpp in Sources */,
 				9329BD4CCCCF6FE4425A50A5 /* AUBuffer.cpp in Sources */,
-				13FD21371A4DF37000B6E308 /* Hiss.cpp in Sources */,
 				D0387CDF7EFB915204B8EE03 /* AUCarbonViewBase.cpp in Sources */,
 				C7033D371250AE7C0B5DFFC3 /* AUCarbonViewControl.cpp in Sources */,
 				139AF31F1B06994E0050534B /* HurricaneSandy.cpp in Sources */,
@@ -3114,6 +3129,7 @@
 				13FD213B1A4DF37000B6E308 /* CustomKnob.cpp in Sources */,
 				13FD21351A4DF37000B6E308 /* AudioGraph.cpp in Sources */,
 				13FD213E1A4DF37000B6E308 /* ImageInteractor.cpp in Sources */,
+				134F6E391B0AEC840033694E /* Noise.cpp in Sources */,
 				73EB5A2A88FDDD34869D8CCD /* juce_cryptography.mm in Sources */,
 				6262D01F5C727716C1E351B4 /* juce_data_structures.mm in Sources */,
 				005055090386AB16F9922507 /* juce_events.mm in Sources */,

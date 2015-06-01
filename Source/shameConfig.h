@@ -27,9 +27,17 @@
 #define AUDIO_PATH String("/Users/Shared/KissOfShame/Audio_Resources/")
 
 
-
-
-
+enum EShameEnvironments
+{
+    eEnvironmentOff,
+    eEnvironmentEnvironment,
+    eEnvironmentStudioCloset,
+    eEnvironmentHumidCellar,
+    eEnvironmentHotLocker,
+    eEnvironmentHurricaneSandy,
+    
+    eEnvironmentTotalEnvironments
+};
 
 
 enum AUParameter

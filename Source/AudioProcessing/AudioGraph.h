@@ -25,7 +25,7 @@ class AudioGraph
 public:
     
     
-    AudioGraph(int numChannels)
+    AudioGraph(int numChannels) : currentEnvironment(eEnvironmentOff)
     {
         inSaturation = new InputSaturation(0.0, 2.0, 0.272);
         
@@ -50,6 +50,8 @@ public:
     
     ~AudioGraph(){}
     
+    
+    void setCurrentEnvironment(EShameEnvironments env) {currentEnvironment = env;}
         
     void processGraph(AudioSampleBuffer& audioBuffer, int numChannels)
     {
@@ -67,13 +69,18 @@ public:
         flange->processFlange(audioGraphProcessingBuffer, numChannels);
         
         //2. add environment effects
-        int environmentSelection = 0;
-        switch (environmentSelection)
+        //EShameEnvironments environmentSelection = eEnvironmentHurricaneSandy;
+        //switch (environmentSelection)
+        switch (currentEnvironment)
         {
-            case 0:
+            case eEnvironmentHurricaneSandy:
                 hurricaneSandy->processHurricaneSandy(audioGraphProcessingBuffer, numChannels);
                 break;
-            case 1:
+            case eEnvironmentHotLocker:
+                break;
+            case eEnvironmentHumidCellar:
+                break;
+            case eEnvironmentStudioCloset:
                 break;
                 
             default:
@@ -148,6 +155,8 @@ public:
     bool isGraphBypassed(){return bypassGraph;}
     
 private:
+    
+    EShameEnvironments currentEnvironment;
     
     AudioSampleBuffer audioGraphProcessingBuffer;
     

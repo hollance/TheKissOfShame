@@ -4,6 +4,8 @@
 #define KOS_EnvironmentsComponent_h
 
 #include "ImageInteractor.h"
+#include "../shameConfig.h"
+#include "../PluginProcessor.h"
 
 
 
@@ -11,7 +13,7 @@ class EnvironmentsComponent : public ImageInteractor, public MouseListener
 {
 public:
     
-    EnvironmentsComponent() : imageIncr(0)
+    EnvironmentsComponent(KissOfShameAudioProcessor& p) : imageIncr(0), curEnvironment(eEnvironmentOff), processor(p)
     {
         setNumFrames(6);
         setMinMaxValues(0, 5);
@@ -26,10 +28,45 @@ public:
     ~EnvironmentsComponent(){};
     
     
+    
+    void setCurrentEnvironment(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                curEnvironment = eEnvironmentOff;
+                break;
+            case 1:
+                curEnvironment = eEnvironmentEnvironment;
+                break;
+            case 2:
+                curEnvironment = eEnvironmentStudioCloset;
+                break;
+            case 3:
+                curEnvironment = eEnvironmentHumidCellar;
+                break;
+            case 4:
+                curEnvironment = eEnvironmentHotLocker;
+                break;
+            case 5:
+                curEnvironment = eEnvironmentHurricaneSandy;
+                break;
+                
+            default:
+                break;
+        }
+        
+        processor.aGraph->setCurrentEnvironment(curEnvironment);
+    }
+        
+    
     virtual void mouseUp (const MouseEvent& event)
     {
         imageIncr = (imageIncr + 1) % 6;
         updateImageWithValue(imageIncr);
+        
+        
+        setCurrentEnvironment(imageIncr);
     }
     
     virtual void mouseDrag(const MouseEvent& event){}
@@ -37,6 +74,9 @@ public:
 private:
     
     int imageIncr;
+    EShameEnvironments curEnvironment;
+    
+    KissOfShameAudioProcessor& processor;
 
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EnvironmentsComponent)
