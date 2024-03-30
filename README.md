@@ -1,8 +1,14 @@
-# The Kiss of Shame – DSP Magnetic Tape Emulation
+# The Kiss of Shame – Tape Desecration Processor
+
+“Something so wrong never sounded so right.”
 
 The Kiss of Shame, debuted at the Audio Engineering Society Convention 2014 in Los Angeles, was a pioneering DAW plugin that leveraged commercial UX/UI design principles to shape its magnetic tape + circuitry emulation algorithms.
 
 To differentiate itself in the competitive pro-audio plugin market, The Kiss of Shame introduced groundbreaking features including an interactive, multi-touch-ready GUI and analog tape degradation simulation for distinctive audio effects.
+
+The Kiss of Shame was the worlds first (and perhaps only) tape / analog circuitry emulation plugin that realistically models the effects of magnetic particle instability, lubricant loss, substrate deformation, drift, scrape-flutter, print-through and reel expansion/contraction into a suite of FX processing tools for sound design and music production.
+
+It was also the first to leverage machine learning to account for the vast nonlinearities inherent in magnetic tape and analog circuitry. Last but not least, it's the only analog tape emulation that has fully-interactive reels that support touch and can write flange automation on-the-fly akin to a real analog tape deck.
 
 The Kiss of Shame was never released. The source code was graciously donated to the open source community by its owner in 2024.
 
@@ -39,6 +45,10 @@ The Kiss of Shame is the first tape plug-in to feature animated, interactive ree
 ## Building from source code
 
 The code is written for JUCE 3.1 and does not currently compile with JUCE 7. I'm working on it, stay tuned! :construction_worker:
+
+## How it works
+
+TODO
 
 ## Credits & license
 
