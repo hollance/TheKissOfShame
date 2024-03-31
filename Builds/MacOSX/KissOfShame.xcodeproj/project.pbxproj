@@ -38,6 +38,7 @@
 		26670EF2B4DE2D38234F0BB2 /* include_juce_audio_plugin_client_Standalone.cpp */ = {isa = PBXBuildFile; fileRef = 4C94802A6A853F28CBB06AF5; };
 		2ABE8A9199A6689EC2E0716D /* AudioGraph.cpp */ = {isa = PBXBuildFile; fileRef = 9B83E56B46E9F0E18FBDD40B; };
 		2C77735FA6726AC34B2A381A /* IOKit.framework */ = {isa = PBXBuildFile; fileRef = C3F2044F1EC707465486EF40; };
+		376925021FC9AD4498C2BBEC /* include_juce_opengl.mm */ = {isa = PBXBuildFile; fileRef = 167AE383636028D5C90B520E; };
 		399CBA271B2E751C3D905943 /* VST3 Manifest Helper */ = {isa = PBXBuildFile; fileRef = 5F0391138B48CB576E901DFB; };
 		399EDC17848C9A2A41720EE4 /* include_juce_audio_plugin_client_AU_1.mm */ = {isa = PBXBuildFile; fileRef = 99A435C2257916B5BE729250; };
 		4CF09E8F1C7C233868DB8F80 /* include_juce_audio_utils.mm */ = {isa = PBXBuildFile; fileRef = 537B49FC05383E6CE7493875; };
@@ -65,6 +66,7 @@
 		BA31140E9DA9A02AE81A4B0B /* include_juce_audio_processors_ara.cpp */ = {isa = PBXBuildFile; fileRef = 3E8BDD3435AF4286A038FB1F; };
 		BFB1BF08E95AC9B3FF39C412 /* DiscRecording.framework */ = {isa = PBXBuildFile; fileRef = 9AF3586C600D1807D7B5E5DC; };
 		C40FC7BCCFB4636020427840 /* InputSaturation.cpp */ = {isa = PBXBuildFile; fileRef = 44CD4A431A6B0BBF5A39EBE4; };
+		C8F43F07A430F3A65F41D714 /* OpenGL.framework */ = {isa = PBXBuildFile; fileRef = EF8BB7251313903441598F0C; };
 		CD6C4F9F8BFA845B7D948A0D /* include_juce_core.mm */ = {isa = PBXBuildFile; fileRef = 27A723DC3D91E923FB455C5C; };
 		CDE5DC05A5B0D9DCFE385206 /* Accelerate.framework */ = {isa = PBXBuildFile; fileRef = 4B607DC04B3FF697AC4349E1; };
 		CF1FBD76E2B7DA4E6D01EF67 /* Blend.cpp */ = {isa = PBXBuildFile; fileRef = 69CB41DC1E8CB2AAC48551DD; };
@@ -90,6 +92,7 @@
 		10386317805A634DF011A08E /* ImageInteractor.h */ /* ImageInteractor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageInteractor.h; path = ../../Source/GUIUtilities/ImageInteractor.h; sourceTree = SOURCE_ROOT; };
 		11ACB0A02C3424DE081F5D6A /* Biquads.h */ /* Biquads.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Biquads.h; path = ../../Source/AudioProcessing/Biquads.h; sourceTree = SOURCE_ROOT; };
 		15F648AC595BD6C38B0B0D46 /* Noise.cpp */ /* Noise.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Noise.cpp; path = ../../Source/AudioProcessing/Noise.cpp; sourceTree = SOURCE_ROOT; };
+		167AE383636028D5C90B520E /* include_juce_opengl.mm */ /* include_juce_opengl.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_opengl.mm; path = ../../JuceLibraryCode/include_juce_opengl.mm; sourceTree = SOURCE_ROOT; };
 		1D5EA8A7F19FCF9E30C9F089 /* WebKit.framework */ /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		25409BFCD270EDFD5FDB14F5 /* juce_audio_plugin_client */ /* juce_audio_plugin_client */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_plugin_client; path = "~/JUCE/modules/juce_audio_plugin_client"; sourceTree = "<absolute>"; };
 		27A723DC3D91E923FB455C5C /* include_juce_core.mm */ /* include_juce_core.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_core.mm; path = ../../JuceLibraryCode/include_juce_core.mm; sourceTree = SOURCE_ROOT; };
@@ -171,8 +174,10 @@
 		EA29AFCCE02544C24BC8D322 /* include_juce_audio_processors_lv2_libs.cpp */ /* include_juce_audio_processors_lv2_libs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_processors_lv2_libs.cpp; path = ../../JuceLibraryCode/include_juce_audio_processors_lv2_libs.cpp; sourceTree = SOURCE_ROOT; };
 		EA3A78232EF8A80661F765F4 /* juce_VST3ManifestHelper.mm */ /* juce_VST3ManifestHelper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = juce_VST3ManifestHelper.mm; path = "$(HOME)/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm"; sourceTree = "<absolute>"; };
 		EA7835208E14FCB215EECD87 /* BacklightComponent.h */ /* BacklightComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BacklightComponent.h; path = ../../Source/GUIUtilities/BacklightComponent.h; sourceTree = SOURCE_ROOT; };
+		EB6E30C1D100A29A03D53F81 /* juce_opengl */ /* juce_opengl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_opengl; path = "~/JUCE/modules/juce_opengl"; sourceTree = "<absolute>"; };
 		EDAB429DD49CA7DE8137CF39 /* Foundation.framework */ /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EEEDA6D15A1FBB007F82ECFF /* Loop.h */ /* Loop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Loop.h; path = ../../Source/AudioProcessing/Loop.h; sourceTree = SOURCE_ROOT; };
+		EF8BB7251313903441598F0C /* OpenGL.framework */ /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		F2BF8C596E465F74A66EB026 /* EnvironmentsComponent.h */ /* EnvironmentsComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EnvironmentsComponent.h; path = ../../Source/GUIUtilities/EnvironmentsComponent.h; sourceTree = SOURCE_ROOT; };
 		F37CFAF340337A69FD6F1494 /* juce_audio_basics */ /* juce_audio_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_basics; path = "~/JUCE/modules/juce_audio_basics"; sourceTree = "<absolute>"; };
 		F384422D283BE67F518211ED /* PluginProcessor.cpp */ /* PluginProcessor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PluginProcessor.cpp; path = ../../Source/PluginProcessor.cpp; sourceTree = SOURCE_ROOT; };
@@ -196,6 +201,7 @@
 				BFB1BF08E95AC9B3FF39C412,
 				D9F494F97F1B29CEB0143536,
 				2C77735FA6726AC34B2A381A,
+				C8F43F07A430F3A65F41D714,
 				1AF81767F8A0BB04B8628161,
 				2417E2EAAD6EDAA5CC395975,
 				E89603B9192BB97471555F5B,
@@ -217,6 +223,7 @@
 				BFB1BF08E95AC9B3FF39C412,
 				D9F494F97F1B29CEB0143536,
 				2C77735FA6726AC34B2A381A,
+				C8F43F07A430F3A65F41D714,
 				1AF81767F8A0BB04B8628161,
 				2417E2EAAD6EDAA5CC395975,
 				E89603B9192BB97471555F5B,
@@ -239,6 +246,7 @@
 				BFB1BF08E95AC9B3FF39C412,
 				D9F494F97F1B29CEB0143536,
 				2C77735FA6726AC34B2A381A,
+				C8F43F07A430F3A65F41D714,
 				1AF81767F8A0BB04B8628161,
 				2417E2EAAD6EDAA5CC395975,
 				E89603B9192BB97471555F5B,
@@ -260,6 +268,7 @@
 				BFB1BF08E95AC9B3FF39C412,
 				D9F494F97F1B29CEB0143536,
 				2C77735FA6726AC34B2A381A,
+				C8F43F07A430F3A65F41D714,
 				1AF81767F8A0BB04B8628161,
 				2417E2EAAD6EDAA5CC395975,
 				E89603B9192BB97471555F5B,
@@ -292,6 +301,7 @@
 				2C27D2945A225CA2C61DFF49,
 				AA842FFB4841C8D0C5F56A83,
 				943E537F197F1AC0E0B403DD,
+				167AE383636028D5C90B520E,
 				B9CADEEE0E075FCD7232021C,
 				48DAF66962A3B541DBBBB61A,
 			);
@@ -311,6 +321,7 @@
 				9AF3586C600D1807D7B5E5DC,
 				EDAB429DD49CA7DE8137CF39,
 				C3F2044F1EC707465486EF40,
+				EF8BB7251313903441598F0C,
 				858BF97B8452EC689B7EFF0A,
 				C5C3C1144ED7AA27DCD9B3E0,
 				1D5EA8A7F19FCF9E30C9F089,
@@ -442,6 +453,7 @@
 				D6C59E509447F83B4CE6E043,
 				09BA1C29A610E4D77532FEFC,
 				3A74EEB030A3582BEF07C90C,
+				EB6E30C1D100A29A03D53F81,
 			);
 			name = "JUCE Modules";
 			sourceTree = "<group>";
@@ -817,6 +829,7 @@
 				0D03EF1D3EF2AB31FA92FD7D,
 				F6246B3AE95CCC55730C4711,
 				61FBA020D5400579828EEE91,
+				376925021FC9AD4498C2BBEC,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -908,6 +921,7 @@
 					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_MODULE_AVAILABLE_juce_opengl=1",
 					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
 					"JUCE_VST3_CAN_REPLACE_VST2=0",
 					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
@@ -982,6 +996,7 @@
 				PRODUCT_NAME = "KissOfShame";
 				SKIP_INSTALL = YES;
 				USE_HEADERMAP = NO;
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = OpenGL;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
 			};
 			name = Debug;
@@ -1016,6 +1031,7 @@
 					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_MODULE_AVAILABLE_juce_opengl=1",
 					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
 					"JUCE_VST3_CAN_REPLACE_VST2=0",
 					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
@@ -1090,6 +1106,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.InfernalLove.KissOfShame;
 				PRODUCT_NAME = "juce_vst3_helper";
 				USE_HEADERMAP = NO;
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = OpenGL;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
 			};
 			name = Release;
@@ -1124,6 +1141,7 @@
 					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_MODULE_AVAILABLE_juce_opengl=1",
 					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
 					"JUCE_VST3_CAN_REPLACE_VST2=0",
 					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
@@ -1198,6 +1216,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.InfernalLove.KissOfShame;
 				PRODUCT_NAME = "KissOfShame";
 				USE_HEADERMAP = NO;
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = OpenGL;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
 			};
 			name = Debug;
@@ -1232,6 +1251,7 @@
 					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_MODULE_AVAILABLE_juce_opengl=1",
 					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
 					"JUCE_VST3_CAN_REPLACE_VST2=0",
 					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
@@ -1309,6 +1329,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.InfernalLove.KissOfShame;
 				PRODUCT_NAME = "KissOfShame";
 				USE_HEADERMAP = NO;
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = OpenGL;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
 				WRAPPER_EXTENSION = vst3;
 			};
@@ -1344,6 +1365,7 @@
 					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_MODULE_AVAILABLE_juce_opengl=1",
 					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
 					"JUCE_VST3_CAN_REPLACE_VST2=0",
 					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
@@ -1417,6 +1439,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.InfernalLove.KissOfShame;
 				PRODUCT_NAME = "juce_vst3_helper";
 				USE_HEADERMAP = NO;
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = OpenGL;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
 			};
 			name = Debug;
@@ -1459,6 +1482,7 @@
 					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_MODULE_AVAILABLE_juce_opengl=1",
 					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
 					"JUCE_VST3_CAN_REPLACE_VST2=0",
 					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
@@ -1534,6 +1558,7 @@
 				PRODUCT_NAME = "KissOfShame";
 				SKIP_INSTALL = YES;
 				USE_HEADERMAP = NO;
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = OpenGL;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
 			};
 			name = Release;
@@ -1615,6 +1640,7 @@
 					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_MODULE_AVAILABLE_juce_opengl=1",
 					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
 					"JUCE_VST3_CAN_REPLACE_VST2=0",
 					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
@@ -1693,6 +1719,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.InfernalLove.KissOfShame;
 				PRODUCT_NAME = "KissOfShame";
 				USE_HEADERMAP = NO;
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = OpenGL;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
 				WRAPPER_EXTENSION = component;
 			};
@@ -1728,6 +1755,7 @@
 					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_MODULE_AVAILABLE_juce_opengl=1",
 					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
 					"JUCE_VST3_CAN_REPLACE_VST2=0",
 					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
@@ -1807,6 +1835,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.InfernalLove.KissOfShame;
 				PRODUCT_NAME = "KissOfShame";
 				USE_HEADERMAP = NO;
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = OpenGL;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
 				WRAPPER_EXTENSION = component;
 			};
@@ -1898,6 +1927,7 @@
 					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_MODULE_AVAILABLE_juce_opengl=1",
 					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
 					"JUCE_VST3_CAN_REPLACE_VST2=0",
 					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
@@ -1976,6 +2006,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.InfernalLove.KissOfShame;
 				PRODUCT_NAME = "KissOfShame";
 				USE_HEADERMAP = NO;
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = OpenGL;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
 				WRAPPER_EXTENSION = vst3;
 			};
@@ -2011,6 +2042,7 @@
 					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_MODULE_AVAILABLE_juce_opengl=1",
 					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
 					"JUCE_VST3_CAN_REPLACE_VST2=0",
 					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
@@ -2086,6 +2118,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.InfernalLove.KissOfShame;
 				PRODUCT_NAME = "KissOfShame";
 				USE_HEADERMAP = NO;
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = OpenGL;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
 			};
 			name = Release;

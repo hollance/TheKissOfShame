@@ -28,7 +28,7 @@
 */
 class KissOfShameAudioProcessorEditor  : public AudioProcessorEditor,
                                          public Timer,
-                                         public SliderListener,
+                                         public Slider::Listener,
                                          public Button::Listener,
                                          public ActionListener
 

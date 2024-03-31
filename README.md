@@ -10,9 +10,9 @@ The Kiss of Shame was the worlds first (and perhaps only) tape / analog circuitr
 
 It was also the first to leverage machine learning to account for the vast nonlinearities inherent in magnetic tape and analog circuitry. Last but not least, it's the only analog tape emulation that has fully-interactive reels that support touch and can write flange automation on-the-fly akin to a real analog tape deck.
 
-The Kiss of Shame was never released. The source code was graciously donated to the open source community by its owner in 2024.
+The Kiss of Shame was never released. The source code was graciously donated to the open source community by its owner in 2024. The original code was written for JUCE 3.1. It has been updated to compile with JUCE 7.
 
-> **NOTE:** This repo is currently work-in-progress. The plug-in does not work yet!
+> **NOTE:** This repo is currently work-in-progress. There may be issues with the plug-in!
 
 ## Installation instructions
 
@@ -44,7 +44,13 @@ The Kiss of Shame is the first tape plug-in to feature animated, interactive ree
 
 ## Building from source code
 
-The code is written for JUCE 3.1 and does not currently compile with JUCE 7. I'm working on it, stay tuned! :construction_worker:
+Brief instructions:
+
+- Install JUCE 7.
+- Open **KissOfShame.jucer** in Projucer and export to your IDE.
+- Select the **VST3** or **AU** target and build.
+
+TODO
 
 ## How it works
 

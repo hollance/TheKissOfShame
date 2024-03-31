@@ -13,7 +13,51 @@
 #include "../shameConfig.h"
 
 
-class ImageAnimationComponent : public AnimatedAppComponent, public ActionBroadcaster
+// Copied from juce::AnimatedAppComponent to allow framesPerSecond == 0
+// TODO: use a less hacky solution (also support vblank)
+class MyAnimatedAppComponent : public Component, private Timer
+{
+public:
+    MyAnimatedAppComponent()
+    {
+        setOpaque(true);
+    }
+
+    void setFramesPerSecond(int framesPerSecond)
+    {
+        jassert(framesPerSecond >= 0 && framesPerSecond < 1000);
+        if (framesPerSecond == 0) {
+            stopTimer();
+        } else {
+            startTimerHz(framesPerSecond);
+        }
+    }
+
+    virtual void update() = 0;
+
+    int getFrameCounter() const noexcept { return totalUpdates; }
+
+    int getMillisecondsSinceLastUpdate() const noexcept
+    {
+        return (int) (Time::getCurrentTime() - lastUpdateTime).inMilliseconds();
+    }
+
+private:
+    Time lastUpdateTime = Time::getCurrentTime();
+    int totalUpdates = 0;
+
+    void timerCallback() override
+    {
+        ++totalUpdates;
+        update();
+        repaint();
+        lastUpdateTime = Time::getCurrentTime();
+    }
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MyAnimatedAppComponent)
+};
+
+class ImageAnimationComponent : public MyAnimatedAppComponent, public ActionBroadcaster
 {
   
 public:
