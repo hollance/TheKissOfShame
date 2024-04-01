@@ -25,9 +25,9 @@ class AudioGraph
 public:
     
     
-    AudioGraph(int numChannels) : currentEnvironment(eEnvironmentOff)
+    AudioGraph(int /*numChannels*/) : currentEnvironment(eEnvironmentOff)
     {
-        inSaturation.reset(new InputSaturation(0.0, 2.0, 0.272));
+        inSaturation.reset(new InputSaturation(0.0f, 2.0f, 0.272f));
 
         flange.reset(new Flange(2));
         flange->setDepth(0.0);
@@ -82,7 +82,12 @@ public:
                 break;
             case eEnvironmentStudioCloset:
                 break;
-                
+            case eEnvironmentOff:
+                break;
+            case eEnvironmentEnvironment:
+                break;
+            case eEnvironmentTotalEnvironments:
+                break;
             default:
                 break;
         }
@@ -104,8 +109,8 @@ public:
     void setInputDrive(float drive)
     {
         //NOTE: express inputDrive in terms of dB
-        inputDrive = drive * 36.0 - 18.0;
-        
+        inputDrive = drive * 36.0f - 18.0f;
+
         //now convert dB to Amp
         inputDrive = powf(10, inputDrive/20);
     }
@@ -113,8 +118,8 @@ public:
     void setOutputLevel(float level)
     {
         //NOTE:express outputLevel in terms of dB
-        outputLevel = level * 36.0 - 18.0;
-        
+        outputLevel = level * 36.0f - 18.0f;
+
         //now convert dB to Amp
         outputLevel = powf(10, outputLevel/20);
     }

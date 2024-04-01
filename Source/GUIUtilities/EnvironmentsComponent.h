@@ -23,9 +23,9 @@ public:
         
         setDimensions(0, 0, 183, 32);
         setSize(183, 32);
-    };
+    }
     
-    ~EnvironmentsComponent(){};
+    ~EnvironmentsComponent(){}
     
     
     
@@ -60,7 +60,7 @@ public:
     }
         
     
-    virtual void mouseUp (const MouseEvent& event)
+    virtual void mouseUp ([[maybe_unused]] const MouseEvent& event)
     {
         imageIncr = (imageIncr + 1) % 6;
         updateImageWithValue(imageIncr);
@@ -69,8 +69,8 @@ public:
         setCurrentEnvironment(imageIncr);
     }
     
-    virtual void mouseDrag(const MouseEvent& event){}
-    
+    virtual void mouseDrag([[maybe_unused]] const MouseEvent& event) {}
+
 private:
     
     int imageIncr;

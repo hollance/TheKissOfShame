@@ -17,7 +17,7 @@ class ImageAnimator : public Component, Timer, public ActionBroadcaster
 {
   
 public:
-    ImageAnimator(File imgFile, int numFrames, int frameRateInMilliseconds) : animationNumFrames(numFrames), frameRate(frameRateInMilliseconds), isAnimating(false)
+    ImageAnimator(File imgFile, int numFrames, int frameRateInMilliseconds) : isAnimating(false), animationNumFrames(numFrames), frameRate(frameRateInMilliseconds)
     {
         curFlangeDepth = 0;
         setFlangeDepth = 0;
@@ -26,8 +26,8 @@ public:
         currentFrame = startFrame;
         curFramePosition = startFrame;
         endFrame = animationNumFrames - 1;
-        animationRate = 0.8;
-        
+        animationRate = 0.8f;
+
         animationImage = ImageCache::getFromFile(imgFile);
         imageFrameWidth = animationImage.getWidth();
         imageFrameHeight = animationImage.getHeight()/animationNumFrames;
@@ -38,11 +38,11 @@ public:
     
     
     
-    virtual void mouseDown (const MouseEvent& event){};
-    virtual void mouseUp (const MouseEvent& event)
+    virtual void mouseDown ([[maybe_unused]] const MouseEvent& event){}
+    virtual void mouseUp ([[maybe_unused]] const MouseEvent& event)
     {
         setFlangeDepth = curFlangeDepth;
-    };
+    }
     virtual void mouseDrag (const MouseEvent& event)
     {
         dragDist = (float)event.getDistanceFromDragStartY()/100;

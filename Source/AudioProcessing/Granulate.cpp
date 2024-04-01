@@ -89,7 +89,7 @@ void Granulate :: setRandomFactor( float randomness )
   else if ( randomness > 1.0 ) gRandomFactor_ = 0.97;
 
   gRandomFactor_ = 0.97 * randomness;
-};
+}
 
 
 //*********** laoding audio file

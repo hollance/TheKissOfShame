@@ -15,9 +15,9 @@ public:
     {
         setSize(960, 266);
         setInterceptsMouseClicks(false, false);
-    };
+    }
     
-    ~BacklightComponent(){};
+    ~BacklightComponent(){}
     
     
     void paint (Graphics& g)

@@ -23,7 +23,7 @@ class KissOfShameAudioProcessor  : public AudioProcessor
 public:
     //==============================================================================
     KissOfShameAudioProcessor();
-    ~KissOfShameAudioProcessor();
+    ~KissOfShameAudioProcessor() override;
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;

@@ -98,7 +98,7 @@ public:
             
             curPos = (curPos + 1) % FLANGE_BUFF_SIZE;
         }
-    };
+    }
 
 //NOTE: this process routine uses linear interpolation
 //    void processFlange(AudioSampleBuffer& sampleBuffer, int numChannels)

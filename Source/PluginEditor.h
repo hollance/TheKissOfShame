@@ -35,22 +35,22 @@ class KissOfShameAudioProcessorEditor  : public AudioProcessorEditor,
 {
 public:
     KissOfShameAudioProcessorEditor (KissOfShameAudioProcessor&);
-    ~KissOfShameAudioProcessorEditor();
+    ~KissOfShameAudioProcessorEditor() override;
     
     void timerCallback() override;
     
     void sliderValueChanged (Slider*) override;
     
     void buttonClicked (Button* b) override;
-    virtual void timerCallback(int timerID) {}
+    virtual void timerCallback(int /*timerID*/) {}
 
     void mouseDoubleClick(const MouseEvent &event) override;
     void mouseDown (const MouseEvent& event) override;
     void mouseUp (const MouseEvent& event) override;
     void mouseDrag (const MouseEvent& event) override;
 
-    void changeListenerCallback (ChangeBroadcaster *source){};
-    
+    void changeListenerCallback (ChangeBroadcaster* /*source*/){}
+
     void actionListenerCallback (const String& message) override;
     
 //    virtual bool keyPressed (const KeyPress& key, Component* originatingComponent)

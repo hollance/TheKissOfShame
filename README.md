@@ -74,6 +74,7 @@ Bugs I found:
 
 Other things that can be improved in the code:
 
+- Remove most of the compiler warnings. (I set the warning level high on purpose.)
 - Embed the external image and sound files as binary data in the plug-in, to simplify the installation (no need to manually copy these resources).
 - Replace deprecated JUCE APIs with modern equivalents.
 - Use APVTS for the parameters so they can be automated.

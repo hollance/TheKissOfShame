@@ -47,10 +47,10 @@ public:
         for(int i = 0; i < numRandPoints; i++)
         {
             float xInit = ((float)i+1)/(numRandPoints+1);
-            float xDeviation = (float)(rand() % 1000)/1000 * partitionSize / 2.5; //why is 2.5 in the denominator??
+            float xDeviation = (float)(rand() % 1000)/1000 * partitionSize / 2.5f; //why is 2.5 in the denominator??
             xDeviation = xDeviation * powf(-1, rand()%2);
             
-            Point<float> pRand(xInit + xDeviation, 1.0 - dynamicExtremity*(float)(rand() % 1000)/1000);
+            Point<float> pRand(xInit + xDeviation, 1.0f - dynamicExtremity*(float)(rand() % 1000)/1000);
             points.add(pRand);
             
             //std::cout << "x deviation: " << xDeviation << std::endl;

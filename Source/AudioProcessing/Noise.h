@@ -37,7 +37,7 @@ public:
   void setSeed( unsigned int seed = 0 );
 
   //! Return the last computed output value.
-  float lastOut( void ) const { return lastFrame; };
+  float lastOut( void ) const { return lastFrame; }
 
   //! Compute and return one output sample.
   float tick( void );

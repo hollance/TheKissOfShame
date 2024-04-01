@@ -37,8 +37,8 @@ public:
         saturationGlobalLevel = 0.0;
         
         oddGain = 1.0;
-        evenGain = 0.3;
-        
+        evenGain = 0.3f;
+
         for(int i = 0; i < 10; i++)
         {
             priorSamp[i] = 0.0;
@@ -70,8 +70,8 @@ public:
     void setDrive(float _drive)
     {
         //NOTE: drive input is in dB
-        drive = _drive * 36.0 - 18.0;
-        
+        drive = _drive * 36.0f - 18.0f;
+
         //now convert dB to Amp
         drive = powf(10, drive/20);
     }
@@ -113,7 +113,7 @@ public:
         
         //apply single-pole lowpass filter, rolloff at 4000Hz.
         lowPassFilter(sampleBuffer, numChannels);
-     };
+     }
     
     
     void lowPassFilter(AudioSampleBuffer& sampleBuffer, int numChannels)
@@ -177,11 +177,11 @@ public:
                 
                 if(samples[i] > satThreshold)
                 {
-                    samples[i] = satThreshold + tanhf(satRateOdd * (fabs(samples[i]) - satThreshold)) * (1.0 - satThreshold);
+                    samples[i] = satThreshold + tanhf(satRateOdd * (fabs(samples[i]) - satThreshold)) * (1.0f - satThreshold);
                 }
                 else if(samples[i] < -satThreshold)
                 {
-                    samples[i] = -satThreshold - tanhf(satRateOdd * (fabs(samples[i]) - satThreshold)) * (1.0 - satThreshold);
+                    samples[i] = -satThreshold - tanhf(satRateOdd * (fabs(samples[i]) - satThreshold)) * (1.0f - satThreshold);
                 }
                 else
                 {
