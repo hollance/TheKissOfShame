@@ -11,9 +11,12 @@ knobNumFrames(128)
     setRange(0.000, 1.000, 0.001);
     setValue(0.0);
     
-    
-    knobImagePath = "/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/MixKnob/Knob-Pan-Mix.png";
-    
+    // TODO: horrible hack
+#if JUCE_MSVC
+    knobImagePath = "C:\\Program Files\\Common Files\\VST3\\KissOfShame\\GUI_Resources\\MixKnob\\Knob-Pan-Mix.png";
+#else
+    knobImagePath = "/Users/Shared/KissOfShame/GUI_Resources/MixKnob/Knob-Pan-Mix.png";
+#endif
     File imgFile;
     imgFile = File(knobImagePath);
     knobImage = ImageCache::getFromFile(imgFile);

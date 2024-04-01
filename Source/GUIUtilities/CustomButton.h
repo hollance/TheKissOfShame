@@ -11,10 +11,8 @@ class CustomButton : public ImageButton
 public:
     CustomButton()
     {
-        File offImgFile("/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/testButton-off.png");
-        File onImgFile("/Users/brianhansen/Documents/Brian/Work/1_KOS/kissofshame/GUI_Resources/testButton-on.png");
-//        File offImgFile(String(GUI_PATH) + "testButton-off.png");
-//        File onImgFile(String(GUI_PATH) + "testButton-on.png");
+        File offImgFile(String(GUI_PATH) + "testButton-off.png");
+        File onImgFile(String(GUI_PATH) + "testButton-on.png");
         
         //std::cout << "off file = " << offImgFile.getFullPathName() << std::endl;
         
