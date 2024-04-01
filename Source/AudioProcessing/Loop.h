@@ -12,6 +12,7 @@
 #include <iostream>
 #include "../shameConfig.h"
 
+using namespace juce;
 
 class Loop
 {

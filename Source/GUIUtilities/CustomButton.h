@@ -5,6 +5,7 @@
 
 #include "../shameConfig.h"
 
+using namespace juce;
 
 class CustomButton : public ImageButton
 {

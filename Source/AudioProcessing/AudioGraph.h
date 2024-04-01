@@ -19,13 +19,14 @@
 #include "Flange.h"
 #include "HurricaneSandy.h"
 
+using namespace juce;
 
 class AudioGraph
 {
 public:
     
     
-    AudioGraph(int /*numChannels*/) : currentEnvironment(eEnvironmentOff)
+    AudioGraph() : currentEnvironment(eEnvironmentOff)
     {
         inSaturation.reset(new InputSaturation(0.0f, 2.0f, 0.272f));
 
@@ -49,8 +50,7 @@ public:
     }
     
     ~AudioGraph(){}
-    
-    
+
     void setCurrentEnvironment(EShameEnvironments env) {currentEnvironment = env;}
         
     void processGraph(AudioSampleBuffer& audioBuffer, int numChannels)

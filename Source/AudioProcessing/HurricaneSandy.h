@@ -20,6 +20,8 @@
 #include "Envelope.h"
 #include "Noise.h"
 
+using namespace juce;
+
 class HurricaneSandy
 {
 public:

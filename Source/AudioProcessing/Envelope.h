@@ -7,6 +7,7 @@
 //#include "../../JuceLibraryCode/JuceHeader.h"
 #include "../shameConfig.h"
 
+using namespace juce;
 
 class Envelope
 {

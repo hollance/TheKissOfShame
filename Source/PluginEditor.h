@@ -21,6 +21,7 @@
 #include "GUIUtilities/BacklightComponent.h"
 #include "GUIUtilities/ImageAnimationComponent.h"
 
+using namespace juce;
 
 
 //==============================================================================

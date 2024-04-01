@@ -9,6 +9,7 @@
 
 #define SAMPLE_RATE 44100
 
+using namespace juce;
 
 //namespace stk {
 

@@ -12,6 +12,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
+using namespace juce;
 
 class ImageAnimator : public Component, Timer, public ActionBroadcaster
 {

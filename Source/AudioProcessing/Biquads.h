@@ -5,6 +5,7 @@
 #include "../../JuceLibraryCode/JuceHeader.h"
 #include <time.h>
 
+using namespace juce;
 
 /*
  Implementation of filter designes based on the biquad setup with difference equation:

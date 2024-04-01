@@ -13,6 +13,8 @@
 
 #include "../shameConfig.h"
 
+using namespace juce;
+
 class LoopCrossfade
 {
 public:

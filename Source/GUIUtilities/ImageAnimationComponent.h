@@ -12,6 +12,7 @@
 
 #include "../shameConfig.h"
 
+using namespace juce;
 
 // Copied from juce::AnimatedAppComponent to allow framesPerSecond == 0
 // TODO: use a less hacky solution (also support vblank)

@@ -1,24 +1,10 @@
-//
-//  shameConfig.h
-//  KissOfShame
-//
-//  Created by Brian Hansen on 9/11/14.
-//
-//
+#pragma once
 
-#ifndef KissOfShame_shameConfig_h
-#define KissOfShame_shameConfig_h
-
-#include <iostream>
-#include <math.h>
-
-#include "../JuceLibraryCode/JuceHeader.h"
-
+#include <JuceHeader.h>
 
 #define BUFFER_SIZE (44100)
 #define PI 3.14159265359
 #define SAMPLE_RATE 44100
-
 
 //TODO: horrible hack!
 #if JUCE_MSVC
@@ -37,10 +23,8 @@ enum EShameEnvironments
     eEnvironmentHumidCellar,
     eEnvironmentHotLocker,
     eEnvironmentHurricaneSandy,
-    
-    eEnvironmentTotalEnvironments
+    eEnvironmentTotalEnvironments,
 };
-
 
 enum AUParameter
 {
@@ -49,24 +33,17 @@ enum AUParameter
     eSaturationRate,
     eSaturationThresh,
     eSaturationGlobalLevel,
-    
+
     eShameGlobalLevel,
     eShameFreq,
     eShameDepth,
-    
+
     eHurricaneSandyGlobalLevel,
-    
     eHissLevel,
-    
     eBlendLevel,
-    
     eFlangeDepth,
-    
+
     eBypass,
     eInputDrive,
-    eOutputLevel
+    eOutputLevel,
 };
-
-
-
-#endif

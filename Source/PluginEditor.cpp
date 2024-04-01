@@ -209,7 +209,7 @@ void KissOfShameAudioProcessorEditor::actionListenerCallback (const String& mess
     {
         //debugLabel.setText(String(reelAnimation->getCurrentFlangeDepth()), dontSendNotification);
         processor.setParameterNotifyingHost (KissOfShameAudioProcessor::flangeParam, reelAnimation->getCurrentFlangeDepth());
-        processor.aGraph->setAudioUnitParameters(eFlangeDepth, reelAnimation->getCurrentFlangeDepth());
+        processor.audioGraph.setAudioUnitParameters(eFlangeDepth, reelAnimation->getCurrentFlangeDepth());
     }
 }
 
@@ -285,7 +285,7 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     
     //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
     //after stopping playback. Don't know why this is... For now, only animating reels when output != 0.
-    if(processor.curPositionInfo.isPlaying && processor.playHeadPos != priorProcessorTime && !processor.aGraph->isGraphBypassed())
+    if(processor.curPositionInfo.isPlaying && processor.playHeadPos != priorProcessorTime && !processor.audioGraph.isGraphBypassed())
     {
         priorProcessorTime = processor.playHeadPos;
         if(!reelAnimation->isAnimating)
@@ -341,15 +341,15 @@ void KissOfShameAudioProcessorEditor::initializeLevels()
 {
     inputSaturationKnob->setValue(0.5);
     processor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam, 0.5);
-    processor.aGraph->setAudioUnitParameters(eInputDrive, 0.5);
+    processor.audioGraph.setAudioUnitParameters(eInputDrive, 0.5);
     
     outputKnob->setValue(0.5);
     processor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam, 0.5);
-    processor.aGraph->setAudioUnitParameters(eOutputLevel, 0.5);
+    processor.audioGraph.setAudioUnitParameters(eOutputLevel, 0.5);
     
     blendKnob->setValue(1.0);
     processor.setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam, 1.0);
-    processor.aGraph->setAudioUnitParameters(eBlendLevel, 1.0);
+    processor.audioGraph.setAudioUnitParameters(eBlendLevel, 1.0);
     
     linkIOButtonL->setToggleState(false, dontSendNotification);
     linkIOButtonR->setToggleState(false, dontSendNotification);
@@ -371,26 +371,26 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
     {
         processor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam,
                                                    (float) inputSaturationKnob->getValue());
-        processor.aGraph->setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
+        processor.audioGraph.setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
         
         if(linkIOMode)
         {
             outputKnob->setValue(1.0 - inputSaturationKnob->getValue());
             processor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam, (float) outputKnob->getValue());
-            processor.aGraph->setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
+            processor.audioGraph.setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
         }
     }
     else if(slider == outputKnob.get())
     {
         processor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam,
                                              (float) outputKnob->getValue());
-        processor.aGraph->setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
+        processor.audioGraph.setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
         
         if(linkIOMode)
         {
             inputSaturationKnob->setValue(1.0 - outputKnob->getValue());
             processor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam, (float) inputSaturationKnob->getValue());
-            processor.aGraph->setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
+            processor.audioGraph.setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
         }
     }
     else if(slider == shameKnob.get())
@@ -400,21 +400,21 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
         processor.setParameterNotifyingHost (KissOfShameAudioProcessor::shameParam,
                                                    (float) shameKnob->getValue());
         
-        processor.aGraph->setAudioUnitParameters(eShameGlobalLevel, (float) shameKnob->getValue());
+        processor.audioGraph.setAudioUnitParameters(eShameGlobalLevel, (float) shameKnob->getValue());
     }
     else if(slider == hissKnob.get())
     {
         processor.setParameterNotifyingHost (KissOfShameAudioProcessor::hissParam,
                                                    (float) hissKnob->getValue());
         
-        processor.aGraph->setAudioUnitParameters(eHissLevel, (float) hissKnob->getValue());
+        processor.audioGraph.setAudioUnitParameters(eHissLevel, (float) hissKnob->getValue());
     }
     else if(slider == blendKnob.get())
     {
         processor.setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam,
                                                    (float) blendKnob->getValue());
         
-        processor.aGraph->setAudioUnitParameters(eBlendLevel, (float) blendKnob->getValue());
+        processor.audioGraph.setAudioUnitParameters(eBlendLevel, (float) blendKnob->getValue());
     }
     else if(slider == ageKnob.get())
     {
@@ -425,7 +425,7 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
         processor.setParameterNotifyingHost (KissOfShameAudioProcessor::hurricaneSandyParam,
                                              (float) ageKnob->getValue());
         
-        processor.aGraph->setAudioUnitParameters(eHurricaneSandyGlobalLevel, (float) ageKnob->getValue());
+        processor.audioGraph.setAudioUnitParameters(eHurricaneSandyGlobalLevel, (float) ageKnob->getValue());
     }
 }
 
@@ -455,7 +455,7 @@ void KissOfShameAudioProcessorEditor::buttonClicked (Button* b)
         
         processor.setParameterNotifyingHost (KissOfShameAudioProcessor::bypassParam,
                                                    b->getToggleState());
-        processor.aGraph->setAudioUnitParameters(eBypass, b->getToggleState());
+        processor.audioGraph.setAudioUnitParameters(eBypass, b->getToggleState());
     }
     else if(b == linkIOButtonL.get() || b == linkIOButtonR.get())
     {
@@ -470,7 +470,7 @@ void KissOfShameAudioProcessorEditor::buttonClicked (Button* b)
             
             outputKnob->setValue(1.0 - inputSaturationKnob->getValue());
             processor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam, (float) outputKnob->getValue());
-            processor.aGraph->setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
+            processor.audioGraph.setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
         }
         else
         {

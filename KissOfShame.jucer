@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="r9VeKi" name="KissOfShame" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="1" jucerFormatVersion="1" bundleIdentifier="com.InfernalLove.KissOfShame"
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" bundleIdentifier="com.InfernalLove.KissOfShame"
               pluginName="The Kiss Of Shame" pluginManufacturer="Infernal Love"
               pluginManufacturerCode="ILov" pluginCode="Tkos" pluginAAXCategory="2"
               cppLanguageStandard="20" pluginChannelConfigs="{1, 1}, {2, 2}"

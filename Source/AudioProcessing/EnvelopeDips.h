@@ -8,6 +8,7 @@
 #include "../shameConfig.h"
 #include <time.h>
 
+using namespace juce;
 
 
 //recalculate random points for every loop

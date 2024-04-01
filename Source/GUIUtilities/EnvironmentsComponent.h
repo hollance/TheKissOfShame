@@ -7,6 +7,7 @@
 #include "../shameConfig.h"
 #include "../PluginProcessor.h"
 
+using namespace juce;
 
 
 class EnvironmentsComponent : public ImageInteractor, public MouseListener
@@ -56,7 +57,7 @@ public:
                 break;
         }
         
-        processor.aGraph->setCurrentEnvironment(curEnvironment);
+        processor.audioGraph.setCurrentEnvironment(curEnvironment);
     }
         
     

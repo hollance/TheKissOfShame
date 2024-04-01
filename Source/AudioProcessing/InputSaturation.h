@@ -16,6 +16,7 @@
 
 #include "../shameConfig.h"
 
+using namespace juce;
 
 
 class InputSaturation

@@ -11,6 +11,8 @@
 
 #include "../shameConfig.h"
 
+using namespace juce;
+
 #define FLANGE_BUFF_SIZE 2000
 
 class Flange

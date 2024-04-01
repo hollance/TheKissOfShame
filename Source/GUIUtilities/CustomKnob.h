@@ -5,6 +5,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
+using namespace juce;
 
 
 class CustomKnob : public Slider

@@ -83,6 +83,7 @@ Other things that can be improved in the code:
 - Remove most of the compiler warnings. (I set the warning level high on purpose.)
 - Replace deprecated JUCE APIs with modern equivalents.
 - Use APVTS for the parameters so they can be automated.
+- Implement state saving and loading.
 - Since `ScopedPointer` is deprecrated, I replaced these with `std::unique_ptr`, but many of these things do not actually need to be pointers at all.
 - Explicitly use `juce::` and `std::` namespaces.
 - Remove any files that aren't being used (source files, images, audio).
