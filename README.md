@@ -79,6 +79,7 @@ Bugs I found:
 Other things that can be improved in the code:
 
 - Embed the external image and sound files as binary data in the plug-in, to simplify the installation (no need to manually copy these resources).
+- pluginval succeeds but there is an assertion failure in juce_AudioSampleBuffer in `getRMSLevel`; I think this happens on mono inputs
 - Remove most of the compiler warnings. (I set the warning level high on purpose.)
 - Replace deprecated JUCE APIs with modern equivalents.
 - Use APVTS for the parameters so they can be automated.
