@@ -4,6 +4,8 @@
 
 The Kiss of Shame, debuted at the Audio Engineering Society Convention 2014 in Los Angeles, was a pioneering DAW plugin that leveraged commercial UX/UI design principles to shape its magnetic tape + circuitry emulation algorithms.
 
+![](Docs/blurb.jpg)
+
 To differentiate itself in the competitive pro-audio plugin market, The Kiss of Shame introduced groundbreaking features including an interactive, multi-touch-ready GUI and analog tape degradation simulation for distinctive audio effects.
 
 The Kiss of Shame was the worlds first (and perhaps only) tape / analog circuitry emulation plugin that realistically models the effects of magnetic particle instability, lubricant loss, substrate deformation, drift, scrape-flutter, print-through and reel expansion/contraction into a suite of FX processing tools for sound design and music production.
@@ -19,6 +21,8 @@ The Kiss of Shame was never released. The source code was graciously donated to 
 TODO
 
 ## How to use this plug-in
+
+![](Docs/screenshot.jpg)
 
 **Choose between two distinct tape types:**
 
@@ -74,12 +78,13 @@ Bugs I found:
 
 Other things that can be improved in the code:
 
-- Remove most of the compiler warnings. (I set the warning level high on purpose.)
 - Embed the external image and sound files as binary data in the plug-in, to simplify the installation (no need to manually copy these resources).
+- Remove most of the compiler warnings. (I set the warning level high on purpose.)
 - Replace deprecated JUCE APIs with modern equivalents.
 - Use APVTS for the parameters so they can be automated.
 - Since `ScopedPointer` is deprecrated, I replaced these with `std::unique_ptr`, but many of these things do not actually need to be pointers at all.
 - Explicitly use `juce::` and `std::` namespaces.
+- Remove any files that aren't being used (source files, images, audio).
 - Don't use `rand()` and `srand()`.
 - General code cleanup.
 
