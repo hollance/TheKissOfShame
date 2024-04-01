@@ -19,7 +19,7 @@ class EnvelopeDips
 {
 public:
     
-    EnvelopeDips() : domain(44100), incr(0.0), dynamicExtremity(0.0), numPointRandomness(0.0), numPoints(5)
+    EnvelopeDips() : incr(0.0), domain(44100), dynamicExtremity(0.0), numPointRandomness(0.0), numPoints(5)
     {
         srand (time(NULL));
         

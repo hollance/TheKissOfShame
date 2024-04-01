@@ -61,7 +61,7 @@ class ImageAnimationComponent : public MyAnimatedAppComponent, public ActionBroa
 {
   
 public:
-    ImageAnimationComponent(File imgFile, int numFrames, int framesPerSecond) : animationNumFrames(numFrames), isAnimating(false), curIncrement(0), resetThresh(1), incrRate(0.01)
+    ImageAnimationComponent(File imgFile, int numFrames, int framesPerSecond) : isAnimating(false), resetThresh(1), curIncrement(0), incrRate(0.01), animationNumFrames(numFrames)
     {
         setFramesPerSecond(framesPerSecond); //NOTE: setting framesPerSecond to 0 stops the timer.
         
@@ -79,18 +79,20 @@ public:
         oglContext.attachTo(*this);
     }
     
-    virtual void mouseDown (const MouseEvent& event)
+    void mouseDown (const MouseEvent& event) override
     {
         //setFramesPerSecond(25);
         setAnimationResetThreshold(0.015);
-    };
-    virtual void mouseUp (const MouseEvent& event)
+    }
+
+    void mouseUp (const MouseEvent& event) override
     {
         //setFramesPerSecond(50);
         setFlangeDepth = curFlangeDepth;
         setAnimationResetThreshold(0.0);
-    };
-    virtual void mouseDrag (const MouseEvent& event)
+    }
+
+    void mouseDrag (const MouseEvent& event) override
     {
         dragDist = (float)event.getDistanceFromDragStartY()/100;
         curFlangeDepth = setFlangeDepth + dragDist;
@@ -124,7 +126,7 @@ public:
             
     }
 
-    void paint (Graphics& g)
+    void paint (Graphics& g) override
     {
         g.fillAll(Colours::black);
         

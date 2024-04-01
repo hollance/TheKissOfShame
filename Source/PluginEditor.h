@@ -41,17 +41,17 @@ public:
     
     void sliderValueChanged (Slider*) override;
     
-    void buttonClicked (Button* b);
-    virtual void timerCallback(int timerID){}
-    
-    virtual void mouseDoubleClick(const MouseEvent &event);
-    virtual void mouseDown (const MouseEvent& event);
-    virtual void mouseUp (const MouseEvent& event);
-    virtual void mouseDrag (const MouseEvent& event);
+    void buttonClicked (Button* b) override;
+    virtual void timerCallback(int timerID) {}
+
+    void mouseDoubleClick(const MouseEvent &event) override;
+    void mouseDown (const MouseEvent& event) override;
+    void mouseUp (const MouseEvent& event) override;
+    void mouseDrag (const MouseEvent& event) override;
 
     void changeListenerCallback (ChangeBroadcaster *source){};
     
-    virtual void actionListenerCallback (const String& message);
+    void actionListenerCallback (const String& message) override;
     
 //    virtual bool keyPressed (const KeyPress& key, Component* originatingComponent)
 //    {

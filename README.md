@@ -74,7 +74,8 @@ Other things that can be improved in the code:
 - Replace deprecated JUCE APIs with modern equivalents.
 - Use APVTS for the parameters so they can be automated.
 - Since `ScopedPointer` is deprecrated, I replaced these with `std::unique_ptr`, but many of these things do not actually need to be pointers at all.
-- Explicitly use `juce::` namespace.
+- Explicitly use `juce::` and `std::` namespaces.
+- Don't use `rand()` and `srand()`.
 - General code cleanup.
 
 ## How it works
