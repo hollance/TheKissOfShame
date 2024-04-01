@@ -19,9 +19,9 @@ public:
     Hiss()
     {
         File hissFile(AUDIO_PATH + "Hiss.wav");
-        hissBuffer = new AudioSampleBuffer();
-        if(hissFile.existsAsFile()) hissBuffer = loadSampleFromFile(hissFile);
-                
+        hissBuffer.reset(new AudioSampleBuffer());
+        if(hissFile.existsAsFile()) hissBuffer.reset(loadSampleFromFile(hissFile));
+
         setHissLevel(0.0);
         
         indx1 = 0;
@@ -37,8 +37,8 @@ public:
         hissBuffer->clear();
         
         File hissFile(audioFilePath);
-        hissBuffer = new AudioSampleBuffer();
-        if(hissFile.existsAsFile()) hissBuffer = loadSampleFromFile(hissFile);
+        hissBuffer.reset(new AudioSampleBuffer());
+        if(hissFile.existsAsFile()) hissBuffer.reset(loadSampleFromFile(hissFile));
     }
 
     
@@ -140,7 +140,7 @@ public:
     
 private:
     
-    ScopedPointer<AudioSampleBuffer> hissBuffer;
+    std::unique_ptr<AudioSampleBuffer> hissBuffer;
     int indx1;
     int indx2;
     float hissSample;

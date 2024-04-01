@@ -27,7 +27,7 @@ public:
         
         shameGlobalLevel = 0.0;
         
-        shameSampleBuffer = new AudioSampleBuffer(numChannels, BUFFER_SIZE);
+        shameSampleBuffer.reset(new AudioSampleBuffer(numChannels, BUFFER_SIZE));
         
         
         ////////////////initialization for wavetable
@@ -199,7 +199,7 @@ public:
 
 private:
     
-    ScopedPointer<AudioSampleBuffer> shameSampleBuffer;
+    std::unique_ptr<AudioSampleBuffer> shameSampleBuffer;
     
     float shameGlobalLevel;
     

@@ -165,7 +165,7 @@ class Granulate//: public Generator
     
   std::vector<float> lastFrame;
 //  StkFrames data_;
-    ScopedPointer<AudioSampleBuffer> audioData;
+    std::unique_ptr<AudioSampleBuffer> audioData;
   std::vector<Grain> grains_;
   Noise noise;
   //long gPointer_;

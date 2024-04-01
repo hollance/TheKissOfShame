@@ -69,37 +69,37 @@ public:
 
     //Images
     //Image faceImage;
-    ScopedPointer<BacklightComponent> backlight;
-    ScopedPointer<ImageInteractor> faceImage;
+    std::unique_ptr<BacklightComponent> backlight;
+    std::unique_ptr<ImageInteractor> faceImage;
     
     //Knobs
-    ScopedPointer<CustomKnob> inputSaturationKnob;
-    ScopedPointer<CustomKnob> shameKnob;
-    ScopedPointer<CustomKnob> hissKnob;
-    ScopedPointer<CustomKnob> blendKnob;
-    ScopedPointer<CustomKnob> outputKnob;
-    ScopedPointer<CustomKnob> ageKnob;
+    std::unique_ptr<CustomKnob> inputSaturationKnob;
+    std::unique_ptr<CustomKnob> shameKnob;
+    std::unique_ptr<CustomKnob> hissKnob;
+    std::unique_ptr<CustomKnob> blendKnob;
+    std::unique_ptr<CustomKnob> outputKnob;
+    std::unique_ptr<CustomKnob> ageKnob;
     
     //buttons
-    ScopedPointer<CustomButton> bypassButton;
-    ScopedPointer<CustomButton> tapeTypeButton;
-    ScopedPointer<CustomButton> printThroughButton;
-    ScopedPointer<CustomButton> linkIOButtonL;
-    ScopedPointer<CustomButton> linkIOButtonR;
+    std::unique_ptr<CustomButton> bypassButton;
+    std::unique_ptr<CustomButton> tapeTypeButton;
+    std::unique_ptr<CustomButton> printThroughButton;
+    std::unique_ptr<CustomButton> linkIOButtonL;
+    std::unique_ptr<CustomButton> linkIOButtonR;
 
     //labels
     Label debugLabel; //Used strictly to post messages for debugging...
     
     //Components
-    ScopedPointer<EnvironmentsComponent> environmentsComponent;
+    std::unique_ptr<EnvironmentsComponent> environmentsComponent;
 
     
     //animation
     //ScopedPointer<ImageAnimator> reelAnimation;
-    ScopedPointer<ImageAnimationComponent> reelAnimation;
-    ScopedPointer<ImageInteractor> vuMeterL;
-    ScopedPointer<ImageInteractor> vuMeterR;
-    ScopedPointer<ImageInteractor> shameKnobImage;
+    std::unique_ptr<ImageAnimationComponent> reelAnimation;
+    std::unique_ptr<ImageInteractor> vuMeterL;
+    std::unique_ptr<ImageInteractor> vuMeterR;
+    std::unique_ptr<ImageInteractor> shameKnobImage;
 
 
 

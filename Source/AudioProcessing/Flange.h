@@ -25,7 +25,7 @@ public:
         playPosition = 0.0;
         curPos = 0;
         
-        flangeSampleBuffer = new AudioSampleBuffer(numChannels, FLANGE_BUFF_SIZE);
+        flangeSampleBuffer.reset(new AudioSampleBuffer(numChannels, FLANGE_BUFF_SIZE));
      }
     
     ~Flange(){}
@@ -139,8 +139,8 @@ public:
     
 private:
     
-    ScopedPointer<AudioSampleBuffer> flangeSampleBuffer;
-    
+    std::unique_ptr<AudioSampleBuffer> flangeSampleBuffer;
+
     float playPosition;
     int curPos;
     

@@ -52,6 +52,31 @@ Brief instructions:
 
 TODO
 
+## TO-DO list
+
+The plug-in was never completely finished. The goal of this open source project is:
+
+1. To finish the plug-in and make binary releases available.
+2. Figure out how it works and document the code for eductional purposes.
+3. Potentially, clean up and improve the code.
+
+The information about missing features and bugs that I received is as follows:
+
+> As far as the emulations for each Tape Type, Shame knob, storage conditions, those should all be locked, loaded and ready to go. Same with the flange via the automatible reels.
+>
+> I think we were polishing off the “Print-Through” effect. Just making it usable.
+>
+> From what I recall, it just had some minor GUI bugs and where we stopped, it’s the parameters would randomly resort to default.
+
+Other things that can be improved in the code:
+
+- Embed the external image and sound files as binary data in the plug-in, to simplify the installation (no need to manually copy these resources).
+- Replace deprecated JUCE APIs with modern equivalents.
+- Use APVTS for the parameters so they can be automated.
+- Since `ScopedPointer` is deprecrated, I replaced these with `std::unique_ptr`, but many of these things do not actually need to be pointers at all.
+- Explicitly use `juce::` namespace.
+- General code cleanup.
+
 ## How it works
 
 TODO
@@ -67,6 +92,8 @@ Original developers:
 - [Brian Hansen](https://brianhansen.sonimmersion.com/) — DSP Engineering / Algorithm Development
 
 - [Yannick Bonnefoy](https://nanopsy.tv/) — GUI
+
+Updates and improvements by [Matthijs Hollemans](https://audiodev.blog).
 
 This program is free software: you can redistribute it and/or modify it under the terms of the [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.en.html) as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 

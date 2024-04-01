@@ -28,7 +28,7 @@ public:
     {
         
         /////////////////////// used for general amplitude fluctuation
-        dips = new EnvelopeDips();
+        dips.reset(new EnvelopeDips());
         dips->setDomainMS(1000); //NOTE: domain is set in milleseconds
         dips->setDynamicExtremity(0.5);
         dips->setNumPoints(15);
@@ -37,15 +37,15 @@ public:
         
         
         ////////////////////// used to mix noise burst
-        whiteNoise = new Noise();
-        
-        noiseEnv = new Envelope(350);
+        whiteNoise.reset(new Noise());
+
+        noiseEnv.reset(new Envelope(350));
         noiseEnv->addEvelopePoint(0.143, 0.073);
         noiseEnv->addEvelopePoint(0.305, 0.367);
         noiseEnv->addEvelopePoint(0.383, 0.567);
         noiseEnv->addEvelopePoint(0.428, 0.0);
         
-        sigEnv = new Envelope(350);
+        sigEnv.reset(new Envelope(350));
         sigEnv->addEvelopePoint(0.143, 0.2);
         sigEnv->addEvelopePoint(0.305, 0.8);
         sigEnv->addEvelopePoint(0.383, 0.5);
@@ -54,7 +54,7 @@ public:
         
         ////////////////////// used to modulate the amplitude of the incomming signal
         int numVoices = 5;
-        granulator = new Granulate(numVoices, AUDIO_PATH + "PinkNoise.wav");
+        granulator.reset(new Granulate(numVoices, AUDIO_PATH + "PinkNoise.wav"));
         granulator->setRandomFactor(1.0);
         granulator->setStretch(0);
         granulator->setGrainParameters(5, 50, 50, 50);
@@ -62,18 +62,18 @@ public:
         
         
         ///////////////////// pre recorded low frequency granular noise
-        lowFreqGranular = new LoopCrossfade(AUDIO_PATH + "LowLevelGrainNoise.wav");
+        lowFreqGranular.reset(new LoopCrossfade(AUDIO_PATH + "LowLevelGrainNoise.wav"));
         lowFreqGranular->setLoopCrossfadeLevel(0.25);
         
         
         ////////////////////  filters for granulation and the main signal
-        lpButterworth_Grains = new Biquads;
+        lpButterworth_Grains.reset(new Biquads);
         lpButterworth_Grains->setButterworth_LowHighPass(2000, 1, true);
         
-        hpButterworth_Grains = new Biquads;
+        hpButterworth_Grains.reset(new Biquads);
         hpButterworth_Grains->setButterworth_LowHighPass(50, 1, false);
         
-        lpButterworth_Signal = new Biquads;
+        lpButterworth_Signal.reset(new Biquads);
         lpButterworth_Signal->setButterworth_LowHighPass(22050, 1, true);
         
         
@@ -167,16 +167,16 @@ public:
     
 private:
     
-    ScopedPointer<EnvelopeDips> dips;
-    ScopedPointer<Granulate> granulator;
-    ScopedPointer<LoopCrossfade> lowFreqGranular;
-    ScopedPointer<Biquads> lpButterworth_Grains;
-    ScopedPointer<Biquads> hpButterworth_Grains;
-    ScopedPointer<Biquads> lpButterworth_Signal;
+    std::unique_ptr<EnvelopeDips> dips;
+    std::unique_ptr<Granulate> granulator;
+    std::unique_ptr<LoopCrossfade> lowFreqGranular;
+    std::unique_ptr<Biquads> lpButterworth_Grains;
+    std::unique_ptr<Biquads> hpButterworth_Grains;
+    std::unique_ptr<Biquads> lpButterworth_Signal;
     
-    ScopedPointer<Noise> whiteNoise;
-    ScopedPointer<Envelope> noiseEnv;
-    ScopedPointer<Envelope> sigEnv;
+    std::unique_ptr<Noise> whiteNoise;
+    std::unique_ptr<Envelope> noiseEnv;
+    std::unique_ptr<Envelope> sigEnv;
     
     
     float grainImpact;

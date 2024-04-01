@@ -27,21 +27,21 @@ public:
     
     AudioGraph(int numChannels) : currentEnvironment(eEnvironmentOff)
     {
-        inSaturation = new InputSaturation(0.0, 2.0, 0.272);
-        
-        flange = new Flange(2);
+        inSaturation.reset(new InputSaturation(0.0, 2.0, 0.272));
+
+        flange.reset(new Flange(2));
         flange->setDepth(0.0);
         
-        shame = new Shame(2);
+        shame.reset(new Shame(2));
         shame->setInterpolatedParameters(0.0);
         
-        hiss = new Hiss();
-        
-        blend = new Blend();
-        
-        hurricaneSandy = new HurricaneSandy();
-        
-        
+        hiss.reset(new Hiss());
+
+        blend.reset(new Blend());
+
+        hurricaneSandy.reset(new HurricaneSandy());
+
+
         bypassGraph = false;
         
         outputLevel = 1.0;
@@ -160,14 +160,14 @@ private:
     
     AudioSampleBuffer audioGraphProcessingBuffer;
     
-    ScopedPointer<Hiss> hiss;
-    ScopedPointer<Shame> shame;
-    ScopedPointer<InputSaturation> inSaturation;
-    ScopedPointer<Blend> blend;
-    ScopedPointer<Flange> flange;
+    std::unique_ptr<Hiss> hiss;
+    std::unique_ptr<Shame> shame;
+    std::unique_ptr<InputSaturation> inSaturation;
+    std::unique_ptr<Blend> blend;
+    std::unique_ptr<Flange> flange;
     
     
-    ScopedPointer<HurricaneSandy> hurricaneSandy;
+    std::unique_ptr<HurricaneSandy> hurricaneSandy;
     
     bool bypassGraph;
     

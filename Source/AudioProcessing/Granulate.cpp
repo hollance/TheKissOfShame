@@ -120,8 +120,8 @@ void Granulate::openFile(String fileName)
     //Use this to open an audio file
     //File hissFile(AUDIO_PATH + "Hiss.wav");
     File audioFile(fileName);
-    audioData = new AudioSampleBuffer();
-    if(audioFile.existsAsFile()) audioData = loadSampleFromFile(audioFile);
+    audioData.reset(new AudioSampleBuffer());
+    if(audioFile.existsAsFile()) audioData.reset(loadSampleFromFile(audioFile));
     
     
     

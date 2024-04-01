@@ -19,9 +19,9 @@ public:
     Loop(String audioFilePath) : loopDuration(0.0)
     {
         File loopFile(audioFilePath);
-        loopBuffer = new AudioSampleBuffer();
-        if(loopFile.existsAsFile()) loopBuffer = loadSampleFromFile(loopFile);
-        
+        loopBuffer.reset(new AudioSampleBuffer());
+        if(loopFile.existsAsFile()) loopBuffer.reset(loadSampleFromFile(loopFile));
+
         indx = 0;
         
     }
@@ -32,8 +32,8 @@ public:
     void setAudioFile(String audioFilePath)
     {
         File loopFile(audioFilePath);
-        loopBuffer = new AudioSampleBuffer();
-        if(loopFile.existsAsFile()) loopBuffer = loadSampleFromFile(loopFile);
+        loopBuffer.reset(new AudioSampleBuffer());
+        if(loopFile.existsAsFile()) loopBuffer.reset(loadSampleFromFile(loopFile));
     }
     
     void setLoopDuration(float milleseconds)
@@ -132,7 +132,7 @@ public:
     
 private:
     
-    ScopedPointer<AudioSampleBuffer> loopBuffer;
+    std::unique_ptr<AudioSampleBuffer> loopBuffer;
     int indx;
     float signalLevel;
     

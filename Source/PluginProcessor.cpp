@@ -19,7 +19,7 @@ KissOfShameAudioProcessor::KissOfShameAudioProcessor() : masterBypass(false)
     shame = 0.0;
     hiss = 0.0;
     
-    aGraph = new AudioGraph(getNumInputChannels());
+    aGraph.reset(new AudioGraph(getNumInputChannels()));
     
     curRMSL = 0;
     curRMSR = 0;

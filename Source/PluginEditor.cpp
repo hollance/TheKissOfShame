@@ -21,114 +21,114 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     
     //addKeyListener(this);
     
-    backlight = new BacklightComponent;
+    backlight.reset(new BacklightComponent);
     backlight->setTopLeftPosition(0, 703 - backlight->getHeight());
-    addAndMakeVisible(backlight);
-    
-    faceImage = new ImageInteractor;
+    addAndMakeVisible(*backlight);
+
+    faceImage.reset(new ImageInteractor);
     faceImage->setNumFrames(1);
     faceImage->setDimensions(0, 0, 960, 703);
     String faceImagePath = GUI_PATH + "KOS_Graphics/fond_alpha.png";
     faceImage->setAnimationImage(faceImagePath);
     faceImage->setInterceptsMouseClicks(false, false);
-    addAndMakeVisible(faceImage);
+    addAndMakeVisible(*faceImage);
 
     
     /////////// COMPONENTS /////////////////
     
-    environmentsComponent = new EnvironmentsComponent(p);
+    environmentsComponent.reset(new EnvironmentsComponent(p));
     environmentsComponent->setTopLeftPosition(388, 654);
-    addAndMakeVisible(environmentsComponent);
-    
+    addAndMakeVisible(*environmentsComponent);
+
     
     ////////// KNOBS ////////////////
     
-    inputSaturationKnob = new CustomKnob;
+    inputSaturationKnob.reset(new CustomKnob);
     String inputImagePath = GUI_PATH + "KOS_Graphics/06_alpha.png";
     inputSaturationKnob->setKnobImage(inputImagePath);
     inputSaturationKnob->setNumFrames(65);
     inputSaturationKnob->setKnobDimensions(104, 521, 116, 116);
     inputSaturationKnob->addListener (this);
-    addAndMakeVisible(inputSaturationKnob);
+    addAndMakeVisible(*inputSaturationKnob);
 
-    shameKnobImage = new ImageInteractor;
+    shameKnobImage.reset(new ImageInteractor);
     shameKnobImage->setNumFrames(65);
     shameKnobImage->setDimensions(401, 491, 174, 163);
     String shameImagePath = GUI_PATH + "KOS_Graphics/09_alpha.png";
     shameKnobImage->setAnimationImage(shameImagePath);
-    addAndMakeVisible(shameKnobImage);
-    
-    shameKnob = new CustomKnob;
+    addAndMakeVisible(*shameKnobImage);
+
+    shameKnob.reset(new CustomKnob);
     String crossImagePath = GUI_PATH + "KOS_Graphics/09_v2.png";
     shameKnob->setKnobImage(crossImagePath);
     shameKnob->setNumFrames(65);
     shameKnob->setKnobDimensions(401, 491, 174, 163);
     shameKnob->addListener (this);
-    addAndMakeVisible(shameKnob);
-    
-    hissKnob = new CustomKnob;
+    addAndMakeVisible(*shameKnob);
+
+    hissKnob.reset(new CustomKnob);
     String hissImagePath = GUI_PATH + "KOS_Graphics/04_alpha.png";
     hissKnob->setKnobImage(hissImagePath);
     hissKnob->setNumFrames(65);
     hissKnob->setKnobDimensions(547, 455, 78, 72);
     hissKnob->addListener (this);
-    addAndMakeVisible(hissKnob);
-    
-    blendKnob = new CustomKnob;
+    addAndMakeVisible(*hissKnob);
+
+    blendKnob.reset(new CustomKnob);
     String blendImagePath = GUI_PATH + "KOS_Graphics/05_alpha.png";
     blendKnob->setKnobImage(blendImagePath);
     blendKnob->setNumFrames(65);
     blendKnob->setKnobDimensions(705, 455, 78, 72);
     blendKnob->addListener (this);
-    addAndMakeVisible(blendKnob);
-    
-    outputKnob = new CustomKnob;
+    addAndMakeVisible(*blendKnob);
+
+    outputKnob.reset(new CustomKnob);
     String outputImagePath = GUI_PATH + "KOS_Graphics/12_alpha.png";
     outputKnob->setKnobImage(outputImagePath);
     outputKnob->setNumFrames(65);
     outputKnob->setKnobDimensions(757, 521, 122, 116);
     outputKnob->addListener (this);
-    addAndMakeVisible(outputKnob);
-    
-    ageKnob = new CustomKnob;
+    addAndMakeVisible(*outputKnob);
+
+    ageKnob.reset(new CustomKnob);
     String ageImagePath = GUI_PATH + "KOS_Graphics/03_alpha.png";
     ageKnob->setKnobImage(ageImagePath);
     ageKnob->setNumFrames(65);
     ageKnob->setKnobDimensions(350, 455, 74, 72);
     ageKnob->addListener (this);
-    addAndMakeVisible(ageKnob);
-    
+    addAndMakeVisible(*ageKnob);
+
     
     ///////////// BUTTONS /////////////////
     
-    bypassButton = new CustomButton;
+    bypassButton.reset(new CustomButton);
     bypassButton->setTopLeftPosition(202, 469);
     String bypassImagePath = GUI_PATH + "KOS_Graphics/01.png";
     bypassButton->setClippedCustomOnImage(bypassImagePath, 0, 68, 34, 34);
     bypassButton->setClippedCustomOffImage(bypassImagePath, 0, 0, 34, 34);
     bypassButton->addListener(this);
     bypassButton->setClickingTogglesState(true);
-    addAndMakeVisible(bypassButton);
-    
-    tapeTypeButton = new CustomButton;
+    addAndMakeVisible(*bypassButton);
+
+    tapeTypeButton.reset(new CustomButton);
     tapeTypeButton->setTopLeftPosition(233, 610);
     String tapeTypeImagePath = GUI_PATH + "KOS_Graphics/07.png";
     tapeTypeButton->setClippedCustomOnImage(tapeTypeImagePath, 0, 0, 42, 39);
     tapeTypeButton->setClippedCustomOffImage(tapeTypeImagePath, 0, 39, 42, 39);
     tapeTypeButton->addListener(this);
     tapeTypeButton->setClickingTogglesState(true);
-    addAndMakeVisible(tapeTypeButton);
-    
-    printThroughButton = new CustomButton;
+    addAndMakeVisible(*tapeTypeButton);
+
+    printThroughButton.reset(new CustomButton);
     printThroughButton->setTopLeftPosition(698, 609);
     String printThroughImagePath = GUI_PATH + "KOS_Graphics/11.png";
     printThroughButton->setClippedCustomOnImage(printThroughImagePath, 0, 41, 47, 41);
     printThroughButton->setClippedCustomOffImage(printThroughImagePath, 0, 0, 47, 41);
     printThroughButton->addListener(this);
     printThroughButton->setClickingTogglesState(true);
-    addAndMakeVisible(printThroughButton);
-    
-    linkIOButtonL = new CustomButton;
+    addAndMakeVisible(*printThroughButton);
+
+    linkIOButtonL.reset(new CustomButton);
     //inputSaturationKnob->setKnobDimensions(104, 521, 116, 116);
     linkIOButtonL->setTopLeftPosition(137, 605);
     String linkImagePath = GUI_PATH + "KOS_Graphics/link.png";
@@ -137,9 +137,9 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     linkIOButtonL->resizeButton(0.6);
     linkIOButtonL->addListener(this);
     linkIOButtonL->setClickingTogglesState(true);
-    addAndMakeVisible(linkIOButtonL);
+    addAndMakeVisible(*linkIOButtonL);
 
-    linkIOButtonR = new CustomButton;
+    linkIOButtonR.reset(new CustomButton);
     //outputKnob->setKnobDimensions(757, 521, 122, 116);
     linkIOButtonR->setTopLeftPosition(792, 605);
     linkIOButtonR->setClippedCustomOnImage(linkImagePath, 0, 0, 50, 50);
@@ -147,7 +147,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     linkIOButtonR->resizeButton(0.6);
     linkIOButtonR->addListener(this);
     linkIOButtonR->setClickingTogglesState(true);
-    addAndMakeVisible(linkIOButtonR);
+    addAndMakeVisible(*linkIOButtonR);
 
     
     ///////////////// Animation //////////////////
@@ -155,25 +155,25 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor (KissOfShameAud
     String reelImagePath = GUI_PATH + "KOS_Graphics/wheels.png";
     File reelFile(reelImagePath);
     //reelAnimation = new ImageAnimator(reelFile, 31, 31);
-    reelAnimation = new ImageAnimationComponent(reelFile, 31, 50); //50
+    reelAnimation.reset(new ImageAnimationComponent(reelFile, 31, 50)); //50
     reelAnimation->setFrameDimensions(0, 0, 960, 322);
     reelAnimation->addActionListener(this);
-    addAndMakeVisible(reelAnimation);
-    
-    vuMeterL = new ImageInteractor;
+    addAndMakeVisible(*reelAnimation);
+
+    vuMeterL.reset(new ImageInteractor);
     vuMeterL->setNumFrames(65);
     vuMeterL->setDimensions(251, 518, 108, 108);
     String vuLeftImagePath = GUI_PATH + "KOS_Graphics/08.png";
     vuMeterL->setAnimationImage(vuLeftImagePath);
-    addAndMakeVisible(vuMeterL);
-    
-    vuMeterR = new ImageInteractor;
+    addAndMakeVisible(*vuMeterL);
+
+    vuMeterR.reset(new ImageInteractor);
     vuMeterR->setNumFrames(65);
     vuMeterR->setDimensions(605, 518, 110, 108);
     String vuRightImagePath = GUI_PATH + "KOS_Graphics/10.png";
     vuMeterR->setAnimationImage(vuRightImagePath);
-    addAndMakeVisible(vuMeterR);
-    
+    addAndMakeVisible(*vuMeterR);
+
     //oglContext.setComponentPaintingEnabled(true);
     //oglContext.attachTo(*this);
 
@@ -311,7 +311,7 @@ void KissOfShameAudioProcessorEditor::mouseDoubleClick(const MouseEvent &event)
     if(showReels)
     {
         showReels = false;
-        removeChildComponent(reelAnimation);
+        removeChildComponent(reelAnimation.get());
         setReelMode(false);
         setSize(faceImage->getWidth(), faceImage->getHeight());
         repaint();
@@ -319,7 +319,7 @@ void KissOfShameAudioProcessorEditor::mouseDoubleClick(const MouseEvent &event)
     else
     {
         showReels = true;
-        addAndMakeVisible(reelAnimation);
+        addAndMakeVisible(*reelAnimation);
         setReelMode(true);
         setSize(faceImage->getWidth(), faceImage->getHeight());
         repaint();
@@ -367,7 +367,7 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
     // by the host, rather than just modifying them directly, otherwise the host won't know
     // that they've changed.
     
-    if (slider == inputSaturationKnob)
+    if (slider == inputSaturationKnob.get())
     {
         processor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam,
                                                    (float) inputSaturationKnob->getValue());
@@ -380,7 +380,7 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
             processor.aGraph->setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
         }
     }
-    else if(slider == outputKnob)
+    else if(slider == outputKnob.get())
     {
         processor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam,
                                              (float) outputKnob->getValue());
@@ -393,7 +393,7 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
             processor.aGraph->setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
         }
     }
-    else if(slider == shameKnob)
+    else if(slider == shameKnob.get())
     {
         shameKnobImage->updateImageWithValue(slider->getValue());
         
@@ -402,21 +402,21 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
         
         processor.aGraph->setAudioUnitParameters(eShameGlobalLevel, (float) shameKnob->getValue());
     }
-    else if(slider == hissKnob)
+    else if(slider == hissKnob.get())
     {
         processor.setParameterNotifyingHost (KissOfShameAudioProcessor::hissParam,
                                                    (float) hissKnob->getValue());
         
         processor.aGraph->setAudioUnitParameters(eHissLevel, (float) hissKnob->getValue());
     }
-    else if(slider == blendKnob)
+    else if(slider == blendKnob.get())
     {
         processor.setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam,
                                                    (float) blendKnob->getValue());
         
         processor.aGraph->setAudioUnitParameters(eBlendLevel, (float) blendKnob->getValue());
     }
-    else if(slider == ageKnob)
+    else if(slider == ageKnob.get())
     {
         //reelAnimation->setFramesPerSecond(ageKnob->getValue()*15 + 35);
         //reelAnimation->setAnimationRate(ageKnob->getValue());
@@ -431,7 +431,7 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged (Slider* slider)
 
 void KissOfShameAudioProcessorEditor::buttonClicked (Button* b)
 {
-    if(b == bypassButton)
+    if(b == bypassButton.get())
     {
         if(b->getToggleState())
         {
@@ -457,7 +457,7 @@ void KissOfShameAudioProcessorEditor::buttonClicked (Button* b)
                                                    b->getToggleState());
         processor.aGraph->setAudioUnitParameters(eBypass, b->getToggleState());
     }
-    else if(b == linkIOButtonL || b == linkIOButtonR)
+    else if(b == linkIOButtonL.get() || b == linkIOButtonR.get())
     {
         linkIOButtonL->setToggleState(b->getToggleState(), dontSendNotification);
         linkIOButtonR->setToggleState(b->getToggleState(), dontSendNotification);

@@ -89,7 +89,7 @@ public:
     
     AudioPlayHead::CurrentPositionInfo curPositionInfo;
     
-    ScopedPointer<AudioGraph> aGraph;
+    std::unique_ptr<AudioGraph> aGraph;
     float curRMSL, curRMSR;
     
     int playHeadPos;

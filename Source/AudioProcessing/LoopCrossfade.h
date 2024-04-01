@@ -20,9 +20,9 @@ public:
     LoopCrossfade(String filePath)
     {
         File audioFile(filePath);
-        LoopCrossfadeBuffer = new AudioSampleBuffer();
-        if(audioFile.existsAsFile()) LoopCrossfadeBuffer = loadSampleFromFile(audioFile);
-                
+        LoopCrossfadeBuffer.reset(new AudioSampleBuffer());
+        if(audioFile.existsAsFile()) LoopCrossfadeBuffer.reset(loadSampleFromFile(audioFile));
+
         setLoopCrossfadeLevel(0.0);
         
         indx1 = 0;
@@ -38,8 +38,8 @@ public:
         LoopCrossfadeBuffer->clear();
         
         File audioFile(audioFilePath);
-        LoopCrossfadeBuffer = new AudioSampleBuffer();
-        if(audioFile.existsAsFile()) LoopCrossfadeBuffer = loadSampleFromFile(audioFile);
+        LoopCrossfadeBuffer.reset(new AudioSampleBuffer());
+        if(audioFile.existsAsFile()) LoopCrossfadeBuffer.reset(loadSampleFromFile(audioFile));
     }
 
     
@@ -160,7 +160,7 @@ public:
     
 private:
     
-    ScopedPointer<AudioSampleBuffer> LoopCrossfadeBuffer;
+    std::unique_ptr<AudioSampleBuffer> LoopCrossfadeBuffer;
     int indx1;
     int indx2;
     float loopCrossfadeSample;
