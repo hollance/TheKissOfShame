@@ -191,7 +191,7 @@ void KissOfShameAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuf
     //Need to send the RMS below to the animation components for VU meters...
     //use juce's messaging system to keep the audio thread safe.
     curRMSL = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
-    curRMSR = buffer.getRMSLevel(1, 0, buffer.getNumSamples());
+    curRMSR = buffer.getRMSLevel(getTotalNumInputChannels() - 1, 0, buffer.getNumSamples());  // TODO: hacky workaround
     
     
     // In case we have more outputs than inputs, we'll clear any output
