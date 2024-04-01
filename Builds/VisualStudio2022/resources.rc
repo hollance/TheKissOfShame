@@ -15,6 +15,7 @@ BEGIN
   BEGIN
     BLOCK "040904E4"
     BEGIN
+      VALUE "CompanyName",  "Infernal Love\0"
       VALUE "FileDescription",  "KissOfShame\0"
       VALUE "FileVersion",  "1.0.0\0"
       VALUE "ProductName",  "KissOfShame\0"

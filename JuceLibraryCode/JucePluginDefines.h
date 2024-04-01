@@ -44,13 +44,13 @@
  #define JucePlugin_Name                   "The Kiss Of Shame"
 #endif
 #ifndef  JucePlugin_Desc
- #define JucePlugin_Desc                   "KissOfShame"
+ #define JucePlugin_Desc                   "Tape Desecration Processor"
 #endif
 #ifndef  JucePlugin_Manufacturer
  #define JucePlugin_Manufacturer           "Infernal Love"
 #endif
 #ifndef  JucePlugin_ManufacturerWebsite
- #define JucePlugin_ManufacturerWebsite    "www.yourcompany.com"
+ #define JucePlugin_ManufacturerWebsite    "https://github.com/hollance/TheKissOfShame"
 #endif
 #ifndef  JucePlugin_ManufacturerEmail
  #define JucePlugin_ManufacturerEmail      ""
@@ -59,7 +59,7 @@
  #define JucePlugin_ManufacturerCode       0x494c6f76
 #endif
 #ifndef  JucePlugin_PluginCode
- #define JucePlugin_PluginCode             0x506c7567
+ #define JucePlugin_PluginCode             0x546b6f73
 #endif
 #ifndef  JucePlugin_IsSynth
  #define JucePlugin_IsSynth                0
@@ -113,7 +113,7 @@
  #define JucePlugin_CFBundleIdentifier     com.InfernalLove.KissOfShame
 #endif
 #ifndef  JucePlugin_AAXIdentifier
- #define JucePlugin_AAXIdentifier          com.yourcompany.KissOfShame
+ #define JucePlugin_AAXIdentifier          com.InfernalLove.KissOfShame
 #endif
 #ifndef  JucePlugin_AAXManufacturerCode
  #define JucePlugin_AAXManufacturerCode    JucePlugin_ManufacturerCode
@@ -152,10 +152,10 @@
  #define JucePlugin_ARATransformationFlags  0
 #endif
 #ifndef  JucePlugin_ARAFactoryID
- #define JucePlugin_ARAFactoryID           "com.yourcompany.KissOfShame.factory"
+ #define JucePlugin_ARAFactoryID           "com.InfernalLove.KissOfShame.factory"
 #endif
 #ifndef  JucePlugin_ARADocumentArchiveID
- #define JucePlugin_ARADocumentArchiveID   "com.yourcompany.KissOfShame.aradocumentarchive.1.0.0"
+ #define JucePlugin_ARADocumentArchiveID   "com.InfernalLove.KissOfShame.aradocumentarchive.1.0.0"
 #endif
 #ifndef  JucePlugin_ARACompatibleArchiveIDs
  #define JucePlugin_ARACompatibleArchiveIDs  ""

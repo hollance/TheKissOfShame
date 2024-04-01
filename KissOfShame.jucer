@@ -3,8 +3,10 @@
 <JUCERPROJECT id="r9VeKi" name="KissOfShame" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="1" jucerFormatVersion="1" bundleIdentifier="com.InfernalLove.KissOfShame"
               pluginName="The Kiss Of Shame" pluginManufacturer="Infernal Love"
-              pluginManufacturerCode="ILov" pluginCode="Plug" pluginAAXCategory="2"
-              cppLanguageStandard="20" pluginChannelConfigs="{1, 1}, {2, 2}">
+              pluginManufacturerCode="ILov" pluginCode="Tkos" pluginAAXCategory="2"
+              cppLanguageStandard="20" pluginChannelConfigs="{1, 1}, {2, 2}"
+              companyWebsite="https://github.com/hollance/TheKissOfShame" aaxIdentifier="com.InfernalLove.KissOfShame"
+              companyName="Infernal Love" pluginDesc="Tape Desecration Processor">
   <MAINGROUP id="OWaNcN" name="KissOfShame">
     <GROUP id="{B24498C6-307A-39AA-B5C9-C7D44EC9F7CA}" name="Source">
       <GROUP id="{0BB2110C-DD57-5FF0-3F34-F79558EEE4FE}" name="AudioProcessing">
