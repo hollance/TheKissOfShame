@@ -68,6 +68,10 @@ The information about missing features and bugs that I received is as follows:
 >
 > From what I recall, it just had some minor GUI bugs and where we stopped, it’s the parameters would randomly resort to default.
 
+Bugs I found:
+
+- ...
+
 Other things that can be improved in the code:
 
 - Embed the external image and sound files as binary data in the plug-in, to simplify the installation (no need to manually copy these resources).
