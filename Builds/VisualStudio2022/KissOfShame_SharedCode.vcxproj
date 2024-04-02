@@ -139,10 +139,8 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\AudioProcessing\AudioGraph.cpp"/>
-    <ClCompile Include="..\..\Source\AudioProcessing\Blend.cpp"/>
+    <ClCompile Include="..\..\Source\AudioProcessing\AudioUtils.cpp"/>
     <ClCompile Include="..\..\Source\AudioProcessing\Granulate.cpp"/>
-    <ClCompile Include="..\..\Source\AudioProcessing\Hiss.cpp"/>
     <ClCompile Include="..\..\Source\AudioProcessing\HurricaneSandy.cpp"/>
     <ClCompile Include="..\..\Source\AudioProcessing\InputSaturation.cpp"/>
     <ClCompile Include="..\..\Source\AudioProcessing\Noise.cpp"/>
@@ -2434,6 +2432,7 @@
     <ClCompile Include="C:\JUCE\modules\juce_opengl\juce_opengl.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_devices.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_formats.cpp"/>
@@ -3456,10 +3455,12 @@
     <ClInclude Include="C:\JUCE\modules\juce_opengl\opengl\juce_wgl.h"/>
     <ClInclude Include="C:\JUCE\modules\juce_opengl\utils\juce_OpenGLAppComponent.h"/>
     <ClInclude Include="..\..\..\..\..\..\..\..\..\JUCE\modules\juce_opengl\juce_opengl.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\BinaryData.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\JucePluginDefines.h"/>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Audio_Resources\Hiss.wav"/>
     <None Include="C:\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt"/>
     <None Include="C:\JUCE\modules\juce_audio_devices\native\oboe\README.md"/>
     <None Include="C:\JUCE\modules\juce_audio_formats\codecs\flac\Flac Licence.txt"/>

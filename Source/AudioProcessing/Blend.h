@@ -1,49 +1,42 @@
-//
-//  Blend.h
-//  KissOfShame
-//
-//  Created by Brian Hansen on 9/14/14.
-//
-//
-
-#ifndef __KissOfShame__Blend__
-#define __KissOfShame__Blend__
-
+#pragma once
 
 #include "../shameConfig.h"
 
-using namespace juce;
-
+/**
+  Simple dry/wet mix
+ */
 class Blend
 {
 public:
     Blend()
     {
-        blendValue = 0.0;
+        blendValue = 0.0f;
     }
-    
-    void processBlend(AudioSampleBuffer &buffer1, AudioSampleBuffer &buffer2, int numChannels)
+
+    void processBlend(juce::AudioBuffer<float>& buffer1,
+                      juce::AudioBuffer<float>& buffer2,
+                      int numChannels) noexcept
     {
-        
-        for (int channel = 0; channel < numChannels; ++channel)
-        {
+        const float blend1 = 1.0f - blendValue;
+        const float blend2 = blendValue;
+
+        for (int channel = 0; channel < numChannels; ++channel) {
             float* samples = buffer1.getWritePointer(channel);
-            
-            for(int i = 0; i < buffer1.getNumSamples(); i++)
-            {
-                samples[i] = (1-blendValue)*buffer1.getReadPointer(channel)[i] + blendValue*buffer2.getReadPointer(channel)[i];
+
+            const float* readPtr1 = buffer1.getReadPointer(channel);
+            const float* readPtr2 = buffer2.getReadPointer(channel);
+
+            for (int i = 0; i < buffer1.getNumSamples(); ++i) {
+                samples[i] = blend1 * readPtr1[i] + blend2 * readPtr2[i];
             }
         }
     }
-    
-    void setBlendLevel(float level) {blendValue = level;}
-    
+
+    void setBlendLevel(float level) noexcept
+    {
+        blendValue = level;
+    }
+
 private:
-    
     float blendValue;
-    
 };
-
-
-
-#endif /* defined(__KissOfShame__Blend__) */

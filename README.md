@@ -78,12 +78,15 @@ Bugs I found:
 
 Other things that can be improved in the code:
 
+- Use APVTS for the parameters so they can be automated.
+  - Currently the parameters are set from the editor, but there's no guarantee there will be an editor. Closing and reopening the editor will reset all parameters.
+  - There are two sets of parameters: 1) the ones used in `AudioGraph::setAudioUnitParameters()`, and 2) copies of these in the processor. None of this is thread-safe. Instead, we should use `AudioParameterFloat` objects and read them in `processBlock`.
+  - Implement state saving and loading.
+  - Parameter smoothing.
 - Embed the external image and sound files as binary data in the plug-in, to simplify the installation (no need to manually copy these resources).
 - pluginval succeeds but there is an assertion failure in juce_AudioSampleBuffer in `getRMSLevel`; I think this happens on mono inputs
 - Remove most of the compiler warnings. (I set the warning level high on purpose.)
 - Replace deprecated JUCE APIs with modern equivalents.
-- Use APVTS for the parameters so they can be automated.
-- Implement state saving and loading.
 - Since `ScopedPointer` is deprecrated, I replaced these with `std::unique_ptr`, but many of these things do not actually need to be pointers at all.
 - Explicitly use `juce::` and `std::` namespaces.
 - Remove any files that aren't being used (source files, images, audio).

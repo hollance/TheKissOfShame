@@ -1,160 +1,87 @@
-//
-//  Hiss.h
-//  KissOfShame
-//
-//  Created by Brian Hansen on 9/9/14.
-//
-//
-
-#ifndef __KissOfShame__Hiss__
-#define __KissOfShame__Hiss__
-
-#include <iostream>
+#pragma once
 
 #include "../shameConfig.h"
-
-using namespace juce;
 
 class Hiss
 {
 public:
     Hiss()
     {
-        File hissFile(AUDIO_PATH + "Hiss.wav");
-        hissBuffer.reset(new AudioSampleBuffer());
-        if(hissFile.existsAsFile()) hissBuffer.reset(loadSampleFromFile(hissFile));
+        // Load the hiss waveform from the binary data.
+        hissBuffer.reset(loadSampleFromMemory(BinaryData::Hiss_wav, BinaryData::Hiss_wavSize));
 
-        setHissLevel(0.0);
-        
+        // We expect this to be a stereo buffer.
+        jassert(hissBuffer->getNumChannels() == 2);
+        jassert(hissBuffer->getNumSamples() > 0);
+
+        // Note that Hiss.wav is a 44.1 kHz sample. At 48 kHz it still sounds
+        // like noise, but at higher rates a tone becomes audible.
+        // For consistent results, it would be better to add a prepareToPlay()
+        // method to this class and resample the hissBuffer if necessary.
+
+        setHissLevel(0.0f);
+    }
+
+    void reset() noexcept
+    {
         indx1 = 0;
-        indx2 = hissBuffer->getNumSamples()/2;
-        
-//        crossfade = false;
-    }
-    
-    ~Hiss(){}
-    
-    void setAudioFile(String audioFilePath)
-    {
-        hissBuffer->clear();
-        
-        File hissFile(audioFilePath);
-        hissBuffer.reset(new AudioSampleBuffer());
-        if(hissFile.existsAsFile()) hissBuffer.reset(loadSampleFromFile(hissFile));
+        indx2 = hissBuffer->getNumSamples() / 2;
     }
 
-    
-    
-//    void chooseFileToOpen()
-//    {
-//        FileChooser selectFile(T("Choose a file to open"));
-//        if(selectFile.browseForFileToOpen())
-//        {
-//            currentFile = selectFile.getResult();
-//            
-//            //load into transport for playback
-//            loadFileIntoAudioTransport(currentFile);
-//            
-//            //load sample point buffer.
-//            AudioSampleBuffer *as = loadSampleFromFile(currentFile);
-//            cout << "Number of samples in Buffer: " << as->getNumSamples() << endl;
-//            cout << "Number of channels in Buffer: " << as->getNumChannels() << endl;
-//            //        for(int i = 0; i < as->getNumSamples(); i++){
-//            //            cout << "Channel 0. Audio Sample " << i << ": " << *(as->getSampleData(0,i)) << endl;
-//            //        }
-//            
-//        }
-//    }
-
-    
-    AudioSampleBuffer *loadSampleFromFile(const File& audioFile)
+    void processHiss(juce::AudioBuffer<float>& sampleBuffer, int numChannels) noexcept
     {
-        AudioSampleBuffer *toneASB = NULL;
-        //    File noteFile(File::getCurrentWorkingDirectory().getChildFile(fileName));
-        if (audioFile.existsAsFile()) {
-            AudioFormatManager formatManager;
-            formatManager.registerBasicFormats();
-            
-            AudioFormatReader* reader = formatManager.createReaderFor (audioFile);
-            
-            if (reader) {
-                toneASB = new AudioSampleBuffer(reader->numChannels, (int) reader->lengthInSamples);
-                //toneASB->readFromAudioReader(reader, 0, (int) reader->lengthInSamples, 0, true, true);
-                reader->read(toneASB, 0, (int) reader->lengthInSamples, 0, true, true);
-            }
-            delete reader;
-        }
-        return toneASB;
-    }
+        const int hissLength = hissBuffer->getNumSamples();
+        const int hissHalfway = hissLength / 2;
 
-    
-    void processHiss(AudioSampleBuffer& sampleBuffer, int numChannels)
-    {
-        for(int i = 0; i < sampleBuffer.getNumSamples(); i++)
-        {
-            if(indx1 < 0.5*hissBuffer->getNumSamples())
-                rampValue = (float)indx1 / (0.5*(float)hissBuffer->getNumSamples());
+        for (int i = 0; i < sampleBuffer.getNumSamples(); ++i) {
+            // The hiss waveform fades in at the beginning and out at the end.
+            // To prevent these tapers from being audible and get a seamless
+            // loop, we'll read the waveform at two locations that are half a
+            // waveform length apart and blend between these two samples.
+            float rampValue;
+            if (indx1 < hissHalfway)
+                rampValue = float(indx1) / float(hissHalfway);
             else
-                rampValue = (float)(hissBuffer->getNumSamples() - indx1) / (0.5*(float)hissBuffer->getNumSamples());
+                rampValue = float(hissLength - indx1) / float(hissHalfway);
 
-
-            for(int channel = 0; channel < numChannels; ++channel)
-            {
+            //TODO: do this more efficiently by changing the order
+            for (int channel = 0; channel < numChannels; ++channel) {
                 float* samples = sampleBuffer.getWritePointer(channel);
-                
-                hissSample = rampValue*hissBuffer->getReadPointer(channel)[indx1] + (1-rampValue)*hissBuffer->getReadPointer(channel)[indx2];
-                
+                const float* readPtr = hissBuffer->getReadPointer(channel);
+
+                // Blend between the two hiss samples.
+                float hissSample = rampValue*readPtr[indx1] + (1.0f - rampValue)*readPtr[indx2];
+
+                // Blend between the incoming signal and the hiss.
                 samples[i] = signalLevel*samples[i] + hissLevel*hissSample;
             }
-            
-            
-            indx1 = (indx1 + 1) % hissBuffer->getNumSamples();
-            //if(crossfade) indx2 = (indx2 + 1) % hissBuffer->getNumSamples();
-            indx2 = (indx2 + 1) % hissBuffer->getNumSamples();
+
+            indx1 = (indx1 + 1) % hissLength;
+            indx2 = (indx2 + 1) % hissLength;
         }
     }
-    
-    
-    void setHissLevel(float level)
-    {
-        hissLevel = level*0.005;
-        signalLevel = 1 - hissLevel;
-        
-//        signalLevel = 0.0 - 3.0*level; //reducing signal level by this much (up to 3dB)
-//        hissLevel = 3.0*level - 36.0; //replacing with hiss.
-//        
-//        signalLevel = powf(10, signalLevel/20); //convert to amp
-//        hissLevel = powf(10, hissLevel/20); //convert to amp
-    }
-    
-    
-    
-//    void setInputDrive(float drive)
-//    {
-//        //NOTE: drive input is in dB
-//        inputDrive = drive * 36.0 - 18.0;
-//        
-//        //now convert dB to Amp
-//        inputDrive = powf(10, inputDrive/20);
-//    }
 
-    
-    
+    void setAudioFile(const juce::String& audioFilePath)
+    {
+        juce::File hissFile(audioFilePath);
+        if (hissFile.existsAsFile()) {
+            hissBuffer.reset(loadSampleFromFile(hissFile));
+        }
+    }
+
+    void setHissLevel(float level) noexcept
+    {
+        // TODO: maybe boost the max hiss level a bit?
+        // Add up to -46 dB of hiss, reduce the dry level by the same amount.
+        hissLevel = level * 0.005f;
+        signalLevel = 1.0f - hissLevel;
+    }
+
 private:
-    
-    std::unique_ptr<AudioSampleBuffer> hissBuffer;
+    std::unique_ptr<juce::AudioBuffer<float>> hissBuffer;
+
     int indx1;
     int indx2;
-    float hissSample;
-    
     float hissLevel;
     float signalLevel;
-    
-    
-    float rampValue;
-    
-//    bool crossfade;
-    
 };
-
-#endif /* defined(__KissOfShame__Hiss__) */

@@ -1,185 +1,171 @@
-//
-//  AudioGraph.h
-//  KissOfShame
-//
-//  Created by Brian Hansen on 9/9/14.
-//
-//
-
-#ifndef __KissOfShame__AudioGraph__
-#define __KissOfShame__AudioGraph__
-
-#include <iostream>
+#pragma once
 
 #include "../shameConfig.h"
 #include "Hiss.h"
-#include "Shame.h"
-#include "InputSaturation.h"
+//#include "Shame.h"
+//#include "InputSaturation.h"
+//#include "Flange.h"
+//#include "HurricaneSandy.h"
 #include "Blend.h"
-#include "Flange.h"
-#include "HurricaneSandy.h"
-
-using namespace juce;
 
 class AudioGraph
 {
 public:
-    
-    
-    AudioGraph() : currentEnvironment(eEnvironmentOff)
+    AudioGraph()
     {
-        inSaturation.reset(new InputSaturation(0.0f, 2.0f, 0.272f));
+//        currentEnvironment = eEnvironmentOff;
 
-        flange.reset(new Flange(2));
-        flange->setDepth(0.0);
-        
-        shame.reset(new Shame(2));
-        shame->setInterpolatedParameters(0.0);
-        
-        hiss.reset(new Hiss());
-
-        blend.reset(new Blend());
-
-        hurricaneSandy.reset(new HurricaneSandy());
-
+//        inSaturation.reset(new InputSaturation(0.0f, 2.0f, 0.272f));
+//
+//        flange.reset(new Flange(2));
+//        flange->setDepth(0.0);
+//
+//        shame.reset(new Shame(2));
+//        shame->setInterpolatedParameters(0.0);
+//
+//        hurricaneSandy.reset(new HurricaneSandy());
 
         bypassGraph = false;
-        
-        outputLevel = 1.0;
-        inputDrive = 1.0;
+        outputLevel = 1.0f;
+        inputDrive = 1.0f;
     }
-    
-    ~AudioGraph(){}
 
-    void setCurrentEnvironment(EShameEnvironments env) {currentEnvironment = env;}
-        
-    void processGraph(AudioSampleBuffer& audioBuffer, int numChannels)
+    void prepareToPlay(double sampleRate, int samplesPerBlock)
     {
-        if(bypassGraph) return;
-        
-        //apply the input drive
+        // TODO: allocate audioGraphProcessingBuffer
+
+        hiss.reset();
+    }
+
+    void processGraph(juce::AudioBuffer<float>& audioBuffer, int numChannels)
+    {
+        if (bypassGraph) return;
+
+        // Apply the input drive
         audioBuffer.applyGain(inputDrive);
-        
-        //make a copy of the original audio to be used strictly for processing
+
+        // Make a copy of the original audio to be used strictly for processing
+        // TODO: doesn't this allocate memory?
         audioGraphProcessingBuffer = audioBuffer;
-        
-        //////////// Process Audio ///////////
-        //1.Incomming audio gets flange and saturation processing
-        inSaturation->processInputSaturation(audioGraphProcessingBuffer, numChannels);
-        flange->processFlange(audioGraphProcessingBuffer, numChannels);
-        
-        //2. add environment effects
-        //EShameEnvironments environmentSelection = eEnvironmentHurricaneSandy;
-        //switch (environmentSelection)
-        switch (currentEnvironment)
-        {
-            case eEnvironmentHurricaneSandy:
-                hurricaneSandy->processHurricaneSandy(audioGraphProcessingBuffer, numChannels);
-                break;
-            case eEnvironmentHotLocker:
-                break;
-            case eEnvironmentHumidCellar:
-                break;
-            case eEnvironmentStudioCloset:
-                break;
-            case eEnvironmentOff:
-                break;
-            case eEnvironmentEnvironment:
-                break;
-            case eEnvironmentTotalEnvironments:
-                break;
-            default:
-                break;
-        }
-        
-        //3. add hiss and the shame feature
-        hiss->processHiss(audioGraphProcessingBuffer, numChannels);
-        shame->processShame(audioGraphProcessingBuffer, numChannels);
-        
-        //4. blend the processed audio with the original signal.
-        blend->processBlend(audioBuffer, audioGraphProcessingBuffer, numChannels);
-        
-        //////////// End Process Audio ///////////
-        
-        //5. apply the final output level
+
+//        ////////// Process Audio //////////
+//
+//        // 1. Incoming audio gets flange and saturation processing
+//        inSaturation->processInputSaturation(audioGraphProcessingBuffer, numChannels);
+//        flange->processFlange(audioGraphProcessingBuffer, numChannels);
+//
+//        // 2. Add environment effects
+//        switch (currentEnvironment)
+//        {
+//            case eEnvironmentOff:
+//                break;
+//            case eEnvironmentEnvironment:
+//                break;
+//            case eEnvironmentStudioCloset:
+//                break;
+//            case eEnvironmentHumidCellar:
+//                break;
+//            case eEnvironmentHotLocker:
+//                break;
+//            case eEnvironmentHurricaneSandy:
+//                hurricaneSandy->processHurricaneSandy(audioGraphProcessingBuffer, numChannels);
+//                break;
+//            default:
+//                break;
+//        }
+
+        // 3. Add hiss and the shame feature
+        hiss.processHiss(audioGraphProcessingBuffer, numChannels);
+//        shame->processShame(audioGraphProcessingBuffer, numChannels);
+
+        // 4. Blend the processed audio with the original signal
+        blend.processBlend(audioBuffer, audioGraphProcessingBuffer, numChannels);
+
+        ////////// End Process Audio //////////
+
+        // 5. Apply the final output level
         audioBuffer.applyGain(outputLevel);
     }
-    
-    
+
     void setInputDrive(float drive)
     {
-        //NOTE: express inputDrive in terms of dB
+        // Express input drive as -18 dB ... +18 dB
         inputDrive = drive * 36.0f - 18.0f;
 
-        //now convert dB to Amp
-        inputDrive = powf(10, inputDrive/20);
+        // Convert dB to linear gain
+        inputDrive = std::pow(10.0f, inputDrive * 0.05f);
     }
-    
+
     void setOutputLevel(float level)
     {
-        //NOTE:express outputLevel in terms of dB
+        // Express output level as -18 dB ... +18 dB
         outputLevel = level * 36.0f - 18.0f;
 
-        //now convert dB to Amp
-        outputLevel = powf(10, outputLevel/20);
+        // Convert dB to linear gain
+        outputLevel = std::pow(10.0f, outputLevel * 0.05f);
     }
-    
-    
+
+    float getOutputLevel() const noexcept
+    {
+        return outputLevel;
+    }
+
+    bool isGraphBypassed() const noexcept
+    {
+        return bypassGraph;
+    }
+
+    void setCurrentEnvironment(EShameEnvironments env)
+    {
+//TODO
+//        currentEnvironment = env;
+    }
+
     void setAudioUnitParameters(AUParameter param, float paramLevel)
     {
-        switch(param)
-        {
-            case eSaturationDrive: inSaturation->setDrive(paramLevel); break;
-            case eSaturationOuput: inSaturation->setOutput(paramLevel); break;
-            case eSaturationRate: inSaturation->setRateOdd(paramLevel); break;
-            case eSaturationThresh: inSaturation->setThreshold(paramLevel); break;
-            case eSaturationGlobalLevel: inSaturation->setGlobalLevel(paramLevel); break;
-            
-            case eShameFreq: shame->setRate(paramLevel); break;
-            case eShameDepth: shame->setDepth(paramLevel); break;
-            case eShameGlobalLevel: shame->setInterpolatedParameters(paramLevel); break;
-                
-            case eHurricaneSandyGlobalLevel: hurricaneSandy->setInterpolatedParameters(paramLevel); break;
-                
-            case eHissLevel:   hiss->setHissLevel(paramLevel); break;
-                
-            case eBlendLevel:  blend->setBlendLevel(paramLevel); break;
-                
-            case eFlangeDepth:  flange->setDepth(paramLevel); break;
-                
-            case eBypass:      bypassGraph = paramLevel; break;
+        // TODO: replace this with an APVTS and update these properties
+        // from within processBlock
+
+        switch (param) {
+//TODO: these parameters are never used anywhere
+//            case eSaturationDrive: inSaturation->setDrive(paramLevel); break;
+//            case eSaturationOuput: inSaturation->setOutput(paramLevel); break;
+//            case eSaturationRate: inSaturation->setRateOdd(paramLevel); break;
+//            case eSaturationThresh: inSaturation->setThreshold(paramLevel); break;
+//            case eSaturationGlobalLevel: inSaturation->setGlobalLevel(paramLevel); break;
+//            case eShameFreq: shame->setRate(paramLevel); break;
+//            case eShameDepth: shame->setDepth(paramLevel); break;
+
+//            case eShameGlobalLevel: shame->setInterpolatedParameters(paramLevel); break;
+//
+//            case eHurricaneSandyGlobalLevel: hurricaneSandy->setInterpolatedParameters(paramLevel); break;
+
+            case eHissLevel:   hiss.setHissLevel(paramLevel); break;
+            case eBlendLevel:  blend.setBlendLevel(paramLevel); break;
+
+//            case eFlangeDepth:  flange->setDepth(paramLevel); break;
+
+            case eBypass:      bypassGraph = (paramLevel >= 0.5f); break;
             case eInputDrive:  setInputDrive(paramLevel); break;
             case eOutputLevel: setOutputLevel(paramLevel); break;
-                
+
             default: break;
         }
     }
-    
-    float getOutputLevel(){return outputLevel;}
-    
-    bool isGraphBypassed(){return bypassGraph;}
-    
+
 private:
-    
-    EShameEnvironments currentEnvironment;
-    
-    AudioSampleBuffer audioGraphProcessingBuffer;
-    
-    std::unique_ptr<Hiss> hiss;
-    std::unique_ptr<Shame> shame;
-    std::unique_ptr<InputSaturation> inSaturation;
-    std::unique_ptr<Blend> blend;
-    std::unique_ptr<Flange> flange;
-    
-    
-    std::unique_ptr<HurricaneSandy> hurricaneSandy;
-    
+//    EShameEnvironments currentEnvironment;
+
+    juce::AudioBuffer<float> audioGraphProcessingBuffer;
+
+    Hiss hiss;
+//    std::unique_ptr<Shame> shame;
+//    std::unique_ptr<InputSaturation> inSaturation;
+//    std::unique_ptr<Flange> flange;
+//    std::unique_ptr<HurricaneSandy> hurricaneSandy;
+    Blend blend;
+
     bool bypassGraph;
-    
     float inputDrive;
     float outputLevel;
-    
 };
-
-
-#endif /* defined(__KissOfShame__AudioGraph__) */

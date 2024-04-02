@@ -1,14 +1,17 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-KissOfShameAudioProcessor::KissOfShameAudioProcessor() : masterBypass(false)
+KissOfShameAudioProcessor::KissOfShameAudioProcessor()
 {
-    // TODO: I think it might be a good idea to move this into prepareToPlay
-    // but not sure yet how/when the parameters in AudioGraph are updated
-
+    //TODO: these parameters are changed by the editor in order to
+    // communicate back to the host, but this is the wrong approach!
     inputSaturation = 1.0f;
     shame = 0.0f;
     hiss = 0.0f;
+    blend = 0.0f;
+    output = 0.0f;
+    flange = 0.0f;
+    masterBypass = false;
 
     curRMSL = 0.0f;
     curRMSR = 0.0f;
@@ -122,8 +125,16 @@ void KissOfShameAudioProcessor::changeProgramName(int, const juce::String&)
 {
 }
 
-void KissOfShameAudioProcessor::prepareToPlay(double, int)
+void KissOfShameAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
+    audioGraph.prepareToPlay(sampleRate, samplesPerBlock);
+
+    curRMSL = 0.0f;
+    curRMSR = 0.0f;
+
+    curPositionInfo.resetToDefault();
+
+    playHeadPos = 0;
 }
 
 void KissOfShameAudioProcessor::releaseResources()
@@ -145,6 +156,7 @@ void KissOfShameAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, j
 
     // Need to send the RMS below to the animation components for VU meters...
     // use juce's messaging system to keep the audio thread safe.
+    // Measuring RMS over the buffer is simple but depends on the buffer size.
     curRMSL = buffer.getRMSLevel(0, 0, numSamples);
     if (totalNumInputChannels > 1) {
         curRMSR = buffer.getRMSLevel(1, 0, numSamples);

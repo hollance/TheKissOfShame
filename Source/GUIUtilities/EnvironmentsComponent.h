@@ -56,7 +56,8 @@ public:
             default:
                 break;
         }
-        
+
+        // TODO: not thread safe
         processor.audioGraph.setCurrentEnvironment(curEnvironment);
     }
         

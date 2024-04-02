@@ -2,6 +2,9 @@
 
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="KissOfShame\Audio_Resources">
+      <UniqueIdentifier>{A0BC10CC-B60F-182B-A188-9888DA59587F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="KissOfShame\Source\AudioProcessing">
       <UniqueIdentifier>{08758FDE-B663-F85B-12F3-28D07907B4B7}</UniqueIdentifier>
     </Filter>
@@ -616,16 +619,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\AudioProcessing\AudioGraph.cpp">
-      <Filter>KissOfShame\Source\AudioProcessing</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\AudioProcessing\Blend.cpp">
+    <ClCompile Include="..\..\Source\AudioProcessing\AudioUtils.cpp">
       <Filter>KissOfShame\Source\AudioProcessing</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\AudioProcessing\Granulate.cpp">
-      <Filter>KissOfShame\Source\AudioProcessing</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\AudioProcessing\Hiss.cpp">
       <Filter>KissOfShame\Source\AudioProcessing</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\AudioProcessing\HurricaneSandy.cpp">
@@ -3087,6 +3084,9 @@
     </ClCompile>
     <ClCompile Include="C:\JUCE\modules\juce_opengl\juce_opengl.mm">
       <Filter>JUCE Modules\juce_opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp">
+      <Filter>JUCE Library Code</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp">
       <Filter>JUCE Library Code</Filter>
@@ -6132,6 +6132,9 @@
     <ClInclude Include="..\..\..\..\..\..\..\..\..\JUCE\modules\juce_opengl\juce_opengl.h">
       <Filter>JUCE Modules\juce_opengl</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\JuceLibraryCode\BinaryData.h">
+      <Filter>JUCE Library Code</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h">
       <Filter>JUCE Library Code</Filter>
     </ClInclude>
@@ -6140,6 +6143,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Audio_Resources\Hiss.wav">
+      <Filter>KissOfShame\Audio_Resources</Filter>
+    </None>
     <None Include="C:\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt">
       <Filter>JUCE Modules\juce_audio_devices\native\oboe</Filter>
     </None>

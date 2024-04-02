@@ -8,19 +8,20 @@
               companyWebsite="https://github.com/hollance/TheKissOfShame" aaxIdentifier="com.InfernalLove.KissOfShame"
               companyName="Infernal Love" pluginDesc="Tape Desecration Processor">
   <MAINGROUP id="OWaNcN" name="KissOfShame">
+    <GROUP id="{D05B6388-C834-5CDD-F546-69BC8457519E}" name="Audio_Resources">
+      <FILE id="XPhc7y" name="Hiss.wav" compile="0" resource="1" file="Audio_Resources/Hiss.wav"/>
+    </GROUP>
     <GROUP id="{B24498C6-307A-39AA-B5C9-C7D44EC9F7CA}" name="Source">
       <GROUP id="{0BB2110C-DD57-5FF0-3F34-F79558EEE4FE}" name="AudioProcessing">
-        <FILE id="PTciwn" name="AudioGraph.cpp" compile="1" resource="0" file="Source/AudioProcessing/AudioGraph.cpp"/>
         <FILE id="SW4pA6" name="AudioGraph.h" compile="0" resource="0" file="Source/AudioProcessing/AudioGraph.h"/>
+        <FILE id="gBWHf8" name="AudioUtils.cpp" compile="1" resource="0" file="Source/AudioProcessing/AudioUtils.cpp"/>
         <FILE id="vbpRKN" name="Biquads.h" compile="0" resource="0" file="Source/AudioProcessing/Biquads.h"/>
-        <FILE id="Y6RxAM" name="Blend.cpp" compile="1" resource="0" file="Source/AudioProcessing/Blend.cpp"/>
         <FILE id="cuLgsH" name="Blend.h" compile="0" resource="0" file="Source/AudioProcessing/Blend.h"/>
         <FILE id="yjxSU5" name="Envelope.h" compile="0" resource="0" file="Source/AudioProcessing/Envelope.h"/>
         <FILE id="iEIvA1" name="EnvelopeDips.h" compile="0" resource="0" file="Source/AudioProcessing/EnvelopeDips.h"/>
         <FILE id="aA0cm2" name="Flange.h" compile="0" resource="0" file="Source/AudioProcessing/Flange.h"/>
         <FILE id="abZgTO" name="Granulate.cpp" compile="1" resource="0" file="Source/AudioProcessing/Granulate.cpp"/>
         <FILE id="Eefo0l" name="Granulate.h" compile="0" resource="0" file="Source/AudioProcessing/Granulate.h"/>
-        <FILE id="VomXHT" name="Hiss.cpp" compile="1" resource="0" file="Source/AudioProcessing/Hiss.cpp"/>
         <FILE id="YpdFX0" name="Hiss.h" compile="0" resource="0" file="Source/AudioProcessing/Hiss.h"/>
         <FILE id="HEVlgO" name="HurricaneSandy.cpp" compile="1" resource="0"
               file="Source/AudioProcessing/HurricaneSandy.cpp"/>
