@@ -93,6 +93,13 @@ Other things that can be improved in the code:
 - Don't use `rand()` and `srand()`.
 - General code cleanup.
 
+### What is missing
+
+- The only environment that's implemented is Hurricane Sandy.
+- The print-through button doesn't do anything.
+- The tape type selection button has no effect.
+- Oversampling. The saturation stage can easily add aliases.
+
 ## How it works
 
 TODO

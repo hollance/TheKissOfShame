@@ -3,7 +3,7 @@
 #include "../shameConfig.h"
 #include "Hiss.h"
 //#include "Shame.h"
-//#include "InputSaturation.h"
+#include "InputSaturation.h"
 //#include "Flange.h"
 //#include "HurricaneSandy.h"
 #include "Blend.h"
@@ -15,8 +15,6 @@ public:
     {
 //        currentEnvironment = eEnvironmentOff;
 
-//        inSaturation.reset(new InputSaturation(0.0f, 2.0f, 0.272f));
-//
 //        flange.reset(new Flange(2));
 //        flange->setDepth(0.0);
 //
@@ -41,17 +39,24 @@ public:
     {
         if (bypassGraph) return;
 
-        // Apply the input drive
+        // Apply the input drive. This is a simple linear gain.
         audioBuffer.applyGain(inputDrive);
 
         // Make a copy of the original audio to be used strictly for processing
         // TODO: doesn't this allocate memory?
         audioGraphProcessingBuffer = audioBuffer;
 
-//        ////////// Process Audio //////////
-//
-//        // 1. Incoming audio gets flange and saturation processing
-//        inSaturation->processInputSaturation(audioGraphProcessingBuffer, numChannels);
+        ////////// Process Audio //////////
+
+        // 1. Incoming audio gets flange and saturation processing.
+
+        // Note that the saturation module has settings for threshold, drive,
+        // etc, but they'e set to fixed values in this plug-in. The input gain
+        // previously applied determines how saturated the wet signal becomes.
+        // This saturation is always being applied.
+        inSaturation.processInputSaturation(audioGraphProcessingBuffer, numChannels);
+
+
 //        flange->processFlange(audioGraphProcessingBuffer, numChannels);
 //
 //        // 2. Add environment effects
@@ -83,7 +88,7 @@ public:
 
         ////////// End Process Audio //////////
 
-        // 5. Apply the final output level
+        // 5. Apply the final output level. Again a simple linear gain.
         audioBuffer.applyGain(outputLevel);
     }
 
@@ -158,9 +163,10 @@ private:
 
     juce::AudioBuffer<float> audioGraphProcessingBuffer;
 
+    InputSaturation inSaturation { 0.0f, 2.0f, 0.272f };
+
     Hiss hiss;
 //    std::unique_ptr<Shame> shame;
-//    std::unique_ptr<InputSaturation> inSaturation;
 //    std::unique_ptr<Flange> flange;
 //    std::unique_ptr<HurricaneSandy> hurricaneSandy;
     Blend blend;
