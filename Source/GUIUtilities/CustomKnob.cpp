@@ -6,7 +6,8 @@ CustomKnob::CustomKnob()
 :
 knobNumFrames(128)
 {
-    setSliderStyle(Rotary);
+    //setSliderStyle(Rotary);
+    setSliderStyle(RotaryHorizontalVerticalDrag);
     setTextBoxStyle(NoTextBox, true, 0, 0);
     setRange(0.000, 1.000, 0.001);
     setValue(0.0);
