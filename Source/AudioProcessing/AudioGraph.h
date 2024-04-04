@@ -4,7 +4,7 @@
 #include "Hiss.h"
 //#include "Shame.h"
 #include "InputSaturation.h"
-//#include "Flange.h"
+#include "Flange.h"
 //#include "HurricaneSandy.h"
 #include "Blend.h"
 
@@ -15,9 +15,6 @@ public:
     {
 //        currentEnvironment = eEnvironmentOff;
 
-//        flange.reset(new Flange(2));
-//        flange->setDepth(0.0);
-//
 //        shame.reset(new Shame(2));
 //        shame->setInterpolatedParameters(0.0);
 //
@@ -33,6 +30,7 @@ public:
         // TODO: allocate audioGraphProcessingBuffer
 
         hiss.reset();
+        flange.setDepth(0.0f);
     }
 
     void processGraph(juce::AudioBuffer<float>& audioBuffer, int numChannels)
@@ -56,9 +54,8 @@ public:
         // This saturation is always being applied.
         inSaturation.processInputSaturation(audioGraphProcessingBuffer, numChannels);
 
+        flange.processFlange(audioGraphProcessingBuffer, numChannels);
 
-//        flange->processFlange(audioGraphProcessingBuffer, numChannels);
-//
 //        // 2. Add environment effects
 //        switch (currentEnvironment)
 //        {
@@ -147,9 +144,7 @@ public:
 
             case eHissLevel:   hiss.setHissLevel(paramLevel); break;
             case eBlendLevel:  blend.setBlendLevel(paramLevel); break;
-
-//            case eFlangeDepth:  flange->setDepth(paramLevel); break;
-
+            case eFlangeDepth: flange.setDepth(paramLevel); break;
             case eBypass:      bypassGraph = (paramLevel >= 0.5f); break;
             case eInputDrive:  setInputDrive(paramLevel); break;
             case eOutputLevel: setOutputLevel(paramLevel); break;
@@ -164,10 +159,10 @@ private:
     juce::AudioBuffer<float> audioGraphProcessingBuffer;
 
     InputSaturation inSaturation { 0.0f, 2.0f, 0.272f };
+    Flange flange { 2 };
 
     Hiss hiss;
 //    std::unique_ptr<Shame> shame;
-//    std::unique_ptr<Flange> flange;
 //    std::unique_ptr<HurricaneSandy> hurricaneSandy;
     Blend blend;
 
