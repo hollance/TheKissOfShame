@@ -27,8 +27,6 @@
               file="Source/AudioProcessing/HurricaneSandy.cpp"/>
         <FILE id="dx4j1C" name="HurricaneSandy.h" compile="0" resource="0"
               file="Source/AudioProcessing/HurricaneSandy.h"/>
-        <FILE id="OsTNno" name="InputSaturation.cpp" compile="1" resource="0"
-              file="Source/AudioProcessing/InputSaturation.cpp"/>
         <FILE id="Efqd1s" name="InputSaturation.h" compile="0" resource="0"
               file="Source/AudioProcessing/InputSaturation.h"/>
         <FILE id="a7GE3f" name="Loop.h" compile="0" resource="0" file="Source/AudioProcessing/Loop.h"/>

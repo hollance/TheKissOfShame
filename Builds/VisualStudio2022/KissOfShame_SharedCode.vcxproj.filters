@@ -628,9 +628,6 @@
     <ClCompile Include="..\..\Source\AudioProcessing\HurricaneSandy.cpp">
       <Filter>KissOfShame\Source\AudioProcessing</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\AudioProcessing\InputSaturation.cpp">
-      <Filter>KissOfShame\Source\AudioProcessing</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\AudioProcessing\Noise.cpp">
       <Filter>KissOfShame\Source\AudioProcessing</Filter>
     </ClCompile>
