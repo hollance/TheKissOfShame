@@ -47,7 +47,6 @@
 		61C3584349C40BAA728FF771 /* PluginProcessor.cpp */ = {isa = PBXBuildFile; fileRef = F384422D283BE67F518211ED; };
 		61FBA020D5400579828EEE91 /* include_juce_gui_extra.mm */ = {isa = PBXBuildFile; fileRef = 943E537F197F1AC0E0B403DD; };
 		65771AE5DFD756656FC13171 /* AudioUtils.cpp */ = {isa = PBXBuildFile; fileRef = 1367CCBF6BB639E52680406B; };
-		756A5B901E0449959AFBCCB7 /* Shame.cpp */ = {isa = PBXBuildFile; fileRef = 92671EA5E8CB81CC59CDFC05; };
 		7A0902581D585E22E4D5E202 /* CoreMIDI.framework */ = {isa = PBXBuildFile; fileRef = B73D9938ECEE8878ABCE13F7; };
 		808AAB03AD08D8B99CA27662 /* Shared Code */ = {isa = PBXBuildFile; fileRef = 345E4F9F8EF9C79750610C10; };
 		813E63011B7148EBC9C7A9CA /* include_juce_audio_devices.mm */ = {isa = PBXBuildFile; fileRef = 82C7CC92DAAB1E8AB3476423; };
@@ -132,7 +131,6 @@
 		858BF97B8452EC689B7EFF0A /* QuartzCore.framework */ /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		858CE4BF14E9D2BB7C42C315 /* Info-Standalone_Plugin.plist */ /* Info-Standalone_Plugin.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Standalone_Plugin.plist"; path = "Info-Standalone_Plugin.plist"; sourceTree = SOURCE_ROOT; };
 		8E68520AE777BC70F218A0BB /* AudioGraph.h */ /* AudioGraph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AudioGraph.h; path = ../../Source/AudioProcessing/AudioGraph.h; sourceTree = SOURCE_ROOT; };
-		92671EA5E8CB81CC59CDFC05 /* Shame.cpp */ /* Shame.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Shame.cpp; path = ../../Source/AudioProcessing/Shame.cpp; sourceTree = SOURCE_ROOT; };
 		943E537F197F1AC0E0B403DD /* include_juce_gui_extra.mm */ /* include_juce_gui_extra.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_gui_extra.mm; path = ../../JuceLibraryCode/include_juce_gui_extra.mm; sourceTree = SOURCE_ROOT; };
 		95D00723D07BFC6CE0552D7D /* Flange.h */ /* Flange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Flange.h; path = ../../Source/AudioProcessing/Flange.h; sourceTree = SOURCE_ROOT; };
 		9975FC4BB50EEB4E4C12BDE9 /* Info-VST3_Manifest_Helper.plist */ /* Info-VST3_Manifest_Helper.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-VST3_Manifest_Helper.plist"; path = "Info-VST3_Manifest_Helper.plist"; sourceTree = SOURCE_ROOT; };
@@ -391,7 +389,6 @@
 				391F3F07CA42D22184F7179B,
 				15F648AC595BD6C38B0B0D46,
 				683829896CC5361ADB90160F,
-				92671EA5E8CB81CC59CDFC05,
 				45983966A4C17C070D9727B8,
 			);
 			name = AudioProcessing;
@@ -810,7 +807,6 @@
 				1DD7F3CE20E033A17B0B880B,
 				A3D604FB021436CF2DE99D9E,
 				0989958470EAAC7AB3162E49,
-				756A5B901E0449959AFBCCB7,
 				99BDCEFEFE4F4F9D74047207,
 				D36817DDDA4722E755925800,
 				03E6EB0EEFD555B28EE3F895,

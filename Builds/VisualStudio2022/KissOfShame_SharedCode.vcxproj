@@ -143,7 +143,6 @@
     <ClCompile Include="..\..\Source\AudioProcessing\Granulate.cpp"/>
     <ClCompile Include="..\..\Source\AudioProcessing\HurricaneSandy.cpp"/>
     <ClCompile Include="..\..\Source\AudioProcessing\Noise.cpp"/>
-    <ClCompile Include="..\..\Source\AudioProcessing\Shame.cpp"/>
     <ClCompile Include="..\..\Source\GUIUtilities\BacklightComponent.cpp"/>
     <ClCompile Include="..\..\Source\GUIUtilities\CustomKnob.cpp"/>
     <ClCompile Include="..\..\Source\GUIUtilities\EnvironmentsComponent.cpp"/>

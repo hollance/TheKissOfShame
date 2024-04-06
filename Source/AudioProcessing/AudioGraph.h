@@ -2,7 +2,7 @@
 
 #include "../shameConfig.h"
 #include "Hiss.h"
-//#include "Shame.h"
+#include "Shame.h"
 #include "InputSaturation.h"
 #include "Flange.h"
 //#include "HurricaneSandy.h"
@@ -15,10 +15,9 @@ public:
     {
 //        currentEnvironment = eEnvironmentOff;
 
-//        shame.reset(new Shame(2));
-//        shame->setInterpolatedParameters(0.0);
-//
 //        hurricaneSandy.reset(new HurricaneSandy());
+
+        shame.setInterpolatedParameters(0.0f);
 
         bypassGraph = false;
         outputLevel = 1.0f;
@@ -29,8 +28,8 @@ public:
     {
         // TODO: allocate audioGraphProcessingBuffer
 
-        hiss.reset();
         flange.setDepth(0.0f);
+        hiss.reset();
     }
 
     void processGraph(juce::AudioBuffer<float>& audioBuffer, int numChannels)
@@ -78,7 +77,7 @@ public:
 
         // 3. Add hiss and the shame feature
         hiss.processHiss(audioGraphProcessingBuffer, numChannels);
-//        shame->processShame(audioGraphProcessingBuffer, numChannels);
+        shame.processShame(audioGraphProcessingBuffer, numChannels);
 
         // 4. Blend the processed audio with the original signal
         blend.processBlend(audioBuffer, audioGraphProcessingBuffer, numChannels);
@@ -138,8 +137,8 @@ public:
 //            case eShameFreq: shame->setRate(paramLevel); break;
 //            case eShameDepth: shame->setDepth(paramLevel); break;
 
-//            case eShameGlobalLevel: shame->setInterpolatedParameters(paramLevel); break;
-//
+            case eShameGlobalLevel: shame.setInterpolatedParameters(paramLevel); break;
+
 //            case eHurricaneSandyGlobalLevel: hurricaneSandy->setInterpolatedParameters(paramLevel); break;
 
             case eHissLevel:   hiss.setHissLevel(paramLevel); break;
@@ -160,10 +159,9 @@ private:
 
     InputSaturation inSaturation { 0.0f, 2.0f, 0.272f };
     Flange flange { 2 };
-
-    Hiss hiss;
-//    std::unique_ptr<Shame> shame;
 //    std::unique_ptr<HurricaneSandy> hurricaneSandy;
+    Shame shame { 2 };
+    Hiss hiss;
     Blend blend;
 
     bool bypassGraph;

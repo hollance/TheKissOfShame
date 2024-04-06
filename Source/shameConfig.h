@@ -2,7 +2,6 @@
 
 #include <JuceHeader.h>
 
-#define BUFFER_SIZE (44100)
 #define PI 3.14159265359
 #define SAMPLE_RATE 44100
 

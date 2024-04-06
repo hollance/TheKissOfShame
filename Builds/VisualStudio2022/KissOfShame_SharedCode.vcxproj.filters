@@ -631,9 +631,6 @@
     <ClCompile Include="..\..\Source\AudioProcessing\Noise.cpp">
       <Filter>KissOfShame\Source\AudioProcessing</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\AudioProcessing\Shame.cpp">
-      <Filter>KissOfShame\Source\AudioProcessing</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\GUIUtilities\BacklightComponent.cpp">
       <Filter>KissOfShame\Source\GUIUtilities</Filter>
     </ClCompile>
