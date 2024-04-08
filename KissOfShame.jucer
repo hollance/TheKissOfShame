@@ -10,6 +10,8 @@
   <MAINGROUP id="OWaNcN" name="KissOfShame">
     <GROUP id="{D05B6388-C834-5CDD-F546-69BC8457519E}" name="Audio_Resources">
       <FILE id="XPhc7y" name="Hiss.wav" compile="0" resource="1" file="Audio_Resources/Hiss.wav"/>
+      <FILE id="yNeELB" name="LowLevelGrainNoise.wav" compile="0" resource="1"
+            file="Audio_Resources/LowLevelGrainNoise.wav"/>
     </GROUP>
     <GROUP id="{B24498C6-307A-39AA-B5C9-C7D44EC9F7CA}" name="Source">
       <GROUP id="{0BB2110C-DD57-5FF0-3F34-F79558EEE4FE}" name="AudioProcessing">
@@ -23,8 +25,6 @@
         <FILE id="abZgTO" name="Granulate.cpp" compile="1" resource="0" file="Source/AudioProcessing/Granulate.cpp"/>
         <FILE id="Eefo0l" name="Granulate.h" compile="0" resource="0" file="Source/AudioProcessing/Granulate.h"/>
         <FILE id="YpdFX0" name="Hiss.h" compile="0" resource="0" file="Source/AudioProcessing/Hiss.h"/>
-        <FILE id="HEVlgO" name="HurricaneSandy.cpp" compile="1" resource="0"
-              file="Source/AudioProcessing/HurricaneSandy.cpp"/>
         <FILE id="dx4j1C" name="HurricaneSandy.h" compile="0" resource="0"
               file="Source/AudioProcessing/HurricaneSandy.h"/>
         <FILE id="Efqd1s" name="InputSaturation.h" compile="0" resource="0"

@@ -141,7 +141,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\AudioProcessing\AudioUtils.cpp"/>
     <ClCompile Include="..\..\Source\AudioProcessing\Granulate.cpp"/>
-    <ClCompile Include="..\..\Source\AudioProcessing\HurricaneSandy.cpp"/>
     <ClCompile Include="..\..\Source\AudioProcessing\Noise.cpp"/>
     <ClCompile Include="..\..\Source\GUIUtilities\BacklightComponent.cpp"/>
     <ClCompile Include="..\..\Source\GUIUtilities\CustomKnob.cpp"/>
@@ -2431,6 +2430,7 @@
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp"/>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData2.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_devices.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_formats.cpp"/>
@@ -3459,6 +3459,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Audio_Resources\Hiss.wav"/>
+    <None Include="..\..\Audio_Resources\LowLevelGrainNoise.wav"/>
     <None Include="C:\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt"/>
     <None Include="C:\JUCE\modules\juce_audio_devices\native\oboe\README.md"/>
     <None Include="C:\JUCE\modules\juce_audio_formats\codecs\flac\Flac Licence.txt"/>

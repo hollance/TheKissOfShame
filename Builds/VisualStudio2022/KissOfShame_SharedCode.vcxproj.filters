@@ -625,9 +625,6 @@
     <ClCompile Include="..\..\Source\AudioProcessing\Granulate.cpp">
       <Filter>KissOfShame\Source\AudioProcessing</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\AudioProcessing\HurricaneSandy.cpp">
-      <Filter>KissOfShame\Source\AudioProcessing</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\AudioProcessing\Noise.cpp">
       <Filter>KissOfShame\Source\AudioProcessing</Filter>
     </ClCompile>
@@ -3080,6 +3077,9 @@
       <Filter>JUCE Modules\juce_opengl</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp">
+      <Filter>JUCE Library Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData2.cpp">
       <Filter>JUCE Library Code</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp">
@@ -6138,6 +6138,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Audio_Resources\Hiss.wav">
+      <Filter>KissOfShame\Audio_Resources</Filter>
+    </None>
+    <None Include="..\..\Audio_Resources\LowLevelGrainNoise.wav">
       <Filter>KissOfShame\Audio_Resources</Filter>
     </None>
     <None Include="C:\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt">

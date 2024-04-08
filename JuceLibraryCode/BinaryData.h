@@ -11,8 +11,11 @@ namespace BinaryData
     extern const char*   Hiss_wav;
     const int            Hiss_wavSize = 12740652;
 
+    extern const char*   LowLevelGrainNoise_wav;
+    const int            LowLevelGrainNoise_wavSize = 6991920;
+
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 1;
+    const int namedResourceListSize = 2;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

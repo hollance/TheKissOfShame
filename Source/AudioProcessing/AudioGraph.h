@@ -5,7 +5,7 @@
 #include "Shame.h"
 #include "InputSaturation.h"
 #include "Flange.h"
-//#include "HurricaneSandy.h"
+#include "HurricaneSandy.h"
 #include "Blend.h"
 
 class AudioGraph
@@ -13,12 +13,9 @@ class AudioGraph
 public:
     AudioGraph()
     {
-//        currentEnvironment = eEnvironmentOff;
-
-//        hurricaneSandy.reset(new HurricaneSandy());
-
         shame.setInterpolatedParameters(0.0f);
 
+        currentEnvironment = eEnvironmentOff;
         bypassGraph = false;
         outputLevel = 1.0f;
         inputDrive = 1.0f;
@@ -51,33 +48,33 @@ public:
         // etc, but they'e set to fixed values in this plug-in. The input gain
         // previously applied determines how saturated the wet signal becomes.
         // This saturation is always being applied.
-        inSaturation.processInputSaturation(audioGraphProcessingBuffer, numChannels);
+//        inSaturation.processInputSaturation(audioGraphProcessingBuffer, numChannels);
+//
+//        flange.processFlange(audioGraphProcessingBuffer, numChannels);
 
-        flange.processFlange(audioGraphProcessingBuffer, numChannels);
-
-//        // 2. Add environment effects
-//        switch (currentEnvironment)
-//        {
-//            case eEnvironmentOff:
-//                break;
-//            case eEnvironmentEnvironment:
-//                break;
-//            case eEnvironmentStudioCloset:
-//                break;
-//            case eEnvironmentHumidCellar:
-//                break;
-//            case eEnvironmentHotLocker:
-//                break;
-//            case eEnvironmentHurricaneSandy:
-//                hurricaneSandy->processHurricaneSandy(audioGraphProcessingBuffer, numChannels);
-//                break;
-//            default:
-//                break;
-//        }
+        // 2. Add environment effects
+        switch (currentEnvironment)
+        {
+            case eEnvironmentOff:
+                break;
+            case eEnvironmentEnvironment:
+                break;
+            case eEnvironmentStudioCloset:
+                break;
+            case eEnvironmentHumidCellar:
+                break;
+            case eEnvironmentHotLocker:
+                break;
+            case eEnvironmentHurricaneSandy:
+                hurricaneSandy.processHurricaneSandy(audioGraphProcessingBuffer, numChannels);
+                break;
+            default:
+                break;
+        }
 
         // 3. Add hiss and the shame feature
-        hiss.processHiss(audioGraphProcessingBuffer, numChannels);
-        shame.processShame(audioGraphProcessingBuffer, numChannels);
+//        hiss.processHiss(audioGraphProcessingBuffer, numChannels);
+//        shame.processShame(audioGraphProcessingBuffer, numChannels);
 
         // 4. Blend the processed audio with the original signal
         blend.processBlend(audioBuffer, audioGraphProcessingBuffer, numChannels);
@@ -118,8 +115,7 @@ public:
 
     void setCurrentEnvironment(EShameEnvironments env)
     {
-//TODO
-//        currentEnvironment = env;
+        currentEnvironment = env;
     }
 
     void setAudioUnitParameters(AUParameter param, float paramLevel)
@@ -137,9 +133,12 @@ public:
 //            case eShameFreq: shame->setRate(paramLevel); break;
 //            case eShameDepth: shame->setDepth(paramLevel); break;
 
-            case eShameGlobalLevel: shame.setInterpolatedParameters(paramLevel); break;
-
-//            case eHurricaneSandyGlobalLevel: hurricaneSandy->setInterpolatedParameters(paramLevel); break;
+            case eShameGlobalLevel:
+                shame.setInterpolatedParameters(paramLevel);
+                break;
+            case eHurricaneSandyGlobalLevel:
+                hurricaneSandy.setInterpolatedParameters(paramLevel);
+                break;
 
             case eHissLevel:   hiss.setHissLevel(paramLevel); break;
             case eBlendLevel:  blend.setBlendLevel(paramLevel); break;
@@ -153,17 +152,16 @@ public:
     }
 
 private:
-//    EShameEnvironments currentEnvironment;
-
     juce::AudioBuffer<float> audioGraphProcessingBuffer;
 
     InputSaturation inSaturation { 0.0f, 2.0f, 0.272f };
     Flange flange { 2 };
-//    std::unique_ptr<HurricaneSandy> hurricaneSandy;
+    HurricaneSandy hurricaneSandy;
     Shame shame { 2 };
     Hiss hiss;
     Blend blend;
 
+    EShameEnvironments currentEnvironment;
     bool bypassGraph;
     float inputDrive;
     float outputLevel;

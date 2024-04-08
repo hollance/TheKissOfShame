@@ -39,10 +39,11 @@ public:
             // loop, we'll read the waveform at two locations that are half a
             // waveform length apart and blend between these two samples.
             float rampValue;
-            if (indx1 < hissHalfway)
+            if (indx1 < hissHalfway) {
                 rampValue = float(indx1) / float(hissHalfway);
-            else
+            } else {
                 rampValue = float(hissLength - indx1) / float(hissHalfway);
+            }
 
             //TODO: do this more efficiently by changing the order
             for (int channel = 0; channel < numChannels; ++channel) {
