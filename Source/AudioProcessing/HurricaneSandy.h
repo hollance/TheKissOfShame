@@ -14,16 +14,15 @@ class HurricaneSandy
 public:
     HurricaneSandy() : grainImpact(0.0f), ampFluctuationImpact(0.0f)
     {
-        /////////////////////// used for general amplitude fluctuation
+        // Used for general amplitude fluctuation
 //        dips.reset(new EnvelopeDips());
 //        dips->setDomainMS(1000); //NOTE: domain is set in milleseconds
 //        dips->setDynamicExtremity(0.5);
 //        dips->setNumPoints(15);
 //        dips->setNumPointRandomness(0.5);
 //        dips->calculateDipPoints();
-//
-//
-//        ////////////////////// used to mix noise burst
+
+        // Used to mix noise burst
 //        whiteNoise.reset(new Noise());
 //
 //        noiseEnv.reset(new Envelope(350));
@@ -37,9 +36,9 @@ public:
 //        sigEnv->addEvelopePoint(0.305, 0.8);
 //        sigEnv->addEvelopePoint(0.383, 0.5);
 //        sigEnv->addEvelopePoint(0.428, 0.0);
-//
-//
-//        ////////////////////// used to modulate the amplitude of the incomming signal
+
+
+        // Used to modulate the amplitude of the incomming signal
 //        int numVoices = 5;
 //        granulator.reset(new Granulate(numVoices, AUDIO_PATH + "PinkNoise.wav"));
 //        granulator->setRandomFactor(1.0);
@@ -47,21 +46,15 @@ public:
 //        granulator->setGrainParameters(5, 50, 50, 50);
 //        granulator->setVoices(10);
 
-
-        ///////////////////// pre recorded low frequency granular noise
+        // Pre-recorded low frequency granular noise
         lowFreqGranular.setLoopCrossfadeLevel(0.25);
-//
-//
-//        ////////////////////  filters for granulation and the main signal
-//        lpButterworth_Grains.reset(new Biquads);
-//        lpButterworth_Grains->setButterworth_LowHighPass(2000, true);
-//
-//        hpButterworth_Grains.reset(new Biquads);
-//        hpButterworth_Grains->setButterworth_LowHighPass(50, false);
 
+        // Filters for granulation and the main signal
+        lpButterworth_Grains.setButterworth_LowHighPass(2000.0f, true);
+        hpButterworth_Grains.setButterworth_LowHighPass(50.0f, false);
         lpButterworth_Signal.setButterworth_LowHighPass(22050.0f, true);
 
-        // initialize parameters
+        // Initialize parameters
         setInterpolatedParameters(0.0f);
     }
 
@@ -151,8 +144,8 @@ private:
 //    std::unique_ptr<EnvelopeDips> dips;
 //    std::unique_ptr<Granulate> granulator;
     LoopCrossfade lowFreqGranular;
-//    std::unique_ptr<Biquads> lpButterworth_Grains;
-//    std::unique_ptr<Biquads> hpButterworth_Grains;
+    Biquads lpButterworth_Grains;
+    Biquads hpButterworth_Grains;
     Biquads lpButterworth_Signal;
 
 //    std::unique_ptr<Noise> whiteNoise;
