@@ -625,9 +625,6 @@
     <ClCompile Include="..\..\Source\AudioProcessing\Granulate.cpp">
       <Filter>KissOfShame\Source\AudioProcessing</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\AudioProcessing\Noise.cpp">
-      <Filter>KissOfShame\Source\AudioProcessing</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\GUIUtilities\BacklightComponent.cpp">
       <Filter>KissOfShame\Source\GUIUtilities</Filter>
     </ClCompile>
@@ -3157,9 +3154,6 @@
       <Filter>KissOfShame\Source\AudioProcessing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\AudioProcessing\InputSaturation.h">
-      <Filter>KissOfShame\Source\AudioProcessing</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\AudioProcessing\Loop.h">
       <Filter>KissOfShame\Source\AudioProcessing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\AudioProcessing\LoopCrossfade.h">

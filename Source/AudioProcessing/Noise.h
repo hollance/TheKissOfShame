@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdlib.h>
+#include <time.h>
 
 /***************************************************/
 /*! \class Noise
@@ -22,14 +23,24 @@ public:
      If the seed value is zero (the default value), the random number generator is
      seeded with the system time.
      */
-    Noise( unsigned int seed = 0 );
+    Noise( unsigned int seed = 0 )
+    {
+        // Seed the random number generator
+        this->setSeed( seed );
+    }
 
     //! Seed the random number generator with a specific seed value.
     /*!
      If no seed is provided or the seed value is zero, the random
      number generator is seeded with the current system time.
      */
-    void setSeed( unsigned int seed = 0 );
+    void setSeed( unsigned int seed = 0 )
+    {
+        if ( seed == 0 )
+            srand( (unsigned int) time( nullptr ) );
+        else
+            srand( seed );
+    }
 
     //! Return the last computed output value.
     float lastOut( void ) const { return lastFrame; }

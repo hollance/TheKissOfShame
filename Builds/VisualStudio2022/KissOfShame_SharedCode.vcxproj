@@ -141,7 +141,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\AudioProcessing\AudioUtils.cpp"/>
     <ClCompile Include="..\..\Source\AudioProcessing\Granulate.cpp"/>
-    <ClCompile Include="..\..\Source\AudioProcessing\Noise.cpp"/>
     <ClCompile Include="..\..\Source\GUIUtilities\BacklightComponent.cpp"/>
     <ClCompile Include="..\..\Source\GUIUtilities\CustomKnob.cpp"/>
     <ClCompile Include="..\..\Source\GUIUtilities\EnvironmentsComponent.cpp"/>
@@ -2464,7 +2463,6 @@
     <ClInclude Include="..\..\Source\AudioProcessing\Hiss.h"/>
     <ClInclude Include="..\..\Source\AudioProcessing\HurricaneSandy.h"/>
     <ClInclude Include="..\..\Source\AudioProcessing\InputSaturation.h"/>
-    <ClInclude Include="..\..\Source\AudioProcessing\Loop.h"/>
     <ClInclude Include="..\..\Source\AudioProcessing\LoopCrossfade.h"/>
     <ClInclude Include="..\..\Source\AudioProcessing\Noise.h"/>
     <ClInclude Include="..\..\Source\AudioProcessing\Shame.h"/>

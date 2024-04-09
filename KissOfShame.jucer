@@ -29,9 +29,7 @@
               file="Source/AudioProcessing/HurricaneSandy.h"/>
         <FILE id="Efqd1s" name="InputSaturation.h" compile="0" resource="0"
               file="Source/AudioProcessing/InputSaturation.h"/>
-        <FILE id="a7GE3f" name="Loop.h" compile="0" resource="0" file="Source/AudioProcessing/Loop.h"/>
         <FILE id="q18UoO" name="LoopCrossfade.h" compile="0" resource="0" file="Source/AudioProcessing/LoopCrossfade.h"/>
-        <FILE id="j9xvvG" name="Noise.cpp" compile="1" resource="0" file="Source/AudioProcessing/Noise.cpp"/>
         <FILE id="avnfo8" name="Noise.h" compile="0" resource="0" file="Source/AudioProcessing/Noise.h"/>
         <FILE id="OZDTyP" name="Shame.h" compile="0" resource="0" file="Source/AudioProcessing/Shame.h"/>
       </GROUP>
