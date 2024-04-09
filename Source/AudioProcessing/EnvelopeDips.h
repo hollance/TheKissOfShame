@@ -1,132 +1,115 @@
-#ifndef ENVELOPEDIPS_H
-#define ENVELOPEDIPS_H
+#pragma once
 
-
-//#include "Generator.h"
-//#include <stdlib.h>
-//#include "../../JuceLibraryCode/JuceHeader.h"
 #include "../shameConfig.h"
-#include <time.h>
 
-using namespace juce;
-
-
-//recalculate random points for every loop
-//ability to reset domain, and reset it for every loop
-//ability to set fixed number of points. NOTE: random number of points is calculated as input to setting number of points.
-//ability to have different starting values. NOTE: need to interpolate to next starting value.
-
+/**
+  Envelope generator that creates random segments that extend downwards
+  from 1.0 to 0.5 (dynamicExtremity).
+ */
 class EnvelopeDips
 {
 public:
-    
-    EnvelopeDips() : incr(0.0), domain(44100), dynamicExtremity(0.0), numPointRandomness(0.0), numPoints(5)
+    EnvelopeDips() : incr(0.0f), domain(44100.0f), dynamicExtremity(0.0f),
+                     numPointRandomness(0.0f), numPoints(5)
     {
-        srand (time(NULL));
-        
+        srand(time(nullptr));
+
         calculateDipPoints();
-        
+
+        // TODO: have a reset() function that sets incr back to 0.0f
+        // and re-seeds the random generator
+    }
+
+    // TODO: make independent of sampling rate
+    void setDomainMS(float d) noexcept  // domain is set in milliseconds
+    {
+        domain = d * 44.1f;
     }
     
-    ~EnvelopeDips(){}
-    
-    
-    void calculateDipPoints()
+    void setDynamicExtremity(float dE) noexcept
     {
-        //std::cout << "Dyn Intensity: " << dynamicExtremity << std::endl;
-        
-        points.clear();
-        
-        float startingValue = 1.0;
-        
-        int numRandPoints = numPoints * (1.0 - numPointRandomness*(float)(rand() % 1000)/1000) + 1;
-        float partitionSize = 1/((float)numRandPoints + 1);
-        
-        //create set of points, where the beginning and end are always a value of 1.
-        Point<float> p0(0.0, startingValue);
-        points.add(p0);
-        for(int i = 0; i < numRandPoints; i++)
-        {
-            float xInit = ((float)i+1)/(numRandPoints+1);
-            float xDeviation = (float)(rand() % 1000)/1000 * partitionSize / 2.5f; //why is 2.5 in the denominator??
-            xDeviation = xDeviation * powf(-1, rand()%2);
-            
-            Point<float> pRand(xInit + xDeviation, 1.0f - dynamicExtremity*(float)(rand() % 1000)/1000);
-            points.add(pRand);
-            
-            //std::cout << "x deviation: " << xDeviation << std::endl;
-        }
-        Point<float> p1(1.0, startingValue);
-        points.add(p1);
-        
-        
-//        for(int i = 0; i < points.size(); i++)
-//        {
-//            std::cout << "RandPoint: " << i << ". x, y: " << points[i].getX() << ", " << points[i].getY() << std::endl;
-//        }
+        dynamicExtremity = dE;
     }
-    
-    
-    void setDomainMS(float d){ domain = d * 44.1; } //NOTE: domain is set in milleseconds
-    void setDynamicExtremity(float dE){dynamicExtremity = dE;}
-    void setNumPoints(int nP){numPoints = nP;}
-    void setNumPointRandomness(float nPR){numPointRandomness = nPR;}
-    
-    
-    float processEnvelopeDips()
+
+    void setNumPoints(int nP) noexcept
     {
-        float curPos = incr/domain;
-        
-        //find the two points the curPos is between.
-        float priorX, nxtX;
-        float priorY, nxtY;
-        for(int i = points.size() - 1; i >= 0; i--)
-        {
-            if(curPos >= points[i].getX())
-            {
-                priorX = points[i].getX();
-                priorY = points[i].getY();
-                nxtX = points[i+1].getX();
-                nxtY = points[i+1].getY();
+        numPoints = nP;
+    }
+
+    void setNumPointRandomness(float nPR) noexcept
+    {
+        numPointRandomness = nPR;
+    }
+
+    float processEnvelopeDips() noexcept
+    {
+        float curPos = incr / domain;
+
+        // TODO: rather than precomputing a bunch of points and interpolating
+        // between them, why not just calculate one new point at a time?
+
+        // Find the two points the curPos is between.
+        float prevX, nextX;
+        float prevY, nextY;
+        for (int i = points.size() - 1; i >= 0; i--) {
+            if (curPos >= points[i].getX()) {
+                prevX = points[i].getX();
+                prevY = points[i].getY();
+                nextX = points[i + 1].getX();
+                nextY = points[i + 1].getY();
                 break;
             }
         }
-        
-        //Calculate the distance from the prior point relative to the next point.
-        float distFromPrior = (curPos - priorX)/(nxtX - priorX);
-        
-        //The output value is the weighted average between the two points.
-        float interpolatedValue = (1- distFromPrior)*priorY + (distFromPrior)*nxtY;
-        
-        
-        //std::cout << "CurPos: " << curPos << ", prY: " << priorY << ", NxtY: "<< nxtY << ", Value: " << interpolatedValue << std::endl;
-        
-        //increment through domain.
+
+        // Calculate the distance from the prior point relative to the next point.
+        float distance = (curPos - prevX) / (nextX - prevX);
+
+        // The output value is the weighted average between the two points.
+        float interpolatedValue = (1.0f - distance)*prevY + distance*nextY;
+
+        // Increment through domain
         incr++;
-        if(incr >= domain)
-        {
-            calculateDipPoints();   //recalculate the dip points
-            incr = 0;               //set the increment to 0
+        if (incr >= domain) {
+            calculateDipPoints();   // recalculate the dip points
+            incr = 0.0f;
         }
-        
+
         return interpolatedValue;
     }
-    
-    
-    
+
+    void calculateDipPoints() noexcept
+    {
+        points.clear();
+
+        int numRandPoints = int(numPoints * (1.0f - numPointRandomness * random())) + 1;
+        float partitionSize = 1.0f / float(numRandPoints + 1);
+
+        // Create set of points, where the beginning and end are always 1.
+        points.add({ 0.0f, 1.0f });
+
+        for (int i = 0; i < numRandPoints; i++) {
+            float xInit = float(i + 1) / float(numRandPoints + 1);
+            float xDeviation = random() * partitionSize * 0.4f;
+            if (rand() % 2) {
+                xDeviation = -xDeviation;
+            }
+            points.add({ xInit + xDeviation, 1.0f - dynamicExtremity*random() });
+        }
+
+        points.add({ 1.0f, 1.0f });
+    }
+
 private:
-    
+    float random() const noexcept
+    {
+        return float(rand() % 1000) / 1000.0f;
+    }
+
     float incr;
     float domain;
     float dynamicExtremity;
     float numPointRandomness;
     int numPoints;
-    
-    Array<Point<float>> points;
-    
+
+    juce::Array<juce::Point<float>> points;
 };
-
-
-
-
-#endif
