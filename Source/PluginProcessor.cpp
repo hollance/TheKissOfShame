@@ -1,18 +1,8 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-KissOfShameAudioProcessor::KissOfShameAudioProcessor()
+KissOfShameAudioProcessor::KissOfShameAudioProcessor() : params(apvts), audioGraph(params)
 {
-    //TODO: these parameters are changed by the editor in order to
-    // communicate back to the host, but this is the wrong approach!
-    inputSaturation = 1.0f;
-    shame = 0.0f;
-    hiss = 0.0f;
-    blend = 0.0f;
-    output = 0.0f;
-    flange = 0.0f;
-    masterBypass = false;
-
     curRMSL = 0.0f;
     curRMSR = 0.0f;
 
@@ -28,58 +18,6 @@ KissOfShameAudioProcessor::~KissOfShameAudioProcessor()
 const juce::String KissOfShameAudioProcessor::getName() const
 {
     return JucePlugin_Name;
-}
-
-int KissOfShameAudioProcessor::getNumParameters()
-{
-    return 0;
-}
-
-float KissOfShameAudioProcessor::getParameter(int index)
-{
-    // This method will be called by the host, probably on the audio thread, so
-    // it's absolutely time-critical. Don't use critical sections or anything
-    // UI-related, or anything at all that may block in any way!
-    switch (index)
-    {
-        case inputSaturationParam:     return inputSaturation;
-        case shameParam:               return shame;
-        case hissParam:                return hiss;
-        case blendParam:               return blend;
-        case bypassParam:              return masterBypass;
-        case outputParam:              return output;
-        case flangeParam:              return flange;
-        default:                       return 0.0f;
-    }
-    return 0.0f;
-}
-
-void KissOfShameAudioProcessor::setParameter(int index, float newValue)
-{
-    // This method will be called by the host, probably on the audio thread, so
-    // it's absolutely time-critical. Don't use critical sections or anything
-    // UI-related, or anything at all that may block in any way!
-    switch (index)
-    {
-        case inputSaturationParam:     inputSaturation = newValue; break;
-        case shameParam:               shame = newValue; break;
-        case hissParam:                hiss = newValue;  break;
-        case blendParam:               blend = newValue; break;
-        case bypassParam:              masterBypass = newValue; break;
-        case outputParam:              output = newValue; break;
-        case flangeParam:              flange = newValue; break;
-        default:                       break;
-    }
-}
-
-const juce::String KissOfShameAudioProcessor::getParameterName(int index)
-{
-    return {};
-}
-
-const juce::String KissOfShameAudioProcessor::getParameterText(int index)
-{
-    return {};
 }
 
 bool KissOfShameAudioProcessor::acceptsMidi() const
@@ -116,7 +54,7 @@ void KissOfShameAudioProcessor::setCurrentProgram(int)
 {
 }
 
-const String KissOfShameAudioProcessor::getProgramName(int)
+const juce::String KissOfShameAudioProcessor::getProgramName(int)
 {
     return {};
 }
@@ -127,6 +65,9 @@ void KissOfShameAudioProcessor::changeProgramName(int, const juce::String&)
 
 void KissOfShameAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
+    params.prepareToPlay(sampleRate);
+    params.reset();
+
     audioGraph.prepareToPlay(sampleRate, samplesPerBlock);
 
     curRMSL = 0.0f;
@@ -149,6 +90,8 @@ void KissOfShameAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, j
     auto totalNumOutputChannels = getTotalNumOutputChannels();
     auto numSamples = buffer.getNumSamples();
 
+    params.update();
+
     playHeadPos = (playHeadPos + 1) % 99999;
 
     // Audio processing...
@@ -170,6 +113,7 @@ void KissOfShameAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, j
         buffer.clear(i, 0, numSamples);
     }
 
+//TODO: use up-to-date JUCE API for this
     // ask the host for the current time so we can display it...
     if (getPlayHead() != nullptr && getPlayHead()->getCurrentPosition(curPositionInfo))
     {
@@ -194,15 +138,20 @@ juce::AudioProcessorEditor* KissOfShameAudioProcessor::createEditor()
 
 void KissOfShameAudioProcessor::getStateInformation(juce::MemoryBlock& destData)
 {
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
+    copyXmlToBinary(*apvts.copyState().createXml(), destData);
 }
 
 void KissOfShameAudioProcessor::setStateInformation(const void* data, int sizeInBytes)
 {
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
+    std::unique_ptr<juce::XmlElement> xml(getXmlFromBinary(data, sizeInBytes));
+    if (xml.get() != nullptr && xml->hasTagName(apvts.state.getType())) {
+        apvts.replaceState(juce::ValueTree::fromXml(*xml));
+    }
+}
+
+juce::AudioProcessorParameter* KissOfShameAudioProcessor::getBypassParameter() const
+{
+    return params.bypassParam;
 }
 
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()

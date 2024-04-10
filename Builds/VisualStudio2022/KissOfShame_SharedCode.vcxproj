@@ -141,11 +141,9 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\AudioProcessing\AudioUtils.cpp"/>
     <ClCompile Include="..\..\Source\AudioProcessing\Granulate.cpp"/>
-    <ClCompile Include="..\..\Source\GUIUtilities\BacklightComponent.cpp"/>
     <ClCompile Include="..\..\Source\GUIUtilities\CustomKnob.cpp"/>
-    <ClCompile Include="..\..\Source\GUIUtilities\EnvironmentsComponent.cpp"/>
-    <ClCompile Include="..\..\Source\GUIUtilities\ImageAnimator.cpp"/>
     <ClCompile Include="..\..\Source\GUIUtilities\ImageInteractor.cpp"/>
+    <ClCompile Include="..\..\Source\Parameters.cpp"/>
     <ClCompile Include="..\..\Source\PluginEditor.cpp"/>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
     <ClCompile Include="C:\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.cpp">
@@ -2474,6 +2472,7 @@
     <ClInclude Include="..\..\Source\GUIUtilities\ImageAnimationComponent.h"/>
     <ClInclude Include="..\..\Source\GUIUtilities\ImageAnimator.h"/>
     <ClInclude Include="..\..\Source\GUIUtilities\ImageInteractor.h"/>
+    <ClInclude Include="..\..\Source\Parameters.h"/>
     <ClInclude Include="..\..\Source\PluginEditor.h"/>
     <ClInclude Include="..\..\Source\PluginProcessor.h"/>
     <ClInclude Include="..\..\Source\shameConfig.h"/>

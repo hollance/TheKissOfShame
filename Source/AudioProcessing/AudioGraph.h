@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../shameConfig.h"
+#include "../Parameters.h"
 #include "Hiss.h"
 #include "Shame.h"
 #include "InputSaturation.h"
@@ -11,12 +12,11 @@
 class AudioGraph
 {
 public:
-    AudioGraph()
+    AudioGraph(Parameters& params_) : params(params_)
     {
         shame.setInterpolatedParameters(0.0f);
 
         currentEnvironment = eEnvironmentOff;
-        bypassGraph = false;
         outputLevel = 1.0f;
         inputDrive = 1.0f;
     }
@@ -31,7 +31,7 @@ public:
 
     void processGraph(juce::AudioBuffer<float>& audioBuffer, int numChannels)
     {
-        if (bypassGraph) return;
+        if (params.bypassed) return;
 
         // Apply the input drive. This is a simple linear gain.
         audioBuffer.applyGain(inputDrive);
@@ -110,7 +110,7 @@ public:
 
     bool isGraphBypassed() const noexcept
     {
-        return bypassGraph;
+        return params.bypassed;
     }
 
     void setCurrentEnvironment(EShameEnvironments env)
@@ -143,7 +143,7 @@ public:
             case eHissLevel:   hiss.setHissLevel(paramLevel); break;
             case eBlendLevel:  blend.setBlendLevel(paramLevel); break;
             case eFlangeDepth: flange.setDepth(paramLevel); break;
-            case eBypass:      bypassGraph = (paramLevel >= 0.5f); break;
+//            case eBypass:      bypassGraph = (paramLevel >= 0.5f); break;
             case eInputDrive:  setInputDrive(paramLevel); break;
             case eOutputLevel: setOutputLevel(paramLevel); break;
 
@@ -152,6 +152,8 @@ public:
     }
 
 private:
+    Parameters& params;
+
     juce::AudioBuffer<float> audioGraphProcessingBuffer;
 
     InputSaturation inSaturation { 0.0f, 2.0f, 0.272f };
@@ -162,7 +164,6 @@ private:
     Blend blend;
 
     EShameEnvironments currentEnvironment;
-    bool bypassGraph;
     float inputDrive;
     float outputLevel;
 };

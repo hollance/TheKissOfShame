@@ -1,36 +1,21 @@
-
-
-#ifndef KOS_BacklightComponent_h
-#define KOS_BacklightComponent_h
+#pragma once
 
 #include "../shameConfig.h"
 
-using namespace juce;
-
-
-class BacklightComponent : public Component
+class BacklightComponent : public juce::Component
 {
 public:
-    
     BacklightComponent()
     {
         setSize(960, 266);
         setInterceptsMouseClicks(false, false);
     }
-    
-    ~BacklightComponent(){}
-    
-    
-    void paint (Graphics& g)
+
+    void paint(juce::Graphics& g) override
     {
-        g.fillAll(Colour::fromFloatRGBA(1.0f, 0.216f, 0.384f, 1.0));
+        g.fillAll(juce::Colour::fromFloatRGBA(1.0f, 0.216f, 0.384f, 1.0f));
     }
-    
+
 private:
-    
-    
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BacklightComponent)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(BacklightComponent)
 };
-
-
-#endif

@@ -35,27 +35,23 @@
         <FILE id="OZDTyP" name="Shame.h" compile="0" resource="0" file="Source/AudioProcessing/Shame.h"/>
       </GROUP>
       <GROUP id="{DD75611A-075D-2941-7361-14A374697CB9}" name="GUIUtilities">
-        <FILE id="Z4ZQ9p" name="BacklightComponent.cpp" compile="1" resource="0"
-              file="Source/GUIUtilities/BacklightComponent.cpp"/>
         <FILE id="FP9e9G" name="BacklightComponent.h" compile="0" resource="0"
               file="Source/GUIUtilities/BacklightComponent.h"/>
         <FILE id="k8JLNa" name="CustomButton.h" compile="0" resource="0" file="Source/GUIUtilities/CustomButton.h"/>
         <FILE id="jNjwRv" name="CustomKnob.cpp" compile="1" resource="0" file="Source/GUIUtilities/CustomKnob.cpp"/>
         <FILE id="s0vJvZ" name="CustomKnob.h" compile="0" resource="0" file="Source/GUIUtilities/CustomKnob.h"/>
-        <FILE id="AKy6PO" name="EnvironmentsComponent.cpp" compile="1" resource="0"
-              file="Source/GUIUtilities/EnvironmentsComponent.cpp"/>
         <FILE id="idGCDw" name="EnvironmentsComponent.h" compile="0" resource="0"
               file="Source/GUIUtilities/EnvironmentsComponent.h"/>
         <FILE id="IF8wYi" name="ImageAnimationComponent.h" compile="0" resource="0"
               file="Source/GUIUtilities/ImageAnimationComponent.h"/>
-        <FILE id="QnLchj" name="ImageAnimator.cpp" compile="1" resource="0"
-              file="Source/GUIUtilities/ImageAnimator.cpp"/>
         <FILE id="GpAnmn" name="ImageAnimator.h" compile="0" resource="0" file="Source/GUIUtilities/ImageAnimator.h"/>
         <FILE id="VRxWrl" name="ImageInteractor.cpp" compile="1" resource="0"
               file="Source/GUIUtilities/ImageInteractor.cpp"/>
         <FILE id="d3vYfS" name="ImageInteractor.h" compile="0" resource="0"
               file="Source/GUIUtilities/ImageInteractor.h"/>
       </GROUP>
+      <FILE id="uF47bP" name="Parameters.cpp" compile="1" resource="0" file="Source/Parameters.cpp"/>
+      <FILE id="B3sTuH" name="Parameters.h" compile="0" resource="0" file="Source/Parameters.h"/>
       <FILE id="XFFNVz" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="rlfOcK" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>

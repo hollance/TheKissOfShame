@@ -625,20 +625,14 @@
     <ClCompile Include="..\..\Source\AudioProcessing\Granulate.cpp">
       <Filter>KissOfShame\Source\AudioProcessing</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\GUIUtilities\BacklightComponent.cpp">
-      <Filter>KissOfShame\Source\GUIUtilities</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\GUIUtilities\CustomKnob.cpp">
-      <Filter>KissOfShame\Source\GUIUtilities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\GUIUtilities\EnvironmentsComponent.cpp">
-      <Filter>KissOfShame\Source\GUIUtilities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\GUIUtilities\ImageAnimator.cpp">
       <Filter>KissOfShame\Source\GUIUtilities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\GUIUtilities\ImageInteractor.cpp">
       <Filter>KissOfShame\Source\GUIUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Parameters.cpp">
+      <Filter>KissOfShame\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\PluginEditor.cpp">
       <Filter>KissOfShame\Source</Filter>
@@ -3188,6 +3182,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\GUIUtilities\ImageInteractor.h">
       <Filter>KissOfShame\Source\GUIUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Parameters.h">
+      <Filter>KissOfShame\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PluginEditor.h">
       <Filter>KissOfShame\Source</Filter>

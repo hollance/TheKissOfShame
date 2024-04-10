@@ -1,87 +1,80 @@
-
-
-#ifndef KOS_CustomButton_h
-#define KOS_CustomButton_h
+#pragma once
 
 #include "../shameConfig.h"
 
-using namespace juce;
-
-class CustomButton : public ImageButton
+class CustomButton : public juce::ImageButton
 {
 public:
     CustomButton()
     {
-        File offImgFile(String(GUI_PATH) + "testButton-off.png");
-        File onImgFile(String(GUI_PATH) + "testButton-on.png");
-        
-        //std::cout << "off file = " << offImgFile.getFullPathName() << std::endl;
-        
-        offImage = ImageCache::getFromFile(offImgFile);
-        onImage = ImageCache::getFromFile(onImgFile);
-        
-        setImages(true, false, true, onImage, 1.0f, Colour(0x0), Image(), 1.0f, Colour(0x0), offImage, 1.0f, Colour(0x0));
-        
+        // TODO: do we need these?
+        juce::File offImgFile(juce::String(GUI_PATH) + "testButton-off.png");
+        juce::File onImgFile(juce::String(GUI_PATH) + "testButton-on.png");
+
+        offImage = juce::ImageCache::getFromFile(offImgFile);
+        onImage = juce::ImageCache::getFromFile(onImgFile);
+
+        updateImages();
+
         setSize(onImage.getWidth(), onImage.getHeight());
     }
-    
-    ~CustomButton(){}
-    
-    //void paint (Graphics& g){};
 
     void resizeButton(float scale)
     {
-        offImage = offImage.rescaled(offImage.getWidth()*scale, offImage.getHeight()*scale);
-        onImage = onImage.rescaled(onImage.getWidth()*scale, onImage.getHeight()*scale);
-        setImages(true, false, true, onImage, 1.0f, Colour(0x0), Image(), 1.0f, Colour(0x0), offImage, 1.0f, Colour(0x0));
-//        repaint();
+        offImage = offImage.rescaled(int(offImage.getWidth() * scale),
+                                     int(offImage.getHeight() * scale));
+        onImage = onImage.rescaled(int(onImage.getWidth() * scale),
+                                   int(onImage.getHeight() * scale));
+        updateImages();
     }
-    
-     void setImagePaths(String onImgPath, String offImgPath)
-     {
-         File offImgFile(String(GUI_PATH) + onImgPath);
-         File onImgFile(String(GUI_PATH) + offImgPath);
 
-         offImage = ImageCache::getFromFile(offImgFile);
-         onImage = ImageCache::getFromFile(onImgFile);
-     
-         setImages(true, false, true, onImage, 1.0f, Colour(0x0), Image(), 1.0f, Colour(0x0), offImage, 1.0f, Colour(0x0));
-     }
-    
-    void setClippedCustomOnImage(String onImgPath, int topLeftX, int topLeftY, int w, int h)
+    void setImagePaths(const juce::String& onImgPath, const juce::String& offImgPath)
     {
-        onImage = ImageCache::getFromFile(File(onImgPath));
-        
-        if (!onImage.isNull())
-        {
+        juce::File offImgFile(juce::String(GUI_PATH) + onImgPath);
+        juce::File onImgFile(juce::String(GUI_PATH) + offImgPath);
+
+        offImage = juce::ImageCache::getFromFile(offImgFile);
+        onImage = juce::ImageCache::getFromFile(onImgFile);
+
+        updateImages();
+    }
+
+    void setClippedCustomOnImage(const juce::String& onImgPath, int topLeftX, int topLeftY, int w, int h)
+    {
+        onImage = juce::ImageCache::getFromFile(juce::File(onImgPath));
+
+        if (!onImage.isNull()) {
             juce::Rectangle<int> clipRect(topLeftX, topLeftY, w, h);
             onImage = onImage.getClippedImage(clipRect);
         }
-        
-        setImages(true, false, true, onImage, 1.0f, Colour(0x0), Image(), 1.0f, Colour(0x0), offImage, 1.0f, Colour(0x0));
+
+        updateImages();
     }
-    
-    void setClippedCustomOffImage(String offImgPath, int topLeftX, int topLeftY, int w, int h)
+
+    void setClippedCustomOffImage(const juce::String& offImgPath, int topLeftX, int topLeftY, int w, int h)
     {
-        offImage = ImageCache::getFromFile(File(offImgPath));
-        
-        if (!offImage.isNull())
-        {
+        offImage = juce::ImageCache::getFromFile(juce::File(offImgPath));
+
+        if (!offImage.isNull()) {
             juce::Rectangle<int> clipRect(topLeftX, topLeftY, w, h);
             offImage = offImage.getClippedImage(clipRect);
         }
-        
-        setImages(true, false, true, onImage, 1.0f, Colour(0x0), Image(), 1.0f, Colour(0x0), offImage, 1.0f, Colour(0x0));
+
+        updateImages();
     }
 
-    
-
 private:
+    void updateImages()
+    {
+        setImages(true, false, true,
+                  onImage, 1.0f, juce::Colour(0x0),
+                  juce::Image(), 1.0f, juce::Colour(0x0),
+                  offImage, 1.0f, juce::Colour(0x0));
+    }
 
-	Image offImage;
-    Image onImage;
+    juce::Image offImage;
+    juce::Image onImage;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CustomButton)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CustomButton)
 };
 
-#endif

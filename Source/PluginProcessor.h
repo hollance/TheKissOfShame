@@ -2,6 +2,7 @@
 
 #include <JuceHeader.h>
 #include "AudioProcessing/AudioGraph.h"
+#include "Parameters.h"
 
 class KissOfShameAudioProcessor : public juce::AudioProcessor
 {
@@ -32,33 +33,17 @@ public:
     void getStateInformation(juce::MemoryBlock& destData) override;
     void setStateInformation(const void* data, int sizeInBytes) override;
 
-    //TODO: these are deprecated for managing the parameters!
-    int getNumParameters() override;
-    float getParameter(int index) override;
-    void setParameter(int index, float newValue) override;
-    const juce::String getParameterName(int index) override;
-    const juce::String getParameterText(int index) override;
-
 //TODO: these functions exist but aren't used, prefer this over direct variable access
 //    float getCurrentRMSL() const noexcept { return curRMSL; }
 //    float getCurrentRMSR() const noexcept { return curRMSR; }
 
-    // All of these values get communicated to the host:
-    enum AudioInputParameters
-    {
-        inputSaturationParam = 0,
-        shameParam,
-        hissParam,
-        blendParam,
-        bypassParam,
-        outputParam,
-        flangeParam,
-        hurricaneSandyParam,
-        totalNumParams,
+    juce::AudioProcessorParameter* getBypassParameter() const override;
+
+    juce::AudioProcessorValueTreeState apvts {
+        *this, nullptr, "Parameters", Parameters::createParameterLayout()
     };
 
-    float inputSaturation, shame, hiss, blend, output, flange;
-    bool masterBypass;
+    Parameters params;
 
     // TODO: this type is deprecated
     juce::AudioPlayHead::CurrentPositionInfo curPositionInfo;

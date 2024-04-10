@@ -1,33 +1,29 @@
 #include "ImageInteractor.h"
 
-
-ImageInteractor::ImageInteractor() : desaturate(false), numFrames(128), curValue(0)
+ImageInteractor::ImageInteractor() : desaturate(false), numFrames(128), curValue(0.0f)
 {
-    minValue = 0.0;
-    maxValue = 1.0;
-    
+    minValue = 0.0f;
+    maxValue = 1.0f;
+
+//TODO: do we actually use this image for anything useful?
     imagePath = GUI_PATH + "MixKnob/Knob-Pan-Mix.png";
-    
-    image = ImageCache::getFromFile(File(imagePath));
+
+    image = juce::ImageCache::getFromFile(juce::File(imagePath));
     frameWidth = image.getWidth();
     frameHeight = image.getHeight()/numFrames;
     setSize(frameWidth, frameHeight);
 }
 
-ImageInteractor::~ImageInteractor()
-{}
-
-
 void ImageInteractor::setNumFrames(int _numFrames)
 {
-    curValue = 0;
+    curValue = 0.0f;
     numFrames = _numFrames;
 }
 
-void ImageInteractor::setAnimationImage(String filePath)
+void ImageInteractor::setAnimationImage(const juce::String& filePath)
 {
     imagePath = filePath;
-    image = ImageCache::getFromFile(File(imagePath));
+    image = juce::ImageCache::getFromFile(juce::File(imagePath));
     desatImage = image.createCopy();
     satImage = image.createCopy();
     desatImage.desaturate();
@@ -41,18 +37,14 @@ void ImageInteractor::setDimensions(int topLeftX, int topLeftY, int w, int h)
     setSize(frameWidth, frameHeight);
 }
 
-
-void ImageInteractor::paint (Graphics& g)
+void ImageInteractor::paint(juce::Graphics& g)
 {
-    if (!image.isNull())
-    {
+    if (!image.isNull()) {
         double normalizedValue = (curValue - minValue) / (maxValue - minValue);
-        int frameNum = normalizedValue*(numFrames-1);
-		juce::Rectangle<int> clipRect(0, frameNum*frameHeight, frameWidth, frameHeight);
-        image = (desaturate) ? desatImage : satImage;
-        const Image & clippedIm = image.getClippedImage(clipRect);
+        int frameNum = int(normalizedValue * double(numFrames - 1));
+        juce::Rectangle<int> clipRect(0, frameNum*frameHeight, frameWidth, frameHeight);
+        image = desaturate ? desatImage : satImage;
+        const juce::Image& clippedIm = image.getClippedImage(clipRect);
         g.drawImageAt(clippedIm, 0, 0);
     }
 }
-
-

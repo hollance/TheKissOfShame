@@ -42,7 +42,7 @@ enum AUParameter
     eBlendLevel,
     eFlangeDepth,
 
-    eBypass,
+//    eBypass,
     eInputDrive,
     eOutputLevel,
 };
