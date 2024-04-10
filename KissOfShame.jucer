@@ -12,6 +12,7 @@
       <FILE id="XPhc7y" name="Hiss.wav" compile="0" resource="1" file="Audio_Resources/Hiss.wav"/>
       <FILE id="yNeELB" name="LowLevelGrainNoise.wav" compile="0" resource="1"
             file="Audio_Resources/LowLevelGrainNoise.wav"/>
+      <FILE id="PQfYWV" name="PinkNoise.wav" compile="0" resource="1" file="Audio_Resources/PinkNoise.wav"/>
     </GROUP>
     <GROUP id="{B24498C6-307A-39AA-B5C9-C7D44EC9F7CA}" name="Source">
       <GROUP id="{0BB2110C-DD57-5FF0-3F34-F79558EEE4FE}" name="AudioProcessing">

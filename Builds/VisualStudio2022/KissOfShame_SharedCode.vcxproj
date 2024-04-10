@@ -2430,6 +2430,7 @@
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData2.cpp"/>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData3.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_devices.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_formats.cpp"/>
@@ -3458,6 +3459,7 @@
   <ItemGroup>
     <None Include="..\..\Audio_Resources\Hiss.wav"/>
     <None Include="..\..\Audio_Resources\LowLevelGrainNoise.wav"/>
+    <None Include="..\..\Audio_Resources\PinkNoise.wav"/>
     <None Include="C:\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt"/>
     <None Include="C:\JUCE\modules\juce_audio_devices\native\oboe\README.md"/>
     <None Include="C:\JUCE\modules\juce_audio_formats\codecs\flac\Flac Licence.txt"/>

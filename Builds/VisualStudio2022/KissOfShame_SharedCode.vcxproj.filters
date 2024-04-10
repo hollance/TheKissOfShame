@@ -3079,6 +3079,9 @@
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData2.cpp">
       <Filter>JUCE Library Code</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData3.cpp">
+      <Filter>JUCE Library Code</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp">
       <Filter>JUCE Library Code</Filter>
     </ClCompile>
@@ -6135,6 +6138,9 @@
       <Filter>KissOfShame\Audio_Resources</Filter>
     </None>
     <None Include="..\..\Audio_Resources\LowLevelGrainNoise.wav">
+      <Filter>KissOfShame\Audio_Resources</Filter>
+    </None>
+    <None Include="..\..\Audio_Resources\PinkNoise.wav">
       <Filter>KissOfShame\Audio_Resources</Filter>
     </None>
     <None Include="C:\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt">

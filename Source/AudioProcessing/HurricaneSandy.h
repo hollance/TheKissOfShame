@@ -2,7 +2,7 @@
 
 #include "../shameConfig.h"
 #include "EnvelopeDips.h"
-//#include "Granulate.h"
+#include "Granulate.h"
 #include "LoopCrossfade.h"
 #include "Biquads.h"
 #include "Envelope.h"
@@ -32,13 +32,11 @@ public:
         sigEnv.addEnvelopePoint(0.383f, 0.5f);
         sigEnv.addEnvelopePoint(0.428f, 0.0f);
 
-        // Used to modulate the amplitude of the incomming signal
-//        int numVoices = 5;
-//        granulator.reset(new Granulate(numVoices, AUDIO_PATH + "PinkNoise.wav"));
-//        granulator->setRandomFactor(1.0);
-//        granulator->setStretch(0);
-//        granulator->setGrainParameters(5, 50, 50, 50);
-//        granulator->setVoices(10);
+        // Used to modulate the amplitude of the incoming signal
+        granulator.setRandomFactor(1.0f);
+        granulator.setStretch(0);
+        granulator.setGrainParameters(5, 50, 50, 50);
+        granulator.setVoices(10);
 
         // Pre-recorded low frequency granular noise
         lowFreqGranular.setLoopCrossfadeLevel(0.25);
@@ -53,7 +51,7 @@ public:
     }
 
     // TODO: add a reset() function that resets the envelope generator phase,
-    // seeds the noise generator, etc.
+    // seeds the noise generator, resets the granulator, etc.
 
     void processHurricaneSandy(juce::AudioBuffer<float>& buffer, int numChannels)
     {
@@ -61,9 +59,9 @@ public:
 
             float lfGrainSample = lowFreqGranular.processLoopCrossSample(0);
 
-//            float grainSample = granulator->tick();
-//            grainSample = lpButterworth_Grains->process(grainSample, 0);
-//            grainSample = hpButterworth_Grains->process(grainSample, 0);
+            float grainSample = granulator.tick();
+            grainSample = lpButterworth_Grains.process(grainSample, 0);
+            grainSample = hpButterworth_Grains.process(grainSample, 0);
 
             float dipsLevel = dips.processEnvelopeDips();
 
@@ -85,8 +83,8 @@ public:
                 // Mix signal with periodic noise burst.
                 samples[i] = (1.0f - noiseBurstImpact)*samples[i] + noiseBurstImpact*(signalEnvValue * samples[i] + 0.05f * noiseBurstEnvValue * whiteNoise.tick());
 
-//                //Modulate the amplitude by the granular amplitude
-//                samples[i] *= (1 - grainImpact*grainSample);
+                // Modulate the amplitude by the granular amplitude
+                samples[i] *= 1.0f - grainImpact*grainSample;
 
                 // Fluctuate the overall amplitude
                 samples[i] = ampFluctuationImpact*dipsLevel*samples[i] + (1.0f - ampFluctuationImpact)*samples[i];
@@ -104,9 +102,10 @@ public:
         if (input < 0.0f) { input = 0.0f; }
         if (input > 1.0f) { input = 1.0f; }
 
-//        //grain interpolation
-//        grainImpact = 1.0 * input;
-//        granulator->setGrainParameters(10*input + 5, 75, 50, 1000*(1.01 - input));
+        // Grain interpolation
+        grainImpact = 1.0f * input;
+        granulator.setGrainParameters((unsigned int)(10.0f * input + 5.0f), 75, 50,
+                                      (unsigned int)(1000.0f * (1.01f - input)));
 
         // Amount of low frequency granular noise mixed in
         lowFreqGrainNoiseLevel = 0.15f * input;
@@ -128,7 +127,7 @@ public:
 
 private:
     EnvelopeDips dips;
-//    std::unique_ptr<Granulate> granulator;
+    Granulate granulator { 5, BinaryData::PinkNoise_wav, BinaryData::PinkNoise_wavSize };
     LoopCrossfade lowFreqGranular;
     Biquads lpButterworth_Grains;
     Biquads hpButterworth_Grains;
