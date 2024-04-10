@@ -21,7 +21,7 @@ public:
         inputDrive = 1.0f;
     }
 
-    void prepareToPlay(double sampleRate, int samplesPerBlock)
+    void prepareToPlay(double /*sampleRate*/, int /*samplesPerBlock*/)
     {
         // TODO: allocate audioGraphProcessingBuffer
 
@@ -48,9 +48,9 @@ public:
         // etc, but they'e set to fixed values in this plug-in. The input gain
         // previously applied determines how saturated the wet signal becomes.
         // This saturation is always being applied.
-//        inSaturation.processInputSaturation(audioGraphProcessingBuffer, numChannels);
-//
-//        flange.processFlange(audioGraphProcessingBuffer, numChannels);
+        inSaturation.processInputSaturation(audioGraphProcessingBuffer, numChannels);
+
+        flange.processFlange(audioGraphProcessingBuffer, numChannels);
 
         // 2. Add environment effects
         switch (currentEnvironment)
@@ -73,8 +73,8 @@ public:
         }
 
         // 3. Add hiss and the shame feature
-//        hiss.processHiss(audioGraphProcessingBuffer, numChannels);
-//        shame.processShame(audioGraphProcessingBuffer, numChannels);
+        hiss.processHiss(audioGraphProcessingBuffer, numChannels);
+        shame.processShame(audioGraphProcessingBuffer, numChannels);
 
         // 4. Blend the processed audio with the original signal
         blend.processBlend(audioBuffer, audioGraphProcessingBuffer, numChannels);

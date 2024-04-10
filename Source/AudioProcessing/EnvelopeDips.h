@@ -49,6 +49,7 @@ public:
         // between them, why not just calculate one new point at a time?
 
         // Find the two points the curPos is between.
+        // TODO: don't like this loop
         float prevX, nextX;
         float prevY, nextY;
         for (int i = points.size() - 1; i >= 0; i--) {

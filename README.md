@@ -85,14 +85,14 @@ Other things that can be improved in the code:
 - Embed the external image and sound files as binary data in the plug-in, to simplify the installation (no need to manually copy these resources).
 - Remove most of the compiler warnings. (I set the warning level high on purpose.)
 - Replace deprecated JUCE APIs with modern equivalents.
-- Since `ScopedPointer` is deprecrated, I replaced these with `std::unique_ptr`, but many of these things do not actually need to be pointers at all.
 - Replace the Biquads with TPT filters.
   - Moving the Age knob from max to min can cause the low-pass filter to give a massive gain boost. Probably because at 0% this uses (close to) 22050 Hz as the cutoff freq. Or just because it's a biquad.
 - Explicitly use `juce::` and `std::` namespaces.
 - Remove any files that aren't being used (source files, images, audio).
-- Don't use `rand()` and `srand()`.
+- Don't use `rand()` and `srand()`. Replace with `juce::Random`.
 - General code cleanup.
 - Making independent of sample rate.
+- Use CMake instead of Projucer.
 
 ### What is missing
 
@@ -105,7 +105,7 @@ Features this plug-in was supposed to have but that did not appear to be impleme
 Other features to add:
 
 - Parameter smoothing.
-- Maybe the flange depth should be skewed so that shorter delays are easier to dial in. (For example by doing `targetDepth = depth * depth * 1000.0f`.
+- Maybe the flange depth should be skewed so that shorter delays are easier to dial in. (For example by doing `targetDepth = depth * depth * 1000.0f`.)
 - Oversampling. The saturation stage can easily add aliases.
 
 ## How it works
