@@ -30,15 +30,14 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     environmentsComponent.setTopLeftPosition(388, 654);
     addAndMakeVisible(environmentsComponent);
 
-//    ////////// KNOBS //////////
-//
-//    inputSaturationKnob.reset(new CustomKnob);
-//    String inputImagePath = GUI_PATH + "KOS_Graphics/06_alpha.png";
-//    inputSaturationKnob->setKnobImage(inputImagePath);
-//    inputSaturationKnob->setNumFrames(65);
-//    inputSaturationKnob->setKnobDimensions(104, 521, 116, 116);
-//    inputSaturationKnob->addListener (this);
-//    addAndMakeVisible(*inputSaturationKnob);
+    ////////// KNOBS //////////
+
+    juce::String inputImagePath = GUI_PATH + "KOS_Graphics/06_alpha.png";
+    inputSaturationKnob.setKnobImage(inputImagePath);
+    inputSaturationKnob.setNumFrames(65);
+    inputSaturationKnob.setKnobDimensions(104, 521, 116, 116);
+    inputSaturationKnob.addListener(this);
+    addAndMakeVisible(inputSaturationKnob);
 
     shameKnobImage.setNumFrames(65);
     shameKnobImage.setDimensions(401, 491, 174, 163);
@@ -46,46 +45,40 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     shameKnobImage.setAnimationImage(shameImagePath);
     addAndMakeVisible(shameKnobImage);
 
-//    shameKnob.reset(new CustomKnob);
-//    String crossImagePath = GUI_PATH + "KOS_Graphics/09_v2.png";
-//    shameKnob->setKnobImage(crossImagePath);
-//    shameKnob->setNumFrames(65);
-//    shameKnob->setKnobDimensions(401, 491, 174, 163);
-//    shameKnob->addListener (this);
-//    addAndMakeVisible(*shameKnob);
-//
-//    hissKnob.reset(new CustomKnob);
-//    String hissImagePath = GUI_PATH + "KOS_Graphics/04_alpha.png";
-//    hissKnob->setKnobImage(hissImagePath);
-//    hissKnob->setNumFrames(65);
-//    hissKnob->setKnobDimensions(547, 455, 78, 72);
-//    hissKnob->addListener (this);
-//    addAndMakeVisible(*hissKnob);
-//
-//    blendKnob.reset(new CustomKnob);
-//    String blendImagePath = GUI_PATH + "KOS_Graphics/05_alpha.png";
-//    blendKnob->setKnobImage(blendImagePath);
-//    blendKnob->setNumFrames(65);
-//    blendKnob->setKnobDimensions(705, 455, 78, 72);
-//    blendKnob->addListener (this);
-//    addAndMakeVisible(*blendKnob);
-//
-//    outputKnob.reset(new CustomKnob);
-//    String outputImagePath = GUI_PATH + "KOS_Graphics/12_alpha.png";
-//    outputKnob->setKnobImage(outputImagePath);
-//    outputKnob->setNumFrames(65);
-//    outputKnob->setKnobDimensions(757, 521, 122, 116);
-//    outputKnob->addListener (this);
-//    addAndMakeVisible(*outputKnob);
-//
-//    ageKnob.reset(new CustomKnob);
-//    String ageImagePath = GUI_PATH + "KOS_Graphics/03_alpha.png";
-//    ageKnob->setKnobImage(ageImagePath);
-//    ageKnob->setNumFrames(65);
-//    ageKnob->setKnobDimensions(350, 455, 74, 72);
-//    ageKnob->addListener (this);
-//    addAndMakeVisible(*ageKnob);
-//
+    juce::String crossImagePath = GUI_PATH + "KOS_Graphics/09_v2.png";
+    shameKnob.setKnobImage(crossImagePath);
+    shameKnob.setNumFrames(65);
+    shameKnob.setKnobDimensions(401, 491, 174, 163);
+    shameKnob.addListener(this);
+    addAndMakeVisible(shameKnob);
+
+    juce::String hissImagePath = GUI_PATH + "KOS_Graphics/04_alpha.png";
+    hissKnob.setKnobImage(hissImagePath);
+    hissKnob.setNumFrames(65);
+    hissKnob.setKnobDimensions(547, 455, 78, 72);
+    hissKnob.addListener(this);
+    addAndMakeVisible(hissKnob);
+
+    juce::String blendImagePath = GUI_PATH + "KOS_Graphics/05_alpha.png";
+    blendKnob.setKnobImage(blendImagePath);
+    blendKnob.setNumFrames(65);
+    blendKnob.setKnobDimensions(705, 455, 78, 72);
+    blendKnob.addListener(this);
+    addAndMakeVisible(blendKnob);
+
+    juce::String outputImagePath = GUI_PATH + "KOS_Graphics/12_alpha.png";
+    outputKnob.setKnobImage(outputImagePath);
+    outputKnob.setNumFrames(65);
+    outputKnob.setKnobDimensions(757, 521, 122, 116);
+    outputKnob.addListener(this);
+    addAndMakeVisible(outputKnob);
+
+    juce::String ageImagePath = GUI_PATH + "KOS_Graphics/03_alpha.png";
+    ageKnob.setKnobImage(ageImagePath);
+    ageKnob.setNumFrames(65);
+    ageKnob.setKnobDimensions(350, 455, 74, 72);
+    ageKnob.addListener(this);
+    addAndMakeVisible(ageKnob);
 
     ////////// BUTTONS //////////
 
@@ -209,32 +202,31 @@ void KissOfShameAudioProcessorEditor::setShowReelsValue(float newValue)
 
 void KissOfShameAudioProcessorEditor::setReelMode(bool showReels)
 {
-    int adustment = showReels ? 437 : -437;  // height difference: 703 - 266
+    int adjustment = showReels ? 437 : -437;  // height difference: 703 - 266
 
     // Images
-    backlight.setTopLeftPosition(backlight.getX(), backlight.getY() + adustment);
+    backlight.setTopLeftPosition(backlight.getX(), backlight.getY() + adjustment);
 
-//TODO
-//    //Knobs
-//    inputSaturationKnob->setTopLeftPosition(inputSaturationKnob->getX(),inputSaturationKnob->getY()+adustment);
-//    shameKnob->setTopLeftPosition(shameKnob->getX(),shameKnob->getY()+adustment);
-//    hissKnob->setTopLeftPosition(hissKnob->getX(),hissKnob->getY()+adustment);
-//    blendKnob->setTopLeftPosition(blendKnob->getX(),blendKnob->getY()+adustment);
-//    outputKnob->setTopLeftPosition(outputKnob->getX(),outputKnob->getY()+adustment);
-//    ageKnob->setTopLeftPosition(ageKnob->getX(),ageKnob->getY()+adustment);
+    // Knobs
+    inputSaturationKnob.setTopLeftPosition(inputSaturationKnob.getX(), inputSaturationKnob.getY() + adjustment);
+    shameKnob.setTopLeftPosition(shameKnob.getX(), shameKnob.getY() + adjustment);
+    hissKnob.setTopLeftPosition(hissKnob.getX(), hissKnob.getY() + adjustment);
+    blendKnob.setTopLeftPosition(blendKnob.getX(), blendKnob.getY() + adjustment);
+    outputKnob.setTopLeftPosition(outputKnob.getX(), outputKnob.getY() + adjustment);
+    ageKnob.setTopLeftPosition(ageKnob.getX(), ageKnob.getY() + adjustment);
 
     // Buttons
-    bypassButton.setTopLeftPosition(bypassButton.getX(), bypassButton.getY() + adustment);
-    tapeTypeButton.setTopLeftPosition(tapeTypeButton.getX(), tapeTypeButton.getY() + adustment);
-    printThroughButton.setTopLeftPosition(printThroughButton.getX(), printThroughButton.getY() + adustment);
+    bypassButton.setTopLeftPosition(bypassButton.getX(), bypassButton.getY() + adjustment);
+    tapeTypeButton.setTopLeftPosition(tapeTypeButton.getX(), tapeTypeButton.getY() + adjustment);
+    printThroughButton.setTopLeftPosition(printThroughButton.getX(), printThroughButton.getY() + adjustment);
 
     // Components
-    environmentsComponent.setTopLeftPosition(environmentsComponent.getX(), environmentsComponent.getY() + adustment);
+    environmentsComponent.setTopLeftPosition(environmentsComponent.getX(), environmentsComponent.getY() + adjustment);
 
     // Animation
-    vuMeterL.setTopLeftPosition(vuMeterL.getX(), vuMeterL.getY() + adustment);
-    vuMeterR.setTopLeftPosition(vuMeterR.getX(), vuMeterR.getY() + adustment);
-    shameKnobImage.setTopLeftPosition(shameKnobImage.getX(), shameKnobImage.getY() + adustment);
+    vuMeterL.setTopLeftPosition(vuMeterL.getX(), vuMeterL.getY() + adjustment);
+    vuMeterR.setTopLeftPosition(vuMeterR.getX(), vuMeterR.getY() + adjustment);
+    shameKnobImage.setTopLeftPosition(shameKnobImage.getX(), shameKnobImage.getY() + adjustment);
 
     juce::String faceImagePath;
     int faceHeight = 0;
@@ -265,9 +257,9 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     /*
     // Animation of backlighting
     if (!bypassed) {
-        float backlightAlpha = 1.0f - (0.5f*audioProcessor.curRMSL + 0.5f*audioProcessor.curRMSR)*3.0f;//TODO *shameKnob->getValue();
+        float backlightAlpha = 1.0f - (0.5f*audioProcessor.curRMSL + 0.5f*audioProcessor.curRMSR)*3.0f*shameKnob.getValue();
         backlight.setAlpha(backlightAlpha);
-//TODO            shameKnob->setAlpha(backlightAlpha);
+        shameKnob.setAlpha(backlightAlpha);
     }
     */
 
@@ -316,17 +308,17 @@ void KissOfShameAudioProcessorEditor::mouseDrag(const juce::MouseEvent&)
 
 void KissOfShameAudioProcessorEditor::initializeLevels()
 {
-//    inputSaturationKnob->setValue(0.5);
+    inputSaturationKnob.setValue(0.5f);
 //    audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam, 0.5);
-//    audioProcessor.audioGraph.setAudioUnitParameters(eInputDrive, 0.5);
-//
-//    outputKnob->setValue(0.5);
+    audioProcessor.audioGraph.setAudioUnitParameters(eInputDrive, 0.5);
+
+    outputKnob.setValue(0.5);
 //    audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam, 0.5);
-//    audioProcessor.audioGraph.setAudioUnitParameters(eOutputLevel, 0.5);
-//
-//    blendKnob->setValue(1.0);
+    audioProcessor.audioGraph.setAudioUnitParameters(eOutputLevel, 0.5);
+
+    blendKnob.setValue(1.0);
 //    audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam, 1.0);
-//    audioProcessor.audioGraph.setAudioUnitParameters(eBlendLevel, 1.0);
+    audioProcessor.audioGraph.setAudioUnitParameters(eBlendLevel, 1.0);
 
     linkIOButtonL.setToggleState(false, juce::dontSendNotification);
     linkIOButtonR.setToggleState(false, juce::dontSendNotification);
@@ -343,66 +335,65 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
     // by the host, rather than just modifying them directly, otherwise the host won't know
     // that they've changed.
 
-//    if (slider == inputSaturationKnob.get())
-//    {
-//        audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam,
-//                                             (float) inputSaturationKnob->getValue());
-//        audioProcessor.audioGraph.setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
-//
-//        if(linkIOMode)
+    if (slider == &inputSaturationKnob) {
+        //audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam,
+        //                                     (float) inputSaturationKnob->getValue());
+        audioProcessor.audioGraph.setAudioUnitParameters(eInputDrive, (float)inputSaturationKnob.getValue());
+
+//        if (linkIOMode)
 //        {
 //            outputKnob->setValue(1.0 - inputSaturationKnob->getValue());
 //            audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam, (float) outputKnob->getValue());
 //            audioProcessor.audioGraph.setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
 //        }
-//    }
-//    else if(slider == outputKnob.get())
-//    {
+    }
+    else if (slider == &outputKnob)
+    {
 //        audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam,
 //                                             (float) outputKnob->getValue());
-//        audioProcessor.audioGraph.setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
-//
+        audioProcessor.audioGraph.setAudioUnitParameters(eOutputLevel, (float) outputKnob.getValue());
+
 //        if(linkIOMode)
 //        {
 //            inputSaturationKnob->setValue(1.0 - outputKnob->getValue());
 //            audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam, (float) inputSaturationKnob->getValue());
 //            audioProcessor.audioGraph.setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
 //        }
-//    }
-//    else if(slider == shameKnob.get())
-//    {
-//        shameKnobImage->updateImageWithValue(slider->getValue());
-//
+    }
+    else if (slider == &shameKnob)
+    {
+        shameKnobImage.updateImageWithValue(slider->getValue());
+
 //        audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::shameParam,
 //                                             (float) shameKnob->getValue());
-//
-//        audioProcessor.audioGraph.setAudioUnitParameters(eShameGlobalLevel, (float) shameKnob->getValue());
-//    }
-//    else if(slider == hissKnob.get())
-//    {
+
+        audioProcessor.audioGraph.setAudioUnitParameters(eShameGlobalLevel, (float) shameKnob.getValue());
+    }
+    else if (slider == &hissKnob)
+    {
 //        audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::hissParam,
 //                                             (float) hissKnob->getValue());
-//
-//        audioProcessor.audioGraph.setAudioUnitParameters(eHissLevel, (float) hissKnob->getValue());
-//    }
-//    else if(slider == blendKnob.get())
-//    {
+
+        audioProcessor.audioGraph.setAudioUnitParameters(eHissLevel, (float) hissKnob.getValue());
+    }
+    else if (slider == &blendKnob)
+    {
 //        audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam,
 //                                             (float) blendKnob->getValue());
-//
-//        audioProcessor.audioGraph.setAudioUnitParameters(eBlendLevel, (float) blendKnob->getValue());
-//    }
-//    else if(slider == ageKnob.get())
-//    {
-//        //reelAnimation->setFramesPerSecond(ageKnob->getValue()*15 + 35);
-//        //reelAnimation->setAnimationRate(ageKnob->getValue());
-//        //reelAnimation->setAnimationResetThreshold(ageKnob->getValue()*0.025);
-//
+
+        audioProcessor.audioGraph.setAudioUnitParameters(eBlendLevel, (float) blendKnob.getValue());
+    }
+    else if (slider == &ageKnob)
+    {
+        //reelAnimation->setFramesPerSecond(ageKnob->getValue()*15 + 35);
+        //reelAnimation->setAnimationRate(ageKnob->getValue());
+        //reelAnimation->setAnimationResetThreshold(ageKnob->getValue()*0.025);
+
 //        audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::hurricaneSandyParam,
 //                                             (float) ageKnob->getValue());
-//
-//        audioProcessor.audioGraph.setAudioUnitParameters(eHurricaneSandyGlobalLevel, (float) ageKnob->getValue());
-//    }
+
+        audioProcessor.audioGraph.setAudioUnitParameters(eHurricaneSandyGlobalLevel, (float) ageKnob.getValue());
+    }
 }
 
 void KissOfShameAudioProcessorEditor::setBypassButtonValue(float newValue)
@@ -412,10 +403,10 @@ void KissOfShameAudioProcessorEditor::setBypassButtonValue(float newValue)
 
     if (bypassButton.getToggleState()) {
         backlight.setAlpha(0.25f);
-//        shameKnob->setAlpha(0.25f);
+        shameKnob.setAlpha(0.25f);
     } else {
         backlight.setAlpha(1.0f);
-//        shameKnob->setAlpha(1.0f);
+        shameKnob.setAlpha(1.0f);
     }
 }
 

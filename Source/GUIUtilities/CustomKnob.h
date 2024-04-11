@@ -1,35 +1,25 @@
+#pragma once
 
+#include <JuceHeader.h>
 
-#ifndef KOS_CustomKnob_h
-#define KOS_CustomKnob_h
-
-#include "../JuceLibraryCode/JuceHeader.h"
-
-using namespace juce;
-
-
-class CustomKnob : public Slider
+class CustomKnob : public juce::Slider
 {
 public:
     CustomKnob();
-    ~CustomKnob();
-    
+
     void setNumFrames(int numFrames);
-    void setKnobImage(String filePath);
+    void setKnobImage(const juce::String& filePath);
     void setKnobDimensions(int topLeftX, int topLeftY, int w, int h);
-    
-    void paint (Graphics& g);
-        
+
+    void paint(juce::Graphics& g);
+
 private:
-    
-    String knobImagePath;
+    juce::String knobImagePath;
     int knobNumFrames;
-    
-	Image knobImage;
+
+    juce::Image knobImage;
     int knobFrameWidth;
     int knobFrameHeight;
-    
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CustomKnob)
 };
-
-#endif

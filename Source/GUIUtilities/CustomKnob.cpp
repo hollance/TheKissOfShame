@@ -1,45 +1,23 @@
 #include "CustomKnob.h"
 
-
-
-CustomKnob::CustomKnob()
-:
-knobNumFrames(128)
+CustomKnob::CustomKnob() : knobNumFrames(128)
 {
-    //setSliderStyle(Rotary);
-    setSliderStyle(RotaryHorizontalVerticalDrag);
-    setTextBoxStyle(NoTextBox, true, 0, 0);
-    setRange(0.000, 1.000, 0.001);
-    setValue(0.0);
-    
-    // TODO: horrible hack
-#if JUCE_MSVC
-    knobImagePath = "C:\\Program Files\\Common Files\\VST3\\KissOfShame\\GUI_Resources\\MixKnob\\Knob-Pan-Mix.png";
-#else
-    knobImagePath = "/Users/Shared/KissOfShame/GUI_Resources/MixKnob/Knob-Pan-Mix.png";
-#endif
-    File imgFile;
-    imgFile = File(knobImagePath);
-    knobImage = ImageCache::getFromFile(imgFile);
-    knobFrameWidth = knobImage.getWidth();
-    knobFrameHeight = knobImage.getHeight()/knobNumFrames;
-    setSize(knobFrameWidth, knobFrameHeight);    
+    setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
+    setRange(0.000f, 1.000f, 0.001f);
+    setValue(0.0f);
 }
-
-CustomKnob::~CustomKnob()
-{}
 
 void CustomKnob::setNumFrames(int numFrames)
 {
     knobNumFrames = numFrames;
-    setValue(0.0);
+    setValue(0.0f);
 }
 
-void CustomKnob::setKnobImage(String filePath)
+void CustomKnob::setKnobImage(const juce::String& filePath)
 {
-    knobImage = ImageCache::getFromFile(File(filePath));
+    knobImage = juce::ImageCache::getFromFile(juce::File(filePath));
 }
-
 
 void CustomKnob::setKnobDimensions(int topLeftX, int topLeftY, int w, int h)
 {
@@ -49,17 +27,13 @@ void CustomKnob::setKnobDimensions(int topLeftX, int topLeftY, int w, int h)
     setSize(knobFrameWidth, knobFrameHeight);
 }
 
-
-void CustomKnob::paint (Graphics& g)
+void CustomKnob::paint(juce::Graphics& g)
 {
-    if (!knobImage.isNull())
-    {
+    if (!knobImage.isNull()) {
         double normalizedValue = (getValue() - getMinimum()) / (getMaximum() - getMinimum());
-        int frameNum = normalizedValue*(knobNumFrames-1);
-		juce::Rectangle<int> clipRect(0, frameNum*knobFrameHeight, knobFrameWidth, knobFrameHeight);
-        const Image & clippedIm = knobImage.getClippedImage(clipRect);
+        int frameNum = int(normalizedValue * (double(knobNumFrames - 1)));
+		juce::Rectangle<int> clipRect(0, frameNum * knobFrameHeight, knobFrameWidth, knobFrameHeight);
+        const juce::Image& clippedIm = knobImage.getClippedImage(clipRect);
         g.drawImageAt(clippedIm, 0, 0);
     }
 }
-
-

@@ -4,7 +4,7 @@
 #include "PluginProcessor.h"
 #include "GUIUtilities/BacklightComponent.h"
 #include "GUIUtilities/CustomButton.h"
-//#include "GUIUtilities/CustomKnob.h"
+#include "GUIUtilities/CustomKnob.h"
 #include "GUIUtilities/EnvironmentsComponent.h"
 //#include "GUIUtilities/ImageAnimator.h"
 #include "GUIUtilities/ImageInteractor.h"
@@ -45,19 +45,17 @@ private:
 
     KissOfShameAudioProcessor& audioProcessor;
 
-//TODO: get rid of unique_ptrs
-
-    //Images
+    // Images
     BacklightComponent backlight;
     ImageInteractor faceImage;
 
-//    //Knobs
-//    std::unique_ptr<CustomKnob> inputSaturationKnob;
-//    std::unique_ptr<CustomKnob> shameKnob;
-//    std::unique_ptr<CustomKnob> hissKnob;
-//    std::unique_ptr<CustomKnob> blendKnob;
-//    std::unique_ptr<CustomKnob> outputKnob;
-//    std::unique_ptr<CustomKnob> ageKnob;
+    // Knobs
+    CustomKnob inputSaturationKnob;
+    CustomKnob shameKnob;
+    CustomKnob hissKnob;
+    CustomKnob blendKnob;
+    CustomKnob outputKnob;
+    CustomKnob ageKnob;
 
     // Buttons
     CustomButton bypassButton;
@@ -67,7 +65,7 @@ private:
     CustomButton linkIOButtonR;
 
     // Used strictly to post messages for debugging
-    juce::Label debugLabel;
+    //juce::Label debugLabel;
 
     // Components
     EnvironmentsComponent environmentsComponent;
@@ -78,7 +76,7 @@ private:
     ImageInteractor vuMeterR;
     ImageInteractor shameKnobImage;
 
-    //TODO: make these parameters too so they get serialized with the APVTS
+    //TODO: make this a parameter too so it gets serialized with the APVTS
     bool linkIOMode;
 
     int priorProcessorTime;
