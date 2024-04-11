@@ -80,6 +80,10 @@ private:
 
     int priorProcessorTime;
 
+    juce::AudioProcessorValueTreeState::SliderAttachment blendAttachment {
+        audioProcessor.apvts, ParameterID::blend.getParamID(), blendKnob
+    };
+
     bool ignoreCallbacks = false;
     juce::ParameterAttachment bypassButtonAttachment;
     juce::ParameterAttachment showReelsAttachment;

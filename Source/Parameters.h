@@ -5,21 +5,19 @@
 
 namespace ParameterID
 {
+    const juce::ParameterID input { "input", 1 };
+    const juce::ParameterID shame { "shame", 1 };
+    const juce::ParameterID age { "age", 1 };
+    const juce::ParameterID hiss { "hiss", 1 };
+    const juce::ParameterID blend { "blend", 1 };
+    const juce::ParameterID output { "output", 1 };
+    const juce::ParameterID flange { "flange", 1 };
     const juce::ParameterID bypass { "bypass", 1 };
+    const juce::ParameterID link { "link", 1 };
     const juce::ParameterID showReels { "showReels", 1 };
+    const juce::ParameterID printThrough { "printThrough", 1 };
     const juce::ParameterID environment { "environment", 1 };
-
-//TODO: add these parameters
-//    inputLevel = 1.0f;
-//    shame = 0.0f;
-//    age = 0.0f;
-//    hiss = 0.0f;
-//    blend = 0.0f;
-//    outputLevel = 0.0f;
-//    flange = 0.0f;
-//    tapeType
-//    printThrough
-//    linkInputOutput
+    const juce::ParameterID tapeType { "tapeType", 1 };
 }
 
 class Parameters
@@ -34,13 +32,33 @@ public:
     void update() noexcept;
     void smoothen() noexcept;
 
+    float input = 0.0f;
+    float shame = 0.0f;
+    float age = 0.0f;
+    float hiss = 0.0f;
+    float blend = 0.0f;
+    float output = 0.0f;
+    float flange = 0.0f;
     bool bypassed = false;
+    bool link = false;
     bool showReels = true;
+    bool printThrough = false;
     EShameEnvironments environment = eEnvironmentOff;
+    int tapeType = 0;
 
     juce::AudioParameterBool* bypassParam;
     juce::AudioParameterBool* showReelsParam;
     juce::AudioParameterChoice* environmentParam;
+    juce::AudioParameterFloat* inputParam;
+    juce::AudioParameterFloat* shameParam;
+    juce::AudioParameterFloat* ageParam;
+    juce::AudioParameterFloat* hissParam;
+    juce::AudioParameterFloat* blendParam;
+    juce::AudioParameterFloat* outputParam;
+    juce::AudioParameterBool* linkParam;
+    juce::AudioParameterFloat* flangeParam;
+    juce::AudioParameterChoice* tapeTypeParam;
+    juce::AudioParameterBool* printThroughParam;
 
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Parameters)

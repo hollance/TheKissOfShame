@@ -30,6 +30,10 @@ public:
 
     void processGraph(juce::AudioBuffer<float>& audioBuffer, int numChannels)
     {
+        // Update the parameters. This could be optimized by only doing this
+        // when parameters have actually changed.
+        blend.setBlendLevel(params.blend);
+
         if (params.bypassed) return;
 
         // Apply the input drive. This is a simple linear gain.
@@ -131,7 +135,7 @@ public:
                 break;
 
             case eHissLevel:   hiss.setHissLevel(paramLevel); break;
-            case eBlendLevel:  blend.setBlendLevel(paramLevel); break;
+//            case eBlendLevel:  blend.setBlendLevel(paramLevel); break;
             case eFlangeDepth: flange.setDepth(paramLevel); break;
 //            case eBypass:      bypassGraph = (paramLevel >= 0.5f); break;
             case eInputDrive:  setInputDrive(paramLevel); break;

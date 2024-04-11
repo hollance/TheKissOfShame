@@ -63,7 +63,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     blendKnob.setKnobImage(blendImagePath);
     blendKnob.setNumFrames(65);
     blendKnob.setKnobDimensions(705, 455, 78, 72);
-    blendKnob.addListener(this);
     addAndMakeVisible(blendKnob);
 
     juce::String outputImagePath = GUI_PATH + "KOS_Graphics/12_alpha.png";
@@ -316,10 +315,6 @@ void KissOfShameAudioProcessorEditor::initializeLevels()
 //    audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam, 0.5);
     audioProcessor.audioGraph.setAudioUnitParameters(eOutputLevel, 0.5);
 
-    blendKnob.setValue(1.0);
-//    audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam, 1.0);
-    audioProcessor.audioGraph.setAudioUnitParameters(eBlendLevel, 1.0);
-
     linkIOButtonL.setToggleState(false, juce::dontSendNotification);
     linkIOButtonR.setToggleState(false, juce::dontSendNotification);
     linkIOButtonL.setAlpha(0.25);
@@ -375,13 +370,6 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
 //                                             (float) hissKnob->getValue());
 
         audioProcessor.audioGraph.setAudioUnitParameters(eHissLevel, (float) hissKnob.getValue());
-    }
-    else if (slider == &blendKnob)
-    {
-//        audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam,
-//                                             (float) blendKnob->getValue());
-
-        audioProcessor.audioGraph.setAudioUnitParameters(eBlendLevel, (float) blendKnob.getValue());
     }
     else if (slider == &ageKnob)
     {
