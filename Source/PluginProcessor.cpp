@@ -97,8 +97,7 @@ void KissOfShameAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, j
     // Audio processing...
     audioGraph.processGraph(buffer, totalNumInputChannels);
 
-    // Need to send the RMS below to the animation components for VU meters...
-    // use juce's messaging system to keep the audio thread safe.
+    // Need to send the RMS below to the animation components for VU meters.
     // Measuring RMS over the buffer is simple but depends on the buffer size.
     curRMSL = buffer.getRMSLevel(0, 0, numSamples);
     if (totalNumInputChannels > 1) {

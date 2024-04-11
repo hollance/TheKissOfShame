@@ -33,25 +33,21 @@ public:
     void getStateInformation(juce::MemoryBlock& destData) override;
     void setStateInformation(const void* data, int sizeInBytes) override;
 
-//TODO: these functions exist but aren't used, prefer this over direct variable access
-//    float getCurrentRMSL() const noexcept { return curRMSL; }
-//    float getCurrentRMSR() const noexcept { return curRMSR; }
-
     juce::AudioProcessorParameter* getBypassParameter() const override;
 
+public:
     juce::AudioProcessorValueTreeState apvts {
         *this, nullptr, "Parameters", Parameters::createParameterLayout()
     };
 
     Parameters params;
-
-    // TODO: this type is deprecated
-    juce::AudioPlayHead::CurrentPositionInfo curPositionInfo;
-
     AudioGraph audioGraph;
 
     // TODO: make these atomic
     float curRMSL, curRMSR;
+
+    // TODO: this type is deprecated
+    juce::AudioPlayHead::CurrentPositionInfo curPositionInfo;
 
     int playHeadPos;
 

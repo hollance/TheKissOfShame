@@ -14,31 +14,41 @@ class AudioGraph
 public:
     AudioGraph(Parameters& params_) : params(params_)
     {
-        shame.setInterpolatedParameters(0.0f);
-
-        outputLevel = 1.0f;
-        inputDrive = 1.0f;
+        // do nothing
     }
 
     void prepareToPlay(double /*sampleRate*/, int /*samplesPerBlock*/)
     {
         // TODO: allocate audioGraphProcessingBuffer
+        // TODO: reset the other building blocks
 
         flange.setDepth(0.0f);
         hiss.reset();
+
+        // Force recalculation of these parameters.
+        lastShame = -1.0f;
+        lastAge = -1.0f;
     }
 
     void processGraph(juce::AudioBuffer<float>& audioBuffer, int numChannels)
     {
-        // Update the parameters. Could be optimized by only doing this when
-        // the parameters have actually changed.
-        flange.setDepth(params.flange);
+        // Update the parameters.
+        hiss.setHissLevel(params.hiss);
         blend.setBlendLevel(params.blend);
+        if (lastShame != params.shame) {
+            shame.setInterpolatedParameters(params.shame);
+            lastShame = params.shame;
+        }
+        if (lastAge != params.age) {
+            hurricaneSandy.setInterpolatedParameters(params.age);
+            lastAge = params.age;
+        }
+        flange.setDepth(params.flange);
 
         if (params.bypassed) return;
 
         // Apply the input drive. This is a simple linear gain.
-        audioBuffer.applyGain(inputDrive);
+        audioBuffer.applyGain(params.inputDrive);
 
         // Make a copy of the original audio to be used strictly for processing
         // TODO: doesn't this allocate memory?
@@ -82,68 +92,7 @@ public:
         ////////// End Process Audio //////////
 
         // 5. Apply the final output level. Again a simple linear gain.
-        audioBuffer.applyGain(outputLevel);
-    }
-
-    void setInputDrive(float drive)
-    {
-        // Express input drive as -18 dB ... +18 dB
-        inputDrive = drive * 36.0f - 18.0f;
-
-        // Convert dB to linear gain
-        inputDrive = std::pow(10.0f, inputDrive * 0.05f);
-    }
-
-    void setOutputLevel(float level)
-    {
-        // Express output level as -18 dB ... +18 dB
-        outputLevel = level * 36.0f - 18.0f;
-
-        // Convert dB to linear gain
-        outputLevel = std::pow(10.0f, outputLevel * 0.05f);
-    }
-
-    float getOutputLevel() const noexcept
-    {
-        return outputLevel;
-    }
-
-    bool isGraphBypassed() const noexcept
-    {
-        return params.bypassed;
-    }
-
-    void setAudioUnitParameters(AUParameter param, float paramLevel)
-    {
-        // TODO: replace this with an APVTS and update these properties
-        // from within processBlock
-
-        switch (param) {
-//TODO: these parameters are never used anywhere
-//            case eSaturationDrive: inSaturation->setDrive(paramLevel); break;
-//            case eSaturationOuput: inSaturation->setOutput(paramLevel); break;
-//            case eSaturationRate: inSaturation->setRateOdd(paramLevel); break;
-//            case eSaturationThresh: inSaturation->setThreshold(paramLevel); break;
-//            case eSaturationGlobalLevel: inSaturation->setGlobalLevel(paramLevel); break;
-//            case eShameFreq: shame->setRate(paramLevel); break;
-//            case eShameDepth: shame->setDepth(paramLevel); break;
-
-            case eShameGlobalLevel:
-                shame.setInterpolatedParameters(paramLevel);
-                break;
-            case eHurricaneSandyGlobalLevel:
-                hurricaneSandy.setInterpolatedParameters(paramLevel);
-                break;
-
-            case eHissLevel:   hiss.setHissLevel(paramLevel); break;
-//            case eBlendLevel:  blend.setBlendLevel(paramLevel); break;
-//            case eFlangeDepth: flange.setDepth(paramLevel); break;
-//            case eBypass:      bypassGraph = (paramLevel >= 0.5f); break;
-            case eInputDrive:  setInputDrive(paramLevel); break;
-            case eOutputLevel: setOutputLevel(paramLevel); break;
-
-            default: break;
-        }
+        audioBuffer.applyGain(params.outputLevel);
     }
 
 private:
@@ -158,6 +107,6 @@ private:
     Hiss hiss;
     Blend blend;
 
-    float inputDrive;
-    float outputLevel;
+    float lastShame;
+    float lastAge;
 };

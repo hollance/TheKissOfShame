@@ -11,11 +11,11 @@ static void castParameter(juce::AudioProcessorValueTreeState& apvts,
 Parameters::Parameters(juce::AudioProcessorValueTreeState& apvts)
 {
     castParameter(apvts, ParameterID::input, inputParam);
+    castParameter(apvts, ParameterID::output, outputParam);
     castParameter(apvts, ParameterID::shame, shameParam);
     castParameter(apvts, ParameterID::age, ageParam);
     castParameter(apvts, ParameterID::hiss, hissParam);
     castParameter(apvts, ParameterID::blend, blendParam);
-    castParameter(apvts, ParameterID::output, outputParam);
     castParameter(apvts, ParameterID::flange, flangeParam);
     castParameter(apvts, ParameterID::bypass, bypassParam);
     castParameter(apvts, ParameterID::link, linkParam);
@@ -33,6 +33,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout Parameters::createParameterL
         ParameterID::input, "Input", juce::NormalisableRange<float>(), 0.5f));
 
     layout.add(std::make_unique<juce::AudioParameterFloat>(
+        ParameterID::output, "Output", juce::NormalisableRange<float>(), 0.5f));
+
+    layout.add(std::make_unique<juce::AudioParameterFloat>(
         ParameterID::shame, "Shame", juce::NormalisableRange<float>(), 0.0f));
 
     layout.add(std::make_unique<juce::AudioParameterFloat>(
@@ -43,9 +46,6 @@ juce::AudioProcessorValueTreeState::ParameterLayout Parameters::createParameterL
 
     layout.add(std::make_unique<juce::AudioParameterFloat>(
         ParameterID::blend, "Blend", juce::NormalisableRange<float>(), 1.0f));
-
-    layout.add(std::make_unique<juce::AudioParameterFloat>(
-        ParameterID::output, "Output", juce::NormalisableRange<float>(), 0.5f));
 
     layout.add(std::make_unique<juce::AudioParameterFloat>(
         ParameterID::flange, "Flange", juce::NormalisableRange<float>(), 0.0f));
@@ -94,12 +94,14 @@ void Parameters::reset() noexcept
 
 void Parameters::update() noexcept
 {
-    input = inputParam->get();
+    // Input and output are -18 dB ... +18 dB.
+    inputDrive = juce::Decibels::decibelsToGain(inputParam->get() * 36.0f - 18.0f);
+    outputLevel = juce::Decibels::decibelsToGain(outputParam->get() * 36.0f - 18.0f);
+
     shame = shameParam->get();
     age = ageParam->get();
     hiss = hissParam->get();
     blend = blendParam->get();
-    output = outputParam->get();
     flange = flangeParam->get();
     bypassed = bypassParam->get();
     link = linkParam->get();

@@ -56,7 +56,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     hissKnob.setKnobImage(hissImagePath);
     hissKnob.setNumFrames(65);
     hissKnob.setKnobDimensions(547, 455, 78, 72);
-    hissKnob.addListener(this);
     addAndMakeVisible(hissKnob);
 
     juce::String blendImagePath = GUI_PATH + "KOS_Graphics/05_alpha.png";
@@ -76,7 +75,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     ageKnob.setKnobImage(ageImagePath);
     ageKnob.setNumFrames(65);
     ageKnob.setKnobDimensions(350, 455, 74, 72);
-    ageKnob.addListener(this);
     addAndMakeVisible(ageKnob);
 
     ////////// BUTTONS //////////
@@ -95,7 +93,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     juce::String tapeTypeImagePath = GUI_PATH + "KOS_Graphics/07.png";
     tapeTypeButton.setClippedCustomOnImage(tapeTypeImagePath, 0, 0, 42, 39);
     tapeTypeButton.setClippedCustomOffImage(tapeTypeImagePath, 0, 39, 42, 39);
-    tapeTypeButton.addListener(this);
     tapeTypeButton.setClickingTogglesState(true);
     addAndMakeVisible(tapeTypeButton);
 
@@ -103,7 +100,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     juce::String printThroughImagePath = GUI_PATH + "KOS_Graphics/11.png";
     printThroughButton.setClippedCustomOnImage(printThroughImagePath, 0, 41, 47, 41);
     printThroughButton.setClippedCustomOffImage(printThroughImagePath, 0, 0, 47, 41);
-    printThroughButton.addListener(this);
     printThroughButton.setClickingTogglesState(true);
     addAndMakeVisible(printThroughButton);
 
@@ -112,7 +108,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     linkIOButtonL.setClippedCustomOnImage(linkImagePath, 0, 0, 50, 50);
     linkIOButtonL.setClippedCustomOffImage(linkImagePath, 0, 0, 50, 50);
     linkIOButtonL.resizeButton(0.6f);
-    linkIOButtonL.addListener(this);
+//    linkIOButtonL.addListener(this);
     linkIOButtonL.setClickingTogglesState(true);
     addAndMakeVisible(linkIOButtonL);
 
@@ -120,7 +116,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     linkIOButtonR.setClippedCustomOnImage(linkImagePath, 0, 0, 50, 50);
     linkIOButtonR.setClippedCustomOffImage(linkImagePath, 0, 0, 50, 50);
     linkIOButtonR.resizeButton(0.6f);
-    linkIOButtonR.addListener(this);
+//    linkIOButtonR.addListener(this);
     linkIOButtonR.setClickingTogglesState(true);
     addAndMakeVisible(linkIOButtonR);
 
@@ -167,6 +163,9 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
 
 KissOfShameAudioProcessorEditor::~KissOfShameAudioProcessorEditor()
 {
+    inputSaturationKnob.removeListener(this);
+    shameKnob.removeListener(this);
+    outputKnob.removeListener(this);
     bypassButton.removeListener(this);
 }
 
@@ -236,7 +235,7 @@ void KissOfShameAudioProcessorEditor::timerCallback()
 
     // Animation of VU meters
     //float smoothRMS = tanh(audioProcessor.curRMS*10);
-    bool bypassed = audioProcessor.params.bypassed;
+    bool bypassed = audioProcessor.params.bypassParam->get();
     float vuLevelL = bypassed ? 0.0f : audioProcessor.curRMSL * 3.0f;
     float vuLevelR = bypassed ? 0.0f : audioProcessor.curRMSR * 3.0f;
     vuMeterL.updateImageWithValue(vuLevelL);
@@ -245,7 +244,7 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     /*
     // Animation of backlighting
     if (!bypassed) {
-        float backlightAlpha = 1.0f - (0.5f*audioProcessor.curRMSL + 0.5f*audioProcessor.curRMSR)*3.0f*shameKnob.getValue();
+        float backlightAlpha = 1.0f - (0.5f*audioProcessor.curRMSL + 0.5f*audioProcessor.curRMSR)*3.0f*float(shameKnob.getValue());
         backlight.setAlpha(backlightAlpha);
         shameKnob.setAlpha(backlightAlpha);
     }
@@ -255,8 +254,7 @@ void KissOfShameAudioProcessorEditor::timerCallback()
     // TODO: don't animate when reels are not visible?
     //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
     //after stopping playback. Don't know why this is... For now, only animating reels when output != 0.
-    if(audioProcessor.curPositionInfo.isPlaying && audioProcessor.playHeadPos != priorProcessorTime && !audioProcessor.audioGraph.isGraphBypassed())
-    {
+    if (audioProcessor.curPositionInfo.isPlaying && audioProcessor.playHeadPos != priorProcessorTime && !bypassed) {
         priorProcessorTime = audioProcessor.playHeadPos;
         if (!reelAnimation.isAnimating) {
             reelAnimation.setFramesPerSecond(50);
@@ -270,9 +268,7 @@ void KissOfShameAudioProcessorEditor::timerCallback()
 
 void KissOfShameAudioProcessorEditor::mouseDoubleClick(const juce::MouseEvent&)
 {
-    //debugLabel.setText("Double Clicked!!!!", dontSendNotification);
-
-    if (audioProcessor.params.showReels) {
+    if (audioProcessor.params.showReelsParam->get()) {
         showReelsAttachment.setValueAsCompleteGesture(0.0f);
     } else {
         showReelsAttachment.setValueAsCompleteGesture(1.0f);
@@ -296,14 +292,6 @@ void KissOfShameAudioProcessorEditor::mouseDrag(const juce::MouseEvent&)
 
 void KissOfShameAudioProcessorEditor::initializeLevels()
 {
-    inputSaturationKnob.setValue(0.5f);
-//    audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam, 0.5);
-    audioProcessor.audioGraph.setAudioUnitParameters(eInputDrive, 0.5);
-
-    outputKnob.setValue(0.5);
-//    audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam, 0.5);
-    audioProcessor.audioGraph.setAudioUnitParameters(eOutputLevel, 0.5);
-
     linkIOButtonL.setToggleState(false, juce::dontSendNotification);
     linkIOButtonR.setToggleState(false, juce::dontSendNotification);
     linkIOButtonL.setAlpha(0.25);
@@ -315,15 +303,7 @@ void KissOfShameAudioProcessorEditor::initializeLevels()
 
 void KissOfShameAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
 {
-    // It's vital to use setParameterNotifyingHost to change any parameters that are automatable
-    // by the host, rather than just modifying them directly, otherwise the host won't know
-    // that they've changed.
-
     if (slider == &inputSaturationKnob) {
-        //audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam,
-        //                                     (float) inputSaturationKnob->getValue());
-        audioProcessor.audioGraph.setAudioUnitParameters(eInputDrive, (float)inputSaturationKnob.getValue());
-
 //        if (linkIOMode)
 //        {
 //            outputKnob->setValue(1.0 - inputSaturationKnob->getValue());
@@ -333,10 +313,6 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
     }
     else if (slider == &outputKnob)
     {
-//        audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam,
-//                                             (float) outputKnob->getValue());
-        audioProcessor.audioGraph.setAudioUnitParameters(eOutputLevel, (float) outputKnob.getValue());
-
 //        if(linkIOMode)
 //        {
 //            inputSaturationKnob->setValue(1.0 - outputKnob->getValue());
@@ -344,33 +320,15 @@ void KissOfShameAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
 //            audioProcessor.audioGraph.setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
 //        }
     }
-    else if (slider == &shameKnob)
-    {
-        shameKnobImage.updateImageWithValue(slider->getValue());
-
-//        audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::shameParam,
-//                                             (float) shameKnob->getValue());
-
-        audioProcessor.audioGraph.setAudioUnitParameters(eShameGlobalLevel, (float) shameKnob.getValue());
+    else if (slider == &shameKnob) {
+        shameKnobImage.updateImageWithValue(float(slider->getValue()));
     }
-    else if (slider == &hissKnob)
-    {
-//        audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::hissParam,
-//                                             (float) hissKnob->getValue());
 
-        audioProcessor.audioGraph.setAudioUnitParameters(eHissLevel, (float) hissKnob.getValue());
-    }
-    else if (slider == &ageKnob)
-    {
-        //reelAnimation->setFramesPerSecond(ageKnob->getValue()*15 + 35);
-        //reelAnimation->setAnimationRate(ageKnob->getValue());
-        //reelAnimation->setAnimationResetThreshold(ageKnob->getValue()*0.025);
-
-//        audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::hurricaneSandyParam,
-//                                             (float) ageKnob->getValue());
-
-        audioProcessor.audioGraph.setAudioUnitParameters(eHurricaneSandyGlobalLevel, (float) ageKnob.getValue());
-    }
+    // The original code has this commented out for the Age knob,
+    // which would also change the reel animation based on the age.
+    //reelAnimation->setFramesPerSecond(ageKnob->getValue()*15 + 35);
+    //reelAnimation->setAnimationRate(ageKnob->getValue());
+    //reelAnimation->setAnimationResetThreshold(ageKnob->getValue()*0.025);
 }
 
 void KissOfShameAudioProcessorEditor::setBypassButtonValue(float newValue)
