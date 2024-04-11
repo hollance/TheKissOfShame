@@ -2,8 +2,12 @@
 #include "PluginEditor.h"
 
 KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudioProcessor& p) :
-    AudioProcessorEditor(&p), audioProcessor(p),
-    showReels(true), linkIOMode(false), priorProcessorTime(0),
+    AudioProcessorEditor(&p),
+    audioProcessor(p),
+    environmentsComponent(*p.params.environmentParam),
+    showReels(true),
+    linkIOMode(false),
+    priorProcessorTime(0),
     bypassButtonAttachment(
         *p.params.bypassParam, [this](float f){ setBypassButtonValue(f); }, nullptr
     )
@@ -18,13 +22,12 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     faceImage.setInterceptsMouseClicks(false, false);
     addAndMakeVisible(faceImage);
 
-//    /////////// COMPONENTS /////////////////
-//
-//    environmentsComponent.reset(new EnvironmentsComponent(p));
-//    environmentsComponent->setTopLeftPosition(388, 654);
-//    addAndMakeVisible(*environmentsComponent);
-//
-//    ////////// KNOBS ////////////////
+    ////////// COMPONENTS //////////
+
+    environmentsComponent.setTopLeftPosition(388, 654);
+    addAndMakeVisible(environmentsComponent);
+
+//    ////////// KNOBS //////////
 //
 //    inputSaturationKnob.reset(new CustomKnob);
 //    String inputImagePath = GUI_PATH + "KOS_Graphics/06_alpha.png";
@@ -94,47 +97,40 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     bypassButtonAttachment.sendInitialUpdate();
     bypassButton.addListener(this);
 
-//    tapeTypeButton.reset(new CustomButton);
-//    tapeTypeButton->setTopLeftPosition(233, 610);
-//    String tapeTypeImagePath = GUI_PATH + "KOS_Graphics/07.png";
-//    tapeTypeButton->setClippedCustomOnImage(tapeTypeImagePath, 0, 0, 42, 39);
-//    tapeTypeButton->setClippedCustomOffImage(tapeTypeImagePath, 0, 39, 42, 39);
-//    tapeTypeButton->addListener(this);
-//    tapeTypeButton->setClickingTogglesState(true);
-//    addAndMakeVisible(*tapeTypeButton);
-//
-//    printThroughButton.reset(new CustomButton);
-//    printThroughButton->setTopLeftPosition(698, 609);
-//    String printThroughImagePath = GUI_PATH + "KOS_Graphics/11.png";
-//    printThroughButton->setClippedCustomOnImage(printThroughImagePath, 0, 41, 47, 41);
-//    printThroughButton->setClippedCustomOffImage(printThroughImagePath, 0, 0, 47, 41);
-//    printThroughButton->addListener(this);
-//    printThroughButton->setClickingTogglesState(true);
-//    addAndMakeVisible(*printThroughButton);
-//
-//    linkIOButtonL.reset(new CustomButton);
-//    //inputSaturationKnob->setKnobDimensions(104, 521, 116, 116);
-//    linkIOButtonL->setTopLeftPosition(137, 605);
-//    String linkImagePath = GUI_PATH + "KOS_Graphics/link.png";
-//    linkIOButtonL->setClippedCustomOnImage(linkImagePath, 0, 0, 50, 50);
-//    linkIOButtonL->setClippedCustomOffImage(linkImagePath, 0, 0, 50, 50);
-//    linkIOButtonL->resizeButton(0.6);
-//    linkIOButtonL->addListener(this);
-//    linkIOButtonL->setClickingTogglesState(true);
-//    addAndMakeVisible(*linkIOButtonL);
-//
-//    linkIOButtonR.reset(new CustomButton);
-//    //outputKnob->setKnobDimensions(757, 521, 122, 116);
-//    linkIOButtonR->setTopLeftPosition(792, 605);
-//    linkIOButtonR->setClippedCustomOnImage(linkImagePath, 0, 0, 50, 50);
-//    linkIOButtonR->setClippedCustomOffImage(linkImagePath, 0, 0, 50, 50);
-//    linkIOButtonR->resizeButton(0.6);
-//    linkIOButtonR->addListener(this);
-//    linkIOButtonR->setClickingTogglesState(true);
-//    addAndMakeVisible(*linkIOButtonR);
-//
-//
-//    ///////////////// Animation //////////////////
+    tapeTypeButton.setTopLeftPosition(233, 610);
+    juce::String tapeTypeImagePath = GUI_PATH + "KOS_Graphics/07.png";
+    tapeTypeButton.setClippedCustomOnImage(tapeTypeImagePath, 0, 0, 42, 39);
+    tapeTypeButton.setClippedCustomOffImage(tapeTypeImagePath, 0, 39, 42, 39);
+    tapeTypeButton.addListener(this);
+    tapeTypeButton.setClickingTogglesState(true);
+    addAndMakeVisible(tapeTypeButton);
+
+    printThroughButton.setTopLeftPosition(698, 609);
+    juce::String printThroughImagePath = GUI_PATH + "KOS_Graphics/11.png";
+    printThroughButton.setClippedCustomOnImage(printThroughImagePath, 0, 41, 47, 41);
+    printThroughButton.setClippedCustomOffImage(printThroughImagePath, 0, 0, 47, 41);
+    printThroughButton.addListener(this);
+    printThroughButton.setClickingTogglesState(true);
+    addAndMakeVisible(printThroughButton);
+
+    linkIOButtonL.setTopLeftPosition(137, 605);
+    juce::String linkImagePath = GUI_PATH + "KOS_Graphics/link.png";
+    linkIOButtonL.setClippedCustomOnImage(linkImagePath, 0, 0, 50, 50);
+    linkIOButtonL.setClippedCustomOffImage(linkImagePath, 0, 0, 50, 50);
+    linkIOButtonL.resizeButton(0.6f);
+    linkIOButtonL.addListener(this);
+    linkIOButtonL.setClickingTogglesState(true);
+    addAndMakeVisible(linkIOButtonL);
+
+    linkIOButtonR.setTopLeftPosition(792, 605);
+    linkIOButtonR.setClippedCustomOnImage(linkImagePath, 0, 0, 50, 50);
+    linkIOButtonR.setClippedCustomOffImage(linkImagePath, 0, 0, 50, 50);
+    linkIOButtonR.resizeButton(0.6f);
+    linkIOButtonR.addListener(this);
+    linkIOButtonR.setClickingTogglesState(true);
+    addAndMakeVisible(linkIOButtonR);
+
+//    ////////// Animation //////////
 //
 //    String reelImagePath = GUI_PATH + "KOS_Graphics/wheels.png";
 //    File reelFile(reelImagePath);
@@ -176,7 +172,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     setSize(mainWidth, mainHeight);
 
 //TODO reenable
-//    initializeLevels();
+    initializeLevels();
 //    startTimer(25);
 }
 
@@ -213,12 +209,12 @@ void KissOfShameAudioProcessorEditor::setReelMode(bool showReels)
 
     // Buttons
     bypassButton.setTopLeftPosition(bypassButton.getX(), bypassButton.getY() + adustment);
-//    tapeTypeButton->setTopLeftPosition(tapeTypeButton->getX(),tapeTypeButton->getY()+adustment);
-//    printThroughButton->setTopLeftPosition(printThroughButton->getX(),printThroughButton->getY()+adustment);
-//
-//    //Components
-//    environmentsComponent->setTopLeftPosition(environmentsComponent->getX(),environmentsComponent->getY()+adustment);
-//
+    tapeTypeButton.setTopLeftPosition(tapeTypeButton.getX(), tapeTypeButton.getY() + adustment);
+    printThroughButton.setTopLeftPosition(printThroughButton.getX(), printThroughButton.getY() + adustment);
+
+    // Components
+    environmentsComponent.setTopLeftPosition(environmentsComponent.getX(), environmentsComponent.getY() + adustment);
+
 //    //animation
 //    vuMeterL->setTopLeftPosition(vuMeterL->getX(),vuMeterL->getY()+adustment);
 //    vuMeterR->setTopLeftPosition(vuMeterR->getX(),vuMeterR->getY()+adustment);
@@ -326,13 +322,13 @@ void KissOfShameAudioProcessorEditor::initializeLevels()
 //    blendKnob->setValue(1.0);
 //    audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::blendParam, 1.0);
 //    audioProcessor.audioGraph.setAudioUnitParameters(eBlendLevel, 1.0);
-//
-//    linkIOButtonL->setToggleState(false, dontSendNotification);
-//    linkIOButtonR->setToggleState(false, dontSendNotification);
-//    linkIOButtonL->setAlpha(0.25);
-//    linkIOButtonR->setAlpha(0.25);
-//    linkIOMode = false;
-//
+
+    linkIOButtonL.setToggleState(false, juce::dontSendNotification);
+    linkIOButtonR.setToggleState(false, juce::dontSendNotification);
+    linkIOButtonL.setAlpha(0.25);
+    linkIOButtonR.setAlpha(0.25);
+    linkIOMode = false;
+
 //    reelAnimation->setAnimationResetThreshold(0.0);
 }
 
@@ -425,27 +421,26 @@ void KissOfShameAudioProcessorEditor::buttonClicked(juce::Button* button)
     if (button == &bypassButton) {
         bypassButtonAttachment.setValueAsCompleteGesture(button->getToggleState() ? 1.0f : 0.0f);
     }
-//    else if(b == linkIOButtonL.get() || b == linkIOButtonR.get())
-//    {
-//        linkIOButtonL->setToggleState(b->getToggleState(), dontSendNotification);
-//        linkIOButtonR->setToggleState(b->getToggleState(), dontSendNotification);
-//        linkIOMode = b->getToggleState();
-//
-//        if(b->getToggleState())
-//        {
-//            linkIOButtonL->setAlpha(1.0);
-//            linkIOButtonR->setAlpha(1.0);
-//
+    else if (button == &linkIOButtonL || button == &linkIOButtonR)
+    {
+        // TODO: do this with a parameter!
+
+        linkIOMode = button->getToggleState();
+        linkIOButtonL.setToggleState(linkIOMode, juce::dontSendNotification);
+        linkIOButtonR.setToggleState(linkIOMode, juce::dontSendNotification);
+
+        if (linkIOMode) {
+            linkIOButtonL.setAlpha(1.0f);
+            linkIOButtonR.setAlpha(1.0f);
+
 //            outputKnob->setValue(1.0 - inputSaturationKnob->getValue());
 //            audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam, (float) outputKnob->getValue());
 //            audioProcessor.audioGraph.setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
-//        }
-//        else
-//        {
-//            linkIOButtonL->setAlpha(0.25);
-//            linkIOButtonR->setAlpha(0.25);
-//        }
-//    }
+        } else {
+            linkIOButtonL.setAlpha(0.25f);
+            linkIOButtonR.setAlpha(0.25f);
+        }
+    }
 }
 
 void KissOfShameAudioProcessorEditor::paint(juce::Graphics& g)

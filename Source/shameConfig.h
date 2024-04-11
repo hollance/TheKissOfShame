@@ -14,14 +14,16 @@
 
 enum EShameEnvironments
 {
-    eEnvironmentOff,
     eEnvironmentEnvironment,
+    eEnvironmentOff,
     eEnvironmentStudioCloset,
     eEnvironmentHumidCellar,
     eEnvironmentHotLocker,
     eEnvironmentHurricaneSandy,
+    eNumEnvironments,
 };
 
+//TODO: remove this
 enum AUParameter
 {
 //TODO: these parameters are not used anywhere

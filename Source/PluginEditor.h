@@ -5,9 +5,9 @@
 #include "GUIUtilities/BacklightComponent.h"
 #include "GUIUtilities/CustomButton.h"
 //#include "GUIUtilities/CustomKnob.h"
+#include "GUIUtilities/EnvironmentsComponent.h"
 //#include "GUIUtilities/ImageAnimator.h"
 #include "GUIUtilities/ImageInteractor.h"
-//#include "GUIUtilities/EnvironmentsComponent.h"
 //#include "GUIUtilities/ImageAnimationComponent.h"
 
 class KissOfShameAudioProcessorEditor : public juce::AudioProcessorEditor,
@@ -36,6 +36,12 @@ public:
 
     void initializeLevels();
 
+    void paint(juce::Graphics&) override;
+    void resized() override;
+
+private:
+    KissOfShameAudioProcessor& audioProcessor;
+
 //TODO: get rid of unique_ptrs
 
     //Images
@@ -52,28 +58,22 @@ public:
 
     // Buttons
     CustomButton bypassButton;
-//    std::unique_ptr<CustomButton> tapeTypeButton;
-//    std::unique_ptr<CustomButton> printThroughButton;
-//    std::unique_ptr<CustomButton> linkIOButtonL;
-//    std::unique_ptr<CustomButton> linkIOButtonR;
+    CustomButton tapeTypeButton;
+    CustomButton printThroughButton;
+    CustomButton linkIOButtonL;
+    CustomButton linkIOButtonR;
 
     // Used strictly to post messages for debugging
     juce::Label debugLabel;
 
-//    //Components
-//    std::unique_ptr<EnvironmentsComponent> environmentsComponent;
-//
+    // Components
+    EnvironmentsComponent environmentsComponent;
+
 //    //animation
 //    std::unique_ptr<ImageAnimationComponent> reelAnimation;
 //    std::unique_ptr<ImageInteractor> vuMeterL;
 //    std::unique_ptr<ImageInteractor> vuMeterR;
 //    std::unique_ptr<ImageInteractor> shameKnobImage;
-
-    void paint(juce::Graphics&) override;
-    void resized() override;
-
-private:
-    KissOfShameAudioProcessor& audioProcessor;
 
     //TODO: make these parameters too so they get serialized with the APVTS
     bool showReels;

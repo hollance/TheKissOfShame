@@ -11,6 +11,7 @@ static void castParameter(juce::AudioProcessorValueTreeState& apvts,
 Parameters::Parameters(juce::AudioProcessorValueTreeState& apvts)
 {
     castParameter(apvts, ParameterID::bypass, bypassParam);
+    castParameter(apvts, ParameterID::environment, environmentParam);
 }
 
 juce::AudioProcessorValueTreeState::ParameterLayout Parameters::createParameterLayout()
@@ -18,6 +19,19 @@ juce::AudioProcessorValueTreeState::ParameterLayout Parameters::createParameterL
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
 
     layout.add(std::make_unique<juce::AudioParameterBool>(ParameterID::bypass, "Bypass", false));
+
+    layout.add(std::make_unique<juce::AudioParameterChoice>(
+        ParameterID::environment,
+        "Environment",
+        juce::StringArray {
+            "Environment",
+            "Off",
+            "Studio Closet",
+            "Humid Cellar",
+            "Hot Locker",
+            "Hurricane Sandy",
+        },
+        0));
 
     return layout;
 }
@@ -33,6 +47,7 @@ void Parameters::reset() noexcept
 void Parameters::update() noexcept
 {
     bypassed = bypassParam->get();
+    environment = EShameEnvironments(environmentParam->getIndex());
 }
 
 void Parameters::smoothen() noexcept

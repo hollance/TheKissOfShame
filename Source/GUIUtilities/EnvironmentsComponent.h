@@ -1,88 +1,45 @@
+#pragma once
 
-
-#ifndef KOS_EnvironmentsComponent_h
-#define KOS_EnvironmentsComponent_h
-
-#include "ImageInteractor.h"
 #include "../shameConfig.h"
-#include "../PluginProcessor.h"
+#include "../Parameters.h"
+#include "ImageInteractor.h"
 
-using namespace juce;
-
-
-class EnvironmentsComponent : public ImageInteractor, public MouseListener
+class EnvironmentsComponent : public ImageInteractor
 {
 public:
-    
-    EnvironmentsComponent(KissOfShameAudioProcessor& p) : imageIncr(0), curEnvironment(eEnvironmentOff), processor(p)
+    EnvironmentsComponent(juce::AudioParameterChoice& param) :
+        parameter(param),
+        attachment(
+            param,
+            [this](float value){ updateImageWithValue(int(value)); },
+            nullptr
+        )
     {
         setNumFrames(6);
         setMinMaxValues(0, 5);
-        
-        String environmentsImageLocation = GUI_PATH + "KOS_Graphics/00.png";
+
+        juce::String environmentsImageLocation = GUI_PATH + "KOS_Graphics/00.png";
         setAnimationImage(environmentsImageLocation);
-        
+
         setDimensions(0, 0, 183, 32);
         setSize(183, 32);
+
+        attachment.sendInitialUpdate();
     }
-    
-    ~EnvironmentsComponent(){}
-    
-    
-    
+
     void setCurrentEnvironment(int index)
     {
-        switch (index)
-        {
-            case 0:
-                curEnvironment = eEnvironmentOff;
-                break;
-            case 1:
-                curEnvironment = eEnvironmentEnvironment;
-                break;
-            case 2:
-                curEnvironment = eEnvironmentStudioCloset;
-                break;
-            case 3:
-                curEnvironment = eEnvironmentHumidCellar;
-                break;
-            case 4:
-                curEnvironment = eEnvironmentHotLocker;
-                break;
-            case 5:
-                curEnvironment = eEnvironmentHurricaneSandy;
-                break;
-                
-            default:
-                break;
-        }
+        attachment.setValueAsCompleteGesture(float(index));
+    }
 
-        // TODO: not thread safe
-        processor.audioGraph.setCurrentEnvironment(curEnvironment);
-    }
-        
-    
-    virtual void mouseUp ([[maybe_unused]] const MouseEvent& event)
+    void mouseUp(const juce::MouseEvent&) override
     {
-        imageIncr = (imageIncr + 1) % 6;
-        updateImageWithValue(imageIncr);
-        
-        
-        setCurrentEnvironment(imageIncr);
+        setCurrentEnvironment((parameter.getIndex() + 1) % eNumEnvironments);
     }
-    
-    virtual void mouseDrag([[maybe_unused]] const MouseEvent& event) {}
 
 private:
-    
-    int imageIncr;
-    EShameEnvironments curEnvironment;
-    
-    KissOfShameAudioProcessor& processor;
+    juce::AudioParameterChoice& parameter;
+    juce::ParameterAttachment attachment;
 
-    
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EnvironmentsComponent)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(EnvironmentsComponent)
 };
-
-
-#endif

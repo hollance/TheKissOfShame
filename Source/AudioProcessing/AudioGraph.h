@@ -16,7 +16,6 @@ public:
     {
         shame.setInterpolatedParameters(0.0f);
 
-        currentEnvironment = eEnvironmentOff;
         outputLevel = 1.0f;
         inputDrive = 1.0f;
     }
@@ -53,16 +52,12 @@ public:
         flange.processFlange(audioGraphProcessingBuffer, numChannels);
 
         // 2. Add environment effects
-        switch (currentEnvironment)
+        switch (params.environment)
         {
-            case eEnvironmentOff:
-                break;
             case eEnvironmentEnvironment:
-                break;
+            case eEnvironmentOff:
             case eEnvironmentStudioCloset:
-                break;
             case eEnvironmentHumidCellar:
-                break;
             case eEnvironmentHotLocker:
                 break;
             case eEnvironmentHurricaneSandy:
@@ -113,11 +108,6 @@ public:
         return params.bypassed;
     }
 
-    void setCurrentEnvironment(EShameEnvironments env)
-    {
-        currentEnvironment = env;
-    }
-
     void setAudioUnitParameters(AUParameter param, float paramLevel)
     {
         // TODO: replace this with an APVTS and update these properties
@@ -163,7 +153,6 @@ private:
     Hiss hiss;
     Blend blend;
 
-    EShameEnvironments currentEnvironment;
     float inputDrive;
     float outputLevel;
 };

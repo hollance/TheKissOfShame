@@ -1,10 +1,12 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "shameConfig.h"
 
 namespace ParameterID
 {
     const juce::ParameterID bypass { "bypass", 1 };
+    const juce::ParameterID environment { "environment", 1 };
 
 //TODO: add these parameters
 //    inputLevel = 1.0f;
@@ -14,7 +16,6 @@ namespace ParameterID
 //    blend = 0.0f;
 //    outputLevel = 0.0f;
 //    flange = 0.0f;
-//    currentEnvironment
 //    tapeType
 //    printThrough
 //    showReels
@@ -34,8 +35,10 @@ public:
     void smoothen() noexcept;
 
     bool bypassed = false;
+    EShameEnvironments environment = eEnvironmentOff;
 
     juce::AudioParameterBool* bypassParam;
+    juce::AudioParameterChoice* environmentParam;
 
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Parameters)
