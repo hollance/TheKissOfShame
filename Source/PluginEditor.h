@@ -8,7 +8,7 @@
 #include "GUIUtilities/EnvironmentsComponent.h"
 //#include "GUIUtilities/ImageAnimator.h"
 #include "GUIUtilities/ImageInteractor.h"
-//#include "GUIUtilities/ImageAnimationComponent.h"
+#include "GUIUtilities/ImageAnimationComponent.h"
 
 class KissOfShameAudioProcessorEditor : public juce::AudioProcessorEditor,
                                         public juce::Timer,
@@ -40,6 +40,9 @@ public:
     void resized() override;
 
 private:
+    void setBypassButtonValue(float newValue);
+    void setShowReelsValue(float newValue);
+
     KissOfShameAudioProcessor& audioProcessor;
 
 //TODO: get rid of unique_ptrs
@@ -69,23 +72,20 @@ private:
     // Components
     EnvironmentsComponent environmentsComponent;
 
-//    //animation
-//    std::unique_ptr<ImageAnimationComponent> reelAnimation;
-//    std::unique_ptr<ImageInteractor> vuMeterL;
-//    std::unique_ptr<ImageInteractor> vuMeterR;
-//    std::unique_ptr<ImageInteractor> shameKnobImage;
+    // Animation
+    ImageAnimationComponent reelAnimation;
+    ImageInteractor vuMeterL;
+    ImageInteractor vuMeterR;
+    ImageInteractor shameKnobImage;
 
     //TODO: make these parameters too so they get serialized with the APVTS
-    bool showReels;
     bool linkIOMode;
 
     int priorProcessorTime;
 
     bool ignoreCallbacks = false;
-
-    void setBypassButtonValue(float newValue);
-
     juce::ParameterAttachment bypassButtonAttachment;
+    juce::ParameterAttachment showReelsAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(KissOfShameAudioProcessorEditor)
 };

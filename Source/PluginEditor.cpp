@@ -5,11 +5,14 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     AudioProcessorEditor(&p),
     audioProcessor(p),
     environmentsComponent(*p.params.environmentParam),
-    showReels(true),
+    reelAnimation({GUI_PATH + "KOS_Graphics/wheels.png"}, 31),
     linkIOMode(false),
     priorProcessorTime(0),
     bypassButtonAttachment(
         *p.params.bypassParam, [this](float f){ setBypassButtonValue(f); }, nullptr
+    ),
+    showReelsAttachment(
+        *p.params.showReelsParam, [this](float f){ setShowReelsValue(f); }, nullptr
     )
 {
     backlight.setTopLeftPosition(0, 703 - backlight.getHeight());
@@ -36,14 +39,13 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
 //    inputSaturationKnob->setKnobDimensions(104, 521, 116, 116);
 //    inputSaturationKnob->addListener (this);
 //    addAndMakeVisible(*inputSaturationKnob);
-//
-//    shameKnobImage.reset(new ImageInteractor);
-//    shameKnobImage->setNumFrames(65);
-//    shameKnobImage->setDimensions(401, 491, 174, 163);
-//    String shameImagePath = GUI_PATH + "KOS_Graphics/09_alpha.png";
-//    shameKnobImage->setAnimationImage(shameImagePath);
-//    addAndMakeVisible(*shameKnobImage);
-//
+
+    shameKnobImage.setNumFrames(65);
+    shameKnobImage.setDimensions(401, 491, 174, 163);
+    juce::String shameImagePath = GUI_PATH + "KOS_Graphics/09_alpha.png";
+    shameKnobImage.setAnimationImage(shameImagePath);
+    addAndMakeVisible(shameKnobImage);
+
 //    shameKnob.reset(new CustomKnob);
 //    String crossImagePath = GUI_PATH + "KOS_Graphics/09_v2.png";
 //    shameKnob->setKnobImage(crossImagePath);
@@ -130,31 +132,26 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     linkIOButtonR.setClickingTogglesState(true);
     addAndMakeVisible(linkIOButtonR);
 
-//    ////////// Animation //////////
-//
-//    String reelImagePath = GUI_PATH + "KOS_Graphics/wheels.png";
-//    File reelFile(reelImagePath);
-//    //reelAnimation = new ImageAnimator(reelFile, 31, 31);
-//    reelAnimation.reset(new ImageAnimationComponent(reelFile, 31, 50)); //50
-//    reelAnimation->setFrameDimensions(0, 0, 960, 322);
-//    reelAnimation->addActionListener(this);
-//    addAndMakeVisible(*reelAnimation);
-//
-//    vuMeterL.reset(new ImageInteractor);
-//    vuMeterL->setNumFrames(65);
-//    vuMeterL->setDimensions(251, 518, 108, 108);
-//    String vuLeftImagePath = GUI_PATH + "KOS_Graphics/08.png";
-//    vuMeterL->setAnimationImage(vuLeftImagePath);
-//    addAndMakeVisible(*vuMeterL);
-//
-//    vuMeterR.reset(new ImageInteractor);
-//    vuMeterR->setNumFrames(65);
-//    vuMeterR->setDimensions(605, 518, 110, 108);
-//    String vuRightImagePath = GUI_PATH + "KOS_Graphics/10.png";
-//    vuMeterR->setAnimationImage(vuRightImagePath);
-//    addAndMakeVisible(*vuMeterR);
+    ////////// Animation //////////
 
-    //////////////// LABELS /////////////////
+    reelAnimation.setFrameDimensions(0, 0, 960, 322);
+    reelAnimation.addActionListener(this);
+    addAndMakeVisible(reelAnimation);
+
+    vuMeterL.setNumFrames(65);
+    vuMeterL.setDimensions(251, 518, 108, 108);
+    juce::String vuLeftImagePath = GUI_PATH + "KOS_Graphics/08.png";
+    vuMeterL.setAnimationImage(vuLeftImagePath);
+    addAndMakeVisible(vuMeterL);
+
+    vuMeterR.setNumFrames(65);
+    vuMeterR.setDimensions(605, 518, 110, 108);
+    juce::String vuRightImagePath = GUI_PATH + "KOS_Graphics/10.png";
+    vuMeterR.setAnimationImage(vuRightImagePath);
+    addAndMakeVisible(vuMeterR);
+
+    ////////// LABELS //////////
+
     /*
     #if DEBUG
     juce::String debugText = "Debug Info...";
@@ -171,9 +168,10 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     int mainHeight = faceImage.getHeight();
     setSize(mainWidth, mainHeight);
 
-//TODO reenable
+    showReelsAttachment.sendInitialUpdate();
+
     initializeLevels();
-//    startTimer(25);
+    startTimer(25);
 }
 
 KissOfShameAudioProcessorEditor::~KissOfShameAudioProcessorEditor()
@@ -189,6 +187,24 @@ void KissOfShameAudioProcessorEditor::actionListenerCallback(const juce::String&
 //        audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::flangeParam, reelAnimation->getCurrentFlangeDepth());
 //        audioProcessor.audioGraph.setAudioUnitParameters(eFlangeDepth, reelAnimation->getCurrentFlangeDepth());
 //    }
+}
+
+void KissOfShameAudioProcessorEditor::setShowReelsValue(float newValue)
+{
+    bool newVisible = newValue > 0.0f;
+    bool oldVisible = getHeight() > 300;
+
+    if (newVisible != oldVisible) {
+        if (newVisible) {
+            addAndMakeVisible(reelAnimation);
+            setReelMode(true);
+        } else {
+            removeChildComponent(&reelAnimation);
+            setReelMode(false);
+        }
+        setSize(faceImage.getWidth(), faceImage.getHeight());
+        repaint();
+    }
 }
 
 void KissOfShameAudioProcessorEditor::setReelMode(bool showReels)
@@ -215,10 +231,10 @@ void KissOfShameAudioProcessorEditor::setReelMode(bool showReels)
     // Components
     environmentsComponent.setTopLeftPosition(environmentsComponent.getX(), environmentsComponent.getY() + adustment);
 
-//    //animation
-//    vuMeterL->setTopLeftPosition(vuMeterL->getX(),vuMeterL->getY()+adustment);
-//    vuMeterR->setTopLeftPosition(vuMeterR->getX(),vuMeterR->getY()+adustment);
-//    shameKnobImage->setTopLeftPosition(shameKnobImage->getX(),shameKnobImage->getY()+adustment);
+    // Animation
+    vuMeterL.setTopLeftPosition(vuMeterL.getX(), vuMeterL.getY() + adustment);
+    vuMeterR.setTopLeftPosition(vuMeterR.getX(), vuMeterR.getY() + adustment);
+    shameKnobImage.setTopLeftPosition(shameKnobImage.getX(), shameKnobImage.getY() + adustment);
 
     juce::String faceImagePath;
     int faceHeight = 0;
@@ -235,62 +251,51 @@ void KissOfShameAudioProcessorEditor::setReelMode(bool showReels)
 
 void KissOfShameAudioProcessorEditor::timerCallback()
 {
-/*
-    //debugLabel.setText(String(reelAnimation->getCurrentFlangeDepth()), dontSendNotification);
+    //debugLabel.setText(String(reelAnimation->getCurrentFlangeDepth()), juce::dontSendNotification);
+    //debugLabel.setText(String(audioProcessor.curPositionInfo.isPlaying) + ":  " + String(audioProcessor.playHeadPos), juce::dontSendNotification);
 
-    //DEBUG: message from processor
-    //debugLabel.setText(String(ourProcessor->curPositionInfo.isPlaying) + ":  " + String(ourProcessor->playHeadPos), dontSendNotification);
+    // Animation of VU meters
+    //float smoothRMS = tanh(audioProcessor.curRMS*10);
+    bool bypassed = audioProcessor.params.bypassed;
+    float vuLevelL = bypassed ? 0.0f : audioProcessor.curRMSL * 3.0f;
+    float vuLevelR = bypassed ? 0.0f : audioProcessor.curRMSR * 3.0f;
+    vuMeterL.updateImageWithValue(vuLevelL);
+    vuMeterR.updateImageWithValue(vuLevelR);
 
-    //animation of VU meters and backlighting
-    //float smoothRMS = tanh(ourProcessor->curRMS*10);
-    float vuLevelL = bypassButton->getToggleState() ? 0.0 : audioProcessor.curRMSL*3;
-    float vuLevelR = bypassButton->getToggleState() ? 0.0 : audioProcessor.curRMSR*3;
-    vuMeterL->updateImageWithValue(vuLevelL);
-    vuMeterR->updateImageWithValue(vuLevelR);
+    /*
+    // Animation of backlighting
+    if (!bypassed) {
+        float backlightAlpha = 1.0f - (0.5f*audioProcessor.curRMSL + 0.5f*audioProcessor.curRMSR)*3.0f;//TODO *shameKnob->getValue();
+        backlight.setAlpha(backlightAlpha);
+//TODO            shameKnob->setAlpha(backlightAlpha);
+    }
+    */
 
-    //    if(!bypassButton->getToggleState())
-    //    {
-    //        float backlightAlpha = 1 - (0.5*audioProcessor.curRMSL + 0.5*audioProcessor.curRMSR)*3*shameKnob->getValue();
-    //        backlight.setAlpha(backlightAlpha);
-    //        shameKnob->setAlpha(backlightAlpha);
-    //    }
-
+    // TODO: clean this up
+    // TODO: don't animate when reels are not visible?
     //NOTE: when output level == 0, for some reason the AudioPlayhead position doesn't return to 0
     //after stopping playback. Don't know why this is... For now, only animating reels when output != 0.
     if(audioProcessor.curPositionInfo.isPlaying && audioProcessor.playHeadPos != priorProcessorTime && !audioProcessor.audioGraph.isGraphBypassed())
     {
         priorProcessorTime = audioProcessor.playHeadPos;
-        if(!reelAnimation->isAnimating)
-        {
-            reelAnimation->setFramesPerSecond(50);
-            reelAnimation->isAnimating = true;
+        if (!reelAnimation.isAnimating) {
+            reelAnimation.setFramesPerSecond(50);
+            reelAnimation.isAnimating = true;
         }
+    } else {
+        reelAnimation.setFramesPerSecond(0);
+        reelAnimation.isAnimating = false;
     }
-    else
-    {
-        reelAnimation->setFramesPerSecond(0);
-        reelAnimation->isAnimating = false;
-    }
-    //else if(reelAnimation->isAnimating) reelAnimation->stopAnimation();
-*/
 }
 
 void KissOfShameAudioProcessorEditor::mouseDoubleClick(const juce::MouseEvent&)
 {
     //debugLabel.setText("Double Clicked!!!!", dontSendNotification);
 
-    if (showReels) {
-        showReels = false;
-//TODO        removeChildComponent(reelAnimation.get());
-        setReelMode(false);
-        setSize(faceImage.getWidth(), faceImage.getHeight());
-        repaint();
+    if (audioProcessor.params.showReels) {
+        showReelsAttachment.setValueAsCompleteGesture(0.0f);
     } else {
-        showReels = true;
-//TODO        addAndMakeVisible(*reelAnimation);
-        setReelMode(true);
-        setSize(faceImage.getWidth(), faceImage.getHeight());
-        repaint();
+        showReelsAttachment.setValueAsCompleteGesture(1.0f);
     }
 }
 
@@ -329,7 +334,7 @@ void KissOfShameAudioProcessorEditor::initializeLevels()
     linkIOButtonR.setAlpha(0.25);
     linkIOMode = false;
 
-//    reelAnimation->setAnimationResetThreshold(0.0);
+    reelAnimation.setAnimationResetThreshold(0.0f);
 }
 
 void KissOfShameAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
