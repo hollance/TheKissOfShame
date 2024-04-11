@@ -3177,9 +3177,6 @@
     <ClInclude Include="..\..\Source\GUIUtilities\ImageAnimationComponent.h">
       <Filter>KissOfShame\Source\GUIUtilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\GUIUtilities\ImageAnimator.h">
-      <Filter>KissOfShame\Source\GUIUtilities</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\GUIUtilities\ImageInteractor.h">
       <Filter>KissOfShame\Source\GUIUtilities</Filter>
     </ClInclude>

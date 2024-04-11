@@ -6,7 +6,6 @@
 #include "GUIUtilities/CustomButton.h"
 #include "GUIUtilities/CustomKnob.h"
 #include "GUIUtilities/EnvironmentsComponent.h"
-//#include "GUIUtilities/ImageAnimator.h"
 #include "GUIUtilities/ImageInteractor.h"
 #include "GUIUtilities/ImageAnimationComponent.h"
 

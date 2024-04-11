@@ -44,7 +44,6 @@
               file="Source/GUIUtilities/EnvironmentsComponent.h"/>
         <FILE id="IF8wYi" name="ImageAnimationComponent.h" compile="0" resource="0"
               file="Source/GUIUtilities/ImageAnimationComponent.h"/>
-        <FILE id="GpAnmn" name="ImageAnimator.h" compile="0" resource="0" file="Source/GUIUtilities/ImageAnimator.h"/>
         <FILE id="VRxWrl" name="ImageInteractor.cpp" compile="1" resource="0"
               file="Source/GUIUtilities/ImageInteractor.cpp"/>
         <FILE id="d3vYfS" name="ImageInteractor.h" compile="0" resource="0"

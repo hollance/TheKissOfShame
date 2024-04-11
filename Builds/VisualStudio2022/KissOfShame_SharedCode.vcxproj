@@ -2470,7 +2470,6 @@
     <ClInclude Include="..\..\Source\GUIUtilities\CustomKnob.h"/>
     <ClInclude Include="..\..\Source\GUIUtilities\EnvironmentsComponent.h"/>
     <ClInclude Include="..\..\Source\GUIUtilities\ImageAnimationComponent.h"/>
-    <ClInclude Include="..\..\Source\GUIUtilities\ImageAnimator.h"/>
     <ClInclude Include="..\..\Source\GUIUtilities\ImageInteractor.h"/>
     <ClInclude Include="..\..\Source\Parameters.h"/>
     <ClInclude Include="..\..\Source\PluginEditor.h"/>

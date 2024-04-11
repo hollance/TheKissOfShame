@@ -143,7 +143,6 @@
 		AB0BDD5D8D1B7C4617398ED1 /* CustomButton.h */ /* CustomButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CustomButton.h; path = ../../Source/GUIUtilities/CustomButton.h; sourceTree = SOURCE_ROOT; };
 		AF7B5DB1ABD5B61B82D4484A /* RecentFilesMenuTemplate.nib */ /* RecentFilesMenuTemplate.nib */ = {isa = PBXFileReference; lastKnownFileType = file.nib; name = RecentFilesMenuTemplate.nib; path = RecentFilesMenuTemplate.nib; sourceTree = SOURCE_ROOT; };
 		B04EB6EC963D031CC44551DF /* Info-AU.plist */ /* Info-AU.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-AU.plist"; path = "Info-AU.plist"; sourceTree = SOURCE_ROOT; };
-		B176E700B7D8E856223D7FBF /* ImageAnimator.h */ /* ImageAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageAnimator.h; path = ../../Source/GUIUtilities/ImageAnimator.h; sourceTree = SOURCE_ROOT; };
 		B3953F0C62C4A82C19D8B9BE /* PluginEditor.cpp */ /* PluginEditor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PluginEditor.cpp; path = ../../Source/PluginEditor.cpp; sourceTree = SOURCE_ROOT; };
 		B44FE72BF900B950E2848C63 /* EnvelopeDips.h */ /* EnvelopeDips.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EnvelopeDips.h; path = ../../Source/AudioProcessing/EnvelopeDips.h; sourceTree = SOURCE_ROOT; };
 		B464659D7A2B34422E68E05D /* PluginProcessor.h */ /* PluginProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginProcessor.h; path = ../../Source/PluginProcessor.h; sourceTree = SOURCE_ROOT; };
@@ -338,7 +337,6 @@
 				3AA19A4B435BF55130283DD1,
 				F2BF8C596E465F74A66EB026,
 				FCBE723A58FDA3E82663743D,
-				B176E700B7D8E856223D7FBF,
 				F40D2B96F5C29C0F960737DE,
 				10386317805A634DF011A08E,
 			);
