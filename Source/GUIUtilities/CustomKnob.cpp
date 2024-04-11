@@ -11,7 +11,6 @@ CustomKnob::CustomKnob() : knobNumFrames(128)
 void CustomKnob::setNumFrames(int numFrames)
 {
     knobNumFrames = numFrames;
-    setValue(0.0f);
 }
 
 void CustomKnob::setKnobImage(const juce::String& filePath)

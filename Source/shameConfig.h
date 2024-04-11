@@ -42,7 +42,7 @@ enum AUParameter
     eHurricaneSandyGlobalLevel,
     eHissLevel,
 //    eBlendLevel,
-    eFlangeDepth,
+//    eFlangeDepth,
 
 //    eBypass,
     eInputDrive,

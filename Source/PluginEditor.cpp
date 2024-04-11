@@ -5,7 +5,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     AudioProcessorEditor(&p),
     audioProcessor(p),
     environmentsComponent(*p.params.environmentParam),
-    reelAnimation({GUI_PATH + "KOS_Graphics/wheels.png"}, 31),
+    reelAnimation(*p.params.flangeParam, {GUI_PATH + "KOS_Graphics/wheels.png"}, 31),
     linkIOMode(false),
     priorProcessorTime(0),
     bypassButtonAttachment(
@@ -127,7 +127,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     ////////// Animation //////////
 
     reelAnimation.setFrameDimensions(0, 0, 960, 322);
-    reelAnimation.addActionListener(this);
     addAndMakeVisible(reelAnimation);
 
     vuMeterL.setNumFrames(65);
@@ -169,16 +168,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
 KissOfShameAudioProcessorEditor::~KissOfShameAudioProcessorEditor()
 {
     bypassButton.removeListener(this);
-}
-
-void KissOfShameAudioProcessorEditor::actionListenerCallback(const juce::String& message)
-{
-//    if(message == "updateFlange")
-//    {
-//        //debugLabel.setText(String(reelAnimation->getCurrentFlangeDepth()), dontSendNotification);
-//        audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::flangeParam, reelAnimation->getCurrentFlangeDepth());
-//        audioProcessor.audioGraph.setAudioUnitParameters(eFlangeDepth, reelAnimation->getCurrentFlangeDepth());
-//    }
 }
 
 void KissOfShameAudioProcessorEditor::setShowReelsValue(float newValue)

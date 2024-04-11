@@ -22,36 +22,11 @@ public:
         repaint();
     }
 
-//TODO: I don't think these are used anywhere, so remove them
-//    void setCurrentValue(float value)
-//    {
-//        if (value > maxValue) {
-//            curValue = maxValue;
-//        } else if (value < minValue){
-//            curValue = minValue;
-//        } else {
-//            curValue = value;
-//        }
-//    }
-
     void setMinMaxValues(float min, float max)
     {
         minValue = min;
         maxValue = max;
     }
-
-//    void setDesaturate(bool _desaturate)
-//    {
-//        desaturate = _desaturate;
-//
-//        if (desaturate) {
-//            image = desatImage;
-//        } else {
-//            image = satImage;
-//        }
-//
-//        repaint();
-//    }
 
     void setNumFrames(int numFrames);
     void setAnimationImage(const juce::String& filePath);

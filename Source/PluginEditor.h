@@ -12,8 +12,7 @@
 class KissOfShameAudioProcessorEditor : public juce::AudioProcessorEditor,
                                         public juce::Timer,
                                         public juce::Slider::Listener,
-                                        public juce::Button::Listener,
-                                        public juce::ActionListener
+                                        public juce::Button::Listener
 {
 public:
     KissOfShameAudioProcessorEditor(KissOfShameAudioProcessor&);
@@ -28,8 +27,6 @@ public:
     void mouseDown(const juce::MouseEvent& event) override;
     void mouseUp(const juce::MouseEvent& event) override;
     void mouseDrag(const juce::MouseEvent& event) override;
-
-    void actionListenerCallback(const juce::String& message) override;
 
     void setReelMode(bool showReels);
 

@@ -50,7 +50,7 @@ private:
 class ImageAnimationComponent : public MyAnimatedAppComponent, public juce::ActionBroadcaster
 {
 public:
-    ImageAnimationComponent(const juce::File& imgFile, int numFrames)
+    ImageAnimationComponent(juce::AudioParameterFloat& param, const juce::File& imgFile, int numFrames) : parameter(param)
     {
         isAnimating = false;
         resetThresh = 0.0f;
@@ -67,7 +67,6 @@ public:
         imageFrameHeight = animationImage.getHeight()/animationNumFrames;
         setSize(imageFrameWidth, imageFrameHeight);
 
-        curFlangeDepth = 0.0f;
         setFlangeDepth = 0.0f;
 
         setFramesPerSecond(0);  // initially stopped
@@ -79,29 +78,25 @@ public:
     void mouseDown(const juce::MouseEvent&) override
     {
         setAnimationResetThreshold(0.015f);
+        parameter.beginChangeGesture();
     }
 
     void mouseUp(const juce::MouseEvent&) override
     {
-        setFlangeDepth = curFlangeDepth;
+        parameter.endChangeGesture();
+        setFlangeDepth = parameter.get();
         setAnimationResetThreshold(0.0f);
     }
 
     void mouseDrag(const juce::MouseEvent& event) override
     {
         float dragDist = float(event.getDistanceFromDragStartY()) / 100.0f;
-        curFlangeDepth = setFlangeDepth + dragDist;
+        float curFlangeDepth = setFlangeDepth + dragDist;
 
         if (curFlangeDepth > 1.0f) { curFlangeDepth = 1.0f; }
         if (curFlangeDepth < 0.0f) { curFlangeDepth = 0.0f; }
 
-        // TODO: update parameter
-        sendActionMessage("updateFlange");
-    }
-
-    float getCurrentFlangeDepth()
-    {
-        return curFlangeDepth;
+        parameter.setValueNotifyingHost(curFlangeDepth);
     }
 
     void update() override
@@ -176,6 +171,7 @@ public:
     bool isAnimating;
 
 private:
+    juce::AudioParameterFloat& parameter;
     juce::OpenGLContext oglContext;
 
     float resetThresh;
@@ -186,11 +182,10 @@ private:
     int imageFrameWidth;
     int imageFrameHeight;
 
-    float curFlangeDepth;
-    float setFlangeDepth;
-
     int animationNumFrames;
     int currentFrame;
     int startFrame;
     int endFrame;
+
+    float setFlangeDepth;
 };
