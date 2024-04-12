@@ -28,16 +28,14 @@ public:
     void mouseUp(const juce::MouseEvent& event) override;
     void mouseDrag(const juce::MouseEvent& event) override;
 
-    void setReelMode(bool showReels);
-
-    void initializeLevels();
-
     void paint(juce::Graphics&) override;
     void resized() override;
 
 private:
+    void setReelMode(bool showReels);
     void setBypassButtonValue(float newValue);
     void setShowReelsValue(float newValue);
+    void setLinkButtonValue(float newValue);
 
     KissOfShameAudioProcessor& audioProcessor;
 
@@ -72,9 +70,6 @@ private:
     ImageInteractor vuMeterR;
     ImageInteractor shameKnobImage;
 
-    //TODO: make this a parameter too so it gets serialized with the APVTS
-    bool linkIOMode;
-
     int priorProcessorTime;
 
     juce::AudioProcessorValueTreeState::SliderAttachment inputAttachment {
@@ -99,6 +94,7 @@ private:
     bool ignoreCallbacks = false;
     juce::ParameterAttachment bypassButtonAttachment;
     juce::ParameterAttachment showReelsAttachment;
+    juce::ParameterAttachment linkButtonAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(KissOfShameAudioProcessorEditor)
 };

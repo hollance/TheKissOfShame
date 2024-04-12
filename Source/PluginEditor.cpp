@@ -6,13 +6,15 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     audioProcessor(p),
     environmentsComponent(*p.params.environmentParam),
     reelAnimation(*p.params.flangeParam, {GUI_PATH + "KOS_Graphics/wheels.png"}, 31),
-    linkIOMode(false),
     priorProcessorTime(0),
     bypassButtonAttachment(
         *p.params.bypassParam, [this](float f){ setBypassButtonValue(f); }, nullptr
     ),
     showReelsAttachment(
         *p.params.showReelsParam, [this](float f){ setShowReelsValue(f); }, nullptr
+    ),
+    linkButtonAttachment(
+        *p.params.linkParam, [this](float f){ setLinkButtonValue(f); }, nullptr
     )
 {
     backlight.setTopLeftPosition(0, 703 - backlight.getHeight());
@@ -108,7 +110,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     linkIOButtonL.setClippedCustomOnImage(linkImagePath, 0, 0, 50, 50);
     linkIOButtonL.setClippedCustomOffImage(linkImagePath, 0, 0, 50, 50);
     linkIOButtonL.resizeButton(0.6f);
-//    linkIOButtonL.addListener(this);
     linkIOButtonL.setClickingTogglesState(true);
     addAndMakeVisible(linkIOButtonL);
 
@@ -116,13 +117,17 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     linkIOButtonR.setClippedCustomOnImage(linkImagePath, 0, 0, 50, 50);
     linkIOButtonR.setClippedCustomOffImage(linkImagePath, 0, 0, 50, 50);
     linkIOButtonR.resizeButton(0.6f);
-//    linkIOButtonR.addListener(this);
     linkIOButtonR.setClickingTogglesState(true);
     addAndMakeVisible(linkIOButtonR);
+
+    linkButtonAttachment.sendInitialUpdate();
+    linkIOButtonL.addListener(this);
+    linkIOButtonR.addListener(this);
 
     ////////// Animation //////////
 
     reelAnimation.setFrameDimensions(0, 0, 960, 322);
+    reelAnimation.setAnimationResetThreshold(0.0f);
     addAndMakeVisible(reelAnimation);
 
     vuMeterL.setNumFrames(65);
@@ -157,7 +162,6 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
 
     showReelsAttachment.sendInitialUpdate();
 
-    initializeLevels();
     startTimer(25);
 }
 
@@ -167,6 +171,8 @@ KissOfShameAudioProcessorEditor::~KissOfShameAudioProcessorEditor()
     shameKnob.removeListener(this);
     outputKnob.removeListener(this);
     bypassButton.removeListener(this);
+    linkIOButtonL.removeListener(this);
+    linkIOButtonR.removeListener(this);
 }
 
 void KissOfShameAudioProcessorEditor::setShowReelsValue(float newValue)
@@ -290,35 +296,30 @@ void KissOfShameAudioProcessorEditor::mouseDrag(const juce::MouseEvent&)
     // do nothing
 }
 
-void KissOfShameAudioProcessorEditor::initializeLevels()
-{
-    linkIOButtonL.setToggleState(false, juce::dontSendNotification);
-    linkIOButtonR.setToggleState(false, juce::dontSendNotification);
-    linkIOButtonL.setAlpha(0.25);
-    linkIOButtonR.setAlpha(0.25);
-    linkIOMode = false;
-
-    reelAnimation.setAnimationResetThreshold(0.0f);
-}
-
 void KissOfShameAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
 {
     if (slider == &inputSaturationKnob) {
-//        if (linkIOMode)
-//        {
-//            outputKnob->setValue(1.0 - inputSaturationKnob->getValue());
-//            audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam, (float) outputKnob->getValue());
-//            audioProcessor.audioGraph.setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
-//        }
+        // Note: Changing the level parameter when Link is enabled only works
+        // when the editor is open. It won't happen when the host changes the
+        // link parameter directly.
+        if (audioProcessor.params.linkParam->get()) {
+            outputKnob.removeListener(this);
+            float outputLevel = 1.0f - audioProcessor.params.inputParam->get();
+            audioProcessor.params.outputParam->beginChangeGesture();
+            audioProcessor.params.outputParam->setValueNotifyingHost(outputLevel);
+            audioProcessor.params.outputParam->endChangeGesture();
+            outputKnob.addListener(this);
+        }
     }
-    else if (slider == &outputKnob)
-    {
-//        if(linkIOMode)
-//        {
-//            inputSaturationKnob->setValue(1.0 - outputKnob->getValue());
-//            audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::inputSaturationParam, (float) inputSaturationKnob->getValue());
-//            audioProcessor.audioGraph.setAudioUnitParameters(eInputDrive, (float) inputSaturationKnob->getValue());
-//        }
+    else if (slider == &outputKnob) {
+        if (audioProcessor.params.linkParam->get()) {
+            inputSaturationKnob.removeListener(this);
+            float inputDrive = 1.0f - audioProcessor.params.outputParam->get();
+            audioProcessor.params.inputParam->beginChangeGesture();
+            audioProcessor.params.inputParam->setValueNotifyingHost(inputDrive);
+            audioProcessor.params.inputParam->endChangeGesture();
+            inputSaturationKnob.addListener(this);
+        }
     }
     else if (slider == &shameKnob) {
         shameKnobImage.updateImageWithValue(float(slider->getValue()));
@@ -345,6 +346,21 @@ void KissOfShameAudioProcessorEditor::setBypassButtonValue(float newValue)
     }
 }
 
+void KissOfShameAudioProcessorEditor::setLinkButtonValue(float newValue)
+{
+    const juce::ScopedValueSetter<bool> svs(ignoreCallbacks, true);
+    linkIOButtonL.setToggleState(newValue >= 0.5f, juce::sendNotificationSync);
+    linkIOButtonR.setToggleState(newValue >= 0.5f, juce::sendNotificationSync);
+
+    if (linkIOButtonL.getToggleState()) {
+        linkIOButtonL.setAlpha(1.0f);
+        linkIOButtonR.setAlpha(1.0f);
+    } else {
+        linkIOButtonL.setAlpha(0.25f);
+        linkIOButtonR.setAlpha(0.25f);
+    }
+}
+
 void KissOfShameAudioProcessorEditor::buttonClicked(juce::Button* button)
 {
     if (ignoreCallbacks) { return; }
@@ -352,24 +368,30 @@ void KissOfShameAudioProcessorEditor::buttonClicked(juce::Button* button)
     if (button == &bypassButton) {
         bypassButtonAttachment.setValueAsCompleteGesture(button->getToggleState() ? 1.0f : 0.0f);
     }
-    else if (button == &linkIOButtonL || button == &linkIOButtonR)
-    {
-        // TODO: do this with a parameter!
+    else if (button == &linkIOButtonL) {
+        linkButtonAttachment.setValueAsCompleteGesture(button->getToggleState() ? 1.0f : 0.0f);
 
-        linkIOMode = button->getToggleState();
-        linkIOButtonL.setToggleState(linkIOMode, juce::dontSendNotification);
-        linkIOButtonR.setToggleState(linkIOMode, juce::dontSendNotification);
+        // TODO: Not sure if changing the input drive makes sense, since input
+        // is used to apply saturation. The original plug-in didn't do this;
+        // it always changed the output level to match the input level.
+        if (button->getToggleState()) {
+            float inputDrive = 1.0f - audioProcessor.params.outputParam->get();
+            audioProcessor.params.inputParam->beginChangeGesture();
+            audioProcessor.params.inputParam->setValueNotifyingHost(inputDrive);
+            audioProcessor.params.inputParam->endChangeGesture();
+        }
+    }
+    else if (button == &linkIOButtonR) {
+        linkButtonAttachment.setValueAsCompleteGesture(button->getToggleState() ? 1.0f : 0.0f);
 
-        if (linkIOMode) {
-            linkIOButtonL.setAlpha(1.0f);
-            linkIOButtonR.setAlpha(1.0f);
-
-//            outputKnob->setValue(1.0 - inputSaturationKnob->getValue());
-//            audioProcessor.setParameterNotifyingHost (KissOfShameAudioProcessor::outputParam, (float) outputKnob->getValue());
-//            audioProcessor.audioGraph.setAudioUnitParameters(eOutputLevel, (float) outputKnob->getValue());
-        } else {
-            linkIOButtonL.setAlpha(0.25f);
-            linkIOButtonR.setAlpha(0.25f);
+        // Note: Changing the level parameter when Link is enabled only works
+        // when the editor is open. It won't happen when the host changes the
+        // link parameter directly.
+        if (button->getToggleState()) {
+            float outputLevel = 1.0f - audioProcessor.params.inputParam->get();
+            audioProcessor.params.outputParam->beginChangeGesture();
+            audioProcessor.params.outputParam->setValueNotifyingHost(outputLevel);
+            audioProcessor.params.outputParam->endChangeGesture();
         }
     }
 }

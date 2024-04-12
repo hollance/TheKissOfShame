@@ -29,11 +29,15 @@ juce::AudioProcessorValueTreeState::ParameterLayout Parameters::createParameterL
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
 
+    // Input and Output are metaparameters because in Linked mode,
+    // changing one will change the other.
     layout.add(std::make_unique<juce::AudioParameterFloat>(
-        ParameterID::input, "Input", juce::NormalisableRange<float>(), 0.5f));
+        ParameterID::input, "Input", juce::NormalisableRange<float>(), 0.5f,
+        juce::AudioParameterFloatAttributes().withMeta(true)));
 
     layout.add(std::make_unique<juce::AudioParameterFloat>(
-        ParameterID::output, "Output", juce::NormalisableRange<float>(), 0.5f));
+        ParameterID::output, "Output", juce::NormalisableRange<float>(), 0.5f,
+        juce::AudioParameterFloatAttributes().withMeta(true)));
 
     layout.add(std::make_unique<juce::AudioParameterFloat>(
         ParameterID::shame, "Shame", juce::NormalisableRange<float>(), 0.0f));
