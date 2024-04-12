@@ -91,6 +91,7 @@ The following changes were made in this repo:
 - Put the parameters into AVPTS, added state saving & loading.
 - Embedded the graphics and audio resources into the plug-in binary.
 - Added support for Windows and Apple Silicon Macs.
+- Changed the knobs from rotary to vertical drag.
 
 ## TO-DO list
 
@@ -141,5 +142,7 @@ Original developers:
 Updates and improvements by [Matthijs Hollemans](https://audiodev.blog).
 
 This program is free software: you can redistribute it and/or modify it under the terms of the [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.en.html) as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+Some of the code in this repo (`Granulate` and `Noise`) was taken from [The Synthesis ToolKit in C++ (STK)](https://github.com/thestk/stk) by Perry R. Cook and Gary P. Scavone.
 
 JUCE is copyright © Raw Material Software.
