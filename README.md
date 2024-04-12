@@ -14,13 +14,23 @@ It was also the first to leverage machine learning to account for the vast nonli
 
 [Watch a short demo video](Unused/Promotional/TKOS_demo.mp4)
 
-The Kiss of Shame was never released. The source code was graciously donated to the open source community by its owner in 2024. The original code was written for JUCE 3.1. It has been updated to compile with JUCE 7.
+## About this open source project
 
-> **NOTE:** This repo is currently work-in-progress. There may be issues with the plug-in!
+The Kiss of Shame was not completely finished and never saw a release. The source code was graciously donated to the open source community by its owner in 2024.
+
+The goal of this open source project is:
+
+1. To finish the plug-in and make binary releases available.
+2. Figure out how it works and document the code for eductional purposes.
+3. Potentially, improve the code.
+
+> **NOTE:** The source code that was donated does not contain all the features from the description. Notably, there is only one tape type and one environment (Hurricane Sandy), and the print-through function is missing. In its current form the plug-in only works well at a 44100 Hz sample rate. That said, it's still a fun plug-in with a cool UI, and there's a lot to learn from the source code!
 
 ## Installation instructions
 
 TODO
+
+> **NOTE:** This is currently work-in-progress. There may be issues with the plug-in!
 
 ## How to use this plug-in
 
@@ -32,11 +42,15 @@ TODO
 
 **A-456** – This classic, high-output/low-noise format is a recording staple used in countless productions. While many software emulations exist, none recreate it quite like this. Unique digital recreation tactics were employed to capture its essence.
 
+> **NOTE:** The tape type selection button currently has no effect.
+
 **From Weathered to *Weather***:
 
 **Age** – This knob allows the user to legislate the amount of hypothetical time the selected tape type has been subjected to the chosen "Environment" to manipulate the severity of the corresponding effects.
 
 **Environment** – Choose between several simulated storage conditions to inflict the sonic ramifications of factors such as magnetic particle instability, oxidation, lubricant loss, tape pack expansion/contraction, "vinegar syndrome" and more upon the source material. Users can even choose a "Hurricane Sandy" setting to access processing modeled from tape immersed and then recovered from the storm's flood waters.
+
+> **NOTE:** Only the Hurricane Sandy environment is implemented.
 
 **A real-world obstacle:**
 
@@ -44,71 +58,69 @@ TODO
 
 **Print-Through** – Also known as "bleed-through", this emulation captures the mechanical speed fluctuations present in analog recordings. While they posed challenges for engineers in the past, they became a hallmark of classic records.
 
+> **NOTE:** The print-through feature is not implemented.
+
 **Reach out and touch tape:**
 
 The Kiss of Shame is the first tape plug-in to feature animated, interactive reels that can be manipulated with a simple click or touch. This allows users to access authentic analogue tape flange in real-time, without the need for two physical tape decks, and in a fraction of the time. All parameters, including reel movements, are fully automatable, and for screen real estate optimization, the reels are collapsible and fully customizable.
+
+> **TIP:** To flange, drag on the reels. To collapse the reels, double-click anywhere in the UI.
 
 ## Building from source code
 
 Brief instructions:
 
-- Install JUCE 7.
+- Install JUCE 7 or newer.
 - Open **KissOfShame.jucer** in Projucer and export to your IDE.
 - Select the **VST3** or **AU** target and build.
 
-TODO
+Currently only tested with:
+
+- JUCE 7.0.9
+- Xcode 15.2 + macOS Sonoma 14.3
+- Visual Studio 2022 + Windows 10
+
+## Changes from the original
+
+The original code was written using JUCE 3.1. It required the user to copy a folder with image and sound files to `/Users/Shared/KissOfShame`. The parameters were not exposed to the DAW and would reset when the editor re-opened.
+
+The following changes were made in this repo:
+
+- Converted to JUCE 7.
+- General code cleanup, fixed compiler warnings, added some comments.
+- Put the parameters into AVPTS, added state saving & loading.
+- Embedded the graphics and audio resources into the plug-in binary.
+- Added support for Windows and Apple Silicon Macs.
 
 ## TO-DO list
 
-The plug-in was never completely finished. The goal of this open source project is:
-
-1. To finish the plug-in and make binary releases available.
-2. Figure out how it works and document the code for eductional purposes.
-3. Potentially, clean up and improve the code.
-
-The information about missing features and bugs that I received is as follows:
-
-> As far as the emulations for each Tape Type, Shame knob, storage conditions, those should all be locked, loaded and ready to go. Same with the flange via the automatible reels.
->
-> I think we were polishing off the “Print-Through” effect. Just making it usable.
->
-> From what I recall, it just had some minor GUI bugs and where we stopped, it’s the parameters would randomly resort to default.
-
 Bugs I found:
 
-- When you drag to apply flanging, I would expect a mouse up to reset the flanging depth. The animation does return to normal speed.
+- Sometimes there is an extremely loud glitch. Not sure yet what causes this, most likely some uninitialized memory.
+- When the Hurricane Sandy environment is active, moving the Age knob to the minimum position can cause the low-pass filter to give a massive gain boost.
 
-Other things that can be improved in the code:
+Other things that can / should be improved in the code (volunteers welcome!):
 
-- Use APVTS for the parameters so they can be automated.
-  - Currently the parameters are set from the editor, but there's no guarantee there will be an editor. Closing and reopening the editor will reset all parameters.
-  - There are two sets of parameters: 1) the ones used in `AudioGraph::setAudioUnitParameters()`, and 2) copies of these in the processor. None of this is thread-safe. Instead, we should use `AudioParameterFloat` objects and read them in `processBlock`.
-  - Implement state saving and loading.
-- Embed the external image and sound files as binary data in the plug-in, to simplify the installation (no need to manually copy these resources).
+- Don't hardcode the sample rate to 44100 Hz.
+- Add `prepareToPlay()` and `reset()` methods to the DSP classes. The reset method should clear out old state.
+- Allocate buffers ahead of time and copy into them, rather than doing `audioGraphProcessingBuffer = audioBuffer`, which may allocate (at least the first time).
+- The envelope generators (`Envelope` and `EnvelopeDips`) could keep track of the prev and next point, so we don't have to loop through all the points at every timestep.
+- Often the loop for the channels is nested inside the loop for the samples, which can be inefficient.
+- Shame effect: The code allows for interpolating between the wavetables but all wavetables have the same data in it.
+- Reel animation: Don't set framesPerSecond to 0 to stop the animation.
+- `audioProcessor.curPositionInfo` uses a deprecated API.
+- VU meter RMS readings should be atomic, and ideally be independent of the block size.
 - Remove most of the compiler warnings. (I set the warning level high on purpose.)
-- Replace deprecated JUCE APIs with modern equivalents.
-- Replace the Biquads with TPT filters.
-  - Moving the Age knob from max to min can cause the low-pass filter to give a massive gain boost. Probably because at 0% this uses (close to) 22050 Hz as the cutoff freq. Or just because it's a biquad.
-- Explicitly use `juce::` and `std::` namespaces.
-- Remove any files that aren't being used (source files, images, audio).
+- Replace the Biquads with TPT / SVF filters.
 - Don't use `rand()` and `srand()`. Replace with `juce::Random`.
-- General code cleanup.
-- Making independent of sample rate.
-- Use CMake instead of Projucer.
-
-### What is missing
-
-Features this plug-in was supposed to have but that did not appear to be implemented:
-
-- The only environment that's implemented is Hurricane Sandy.
-- The print-through button doesn't do anything.
-- The tape type selection button has no effect.
-
-Other features to add:
-
 - Parameter smoothing.
-- Maybe the flange depth should be skewed so that shorter delays are easier to dial in. (For example by doing `targetDepth = depth * depth * 1000.0f`.)
+
+Maybe:
+
+- When you drag to apply flanging, I would expect a mouse up to reset the flanging depth, since the animation does return to normal speed.
+- Skew the flange depth so that shorter delays are easier to dial in. (For example by doing `targetDepth = depth * depth * 1000.0f`.)
 - Oversampling. The saturation stage can easily add aliases.
+- Use CMake instead of Projucer.
 
 ## How it works
 

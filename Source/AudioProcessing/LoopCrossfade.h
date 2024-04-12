@@ -41,7 +41,7 @@ public:
                 rampValue = float(loopLength - indx1) / float(loopHalfway);
             }
 
-            //TODO: do this more efficiently by changing the order
+            // TODO: do this more efficiently by changing the order
             for (int channel = 0; channel < numChannels; ++channel) {
                 float* samples = sampleBuffer.getWritePointer(channel);
                 const float* readPtr = loopBuffer->getReadPointer(channel);

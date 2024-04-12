@@ -65,7 +65,7 @@ public:
     {
         if (f < 0.0f) { f = 0.0f; }
 
-        //TODO: don't hardcode sample rate here!
+        // TODO: don't hardcode sample rate here!
         coef = f * (2.0f * PI) / SAMPLE_RATE;
         if (coef > 1.0f) {
             coef = 1.0f;
@@ -76,7 +76,7 @@ public:
 
     void processInputSaturation(juce::AudioBuffer<float>& sampleBuffer, int numChannels)
     {
-        //TODO: doesn't this allocate?
+        // TODO: doesn't this allocate?
         // Create a copy of the input signal, allowing us to perform odd
         // and even harmonics distortion separately.
         sampleBufferCopy = sampleBuffer;

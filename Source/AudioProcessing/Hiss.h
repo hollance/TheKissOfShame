@@ -45,7 +45,7 @@ public:
                 rampValue = float(hissLength - indx1) / float(hissHalfway);
             }
 
-            //TODO: do this more efficiently by changing the order
+            // TODO: do this more efficiently by changing the order
             for (int channel = 0; channel < numChannels; ++channel) {
                 float* samples = sampleBuffer.getWritePointer(channel);
                 const float* readPtr = hissBuffer->getReadPointer(channel);
@@ -72,7 +72,6 @@ public:
 
     void setHissLevel(float level) noexcept
     {
-        // TODO: maybe boost the max hiss level a bit?
         // Add up to -46 dB of hiss, reduce the dry level by the same amount.
         hissLevel = level * 0.005f;
         signalLevel = 1.0f - hissLevel;

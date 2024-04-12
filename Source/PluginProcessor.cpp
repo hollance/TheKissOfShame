@@ -112,7 +112,7 @@ void KissOfShameAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, j
         buffer.clear(i, 0, numSamples);
     }
 
-//TODO: use up-to-date JUCE API for this
+    // TODO: use up-to-date JUCE API for this
     // ask the host for the current time so we can display it...
     if (getPlayHead() != nullptr && getPlayHead()->getCurrentPosition(curPositionInfo))
     {
