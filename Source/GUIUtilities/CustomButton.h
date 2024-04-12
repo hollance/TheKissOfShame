@@ -5,19 +5,7 @@
 class CustomButton : public juce::ImageButton
 {
 public:
-    CustomButton()
-    {
-        // TODO: do we need these?
-        juce::File offImgFile(juce::String(GUI_PATH) + "testButton-off.png");
-        juce::File onImgFile(juce::String(GUI_PATH) + "testButton-on.png");
-
-        offImage = juce::ImageCache::getFromFile(offImgFile);
-        onImage = juce::ImageCache::getFromFile(onImgFile);
-
-        updateImages();
-
-        setSize(onImage.getWidth(), onImage.getHeight());
-    }
+    CustomButton() { }
 
     void resizeButton(float scale)
     {
@@ -28,20 +16,9 @@ public:
         updateImages();
     }
 
-    void setImagePaths(const juce::String& onImgPath, const juce::String& offImgPath)
+    void setClippedCustomOnImage(const char* imageData, int imageSize, int topLeftX, int topLeftY, int w, int h)
     {
-        juce::File offImgFile(juce::String(GUI_PATH) + onImgPath);
-        juce::File onImgFile(juce::String(GUI_PATH) + offImgPath);
-
-        offImage = juce::ImageCache::getFromFile(offImgFile);
-        onImage = juce::ImageCache::getFromFile(onImgFile);
-
-        updateImages();
-    }
-
-    void setClippedCustomOnImage(const juce::String& onImgPath, int topLeftX, int topLeftY, int w, int h)
-    {
-        onImage = juce::ImageCache::getFromFile(juce::File(onImgPath));
+        onImage = juce::ImageCache::getFromMemory(imageData, imageSize);
 
         if (!onImage.isNull()) {
             juce::Rectangle<int> clipRect(topLeftX, topLeftY, w, h);
@@ -49,11 +26,13 @@ public:
         }
 
         updateImages();
+
+        setSize(onImage.getWidth(), onImage.getHeight());
     }
 
-    void setClippedCustomOffImage(const juce::String& offImgPath, int topLeftX, int topLeftY, int w, int h)
+    void setClippedCustomOffImage(const char* imageData, int imageSize, int topLeftX, int topLeftY, int w, int h)
     {
-        offImage = juce::ImageCache::getFromFile(juce::File(offImgPath));
+        offImage = juce::ImageCache::getFromMemory(imageData, imageSize);
 
         if (!offImage.isNull()) {
             juce::Rectangle<int> clipRect(topLeftX, topLeftY, w, h);

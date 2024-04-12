@@ -8,7 +8,7 @@ public:
     CustomKnob();
 
     void setNumFrames(int numFrames);
-    void setKnobImage(const juce::String& filePath);
+    void setKnobImage(const char* data, int size);
     void setKnobDimensions(int topLeftX, int topLeftY, int w, int h);
 
     void paint(juce::Graphics& g);

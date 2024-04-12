@@ -5,6 +5,9 @@
     <Filter Include="KissOfShame\Audio_Resources">
       <UniqueIdentifier>{A0BC10CC-B60F-182B-A188-9888DA59587F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="KissOfShame\GUI_Resources">
+      <UniqueIdentifier>{D8C181A9-0CA7-2924-A07E-1401FFD426DA}</UniqueIdentifier>
+    </Filter>
     <Filter Include="KissOfShame\Source\AudioProcessing">
       <UniqueIdentifier>{08758FDE-B663-F85B-12F3-28D07907B4B7}</UniqueIdentifier>
     </Filter>
@@ -3076,6 +3079,21 @@
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData3.cpp">
       <Filter>JUCE Library Code</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData4.cpp">
+      <Filter>JUCE Library Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData5.cpp">
+      <Filter>JUCE Library Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData6.cpp">
+      <Filter>JUCE Library Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData7.cpp">
+      <Filter>JUCE Library Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData8.cpp">
+      <Filter>JUCE Library Code</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp">
       <Filter>JUCE Library Code</Filter>
     </ClCompile>
@@ -6136,6 +6154,57 @@
     </None>
     <None Include="..\..\Audio_Resources\PinkNoise.wav">
       <Filter>KissOfShame\Audio_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\AgeKnob.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\BlendKnob.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\Bypass.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\Environments.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\Face.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\FaceWithReels.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\HissKnob.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\InputKnob.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\Link.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\OutputKnob.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\PrintThrough.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\ShameCross.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\ShameKnob.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\TapeType.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\VUMeterL.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\VUMeterR.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
+    </None>
+    <None Include="..\..\GUI_Resources\Wheels.png">
+      <Filter>KissOfShame\GUI_Resources</Filter>
     </None>
     <None Include="C:\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt">
       <Filter>JUCE Modules\juce_audio_devices\native\oboe</Filter>

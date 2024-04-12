@@ -18,8 +18,7 @@ public:
         setNumFrames(6);
         setMinMaxValues(0, 5);
 
-        juce::String environmentsImageLocation = GUI_PATH + "KOS_Graphics/00.png";
-        setAnimationImage(environmentsImageLocation);
+        setAnimationImage(BinaryData::Environments_png, BinaryData::Environments_pngSize);
 
         setDimensions(0, 0, 183, 32);
         setSize(183, 32);

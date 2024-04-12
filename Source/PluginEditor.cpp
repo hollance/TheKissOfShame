@@ -5,7 +5,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     AudioProcessorEditor(&p),
     audioProcessor(p),
     environmentsComponent(*p.params.environmentParam),
-    reelAnimation(*p.params.flangeParam, {GUI_PATH + "KOS_Graphics/wheels.png"}, 31),
+    reelAnimation(*p.params.flangeParam, 31, BinaryData::Wheels_png, BinaryData::Wheels_pngSize),
     priorProcessorTime(0),
     bypassButtonAttachment(
         *p.params.bypassParam, [this](float f){ setBypassButtonValue(f); }, nullptr
@@ -22,8 +22,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
 
     faceImage.setNumFrames(1);
     faceImage.setDimensions(0, 0, 960, 703);
-    juce::String faceImagePath = GUI_PATH + "KOS_Graphics/fond_alpha.png";
-    faceImage.setAnimationImage(faceImagePath);
+    faceImage.setAnimationImage(BinaryData::FaceWithReels_png, BinaryData::FaceWithReels_pngSize);
     faceImage.setInterceptsMouseClicks(false, false);
     addAndMakeVisible(faceImage);
 
@@ -34,8 +33,7 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
 
     ////////// KNOBS //////////
 
-    juce::String inputImagePath = GUI_PATH + "KOS_Graphics/06_alpha.png";
-    inputSaturationKnob.setKnobImage(inputImagePath);
+    inputSaturationKnob.setKnobImage(BinaryData::InputKnob_png, BinaryData::InputKnob_pngSize);
     inputSaturationKnob.setNumFrames(65);
     inputSaturationKnob.setKnobDimensions(104, 521, 116, 116);
     inputSaturationKnob.addListener(this);
@@ -43,38 +41,32 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
 
     shameKnobImage.setNumFrames(65);
     shameKnobImage.setDimensions(401, 491, 174, 163);
-    juce::String shameImagePath = GUI_PATH + "KOS_Graphics/09_alpha.png";
-    shameKnobImage.setAnimationImage(shameImagePath);
+    shameKnobImage.setAnimationImage(BinaryData::ShameKnob_png, BinaryData::ShameKnob_pngSize);
     addAndMakeVisible(shameKnobImage);
 
-    juce::String crossImagePath = GUI_PATH + "KOS_Graphics/09_v2.png";
-    shameKnob.setKnobImage(crossImagePath);
+    shameKnob.setKnobImage(BinaryData::ShameCross_png, BinaryData::ShameCross_pngSize);
     shameKnob.setNumFrames(65);
     shameKnob.setKnobDimensions(401, 491, 174, 163);
     shameKnob.addListener(this);
     addAndMakeVisible(shameKnob);
 
-    juce::String hissImagePath = GUI_PATH + "KOS_Graphics/04_alpha.png";
-    hissKnob.setKnobImage(hissImagePath);
+    hissKnob.setKnobImage(BinaryData::HissKnob_png, BinaryData::HissKnob_pngSize);
     hissKnob.setNumFrames(65);
     hissKnob.setKnobDimensions(547, 455, 78, 72);
     addAndMakeVisible(hissKnob);
 
-    juce::String blendImagePath = GUI_PATH + "KOS_Graphics/05_alpha.png";
-    blendKnob.setKnobImage(blendImagePath);
+    blendKnob.setKnobImage(BinaryData::BlendKnob_png, BinaryData::BlendKnob_pngSize);
     blendKnob.setNumFrames(65);
     blendKnob.setKnobDimensions(705, 455, 78, 72);
     addAndMakeVisible(blendKnob);
 
-    juce::String outputImagePath = GUI_PATH + "KOS_Graphics/12_alpha.png";
-    outputKnob.setKnobImage(outputImagePath);
+    outputKnob.setKnobImage(BinaryData::OutputKnob_png, BinaryData::OutputKnob_pngSize);
     outputKnob.setNumFrames(65);
     outputKnob.setKnobDimensions(757, 521, 122, 116);
     outputKnob.addListener(this);
     addAndMakeVisible(outputKnob);
 
-    juce::String ageImagePath = GUI_PATH + "KOS_Graphics/03_alpha.png";
-    ageKnob.setKnobImage(ageImagePath);
+    ageKnob.setKnobImage(BinaryData::AgeKnob_png, BinaryData::AgeKnob_pngSize);
     ageKnob.setNumFrames(65);
     ageKnob.setKnobDimensions(350, 455, 74, 72);
     addAndMakeVisible(ageKnob);
@@ -82,9 +74,8 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     ////////// BUTTONS //////////
 
     bypassButton.setTopLeftPosition(202, 469);
-    juce::String bypassImagePath = GUI_PATH + "KOS_Graphics/01.png";
-    bypassButton.setClippedCustomOnImage(bypassImagePath, 0, 68, 34, 34);
-    bypassButton.setClippedCustomOffImage(bypassImagePath, 0, 0, 34, 34);
+    bypassButton.setClippedCustomOnImage(BinaryData::Bypass_png, BinaryData::Bypass_pngSize, 0, 68, 34, 34);
+    bypassButton.setClippedCustomOffImage(BinaryData::Bypass_png, BinaryData::Bypass_pngSize, 0, 0, 34, 34);
     bypassButton.setClickingTogglesState(true);
     addAndMakeVisible(bypassButton);
 
@@ -92,30 +83,27 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
     bypassButton.addListener(this);
 
     tapeTypeButton.setTopLeftPosition(233, 610);
-    juce::String tapeTypeImagePath = GUI_PATH + "KOS_Graphics/07.png";
-    tapeTypeButton.setClippedCustomOnImage(tapeTypeImagePath, 0, 0, 42, 39);
-    tapeTypeButton.setClippedCustomOffImage(tapeTypeImagePath, 0, 39, 42, 39);
+    tapeTypeButton.setClippedCustomOnImage(BinaryData::TapeType_png, BinaryData::TapeType_pngSize, 0, 0, 42, 39);
+    tapeTypeButton.setClippedCustomOffImage(BinaryData::TapeType_png, BinaryData::TapeType_pngSize, 0, 39, 42, 39);
     tapeTypeButton.setClickingTogglesState(true);
     addAndMakeVisible(tapeTypeButton);
 
     printThroughButton.setTopLeftPosition(698, 609);
-    juce::String printThroughImagePath = GUI_PATH + "KOS_Graphics/11.png";
-    printThroughButton.setClippedCustomOnImage(printThroughImagePath, 0, 41, 47, 41);
-    printThroughButton.setClippedCustomOffImage(printThroughImagePath, 0, 0, 47, 41);
+    printThroughButton.setClippedCustomOnImage(BinaryData::PrintThrough_png, BinaryData::PrintThrough_pngSize, 0, 41, 47, 41);
+    printThroughButton.setClippedCustomOffImage(BinaryData::PrintThrough_png, BinaryData::PrintThrough_pngSize, 0, 0, 47, 41);
     printThroughButton.setClickingTogglesState(true);
     addAndMakeVisible(printThroughButton);
 
     linkIOButtonL.setTopLeftPosition(137, 605);
-    juce::String linkImagePath = GUI_PATH + "KOS_Graphics/link.png";
-    linkIOButtonL.setClippedCustomOnImage(linkImagePath, 0, 0, 50, 50);
-    linkIOButtonL.setClippedCustomOffImage(linkImagePath, 0, 0, 50, 50);
+    linkIOButtonL.setClippedCustomOnImage(BinaryData::Link_png, BinaryData::Link_pngSize, 0, 0, 50, 50);
+    linkIOButtonL.setClippedCustomOffImage(BinaryData::Link_png, BinaryData::Link_pngSize, 0, 0, 50, 50);
     linkIOButtonL.resizeButton(0.6f);
     linkIOButtonL.setClickingTogglesState(true);
     addAndMakeVisible(linkIOButtonL);
 
     linkIOButtonR.setTopLeftPosition(792, 605);
-    linkIOButtonR.setClippedCustomOnImage(linkImagePath, 0, 0, 50, 50);
-    linkIOButtonR.setClippedCustomOffImage(linkImagePath, 0, 0, 50, 50);
+    linkIOButtonR.setClippedCustomOnImage(BinaryData::Link_png, BinaryData::Link_pngSize, 0, 0, 50, 50);
+    linkIOButtonR.setClippedCustomOffImage(BinaryData::Link_png, BinaryData::Link_pngSize, 0, 0, 50, 50);
     linkIOButtonR.resizeButton(0.6f);
     linkIOButtonR.setClickingTogglesState(true);
     addAndMakeVisible(linkIOButtonR);
@@ -132,14 +120,12 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
 
     vuMeterL.setNumFrames(65);
     vuMeterL.setDimensions(251, 518, 108, 108);
-    juce::String vuLeftImagePath = GUI_PATH + "KOS_Graphics/08.png";
-    vuMeterL.setAnimationImage(vuLeftImagePath);
+    vuMeterL.setAnimationImage(BinaryData::VUMeterL_png, BinaryData::VUMeterL_pngSize);
     addAndMakeVisible(vuMeterL);
 
     vuMeterR.setNumFrames(65);
     vuMeterR.setDimensions(605, 518, 110, 108);
-    juce::String vuRightImagePath = GUI_PATH + "KOS_Graphics/10.png";
-    vuMeterR.setAnimationImage(vuRightImagePath);
+    vuMeterR.setAnimationImage(BinaryData::VUMeterR_png, BinaryData::VUMeterR_pngSize);
     addAndMakeVisible(vuMeterR);
 
     ////////// LABELS //////////
@@ -221,17 +207,13 @@ void KissOfShameAudioProcessorEditor::setReelMode(bool showReels)
     vuMeterR.setTopLeftPosition(vuMeterR.getX(), vuMeterR.getY() + adjustment);
     shameKnobImage.setTopLeftPosition(shameKnobImage.getX(), shameKnobImage.getY() + adjustment);
 
-    juce::String faceImagePath;
-    int faceHeight = 0;
     if (showReels) {
-        faceImagePath = GUI_PATH + "KOS_Graphics/fond_alpha.png";
-        faceHeight = 703;
+        faceImage.setAnimationImage(BinaryData::FaceWithReels_png, BinaryData::FaceWithReels_pngSize);
+        faceImage.setDimensions(0, 0, 960, 703);
     } else {
-        faceImagePath = GUI_PATH + "KOS_Graphics/fond_alone2.png";
-        faceHeight = 266;
+        faceImage.setAnimationImage(BinaryData::Face_png, BinaryData::Face_pngSize);
+        faceImage.setDimensions(0, 0, 960, 266);
     }
-    faceImage.setAnimationImage(faceImagePath);
-    faceImage.setDimensions(0, 0, 960, faceHeight);
 }
 
 void KissOfShameAudioProcessorEditor::timerCallback()

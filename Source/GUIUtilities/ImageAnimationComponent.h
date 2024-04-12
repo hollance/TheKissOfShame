@@ -50,7 +50,9 @@ private:
 class ImageAnimationComponent : public MyAnimatedAppComponent, public juce::ActionBroadcaster
 {
 public:
-    ImageAnimationComponent(juce::AudioParameterFloat& param, const juce::File& imgFile, int numFrames) : parameter(param)
+    ImageAnimationComponent(juce::AudioParameterFloat& param, int numFrames,
+                            const char* imageData, int imageSize)
+        : parameter(param)
     {
         isAnimating = false;
         resetThresh = 0.0f;
@@ -62,7 +64,7 @@ public:
         currentFrame = startFrame;
         endFrame = animationNumFrames - 1;
 
-        animationImage = juce::ImageCache::getFromFile(imgFile);
+        animationImage = juce::ImageCache::getFromMemory(imageData, imageSize);
         imageFrameWidth = animationImage.getWidth();
         imageFrameHeight = animationImage.getHeight()/animationNumFrames;
         setSize(imageFrameWidth, imageFrameHeight);

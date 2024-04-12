@@ -4,14 +4,6 @@ ImageInteractor::ImageInteractor() : desaturate(false), numFrames(128), curValue
 {
     minValue = 0.0f;
     maxValue = 1.0f;
-
-//TODO: do we actually use this image for anything useful?
-    imagePath = GUI_PATH + "MixKnob/Knob-Pan-Mix.png";
-
-    image = juce::ImageCache::getFromFile(juce::File(imagePath));
-    frameWidth = image.getWidth();
-    frameHeight = image.getHeight()/numFrames;
-    setSize(frameWidth, frameHeight);
 }
 
 void ImageInteractor::setNumFrames(int _numFrames)
@@ -20,10 +12,9 @@ void ImageInteractor::setNumFrames(int _numFrames)
     numFrames = _numFrames;
 }
 
-void ImageInteractor::setAnimationImage(const juce::String& filePath)
+void ImageInteractor::setAnimationImage(const char* data, int size)
 {
-    imagePath = filePath;
-    image = juce::ImageCache::getFromFile(juce::File(imagePath));
+    image = juce::ImageCache::getFromMemory(data, size);
     desatImage = image.createCopy();
     satImage = image.createCopy();
     desatImage.desaturate();

@@ -14,6 +14,28 @@
             file="Audio_Resources/LowLevelGrainNoise.wav"/>
       <FILE id="PQfYWV" name="PinkNoise.wav" compile="0" resource="1" file="Audio_Resources/PinkNoise.wav"/>
     </GROUP>
+    <GROUP id="{0DBFEB0E-1B5F-104C-042A-9F52C9B8E017}" name="GUI_Resources">
+      <FILE id="tn2JAq" name="AgeKnob.png" compile="0" resource="1" file="GUI_Resources/AgeKnob.png"/>
+      <FILE id="OVaWWF" name="BlendKnob.png" compile="0" resource="1" file="GUI_Resources/BlendKnob.png"/>
+      <FILE id="reHHLz" name="Bypass.png" compile="0" resource="1" file="GUI_Resources/Bypass.png"/>
+      <FILE id="bdyO9s" name="Environments.png" compile="0" resource="1"
+            file="GUI_Resources/Environments.png"/>
+      <FILE id="GjHnsU" name="Face.png" compile="0" resource="1" file="GUI_Resources/Face.png"/>
+      <FILE id="kxlLjo" name="FaceWithReels.png" compile="0" resource="1"
+            file="GUI_Resources/FaceWithReels.png"/>
+      <FILE id="RU4sd5" name="HissKnob.png" compile="0" resource="1" file="GUI_Resources/HissKnob.png"/>
+      <FILE id="zWT5on" name="InputKnob.png" compile="0" resource="1" file="GUI_Resources/InputKnob.png"/>
+      <FILE id="uyNwpi" name="Link.png" compile="0" resource="1" file="GUI_Resources/Link.png"/>
+      <FILE id="B7eS9h" name="OutputKnob.png" compile="0" resource="1" file="GUI_Resources/OutputKnob.png"/>
+      <FILE id="b8aDED" name="PrintThrough.png" compile="0" resource="1"
+            file="GUI_Resources/PrintThrough.png"/>
+      <FILE id="kSiAvW" name="ShameCross.png" compile="0" resource="1" file="GUI_Resources/ShameCross.png"/>
+      <FILE id="yfcp33" name="ShameKnob.png" compile="0" resource="1" file="GUI_Resources/ShameKnob.png"/>
+      <FILE id="C42pzM" name="TapeType.png" compile="0" resource="1" file="GUI_Resources/TapeType.png"/>
+      <FILE id="epwyJM" name="VUMeterL.png" compile="0" resource="1" file="GUI_Resources/VUMeterL.png"/>
+      <FILE id="IEk98J" name="VUMeterR.png" compile="0" resource="1" file="GUI_Resources/VUMeterR.png"/>
+      <FILE id="qTpRy0" name="Wheels.png" compile="0" resource="1" file="GUI_Resources/Wheels.png"/>
+    </GROUP>
     <GROUP id="{B24498C6-307A-39AA-B5C9-C7D44EC9F7CA}" name="Source">
       <GROUP id="{0BB2110C-DD57-5FF0-3F34-F79558EEE4FE}" name="AudioProcessing">
         <FILE id="SW4pA6" name="AudioGraph.h" compile="0" resource="0" file="Source/AudioProcessing/AudioGraph.h"/>

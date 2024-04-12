@@ -13,9 +13,9 @@ void CustomKnob::setNumFrames(int numFrames)
     knobNumFrames = numFrames;
 }
 
-void CustomKnob::setKnobImage(const juce::String& filePath)
+void CustomKnob::setKnobImage(const char* data, int size)
 {
-    knobImage = juce::ImageCache::getFromFile(juce::File(filePath));
+    knobImage = juce::ImageCache::getFromMemory(data, size);
 }
 
 void CustomKnob::setKnobDimensions(int topLeftX, int topLeftY, int w, int h)

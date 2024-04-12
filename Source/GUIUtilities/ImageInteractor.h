@@ -29,12 +29,11 @@ public:
     }
 
     void setNumFrames(int numFrames);
-    void setAnimationImage(const juce::String& filePath);
+    void setAnimationImage(const char* data, int size);
     void setDimensions(int topLeftX, int topLeftY, int w, int h);
 
 private:
     bool desaturate;
-    juce::String imagePath;
     juce::Image image;
     juce::Image satImage;
     juce::Image desatImage;
