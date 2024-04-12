@@ -12,6 +12,8 @@ The Kiss of Shame was the worlds first (and perhaps only) tape / analog circuitr
 
 It was also the first to leverage machine learning to account for the vast nonlinearities inherent in magnetic tape and analog circuitry. Last but not least, it's the only analog tape emulation that has fully-interactive reels that support touch and can write flange automation on-the-fly akin to a real analog tape deck.
 
+![Demo video](Unused/Promotional/TKOS_demo.mp4)
+
 The Kiss of Shame was never released. The source code was graciously donated to the open source community by its owner in 2024. The original code was written for JUCE 3.1. It has been updated to compile with JUCE 7.
 
 > **NOTE:** This repo is currently work-in-progress. There may be issues with the plug-in!
