@@ -11,7 +11,7 @@ public:
         parameter(param),
         attachment(
             param,
-            [this](float value){ updateImageWithValue(int(value)); },
+            [this](float value){ updateImageWithValue(value); },
             nullptr
         )
     {

@@ -83,7 +83,7 @@ void Granulate::reset()
     for (unsigned int i = 0; i < grains_.size(); ++i) {
         grains_[i].repeats = 0;
         count = size_t(i * gDuration_ * 0.001f * SAMPLE_RATE / nVoices);
-        grains_[i].counter = count;
+        grains_[i].counter = (unsigned long)count;
         grains_[i].state = GRAIN_STOPPED;
     }
 
@@ -102,7 +102,7 @@ void Granulate::setVoices(unsigned int nVoices)
     for (size_t i = oldSize; i < nVoices; i++) {
         grains_[i].repeats = 0;
         count = size_t(i * gDuration_ * 0.001f * SAMPLE_RATE / nVoices);
-        grains_[i].counter = count;
+        grains_[i].counter = (unsigned long)count;
         grains_[i].pointer = gPointer_;
         grains_[i].state = GRAIN_STOPPED;
     }
@@ -114,7 +114,7 @@ void Granulate::calculateGrain(Granulate::Grain& grain)
 {
     if (grain.repeats > 0) {
         grain.repeats--;
-        grain.pointer = grain.startPointer;
+        grain.pointer = float(grain.startPointer);
         if (grain.attackCount > 0) {
             grain.eScaler = 0.0;
             grain.eRate = -grain.eRate;
@@ -201,6 +201,7 @@ float Granulate::tick(unsigned int channel)
                         break;
                     }
                     // else no sustain state (i.e. perfect triangle window)
+                    [[fallthrough]];
 
                 case GRAIN_SUSTAIN:
                     // We're done with flat part of envelope ... setup to ramp down
@@ -211,6 +212,7 @@ float Granulate::tick(unsigned int channel)
                         break;
                     }
                     // else no fade out state (gRampPercent = 0)
+                    [[fallthrough]];
 
                 case GRAIN_FADEOUT:
                     // We're done ramping down ... setup for wait between grains
@@ -220,7 +222,6 @@ float Granulate::tick(unsigned int channel)
                         break;
                     }
                     // else no delay (gDelay = 0)
-
                     calculateGrain(grains_[i]);
             }
         }
