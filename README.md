@@ -12,7 +12,7 @@ The Kiss of Shame was the worlds first (and perhaps only) tape / analog circuitr
 
 It was also the first to leverage machine learning to account for the vast nonlinearities inherent in magnetic tape and analog circuitry. Last but not least, it's the only analog tape emulation that has fully-interactive reels that support touch and can write flange automation on-the-fly akin to a real analog tape deck.
 
-[Watch a short demo video](Unused/Promotional/TKOS_demo.mp4)
+[Watch a short demo video](https://github.com/hollance/TheKissOfShame/raw/main/Unused/Promotional/TKOS_demo.mp4)
 
 ## About this open source project
 
