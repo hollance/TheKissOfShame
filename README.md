@@ -124,6 +124,7 @@ The following changes were made in this repo:
 
 Bugs I found (or introduced hehe):
 
+- The Link buttons under the input/output knobs disappear when the reels are hidden.
 - Sometimes there is an extremely loud glitch. Not sure yet what causes this, maybe some uninitialized memory.Hard to reproduce.
 - The hacky way I've implemented the Link Input/Output mode may be problematic. Sometimes this gives an assertion on `beginGesture` being called twice. Not a massive problem but not great either.
 - [FIXED] ~~When the Hurricane Sandy environment is active, moving the Age knob to the minimum position can cause the low-pass filter to give a massive gain boost.~~
@@ -171,3 +172,5 @@ This program is free software: you can redistribute it and/or modify it under th
 Some of the code in this repo (`Granulate` and `Noise`) was taken from [The Synthesis ToolKit in C++ (STK)](https://github.com/thestk/stk) by Perry R. Cook and Gary P. Scavone.
 
 JUCE is copyright © Raw Material Software.
+
+VST® is a trademark of Steinberg Media Technologies GmbH, registered in Europe and other countries.
