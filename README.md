@@ -20,17 +20,38 @@ The Kiss of Shame was not completely finished and never saw a release. The sourc
 
 The goal of this open source project is:
 
-1. To finish the plug-in and make binary releases available.
-2. Figure out how it works and document the code for eductional purposes.
+1. To finish the plug-in and make binary releases available. [DONE]
+2. Figure out how it works and document the code for eductional purposes. [DONE]
 3. Potentially, improve the code.
 
 > **NOTE:** The source code that was donated does not contain all the features from the description. Notably, there is only one tape type and one environment (Hurricane Sandy), and the print-through function is missing. In its current form the plug-in only works well at a 44100 Hz sample rate. That said, it's still a fun plug-in with a cool UI, and there's a lot to learn from the source code!
 
 ## Installation instructions
 
-TODO
-
 > **NOTE:** This is currently work-in-progress. There may be issues with the plug-in!
+
+### Mac
+
+1. Download **KissOfShame-Mac.zip** from the [Releases page](https://github.com/hollance/TheKissOfShame/releases).
+2. In your **Downloads** folder, double-click **KissOfShame-Mac.zip** to unzip the file.
+3. Copy **KissOfShame.component** to the folder **/Library/Audio/Plug-Ins/Components**
+4. Copy **KissOfShame.vst3** to the folder **/Library/Audio/Plug-Ins/VST3**
+5. In your DAW, look for **Infernal Love > The Kiss of Shame**. You can insert this plug-in on a mono or stereo track.
+
+If the AU version of the plug-in is not visible in your DAW, open **Applications/Utilities/Terminal**. Type the following and press the enter key:
+
+```bash
+killall -9 AudioComponentRegistrar
+```
+
+Then restart your DAW. Now the plug-in should be visible. If not, reboot your computer.
+
+### Windows
+
+1. Download **KissOfShame-Windows.zip** from the [Releases page](https://github.com/hollance/TheKissOfShame/releases).
+2. In your **Downloads** folder, right-click **KissOfShame-Windows.zip** and choose **Extract All...** to unzip the file.
+3. Copy **KissOfShame.vst3** to the folder **C:\Program Files\Common Files\VST3**
+4. In your DAW, look for **Infernal Love > The Kiss of Shame**. You can insert this plug-in on a mono or stereo track.
 
 ## How to use this plug-in
 
@@ -80,6 +101,10 @@ Currently only tested with:
 - Xcode 15.2 + macOS Sonoma 14.3
 - Visual Studio 2022 + Windows 10
 
+## How it works
+
+I've added comments to the code to explain what it does, but for a full walk-through, check out [my blog post](https://audiodev.blog/kiss-of-shame/).
+
 ## Changes from the original
 
 The original code was written using JUCE 3.1. It required the user to copy a folder with image and sound files to `/Users/Shared/KissOfShame`. The parameters were not exposed to the DAW and would reset when the editor re-opened.
@@ -124,10 +149,6 @@ Maybe:
 - Skew the flange depth so that shorter delays are easier to dial in. (For example by doing `targetDepth = depth * depth * 1000.0f`.)
 - Oversampling. The saturation stage can easily add aliases.
 - Use CMake instead of Projucer.
-
-## How it works
-
-TODO
 
 ## Credits & license
 
