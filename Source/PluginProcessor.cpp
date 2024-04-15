@@ -63,6 +63,19 @@ void KissOfShameAudioProcessor::changeProgramName(int, const juce::String&)
 {
 }
 
+bool KissOfShameAudioProcessor::isBusesLayoutSupported(const BusesLayout& layouts) const
+{
+    const auto mono = juce::AudioChannelSet::mono();
+    const auto stereo = juce::AudioChannelSet::stereo();
+    const auto mainIn = layouts.getMainInputChannelSet();
+    const auto mainOut = layouts.getMainOutputChannelSet();
+
+    if (mainIn == mono && mainOut == mono) { return true; }
+    if (mainIn == stereo && mainOut == stereo) { return true; }
+
+    return false;
+}
+
 void KissOfShameAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
     params.prepareToPlay(sampleRate);

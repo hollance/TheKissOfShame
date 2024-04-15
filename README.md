@@ -95,10 +95,11 @@ The following changes were made in this repo:
 
 ## TO-DO list
 
-Bugs I found:
+Bugs I found (or introduced hehe):
 
 - Sometimes there is an extremely loud glitch. Not sure yet what causes this, most likely some uninitialized memory.
 - When the Hurricane Sandy environment is active, moving the Age knob to the minimum position can cause the low-pass filter to give a massive gain boost.
+- The hacky way I've implemented the Link Input/Output mode may be problematic. Sometimes this gives an assertion on `beginGesture` being called twice. Not a massive problem but not great either.
 
 Other things that can / should be improved in the code (volunteers welcome!):
 

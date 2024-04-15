@@ -4,9 +4,9 @@
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" bundleIdentifier="com.InfernalLove.KissOfShame"
               pluginName="The Kiss Of Shame" pluginManufacturer="Infernal Love"
               pluginManufacturerCode="ILov" pluginCode="Tkos" pluginAAXCategory="2"
-              cppLanguageStandard="20" pluginChannelConfigs="{1, 1}, {2, 2}"
-              companyWebsite="https://github.com/hollance/TheKissOfShame" aaxIdentifier="com.InfernalLove.KissOfShame"
-              companyName="Infernal Love" pluginDesc="Tape Desecration Processor">
+              cppLanguageStandard="20" companyWebsite="https://github.com/hollance/TheKissOfShame"
+              aaxIdentifier="com.InfernalLove.KissOfShame" companyName="Infernal Love"
+              pluginDesc="Tape Desecration Processor">
   <MAINGROUP id="OWaNcN" name="KissOfShame">
     <GROUP id="{D05B6388-C834-5CDD-F546-69BC8457519E}" name="Audio_Resources">
       <FILE id="XPhc7y" name="Hiss.wav" compile="0" resource="1" file="Audio_Resources/Hiss.wav"/>
