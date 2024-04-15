@@ -32,6 +32,8 @@ The goal of this open source project is:
 
 ### Mac
 
+The Mac version of the plug-in is signed and notarized.
+
 1. Download **KissOfShame-Mac.zip** from the [Releases page](https://github.com/hollance/TheKissOfShame/releases).
 2. In your **Downloads** folder, double-click **KissOfShame-Mac.zip** to unzip the file.
 3. Copy **KissOfShame.component** to the folder **/Library/Audio/Plug-Ins/Components**
