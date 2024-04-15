@@ -50,8 +50,8 @@ public:
         d0 = 0.0f;
 
         float theta = fc * PI / SAMPLE_RATE;
-        if (theta >= PI/2.0f) {
-            theta = PI/2.0f - 0.001f;
+        if (theta >= 0.49f * PI) {
+            theta = 0.49f * PI;
         }
 
         const float sqrt2 = 1.41421356237309504880168872420969808f;

@@ -97,9 +97,9 @@ The following changes were made in this repo:
 
 Bugs I found (or introduced hehe):
 
-- Sometimes there is an extremely loud glitch. Not sure yet what causes this, most likely some uninitialized memory.
-- When the Hurricane Sandy environment is active, moving the Age knob to the minimum position can cause the low-pass filter to give a massive gain boost.
+- Sometimes there is an extremely loud glitch. Not sure yet what causes this, maybe some uninitialized memory.Hard to reproduce.
 - The hacky way I've implemented the Link Input/Output mode may be problematic. Sometimes this gives an assertion on `beginGesture` being called twice. Not a massive problem but not great either.
+- [FIXED] ~~When the Hurricane Sandy environment is active, moving the Age knob to the minimum position can cause the low-pass filter to give a massive gain boost.~~
 
 Other things that can / should be improved in the code (volunteers welcome!):
 
@@ -111,11 +111,12 @@ Other things that can / should be improved in the code (volunteers welcome!):
 - Shame effect: The code allows for interpolating between the wavetables but all wavetables have the same data in it.
 - Reel animation: Don't set framesPerSecond to 0 to stop the animation.
 - `audioProcessor.curPositionInfo` uses a deprecated API.
-- VU meter RMS readings should be atomic, and ideally be independent of the block size.
+- There are some data races between the editor and processor. For example, VU meter RMS readings should be atomic, and ideally be independent of the block size.
 - Remove most of the compiler warnings. (I set the warning level high on purpose.)
 - Replace the Biquads with TPT / SVF filters.
 - Don't use `rand()` and `srand()`. Replace with `juce::Random`.
 - Parameter smoothing.
+- When you put the plug-in in bypass mode, change the Age or Shame controls, and disable bypass, there can be a glitch because old filter state etc no longer makes sense.
 
 Maybe:
 
