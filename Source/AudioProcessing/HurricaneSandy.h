@@ -81,7 +81,8 @@ public:
                 }
 
                 // Mix signal with periodic noise burst.
-                samples[i] = (1.0f - noiseBurstImpact)*samples[i] + noiseBurstImpact*(signalEnvValue * samples[i] + 0.05f * noiseBurstEnvValue * whiteNoise.tick());
+                float noiseBurst = signalEnvValue * samples[i] + 0.05f * noiseBurstEnvValue * whiteNoise.tick();
+                samples[i] = (1.0f - noiseBurstImpact)*samples[i] + noiseBurstImpact*noiseBurst;
 
                 // Modulate the amplitude by the granular amplitude
                 samples[i] *= 1.0f - grainImpact*grainSample;
