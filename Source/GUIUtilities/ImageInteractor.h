@@ -5,7 +5,7 @@
 class ImageInteractor : public juce::Component
 {
 public:
-    ImageInteractor();
+    ImageInteractor(float startValue = 0.0f);
 
     void paint(juce::Graphics& g) override;
 

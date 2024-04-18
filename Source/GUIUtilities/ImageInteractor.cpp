@@ -1,6 +1,6 @@
 #include "ImageInteractor.h"
 
-ImageInteractor::ImageInteractor() : desaturate(false), numFrames(128), curValue(0.0f)
+ImageInteractor::ImageInteractor(float startValue) : desaturate(false), numFrames(128), curValue(startValue)
 {
     minValue = 0.0f;
     maxValue = 1.0f;
