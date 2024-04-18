@@ -149,7 +149,7 @@ The following changes were made in this repo:
 
 Bugs I found (or introduced hehe):
 
-- The Link buttons under the input/output knobs disappear when the reels are hidden.
+- [FIXED] ~~The Link buttons under the input/output knobs disappear when the reels are hidden.~~
 - Sometimes there is an extremely loud glitch. Not sure yet what causes this, maybe some uninitialized memory. Hard to reproduce.
 - The hacky way I've implemented the Link Input/Output mode may be problematic. Sometimes this gives an assertion on `beginGesture` being called twice. Not a massive problem but not great either.
 - When restoring state, the Shame knob's cross is in the right position but the colored track isn't shown.
