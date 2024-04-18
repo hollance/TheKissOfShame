@@ -7,7 +7,8 @@
 class Shame
 {
 public:
-    Shame(int numChannels)
+    Shame(int numChannels) : 
+    rng(juce::Random::getSystemRandom())
     {
         depth = 0.5f;
         rate = 2.0f;
@@ -175,7 +176,7 @@ private:
 
         // Reached the end of the wavetable? Choose a new random rate fluctuation.
         if (curPos_wTable >= BUFFER_SIZE) {
-            float random = float(rand() % 2000)/1000.0f - 1.0f;  // -1 ... +1
+            float random = rng.nextFloat() * 2.0f - 1.0f;  // -1 ... +1
             rateFluctuation = random * rate * randPeriodicity;
             curPos_wTable -= BUFFER_SIZE;
         }
@@ -200,6 +201,8 @@ private:
 
     // Several wavetables that each contain a single cycle waveform
     juce::OwnedArray<juce::AudioBuffer<float>> waveTableBuffers;
+
+    juce::Random &rng;
 
     float waveformIndx;      // which wavetable to use (can be fractional)
     float curPos_wTable;     // read position in the wavetable (fractional)

@@ -10,9 +10,10 @@ class EnvelopeDips
 {
 public:
     EnvelopeDips() : incr(0.0f), domain(44100.0f), dynamicExtremity(0.0f),
-                     numPointRandomness(0.0f), numPoints(5)
+                     numPointRandomness(0.0f), numPoints(5),
+                     rng(juce::Random::getSystemRandom())
     {
-        srand(time(nullptr));
+        rng.setSeed(time(nullptr));
 
         calculateDipPoints();
 
@@ -91,7 +92,8 @@ public:
         for (int i = 0; i < numRandPoints; i++) {
             float xInit = float(i + 1) / float(numRandPoints + 1);
             float xDeviation = random() * partitionSize * 0.4f;
-            if (rand() % 2) {
+            
+            if (rng.nextBool()) {
                 xDeviation = -xDeviation;
             }
             points.add({ xInit + xDeviation, 1.0f - dynamicExtremity*random() });
@@ -103,7 +105,7 @@ public:
 private:
     float random() const noexcept
     {
-        return float(rand() % 1000) / 1000.0f;
+        return rng.nextFloat();
     }
 
     float incr;
@@ -112,5 +114,7 @@ private:
     float numPointRandomness;
     int numPoints;
 
+    juce::Random &rng;
+    
     juce::Array<juce::Point<float>> points;
 };
