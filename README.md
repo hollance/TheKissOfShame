@@ -119,7 +119,7 @@ cmake --build "build" --config Release --target all --
 
 Replace '--config Release' with '--config Debug' for debug builds.
 
-Builds will be located under `build/TheKissOfShame_artifacts/(Release or Debug)`
+Builds will be located under `build/TheKissOfShame_artefacts/(Release or Debug)`
 
 ## How it works
 
