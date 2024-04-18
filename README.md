@@ -26,10 +26,6 @@ The goal of this open source project is:
 
 > **NOTE:** The source code that was donated does not contain all the features from the description. Notably, there is only one tape type and one environment (Hurricane Sandy), and the print-through function is missing. In its current form the plug-in only works well at a 44100 Hz sample rate. That said, it's still a fun plug-in with a cool UI, and there's a lot to learn from the source code!
 
-## Installation instructions
-
-> **NOTE:** This is currently work-in-progress. There may be issues with the plug-in!
-
 ### Mac
 
 The Mac version of the plug-in is signed and notarized.
@@ -91,6 +87,7 @@ The Kiss of Shame is the first tape plug-in to feature animated, interactive ree
 
 ## Building from source code
 
+### Projucer
 Brief instructions:
 
 - Install JUCE 7 or newer.
@@ -102,6 +99,27 @@ Currently only tested with:
 - JUCE 7.0.9
 - Xcode 15.2 + macOS Sonoma 14.3
 - Visual Studio 2022 + Windows 10
+
+### CMake
+
+To set up CMake builds, make sure you have CMake and Ninja installed. Ninja is configured for fast compile times by default, but if you don't want to use it, omit '-G Ninja' from the configure script below and manually specify the number of jobs. 
+[Check CMake docs on how to do this](https://cmake.org/cmake/help/latest/manual/cmake.1.html#cmdoption-cmake-build-j)
+
+Configure your project (fetches JUCE, sets up JUCE project with Ninja)
+
+```
+cmake -B "build" -G Ninja
+```
+
+Build your project
+
+```
+cmake --build "build" --config Release --target all --
+```
+
+Replace '--config Release' with '--config Debug' for debug builds.
+
+Builds will be located under `build/TheKissOfShame_artifacts/(Release or Debug)`
 
 ## How it works
 
