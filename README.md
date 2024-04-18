@@ -161,7 +161,7 @@ Other things that can / should be improved in the code (volunteers welcome!):
 - There are some data races between the editor and processor. For example, VU meter RMS readings should be atomic, and ideally be independent of the block size.
 - Remove most of the compiler warnings. (I set the warning level high on purpose.)
 - Replace the Biquads with TPT / SVF filters.
-- Don't use `rand()` and `srand()`. Replace with `juce::Random`.
+- [Needs review] ~~Don't use `rand()` and `srand()`. Replace with `juce::Random`.~~
 - Parameter smoothing.
 - When you put the plug-in in bypass mode, change the Age or Shame controls, and disable bypass, there can be a glitch because old filter state etc no longer makes sense.
 
@@ -170,7 +170,7 @@ Maybe:
 - When you drag to apply flanging, I would expect a mouse up to reset the flanging depth, since the animation does return to normal speed.
 - Skew the flange depth so that shorter delays are easier to dial in. (For example by doing `targetDepth = depth * depth * 1000.0f`.)
 - Oversampling. The saturation stage can easily add aliases.
-- Use CMake instead of Projucer.
+- [Needs to include AAX] ~~Use CMake instead of Projucer~~.
 
 ## Credits & license
 

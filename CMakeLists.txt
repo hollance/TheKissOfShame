@@ -136,7 +136,6 @@ set_target_properties("${BaseTargetName}BinaryData" PROPERTIES POSITION_INDEPEND
 
 target_link_libraries("${BaseTargetName}"
     PRIVATE
-        # AudioPluginData           # If we'd created a binary data target, we'd link to it here
         "${BaseTargetName}BinaryData"
         
         juce_audio_basics
