@@ -8,6 +8,7 @@
 #include "GUIUtilities/EnvironmentsComponent.h"
 #include "GUIUtilities/ImageInteractor.h"
 #include "GUIUtilities/ImageAnimationComponent.h"
+#include "Parameters.h"
 
 class KissOfShameAudioProcessorEditor : public juce::AudioProcessorEditor,
                                         public juce::Timer,
@@ -73,22 +74,22 @@ private:
     int priorProcessorTime;
 
     juce::AudioProcessorValueTreeState::SliderAttachment inputAttachment {
-        audioProcessor.apvts, ParameterID::input.getParamID(), inputSaturationKnob
+        audioProcessor.apvts, ParameterIDs::input.getParamID(), inputSaturationKnob
     };
     juce::AudioProcessorValueTreeState::SliderAttachment shameAttachment {
-        audioProcessor.apvts, ParameterID::shame.getParamID(), shameKnob
+        audioProcessor.apvts, ParameterIDs::shame.getParamID(), shameKnob
     };
     juce::AudioProcessorValueTreeState::SliderAttachment hissAttachment {
-        audioProcessor.apvts, ParameterID::hiss.getParamID(), hissKnob
+        audioProcessor.apvts, ParameterIDs::hiss.getParamID(), hissKnob
     };
     juce::AudioProcessorValueTreeState::SliderAttachment blendAttachment {
-        audioProcessor.apvts, ParameterID::blend.getParamID(), blendKnob
+        audioProcessor.apvts, ParameterIDs::blend.getParamID(), blendKnob
     };
     juce::AudioProcessorValueTreeState::SliderAttachment ageAttachment {
-        audioProcessor.apvts, ParameterID::age.getParamID(), ageKnob
+        audioProcessor.apvts, ParameterIDs::age.getParamID(), ageKnob
     };
     juce::AudioProcessorValueTreeState::SliderAttachment outputAttachment {
-        audioProcessor.apvts, ParameterID::output.getParamID(), outputKnob
+        audioProcessor.apvts, ParameterIDs::output.getParamID(), outputKnob
     };
 
     bool ignoreCallbacks = false;
