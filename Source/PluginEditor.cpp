@@ -211,6 +211,10 @@ void KissOfShameAudioProcessorEditor::setReelMode(bool showReels)
     vuMeterR.setTopLeftPosition(vuMeterR.getX(), vuMeterR.getY() + adjustment);
     shameKnobImage.setTopLeftPosition(shameKnobImage.getX(), shameKnobImage.getY() + adjustment);
 
+    // Link Buttons
+    linkIOButtonL.setTopLeftPosition(linkIOButtonL.getX(), linkIOButtonL.getY() + adjustment);
+    linkIOButtonR.setTopLeftPosition(linkIOButtonR.getX(), linkIOButtonR.getY() + adjustment);
+
     if (showReels) {
         faceImage.setAnimationImage(BinaryData::FaceWithReels_png, BinaryData::FaceWithReels_pngSize);
         faceImage.setDimensions(0, 0, 960, 703);
