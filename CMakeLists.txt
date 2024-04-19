@@ -78,7 +78,8 @@ add_subdirectory(Source)
 target_compile_features("${BaseTargetName}" PUBLIC cxx_std_20)
 
 target_compile_definitions("${BaseTargetName}" PUBLIC
-	JUCE_DISPLAY_SPLASH_SCREEN=0
+    DONT_SET_USING_JUCE_NAMESPACE=1
+    JUCE_DISPLAY_SPLASH_SCREEN=0
     JUCE_REPORT_APP_USAGE=0
 	JUCE_USE_FLAC=0
 	JUCE_USE_OGGVORBIS=0

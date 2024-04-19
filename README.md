@@ -105,7 +105,7 @@ Currently only tested with:
 To set up CMake builds, make sure you have CMake and Ninja installed. Ninja is configured for fast compile times by default, but if you don't want to use it, omit '-G Ninja' from the configure script below and manually specify the number of jobs. 
 [Check CMake docs on how to do this](https://cmake.org/cmake/help/latest/manual/cmake.1.html#cmdoption-cmake-build-j)
 
-Configure your project (fetches JUCE, sets up JUCE project with Ninja)
+Configure your project (fetches JUCE, sets up JUCE project)
 
 ```
 cmake -B "build" -G Ninja
@@ -119,7 +119,9 @@ cmake --build "build" --config Release --target all --
 
 Replace '--config Release' with '--config Debug' for debug builds.
 
-Builds will be located under `build/TheKissOfShame_artefacts/(Release or Debug)`
+Builds will be located under `build/TheKissOfShame_artefacts/(Release or Debug)`. To build into `/Builds/<Your OS>`, uncomment `COPY_PLUGIN_AFTER_BUILD` in `/CMakeLists.txt`.
+
+AAX compilation is not enabled but can be enabled by adding `AAX` to the `FORMATS` definition under `juce_add_plugin` in `/CMakeLists.txt`. To compile for AAX, you need to specify the location of the AAX SDK with `juce_set_aax_sdk_path("  ...  ")`. This has not been tested yet.
 
 ## How it works
 
