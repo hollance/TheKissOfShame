@@ -1,8 +1,0 @@
-JuceLibraryCode/BinaryData.cpp filter=lfs diff=lfs merge=lfs -text
-JuceLibraryCode/BinaryData2.cpp filter=lfs diff=lfs merge=lfs -text
-JuceLibraryCode/BinaryData3.cpp filter=lfs diff=lfs merge=lfs -text
-JuceLibraryCode/BinaryData5.cpp filter=lfs diff=lfs merge=lfs -text
-JuceLibraryCode/BinaryData4.cpp filter=lfs diff=lfs merge=lfs -text
-JuceLibraryCode/BinaryData6.cpp filter=lfs diff=lfs merge=lfs -text
-JuceLibraryCode/BinaryData7.cpp filter=lfs diff=lfs merge=lfs -text
-JuceLibraryCode/BinaryData8.cpp filter=lfs diff=lfs merge=lfs -text
