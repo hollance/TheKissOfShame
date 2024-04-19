@@ -2,4 +2,6 @@
 **/build
 xcuserdata/
 *.xccheckout
+**/Builds
+**/JuceLibraryCode
 
