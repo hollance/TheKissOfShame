@@ -10,7 +10,7 @@ set(ProjectVersion 1.0)
 include (FetchContent)
 Set(FETCHCONTENT_QUIET FALSE) # shows detailed info when fetching from github
 
-
+# attempt to build with multiple threads
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
@@ -30,7 +30,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(JUCE)
 
-
+# determine folder to place builds, if COPY_PLUGIN_AFTER_BUILD is enabled
 if(APPLE)
     set(buildFolder "Builds/MacOSX")
 else()
@@ -43,24 +43,27 @@ endif()
 
  
 juce_add_plugin("${BaseTargetName}"
-    VERSION "${ProjectVersion}"                             # Set this if the plugin version is different to the project version
+    VERSION "${ProjectVersion}"                 # Set this if the plugin version is different to the project version
     # ICON_BIG ...                              # ICON_* arguments specify a path to an image file to use as an icon for the Standalone
     # ICON_SMALL ...
-    COMPANY_NAME Infernal Love                          # Specify the name of the plugin's author
+    COMPANY_NAME Infernal Love                  # Specify the name of the plugin's author
     COMPANY_WEBSITE "https://github.com/hollance/TheKissOfShame"
     COMPANY_EMAIL ""
     IS_SYNTH FALSE                       # Is this a synth or an effect?
     NEEDS_MIDI_INPUT FALSE               # Does the plugin need midi input?
     NEEDS_MIDI_OUTPUT FALSE              # Does the plugin need midi output?
     IS_MIDI_EFFECT FALSE                 # Is this plugin a MIDI effect?
+
     # COPY_PLUGIN_AFTER_BUILD TRUE        # Should the plugin be installed to a default location after building?
     # VST3_COPY_DIR "${buildFolder}"
 	# VST_COPY_DIR "${buildFolder}"
 	# AU_COPY_DIR "${buildFolder}"
+    # AAX_COPY_DIR "${buildFolder}"
+
     PLUGIN_MANUFACTURER_CODE ILov               # A four-character manufacturer id with at least one upper-case character
     PLUGIN_CODE Tkos                            # A unique four-character plugin id with exactly one upper-case character
                                                 # GarageBand 10.3 requires the first letter to be upper-case, and the remaining letters to be lower-case
-    FORMATS VST3 Standalone AU                  # The formats to build. Other valid formats are: AAX Unity VST AU AUv3
+    FORMATS VST3 Standalone AU                  # The formats to build. Other valid formats are: AAX Unity VST AU AUv3. Enable AAX once you have the AAX SDK installed
     PRODUCT_NAME "${PluginName}"  # The name of the final executable, which can differ from the target name
 )
 
@@ -136,9 +139,7 @@ set_target_properties("${BaseTargetName}BinaryData" PROPERTIES POSITION_INDEPEND
 
 target_link_libraries("${BaseTargetName}"
     PRIVATE
-        # AudioPluginData           # If we'd created a binary data target, we'd link to it here
         "${BaseTargetName}BinaryData"
-        
         juce_audio_basics
         juce_audio_devices
         juce_audio_formats
@@ -156,4 +157,3 @@ target_link_libraries("${BaseTargetName}"
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags
         juce::juce_recommended_warning_flags)
-
