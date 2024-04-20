@@ -123,7 +123,8 @@ cmake --build "build" --config Release --target all --
 
 Replace '--config Release' with '--config Debug' for debug builds.
 
-Builds will be located under `build/TheKissOfShame_artefacts/(Release or Debug)`. To build into `/Builds/<Your OS>`, uncomment `COPY_PLUGIN_AFTER_BUILD` in `/CMakeLists.txt`.
+Builds are automatically copied into sensible folders for your target platform (e.g: `C:\Program Files (x86)\Common Files/VST3/` for Windows), making it easy to open this plugin in your DAW during development.
+Builds will also be located under `build/TheKissOfShame_artefacts/(Release or Debug)`.
 
 AAX compilation is not enabled but can be enabled by adding `AAX` to the `FORMATS` definition under `juce_add_plugin` in `/CMakeLists.txt`. To compile for AAX, you need to specify the location of the AAX SDK with `juce_set_aax_sdk_path("  ...  ")`. This has not been tested yet.
 
