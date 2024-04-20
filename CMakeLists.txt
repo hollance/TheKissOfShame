@@ -121,6 +121,8 @@ juce_add_binary_data("${BaseTargetName}BinaryData" HEADER_NAME BinaryData.h NAME
 set_target_properties("${BaseTargetName}BinaryData" PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
 
 # if you ever decide you'd like to support CLAP
+# CLAP code does not get automatically copied with COPY_PLUGIN_AFTER_BUILD
+# so manually copy it when uncommenting this
 
 # FetchContent_Declare (clap-juce-extensions
 #   GIT_REPOSITORY https://github.com/free-audio/clap-juce-extensions.git
