@@ -106,16 +106,16 @@ Currently only tested with:
 
 ### CMake
 
-To set up CMake builds, make sure you have CMake and Ninja installed. Ninja is configured for fast compile times by default, but if you don't want to use it, omit '-G Ninja' from the configure script below and manually specify the number of jobs. 
+To set up CMake builds, make sure you have CMake and Ninja installed. Ninja is configured for fast compile times by default, but if you don't want to use it, omit '-G Ninja' from the configure script below and manually specify the number of jobs.
 [Check CMake docs on how to do this](https://cmake.org/cmake/help/latest/manual/cmake.1.html#cmdoption-cmake-build-j)
 
-Configure your project (fetches JUCE, sets up JUCE project)
+Configure your project (fetches JUCE, sets up JUCE project):
 
 ```
 cmake -B "build" -G Ninja
 ```
 
-Build your project
+Build your project:
 
 ```
 cmake --build "build" --config Release --target all --
@@ -177,7 +177,6 @@ Maybe:
 - When you drag to apply flanging, I would expect a mouse up to reset the flanging depth, since the animation does return to normal speed.
 - Skew the flange depth so that shorter delays are easier to dial in. (For example by doing `targetDepth = depth * depth * 1000.0f`.)
 - Oversampling. The saturation stage can easily add aliases.
-- Use CMake instead of Projucer.
 
 ## Credits & license
 
@@ -191,7 +190,7 @@ Original developers:
 
 - [Yannick Bonnefoy](https://nanopsy.tv/) — GUI
 
-Updates and improvements by [Matthijs Hollemans](https://audiodev.blog).
+Updates and improvements by [Matthijs Hollemans](https://audiodev.blog) and contributors.
 
 This program is free software: you can redistribute it and/or modify it under the terms of the [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.en.html) as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
