@@ -1,5 +1,11 @@
 target_sources("${BaseTargetName}"
     PRIVATE
+        BacklightComponent.h
+        CustomButton.h
+        CustomKnob.h
         CustomKnob.cpp
+        EnvironmentsComponent.h
+        ImageAnimationComponent.h
+        ImageInteractor.h
         ImageInteractor.cpp
         )

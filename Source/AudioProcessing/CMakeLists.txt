@@ -1,5 +1,18 @@
 target_sources("${BaseTargetName}"
     PRIVATE
+        AudioGraph.h
         AudioUtils.cpp
+        Biquads.h
+        Blend.h
+        Envelope.h
+        EnvelopeDips.h
+        Flange.h
+        Granulate.h
         Granulate.cpp
+        Hiss.h
+        HurricaneSandy.h
+        InputSaturation.h
+        LoopCrossfade.h
+        Noise.h
+        Shame.h
         )
