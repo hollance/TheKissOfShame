@@ -8,6 +8,7 @@
 #include "GUIUtilities/EnvironmentsComponent.h"
 #include "GUIUtilities/ImageInteractor.h"
 #include "GUIUtilities/ImageAnimationComponent.h"
+#include "Parameters.h"
 
 class KissOfShameAudioProcessorEditor : public juce::AudioProcessorEditor,
                                         public juce::Timer,

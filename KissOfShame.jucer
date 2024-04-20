@@ -21,7 +21,7 @@
       <FILE id="bdyO9s" name="Environments.png" compile="0" resource="1"
             file="GUI_Resources/Environments.png"/>
       <FILE id="GjHnsU" name="Face.png" compile="0" resource="1" file="GUI_Resources/Face.png"/>
-      <FILE id="kxlLjo" name="FaceWithReels.png" compile="0" resource="1"
+      <FILE id="kxlLjo" name="FaceWithReels.png" compile="0" resource="1" 
             file="GUI_Resources/FaceWithReels.png"/>
       <FILE id="RU4sd5" name="HissKnob.png" compile="0" resource="1" file="GUI_Resources/HissKnob.png"/>
       <FILE id="zWT5on" name="InputKnob.png" compile="0" resource="1" file="GUI_Resources/InputKnob.png"/>

@@ -91,6 +91,7 @@ The Kiss of Shame is the first tape plug-in to feature animated, interactive ree
 
 ## Building from source code
 
+### Projucer
 Brief instructions:
 
 - Install JUCE 7 or newer.
@@ -102,6 +103,30 @@ Currently only tested with:
 - JUCE 7.0.9
 - Xcode 15.2 + macOS Sonoma 14.3
 - Visual Studio 2022 + Windows 10
+
+### CMake
+
+To set up CMake builds, make sure you have CMake and Ninja installed. Ninja is configured for fast compile times by default, but if you don't want to use it, omit '-G Ninja' from the configure script below and manually specify the number of jobs. 
+[Check CMake docs on how to do this](https://cmake.org/cmake/help/latest/manual/cmake.1.html#cmdoption-cmake-build-j)
+
+Configure your project (fetches JUCE, sets up JUCE project)
+
+```
+cmake -B "build" -G Ninja
+```
+
+Build your project
+
+```
+cmake --build "build" --config Release --target all --
+```
+
+Replace '--config Release' with '--config Debug' for debug builds.
+
+Builds are automatically copied into sensible folders for your target platform (e.g: `C:\Program Files (x86)\Common Files/VST3/` for Windows), making it easy to open this plugin in your DAW during development.
+Builds will also be located under `build/TheKissOfShame_artefacts/(Release or Debug)`.
+
+AAX compilation is not enabled but can be enabled by adding `AAX` to the `FORMATS` definition under `juce_add_plugin` in `/CMakeLists.txt`. To compile for AAX, you need to specify the location of the AAX SDK with `juce_set_aax_sdk_path("  ...  ")`. This has not been tested yet.
 
 ## How it works
 
