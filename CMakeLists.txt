@@ -36,17 +36,6 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(JUCE)
 
-# determine folder to place builds, if COPY_PLUGIN_AFTER_BUILD is enabled
-if(APPLE)
-    set(buildFolder "Builds/MacOSX")
-else()
-    if(UNIX)
-        set(buildFolder "Builds/Linux")
-    else()
-        set(buildFolder "Builds/Windows")
-    endif()
-endif()
-
  
 juce_add_plugin("${BaseTargetName}"
     VERSION "${ProjectVersion}"                 # Set this if the plugin version is different to the project version
@@ -60,11 +49,10 @@ juce_add_plugin("${BaseTargetName}"
     NEEDS_MIDI_OUTPUT FALSE              # Does the plugin need midi output?
     IS_MIDI_EFFECT FALSE                 # Is this plugin a MIDI effect?
 
-    # COPY_PLUGIN_AFTER_BUILD TRUE        # Should the plugin be installed to a default location after building?
-    # VST3_COPY_DIR "${buildFolder}"
-    # VST_COPY_DIR "${buildFolder}"
-    # AU_COPY_DIR "${buildFolder}"
-    # AAX_COPY_DIR "${buildFolder}"
+    COPY_PLUGIN_AFTER_BUILD TRUE        # Should the plugin be installed to a default location after building? (will install into sensible locations for most platforms)
+    # VST3_COPY_DIR ""
+    # AU_COPY_DIR ""
+    # AAX_COPY_DIR ""
 
     PLUGIN_MANUFACTURER_CODE ILov               # A four-character manufacturer id with at least one upper-case character
     PLUGIN_CODE Tkos                            # A unique four-character plugin id with exactly one upper-case character
