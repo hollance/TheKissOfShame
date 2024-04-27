@@ -1,7 +1,14 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-KissOfShameAudioProcessor::KissOfShameAudioProcessor() : params(apvts), audioGraph(params)
+KissOfShameAudioProcessor::KissOfShameAudioProcessor() :
+    AudioProcessor(
+        BusesProperties()
+           .withInput("Input", juce::AudioChannelSet::stereo(), true)
+           .withOutput("Output", juce::AudioChannelSet::stereo(), true)
+    ),
+    params(apvts),
+    audioGraph(params)
 {
     curRMSL = 0.0f;
     curRMSR = 0.0f;
