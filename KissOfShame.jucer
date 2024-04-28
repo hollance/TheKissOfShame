@@ -18,14 +18,17 @@
       <FILE id="tn2JAq" name="AgeKnob.png" compile="0" resource="1" file="GUI_Resources/AgeKnob.png"/>
       <FILE id="OVaWWF" name="BlendKnob.png" compile="0" resource="1" file="GUI_Resources/BlendKnob.png"/>
       <FILE id="reHHLz" name="Bypass.png" compile="0" resource="1" file="GUI_Resources/Bypass.png"/>
-      <FILE id="bdyO9s" name="Environments.png" compile="0" resource="1" file="GUI_Resources/Environments.png"/>
+      <FILE id="bdyO9s" name="Environments.png" compile="0" resource="1"
+            file="GUI_Resources/Environments.png"/>
       <FILE id="GjHnsU" name="Face.png" compile="0" resource="1" file="GUI_Resources/Face.png"/>
-      <FILE id="kxlLjo" name="FaceWithReels.png" compile="0" resource="1" file="GUI_Resources/FaceWithReels.png"/>
+      <FILE id="kxlLjo" name="FaceWithReels.png" compile="0" resource="1"
+            file="GUI_Resources/FaceWithReels.png"/>
       <FILE id="RU4sd5" name="HissKnob.png" compile="0" resource="1" file="GUI_Resources/HissKnob.png"/>
       <FILE id="zWT5on" name="InputKnob.png" compile="0" resource="1" file="GUI_Resources/InputKnob.png"/>
       <FILE id="uyNwpi" name="Link.png" compile="0" resource="1" file="GUI_Resources/Link.png"/>
       <FILE id="B7eS9h" name="OutputKnob.png" compile="0" resource="1" file="GUI_Resources/OutputKnob.png"/>
-      <FILE id="b8aDED" name="PrintThrough.png" compile="0" resource="1" file="GUI_Resources/PrintThrough.png"/>
+      <FILE id="b8aDED" name="PrintThrough.png" compile="0" resource="1"
+            file="GUI_Resources/PrintThrough.png"/>
       <FILE id="kSiAvW" name="ShameCross.png" compile="0" resource="1" file="GUI_Resources/ShameCross.png"/>
       <FILE id="yfcp33" name="ShameKnob.png" compile="0" resource="1" file="GUI_Resources/ShameKnob.png"/>
       <FILE id="C42pzM" name="TapeType.png" compile="0" resource="1" file="GUI_Resources/TapeType.png"/>
