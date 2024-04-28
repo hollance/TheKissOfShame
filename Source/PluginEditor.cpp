@@ -148,6 +148,10 @@ KissOfShameAudioProcessorEditor::KissOfShameAudioProcessorEditor(KissOfShameAudi
 
     showReelsAttachment.sendInitialUpdate();
 
+    // fixes bug where shame knob's coloured track is not in the right position
+    // maybe age and other knobs are fine because this knob is a ImageInteractor and not a Slider?
+    shameKnobImage.updateImageWithValue(audioProcessor.params.shameParam->get());
+
     startTimer(25);
 }
 
