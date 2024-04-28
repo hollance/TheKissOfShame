@@ -132,4 +132,6 @@ protected:
     int gOffset_;
     float gRandomFactor_;
     float gain_;
+
+    juce::Random &rng;
 };

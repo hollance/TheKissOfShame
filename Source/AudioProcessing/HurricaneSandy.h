@@ -11,7 +11,7 @@
 class HurricaneSandy
 {
 public:
-    HurricaneSandy() : grainImpact(0.0f), ampFluctuationImpact(0.0f)
+    HurricaneSandy() : grainImpact(0.0f), ampFluctuationImpact(0.0f), rng(juce::Random::getSystemRandom())
     {
         // Used for general amplitude fluctuation
         dips.setDomainMS(1000.0f);  // milliseconds
@@ -81,7 +81,7 @@ public:
                 }
 
                 // Mix signal with periodic noise burst.
-                float noiseBurst = signalEnvValue * samples[i] + 0.05f * noiseBurstEnvValue * whiteNoise.tick();
+                float noiseBurst = signalEnvValue * samples[i] + 0.05f * noiseBurstEnvValue * (rng.nextFloat() * 2.0f - 1.0f);
                 samples[i] = (1.0f - noiseBurstImpact)*samples[i] + noiseBurstImpact*noiseBurst;
 
                 // Modulate the amplitude by the granular amplitude
@@ -142,4 +142,6 @@ private:
     float lowFreqGrainNoiseLevel;
     float ampFluctuationImpact;
     float noiseBurstImpact;
+
+    juce::Random &rng;
 };
