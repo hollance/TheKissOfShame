@@ -74,22 +74,22 @@ private:
     int priorProcessorTime;
 
     juce::AudioProcessorValueTreeState::SliderAttachment inputAttachment {
-        audioProcessor.apvts, ParameterIDs::input.getParamID(), inputSaturationKnob
+        audioProcessor.apvts, ParameterID::input.getParamID(), inputSaturationKnob
     };
     juce::AudioProcessorValueTreeState::SliderAttachment shameAttachment {
-        audioProcessor.apvts, ParameterIDs::shame.getParamID(), shameKnob
+        audioProcessor.apvts, ParameterID::shame.getParamID(), shameKnob
     };
     juce::AudioProcessorValueTreeState::SliderAttachment hissAttachment {
-        audioProcessor.apvts, ParameterIDs::hiss.getParamID(), hissKnob
+        audioProcessor.apvts, ParameterID::hiss.getParamID(), hissKnob
     };
     juce::AudioProcessorValueTreeState::SliderAttachment blendAttachment {
-        audioProcessor.apvts, ParameterIDs::blend.getParamID(), blendKnob
+        audioProcessor.apvts, ParameterID::blend.getParamID(), blendKnob
     };
     juce::AudioProcessorValueTreeState::SliderAttachment ageAttachment {
-        audioProcessor.apvts, ParameterIDs::age.getParamID(), ageKnob
+        audioProcessor.apvts, ParameterID::age.getParamID(), ageKnob
     };
     juce::AudioProcessorValueTreeState::SliderAttachment outputAttachment {
-        audioProcessor.apvts, ParameterIDs::output.getParamID(), outputKnob
+        audioProcessor.apvts, ParameterID::output.getParamID(), outputKnob
     };
 
     bool ignoreCallbacks = false;

@@ -3,7 +3,7 @@
 #include <JuceHeader.h>
 #include "shameConfig.h"
 
-namespace ParameterIDs
+namespace ParameterID
 {
     const juce::ParameterID input { "input", 1 };
     const juce::ParameterID output { "output", 1 };

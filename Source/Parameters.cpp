@@ -10,19 +10,19 @@ static void castParameter(juce::AudioProcessorValueTreeState& apvts,
 
 Parameters::Parameters(juce::AudioProcessorValueTreeState& apvts)
 {
-    castParameter(apvts, ParameterIDs::input, inputParam);
-    castParameter(apvts, ParameterIDs::output, outputParam);
-    castParameter(apvts, ParameterIDs::shame, shameParam);
-    castParameter(apvts, ParameterIDs::age, ageParam);
-    castParameter(apvts, ParameterIDs::hiss, hissParam);
-    castParameter(apvts, ParameterIDs::blend, blendParam);
-    castParameter(apvts, ParameterIDs::flange, flangeParam);
-    castParameter(apvts, ParameterIDs::bypass, bypassParam);
-    castParameter(apvts, ParameterIDs::link, linkParam);
-    castParameter(apvts, ParameterIDs::showReels, showReelsParam);
-    castParameter(apvts, ParameterIDs::printThrough, printThroughParam);
-    castParameter(apvts, ParameterIDs::environment, environmentParam);
-    castParameter(apvts, ParameterIDs::tapeType, tapeTypeParam);
+    castParameter(apvts, ParameterID::input, inputParam);
+    castParameter(apvts, ParameterID::output, outputParam);
+    castParameter(apvts, ParameterID::shame, shameParam);
+    castParameter(apvts, ParameterID::age, ageParam);
+    castParameter(apvts, ParameterID::hiss, hissParam);
+    castParameter(apvts, ParameterID::blend, blendParam);
+    castParameter(apvts, ParameterID::flange, flangeParam);
+    castParameter(apvts, ParameterID::bypass, bypassParam);
+    castParameter(apvts, ParameterID::link, linkParam);
+    castParameter(apvts, ParameterID::showReels, showReelsParam);
+    castParameter(apvts, ParameterID::printThrough, printThroughParam);
+    castParameter(apvts, ParameterID::environment, environmentParam);
+    castParameter(apvts, ParameterID::tapeType, tapeTypeParam);
 }
 
 juce::AudioProcessorValueTreeState::ParameterLayout Parameters::createParameterLayout()
@@ -32,42 +32,42 @@ juce::AudioProcessorValueTreeState::ParameterLayout Parameters::createParameterL
     // Input and Output are metaparameters because in Linked mode,
     // changing one will change the other.
     layout.add(std::make_unique<juce::AudioParameterFloat>(
-        ParameterIDs::input, "Input", juce::NormalisableRange<float>(), 0.5f,
+        ParameterID::input, "Input", juce::NormalisableRange<float>(), 0.5f,
         juce::AudioParameterFloatAttributes().withMeta(true)));
 
     layout.add(std::make_unique<juce::AudioParameterFloat>(
-        ParameterIDs::output, "Output", juce::NormalisableRange<float>(), 0.5f,
+        ParameterID::output, "Output", juce::NormalisableRange<float>(), 0.5f,
         juce::AudioParameterFloatAttributes().withMeta(true)));
 
     layout.add(std::make_unique<juce::AudioParameterFloat>(
-        ParameterIDs::shame, "Shame", juce::NormalisableRange<float>(), 0.0f));
+        ParameterID::shame, "Shame", juce::NormalisableRange<float>(), 0.0f));
 
     layout.add(std::make_unique<juce::AudioParameterFloat>(
-        ParameterIDs::age, "Age", juce::NormalisableRange<float>(), 0.0f));
+        ParameterID::age, "Age", juce::NormalisableRange<float>(), 0.0f));
 
     layout.add(std::make_unique<juce::AudioParameterFloat>(
-        ParameterIDs::hiss, "Hiss", juce::NormalisableRange<float>(), 0.0f));
+        ParameterID::hiss, "Hiss", juce::NormalisableRange<float>(), 0.0f));
 
     layout.add(std::make_unique<juce::AudioParameterFloat>(
-        ParameterIDs::blend, "Blend", juce::NormalisableRange<float>(), 1.0f));
+        ParameterID::blend, "Blend", juce::NormalisableRange<float>(), 1.0f));
 
     layout.add(std::make_unique<juce::AudioParameterFloat>(
-        ParameterIDs::flange, "Flange", juce::NormalisableRange<float>(), 0.0f));
+        ParameterID::flange, "Flange", juce::NormalisableRange<float>(), 0.0f));
 
     layout.add(std::make_unique<juce::AudioParameterBool>(
-        ParameterIDs::bypass, "Bypass", false));
+        ParameterID::bypass, "Bypass", false));
 
     layout.add(std::make_unique<juce::AudioParameterBool>(
-        ParameterIDs::link, "Link", false));
+        ParameterID::link, "Link", false));
 
     layout.add(std::make_unique<juce::AudioParameterBool>(
-        ParameterIDs::showReels, "Show Reels", true));
+        ParameterID::showReels, "Show Reels", true));
 
     layout.add(std::make_unique<juce::AudioParameterBool>(
-        ParameterIDs::printThrough, "Print-Through", false));
+        ParameterID::printThrough, "Print-Through", false));
 
     layout.add(std::make_unique<juce::AudioParameterChoice>(
-        ParameterIDs::environment,
+        ParameterID::environment,
         "Environment",
         juce::StringArray {
             "Environment",
@@ -80,7 +80,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout Parameters::createParameterL
         0));
 
     layout.add(std::make_unique<juce::AudioParameterChoice>(
-        ParameterIDs::tapeType,
+        ParameterID::tapeType,
         "Tape Type",
         juce::StringArray { "S-111", "A-456" },
         0));

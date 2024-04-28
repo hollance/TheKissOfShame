@@ -26,6 +26,10 @@ The goal of this open source project is:
 
 > **NOTE:** The source code that was donated does not contain all the features from the description. Notably, there is only one tape type and one environment (Hurricane Sandy), and the print-through function is missing. In its current form the plug-in only works well at a 44100 Hz sample rate. That said, it's still a fun plug-in with a cool UI, and there's a lot to learn from the source code!
 
+## Installation instructions
+
+> **NOTE:** This is currently work-in-progress. There may be issues with the plug-in!
+
 ### Mac
 
 The Mac version of the plug-in is signed and notarized.
