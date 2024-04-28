@@ -6,7 +6,7 @@
               pluginManufacturerCode="ILov" pluginCode="Tkos" pluginAAXCategory="2"
               cppLanguageStandard="20" companyWebsite="https://github.com/hollance/TheKissOfShame"
               aaxIdentifier="com.InfernalLove.KissOfShame" companyName="Infernal Love"
-              pluginDesc="Tape Desecration Processor">
+              pluginDesc="Tape Desecration Processor" version="1.0.1">
   <MAINGROUP id="OWaNcN" name="KissOfShame">
     <GROUP id="{D05B6388-C834-5CDD-F546-69BC8457519E}" name="Audio_Resources">
       <FILE id="XPhc7y" name="Hiss.wav" compile="0" resource="1" file="Audio_Resources/Hiss.wav"/>
