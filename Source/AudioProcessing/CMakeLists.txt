@@ -13,6 +13,5 @@ target_sources("${BaseTargetName}"
         HurricaneSandy.h
         InputSaturation.h
         LoopCrossfade.h
-        Noise.h
         Shame.h
         )

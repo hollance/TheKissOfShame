@@ -53,7 +53,6 @@
         <FILE id="Efqd1s" name="InputSaturation.h" compile="0" resource="0"
               file="Source/AudioProcessing/InputSaturation.h"/>
         <FILE id="q18UoO" name="LoopCrossfade.h" compile="0" resource="0" file="Source/AudioProcessing/LoopCrossfade.h"/>
-        <FILE id="avnfo8" name="Noise.h" compile="0" resource="0" file="Source/AudioProcessing/Noise.h"/>
         <FILE id="OZDTyP" name="Shame.h" compile="0" resource="0" file="Source/AudioProcessing/Shame.h"/>
       </GROUP>
       <GROUP id="{DD75611A-075D-2941-7361-14A374697CB9}" name="GUIUtilities">

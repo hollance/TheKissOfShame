@@ -6,7 +6,6 @@
 #include "LoopCrossfade.h"
 #include "Biquads.h"
 #include "Envelope.h"
-#include "Noise.h"
 
 class HurricaneSandy
 {
@@ -157,7 +156,6 @@ private:
     Biquads hpButterworth_Grains;
     Biquads lpButterworth_Signal;
 
-    Noise whiteNoise;
     Envelope noiseEnv { 350 };
     Envelope sigEnv { 350 };
 

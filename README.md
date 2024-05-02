@@ -158,7 +158,7 @@ Bugs I found (or introduced hehe):
 Other things that can / should be improved in the code (volunteers welcome!):
 
 - Don't hardcode the sample rate to 44100 Hz.
-- Add `prepareToPlay()` and `reset()` methods to the DSP classes. The reset method should clear out old state.
+- [FIXED] ~~Add `prepareToPlay()` and `reset()` methods to the DSP classes. The reset method should clear out old state.~~
 - Allocate buffers ahead of time and copy into them, rather than doing `audioGraphProcessingBuffer = audioBuffer`, which may allocate (at least the first time).
 - The envelope generators (`Envelope` and `EnvelopeDips`) could keep track of the prev and next point, so we don't have to loop through all the points at every timestep.
 - Often the loop for the channels is nested inside the loop for the samples, which can be inefficient.
@@ -168,7 +168,7 @@ Other things that can / should be improved in the code (volunteers welcome!):
 - There are some data races between the editor and processor. For example, VU meter RMS readings should be atomic, and ideally be independent of the block size.
 - Remove most of the compiler warnings. (I set the warning level high on purpose.)
 - Replace the Biquads with TPT / SVF filters.
-- [Needs review] ~~Don't use `rand()` and `srand()`. Replace with `juce::Random`.~~
+- [FIXED] ~~Don't use `rand()` and `srand()`. Replace with `juce::Random`.~~
 - Parameter smoothing.
 - When you put the plug-in in bypass mode, change the Age or Shame controls, and disable bypass, there can be a glitch because old filter state etc no longer makes sense.
 
@@ -177,7 +177,8 @@ Maybe:
 - When you drag to apply flanging, I would expect a mouse up to reset the flanging depth, since the animation does return to normal speed.
 - Skew the flange depth so that shorter delays are easier to dial in. (For example by doing `targetDepth = depth * depth * 1000.0f`.)
 - Oversampling. The saturation stage can easily add aliases.
-- [Needs to include AAX] ~~Use CMake instead of Projucer~~.
+- [FIXED] ~~Use CMake instead of Projucer~~.
+- Add AAX support.
 
 ## Credits & license
 
@@ -195,7 +196,7 @@ Updates and improvements by [Matthijs Hollemans](https://audiodev.blog) and cont
 
 This program is free software: you can redistribute it and/or modify it under the terms of the [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.en.html) as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-Some of the code in this repo (`Granulate` and `Noise`) was taken from [The Synthesis ToolKit in C++ (STK)](https://github.com/thestk/stk) by Perry R. Cook and Gary P. Scavone.
+Some of the code in this repo (the `Granulate` class) was taken from [The Synthesis ToolKit in C++ (STK)](https://github.com/thestk/stk) by Perry R. Cook and Gary P. Scavone.
 
 JUCE is copyright © Raw Material Software.
 
