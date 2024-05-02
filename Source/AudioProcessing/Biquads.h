@@ -1,7 +1,5 @@
 #pragma once
 
-#define MAX_CHANNELS 2
-
 class Biquads
 {
 public:
@@ -9,9 +7,9 @@ public:
     {
     }
 
-    void prepareToPlay(float sampleRate) noexcept
+    void prepareToPlay(float newSampleRate) noexcept
     {
-        // TODO: don't hardcode the SAMPLE_RATE!
+        sampleRate = newSampleRate;
     }
 
     void reset() noexcept
@@ -55,7 +53,7 @@ public:
         c0 = 1.0f;
         d0 = 0.0f;
 
-        float theta = fc * PI / SAMPLE_RATE;
+        float theta = fc * PI / sampleRate;
         if (theta >= 0.49f * PI) {
             theta = 0.49f * PI;
         }
@@ -84,6 +82,10 @@ public:
     }
 
 private:
+    static constexpr int MAX_CHANNELS = 2;
+
+    float sampleRate;
+
     // Filter state:
     float priorIn_2[MAX_CHANNELS];     // x[n - 2]
     float priorIn_1[MAX_CHANNELS];     // x[n - 1]

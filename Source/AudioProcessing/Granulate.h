@@ -24,8 +24,6 @@
 // This code was taken from STK (https://github.com/thestk/stk) and modified to
 // work with JUCE. Also tweaked it a bit for readability and to silence warnings.
 
-// TODO: make independent of SAMPLE_RATE
-
 
 class Granulate
 {

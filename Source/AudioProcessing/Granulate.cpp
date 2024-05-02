@@ -18,6 +18,9 @@
 #include "Granulate.h"
 #include <cmath>
 
+// TODO: make independent of SAMPLE_RATE
+#define SAMPLE_RATE 44100
+
 Granulate::Granulate(unsigned int nVoices, const char* data, int size)
 {
     rng.setSeedRandomly();

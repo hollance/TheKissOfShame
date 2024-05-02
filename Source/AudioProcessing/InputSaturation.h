@@ -17,8 +17,9 @@ public:
         evenGain = 0.3f;
     }
 
-    void prepareToPlay(float sampleRate) noexcept
+    void prepareToPlay(float newSampleRate) noexcept
     {
+        sampleRate = newSampleRate;
         coef = 0.0f;
         setFrequencyRolloff(4000.0f);
     }
@@ -69,8 +70,7 @@ public:
     {
         if (f < 0.0f) { f = 0.0f; }
 
-        // TODO: don't hardcode sample rate here!
-        coef = f * (2.0f * PI) / SAMPLE_RATE;
+        coef = f * (2.0f * PI) / sampleRate;
         if (coef > 1.0f) {
             coef = 1.0f;
         } else if (coef < 0.0f) {
@@ -182,6 +182,8 @@ private:
     }
 
 private:
+    float sampleRate;
+
     float evenGain;
     float oddGain;
 

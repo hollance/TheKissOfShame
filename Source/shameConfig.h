@@ -4,9 +4,6 @@
 
 #define PI 3.14159265359f
 
-// TODO: don't hardcode the sample rate
-#define SAMPLE_RATE 44100
-
 enum EShameEnvironments
 {
     eEnvironmentEnvironment,
