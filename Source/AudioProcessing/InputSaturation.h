@@ -15,15 +15,19 @@ public:
         drive = 1.0f;
         oddGain = 1.0f;
         evenGain = 0.3f;
+    }
 
-        // TODO: put this into a reset() function
+    void prepareToPlay(float sampleRate) noexcept
+    {
+        coef = 0.0f;
+        setFrequencyRolloff(4000.0f);
+    }
+
+    void reset() noexcept
+    {
         for (int i = 0; i < 10; ++i) {
             priorSample[i] = 0.0f;
         }
-
-        // TODO: put this into a prepareToPlay() function
-        coef = 0.0f;
-        setFrequencyRolloff(4000.0f);
     }
 
     void setThreshold(float threshold)

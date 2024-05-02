@@ -15,12 +15,17 @@ public:
         jassert(loopBuffer->getNumChannels() == 2);
         jassert(loopBuffer->getNumSamples() > 0);
 
+        setLoopCrossfadeLevel(0.0f);
+    }
+
+    void prepareToPlay(float sampleRate) noexcept
+    {
         // For consistent results, it would be better to add a prepareToPlay()
         // method to this class and resample the loopBuffer if necessary.
+    }
 
-        setLoopCrossfadeLevel(0.0f);
-
-        // TODO: put into a reset() function
+    void reset() noexcept
+    {
         indx1 = 0;
         indx2 = loopBuffer->getNumSamples() / 2;
     }

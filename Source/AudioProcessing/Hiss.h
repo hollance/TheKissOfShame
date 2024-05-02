@@ -14,12 +14,15 @@ public:
         jassert(hissBuffer->getNumChannels() == 2);
         jassert(hissBuffer->getNumSamples() > 0);
 
+        setHissLevel(0.0f);
+    }
+
+    void prepareToPlay(float sampleRate) noexcept
+    {
         // Note that Hiss.wav is a 44.1 kHz sample. At 48 kHz it still sounds
         // like noise, but at higher rates a tone becomes audible.
         // For consistent results, it would be better to add a prepareToPlay()
         // method to this class and resample the hissBuffer if necessary.
-
-        setHissLevel(0.0f);
     }
 
     void reset() noexcept

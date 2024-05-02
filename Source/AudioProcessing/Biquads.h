@@ -7,9 +7,15 @@ class Biquads
 public:
     Biquads() : a0(0.0f), a1(0.0f), a2(0.0f), b1(0.0f), b2(0.0f), c0(0.0f), d0(0.0f), isModifiedBiquad(false)
     {
-        // TODO: don't hardcode the SAMPLE_RATE!
+    }
 
-        // TODO: this should be in a reset() function
+    void prepareToPlay(float sampleRate) noexcept
+    {
+        // TODO: don't hardcode the SAMPLE_RATE!
+    }
+
+    void reset() noexcept
+    {
         for (int i = 0; i < MAX_CHANNELS; i++) {
             priorIn_2[i] = 0.0f;
             priorIn_1[i] = 0.0f;

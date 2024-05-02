@@ -88,7 +88,8 @@ void KissOfShameAudioProcessor::prepareToPlay(double sampleRate, int samplesPerB
     params.prepareToPlay(sampleRate);
     params.reset();
 
-    audioGraph.prepareToPlay(sampleRate, samplesPerBlock);
+    audioGraph.prepareToPlay(float(sampleRate), samplesPerBlock);
+    audioGraph.reset();
 
     curRMSL = 0.0f;
     curRMSR = 0.0f;

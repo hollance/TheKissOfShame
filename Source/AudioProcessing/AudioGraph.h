@@ -17,12 +17,23 @@ public:
         // do nothing
     }
 
-    void prepareToPlay(double /*sampleRate*/, int /*samplesPerBlock*/)
+    void prepareToPlay(float sampleRate, int /*samplesPerBlock*/)
     {
         // TODO: allocate audioGraphProcessingBuffer
-        // TODO: reset the other building blocks
 
-        flange.setDepth(0.0f);
+        inSaturation.prepareToPlay(sampleRate);
+        flange.prepareToPlay(sampleRate);
+        hurricaneSandy.prepareToPlay(sampleRate);
+        shame.prepareToPlay(sampleRate);
+        hiss.prepareToPlay(sampleRate);
+    }
+
+    void reset() noexcept
+    {
+        inSaturation.reset();
+        flange.reset();
+        hurricaneSandy.reset();
+        shame.reset();
         hiss.reset();
 
         // Force recalculation of these parameters.
@@ -101,9 +112,9 @@ private:
     juce::AudioBuffer<float> audioGraphProcessingBuffer;
 
     InputSaturation inSaturation { 0.0f, 2.0f, 0.272f };
-    Flange flange { 2 };
+    Flange flange;
     HurricaneSandy hurricaneSandy;
-    Shame shame { 2 };
+    Shame shame;
     Hiss hiss;
     Blend blend;
 

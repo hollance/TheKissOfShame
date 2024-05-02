@@ -17,6 +17,16 @@ public:
         points.add(pEnd);
     }
 
+    void prepareToPlay(float sampleRate) noexcept
+    {
+        // TODO: for making stuff independent of sampling rate
+    }
+
+    void reset() noexcept
+    {
+        incr = 0.0f;
+    }
+
     void addEnvelopePoint(float x, float y) noexcept
     {
         juce::Point<float> pt(x, y);

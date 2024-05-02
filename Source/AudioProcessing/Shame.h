@@ -7,25 +7,31 @@
 class Shame
 {
 public:
-    Shame(int numChannels) : 
-    rng(juce::Random::getSystemRandom())
+    Shame()
     {
+        rng.setSeedRandomly();
+
         depth = 0.5f;
         rate = 2.0f;
         randPeriodicity = 0.0f;
         waveformIndx = 0.0f;
 
-        // TODO put this in a reset() function
+        importWaveTables();
+    }
+
+    void prepareToPlay(float sampleRate) noexcept
+    {
+        // TODO: support other sample rates
+        int numChannels = 2;
+        shameSampleBuffer.reset(new juce::AudioBuffer<float>(numChannels, BUFFER_SIZE));
+    }
+
+    void reset() noexcept
+    {
         curPos = 0;
         playPosition = 0.0f;
         curPos_wTable = 0.0f;
         rateFluctuation = 0.0f;
-
-        // TODO: do this in a prepareToPlay() function to support other sample rates
-        //       then we also don't need to pass numChannels to the constructor
-        shameSampleBuffer.reset(new juce::AudioBuffer<float>(numChannels, BUFFER_SIZE));
-
-        importWaveTables();
     }
 
     void processShame(juce::AudioBuffer<float>& sampleBuffer, int numChannels)
@@ -202,7 +208,7 @@ private:
     // Several wavetables that each contain a single cycle waveform
     juce::OwnedArray<juce::AudioBuffer<float>> waveTableBuffers;
 
-    juce::Random &rng;
+    juce::Random rng;
 
     float waveformIndx;      // which wavetable to use (can be fractional)
     float curPos_wTable;     // read position in the wavetable (fractional)

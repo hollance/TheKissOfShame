@@ -10,15 +10,20 @@ class EnvelopeDips
 {
 public:
     EnvelopeDips() : incr(0.0f), domain(44100.0f), dynamicExtremity(0.0f),
-                     numPointRandomness(0.0f), numPoints(5),
-                     rng(juce::Random::getSystemRandom())
+                     numPointRandomness(0.0f), numPoints(5)
     {
-        rng.setSeed(time(nullptr));
-
+        rng.setSeedRandomly();
         calculateDipPoints();
+    }
 
-        // TODO: have a reset() function that sets incr back to 0.0f
-        // and re-seeds the random generator
+    void prepareToPlay(float sampleRate) noexcept
+    {
+        // TODO: for making stuff independent of sampling rate
+    }
+
+    void reset() noexcept
+    {
+        incr = 0.0f;
     }
 
     // TODO: make independent of sampling rate
@@ -103,7 +108,7 @@ public:
     }
 
 private:
-    float random() const noexcept
+    float random() noexcept
     {
         return rng.nextFloat();
     }
@@ -114,7 +119,7 @@ private:
     float numPointRandomness;
     int numPoints;
 
-    juce::Random &rng;
+    juce::Random rng;
     
     juce::Array<juce::Point<float>> points;
 };

@@ -7,17 +7,19 @@
 class Flange
 {
 public:
-    Flange(int numChannels)
+    void prepareToPlay(float sampleRate) noexcept
     {
-        // TODO put this in a reset() function
+        // TODO: support other sample rates
+        int numChannels = 2;
+        flangeSampleBuffer.reset(new juce::AudioBuffer<float>(numChannels, FLANGE_BUFF_SIZE));
+    }
+
+    void reset() noexcept
+    {
         curPos = 0;
         playPosition = 0.0;
         curDepth = 0.0;
         targetDepth = 0.0;
-
-        // TODO: do this in a prepareToPlay() function to support other sample rates
-        //       then we also don't need to pass numChannels to the constructor
-        flangeSampleBuffer.reset(new juce::AudioBuffer<float>(numChannels, FLANGE_BUFF_SIZE));
     }
 
     void processFlange(juce::AudioBuffer<float>& sampleBuffer, int numChannels)
