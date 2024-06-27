@@ -2,6 +2,8 @@
 
 “Something so wrong never sounded so right.”
 
+‼️‼️‼️ **WARNING! I've received a report that this plug-in can output very loud feedback noises. I have not been able to reproduce this. Unfortunately, I can't fix the problem if I don't know where it comes from. Be careful when using this plug-in, and just in case put a limiter behind it!** ‼️‼️‼️
+
 The Kiss of Shame, debuted at the Audio Engineering Society Convention 2014 in Los Angeles, was a pioneering DAW plugin that leveraged commercial UX/UI design principles to shape its magnetic tape + circuitry emulation algorithms.
 
 ![](Docs/blurb.jpg)
