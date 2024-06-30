@@ -154,6 +154,7 @@ Bugs I found (or introduced hehe):
 - The hacky way I've implemented the Link Input/Output mode may be problematic. Sometimes this gives an assertion on `beginGesture` being called twice. Not a massive problem but not great either.
 - [FIXED] ~~When restoring state, the Shame knob's cross is in the right position but the colored track isn't shown.~~
 - [FIXED] ~~When the Hurricane Sandy environment is active, moving the Age knob to the minimum position can cause the low-pass filter to give a massive gain boost.~~
+- Weird issue on Ableton Live. After a fresh install of Ableton (or an update) and loading The Kiss of Shame for the first time, the Hurricane Sandy mode outputs complete silence. But on a relaunch of Ableton it works fine and I can no longer get it to happen. I've seen this on two computers (Mac + Windows) with Ableton Live 11 Lite and 12 Lite.
 
 Other things that can / should be improved in the code (volunteers welcome!):
 
