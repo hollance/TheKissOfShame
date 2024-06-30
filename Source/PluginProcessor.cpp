@@ -133,6 +133,14 @@ void KissOfShameAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, j
         buffer.clear(i, 0, numSamples);
     }
 
+    // There have been reports that this plug-in sometimes outputs a large
+    // click or even feedback noise. I have not been able to reproduce this
+    // so it's hard to fix. Just in case, if the signal goes over +20 dB or
+    // has inf/nan values, silence the output.
+    if (detectOverload(buffer)) {
+        buffer.clear();
+    }
+
     // TODO: use up-to-date JUCE API for this
     // ask the host for the current time so we can display it...
     if (getPlayHead() != nullptr && getPlayHead()->getCurrentPosition(curPositionInfo))
@@ -144,6 +152,27 @@ void KissOfShameAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, j
         // If the host fails to fill-in the current time, we'll just clear it to a default..
         curPositionInfo.resetToDefault();
     }
+}
+
+bool KissOfShameAudioProcessor::detectOverload(juce::AudioBuffer<float>& buffer)
+{
+    for (int channel = 0; channel < buffer.getNumChannels(); ++channel) {
+        float* channelData = buffer.getWritePointer(channel);
+        for (int sample = 0; sample < buffer.getNumSamples(); ++sample) {
+            float x = channelData[sample];
+            if (std::isnan(x)) {
+                DBG("!!! WARNING: nan detected in audio buffer, silencing !!!");
+                return true;
+            } else if (std::isinf(x)) {
+                DBG("!!! WARNING: inf detected in audio buffer, silencing !!!");
+                return true;
+            } else if (x < -10.0f || x > 10.0f) {  // louder than 20 dB?
+                DBG("!!! WARNING: sample out of range, silencing !!!");
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 bool KissOfShameAudioProcessor::hasEditor() const

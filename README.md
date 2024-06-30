@@ -2,8 +2,6 @@
 
 “Something so wrong never sounded so right.”
 
-‼️‼️‼️ **WARNING! I've received a report that this plug-in can output very loud feedback noises. I have not been able to reproduce this. Unfortunately, I can't fix the problem if I don't know where it comes from. Be careful when using this plug-in, and just in case put a limiter behind it!** ‼️‼️‼️
-
 The Kiss of Shame, debuted at the Audio Engineering Society Convention 2014 in Los Angeles, was a pioneering DAW plugin that leveraged commercial UX/UI design principles to shape its magnetic tape + circuitry emulation algorithms.
 
 ![](Docs/blurb.jpg)
@@ -30,7 +28,7 @@ The goal of this open source project is:
 
 ## Installation instructions
 
-> **NOTE:** This is currently work-in-progress. There may be issues with the plug-in!
+> **NOTE:** ‼️ This is currently work-in-progress. There may be issues with the plug-in. Use at your own risk! ‼️
 
 ### Mac
 
@@ -102,7 +100,7 @@ Brief instructions:
 
 Currently only tested with:
 
-- JUCE 7.0.9
+- JUCE 7.0.9 / 8.0.0
 - Xcode 15.2 + macOS Sonoma 14.3
 - Visual Studio 2022 + Windows 10
 
@@ -140,7 +138,7 @@ The original code was written using JUCE 3.1. It required the user to copy a fol
 
 The following changes were made in this repo:
 
-- Converted to JUCE 7.
+- Converted to JUCE 7. (Also works with JUCE 8.)
 - General code cleanup, fixed compiler warnings, added some comments.
 - Put the parameters into AVPTS, added state saving & loading.
 - Embedded the graphics and audio resources into the plug-in binary.
@@ -152,7 +150,7 @@ The following changes were made in this repo:
 Bugs I found (or introduced hehe):
 
 - [FIXED] ~~The Link buttons under the input/output knobs disappear when the reels are hidden.~~
-- Sometimes there is an extremely loud glitch. Not sure yet what causes this, maybe some uninitialized memory. Hard to reproduce.
+- ‼️ Sometimes there is an extremely loud glitch. Not sure yet what causes this, maybe some uninitialized memory. Hard to reproduce. To prevent such loud output, a limiter was added that outputs silence if such a loud spike is detected (anything over +20 dB).
 - The hacky way I've implemented the Link Input/Output mode may be problematic. Sometimes this gives an assertion on `beginGesture` being called twice. Not a massive problem but not great either.
 - [FIXED] ~~When restoring state, the Shame knob's cross is in the right position but the colored track isn't shown.~~
 - [FIXED] ~~When the Hurricane Sandy environment is active, moving the Age knob to the minimum position can cause the low-pass filter to give a massive gain boost.~~

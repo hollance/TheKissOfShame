@@ -4,7 +4,7 @@ project(TheKissOfShame VERSION "${ProjectVersion}")
 # project description stuff
 set(BaseTargetName TheKissOfShame)
 set(PluginName "The Kiss Of Shame")
-set(ProjectVersion 1.0)
+set(ProjectVersion 1.0.2)
 
 
 include (FetchContent)
@@ -38,7 +38,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(JUCE)
 
- 
+
 juce_add_plugin("${BaseTargetName}"
     VERSION "${ProjectVersion}"                 # Set this if the plugin version is different to the project version
     # ICON_BIG ...                              # ICON_* arguments specify a path to an image file to use as an icon for the Standalone

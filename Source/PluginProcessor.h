@@ -38,6 +38,8 @@ public:
     juce::AudioProcessorParameter* getBypassParameter() const override;
 
 public:
+    bool detectOverload(juce::AudioBuffer<float>& buffer);
+
     juce::AudioProcessorValueTreeState apvts {
         *this, nullptr, "Parameters", Parameters::createParameterLayout()
     };
