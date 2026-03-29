@@ -71,7 +71,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout Parameters::createParameterL
         "Environment",
         juce::StringArray {
             "Environment",
-            "Off",
+            "Bypass",
             "Studio Closet",
             "Humid Cellar",
             "Hot Locker",
